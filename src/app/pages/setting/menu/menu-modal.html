@@ -1,0 +1,79 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="form1" id="formRate">
+            <div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="id">Nama</label>
+                    </div>
+                    <div class="col-sm-8" ng-class="{error: form1.id.$invalid}">
+                        <input name="id" type="text" class="form-control" id="id" ng-model="vm.noAkun" required autofocus/>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.id.$error.required">
+                            Harus Diisi
+                        </span>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="isIdExists">
+                            Nama sudah terpakai
+                        </span>
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="title">Title</label>
+                    </div>
+                    <div class="col-sm-8" ng-class="{error: form1.title.$invalid}">
+                        <input name="title" type="text" class="form-control" id="title" ng-model="vm.title" required autofocus/>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.title.$error.required">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="level">Level</label>
+                    </div>
+                    <div class="col-sm-3" ng-class="{error: form1.level.$invalid}">
+                        <input name="level" type="number" class="form-control" id="level" ng-model="vm.level" required autofocus/>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.level.$error.required">
+                            Harus Diisi
+                        </span>
+                    </div>
+                    <div class="col-xs-3">
+                        <label class="control-label" for="order">Order</label>
+                    </div>
+                    <div class="col-sm-3" ng-class="{error: form1.order.$invalid}">
+                        <input name="order" type="number" class="form-control" id="order" ng-model="vm.order" required autofocus/>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.order.$error.required">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="parent">Parent</label>
+                    </div>                   
+                    <div class="col-sm-8" ng-class="{error: form1.parent.$invalid}">
+                        <ui-select data-ng-model="vm.parent" name="parent" required>
+                            <ui-select-match placeholder="Pilih parent menu">{{$select.selected.nama}}</ui-select-match>
+                            <ui-select-choices data-repeat="item in listParent | filter: $select.search">
+                                <div data-ng-bind-html="item.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.parent.$error.required">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+        <button type="button" class="btn btn-danger" ng-click="$dismiss()">Batal</button>
+    </div>
+</div>

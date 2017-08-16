@@ -1,0 +1,108 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">{{modalTitle}}</h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="form1" id="formRate">
+            <div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="nama">Nama Lengkap</label>
+                    </div>
+                    <div class="col-sm-6" ng-class="{error: form1.status.$invalid}">
+                        <input name="fullname" type="text" class="form-control" id="fullname" ng-model="vm.fullname" required autofocus/>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.fullname.$error.required" placeholder="Nama Lengkap">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="username">Username</label>
+                    </div>
+                    <div class="col-sm-6" ng-class="{error: form1.username.$invalid}">
+                        <input name="username" type="text" class="form-control" id="username" ng-model="vm.username" required/>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.fullname.$error.required" placeholder="Username">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="password">Password</label>
+                    </div>
+                    <div class="col-sm-6" ng-class="{error: form1.password.$invalid}">
+                        <input name="password" type="password" class="form-control" id="username" ng-model="vm.password" required/>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.fullname.$error.required" placeholder="Password">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="active">Aktif</label>
+                    </div>
+                    <div class="col-sm-6" ng-class="{error: form1.active.$invalid}">
+                        <ba-switcher switcher-style="primary" switcher-value="vm.active"></ba-switcher>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.active.$error.required" placeholder="Aktif">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="role">Role</label>
+                    </div>
+                    <div class="col-sm-8" ng-class="{error: form1.role.$invalid}">
+                        <ui-select ng-model="vm.role" name="role"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="true"
+                                   append-to-body="true"
+                                   search-enabled="true">
+                            <ui-select-match placeholder="Pilih Role">
+                                {{$select.selected.nama}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in listRole | filter: $select.search">
+                                <span ng-bind-html="item.nama"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.role.$error.required">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="pegawai">Pegawai</label>
+                    </div>
+                    <div class="col-sm-8" ng-class="{error: form1.pegawai.$invalid}">
+                        <ui-select ng-model="vm.pegawai" name="pegawai"
+                                   class="btn-group bootstrap-select form-control"
+                                   ng-disabled="true"
+                                   append-to-body="true"
+                                   search-enabled="true">
+                            <ui-select-match placeholder="Pilih Pegawai">
+                                {{$select.selected.nama}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="item in listPegawai | filter: $select.search">
+                                <span ng-bind-html="item.nama"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.pegawai.$error.required">
+                            Harus Diisi
+                        </span>
+                    </div>
+                </div>
+            </div>            
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+        <button type="button" class="btn btn-danger" ng-click="$dismiss()">Batal</button>
+    </div>
+</div>

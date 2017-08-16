@@ -1,0 +1,70 @@
+<div class="page-top clearfix" scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled}">
+    <a href="#/dashboard" class="al-logo clearfix"><span>N </span> L S</a>
+    <a href class="collapse-menu-link ion-navicon" ba-sidebar-toggle-menu></a>
+
+<!--    <div class="search">
+        <i class="ion-ios-search-strong" ng-click="startSearch()"></i>
+        <input id="searchInput" type="text" placeholder="Search for...">
+      </div>-->
+    <div ng-if="!vm.isAuthenticated()" class="user-profile clearfix">
+        <div class="al-user-profile" uib-dropdown>
+            <button uib-dropdown-toggle class="btn btn-primary" > Masuk </button>
+            <ul class="top-dropdown-menu" uib-dropdown-menu>
+                <li ><i class="dropdown-arr"></i></li>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 col-sm-12">
+                        <div class="alert alert-danger" ng-show="vm.authenticationError">
+                            <strong>Failed to sign in!</strong> Please check your credentials and try again.
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 col-sm-12">
+                        <form class="form" role="form" ng-submit="vm.login($event)">
+                            <div class="form-group">
+                                <label for="username">Login</label>
+                                <input type="text" class="form-control" id="username" placeholder="Your username" ng-model="vm.username" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Your password"
+                                       ng-model="vm.password">
+                            </div>
+                            <div class="form-group">
+                                <label for="rememberMe">
+                                    <input type="checkbox" id="rememberMe" ng-model="vm.rememberMe" checked>
+                                    <span>Remember me</span>
+                                </label>
+                            </div>
+                            <input type="hidden"
+                                   name="${_csrf.parameterName}"
+                                   value="${_csrf.token}"/>
+                            <button type="submit" class="btn btn-primary">Sign in</button>
+                        </form>
+                        <p></p>
+                        <div class="alert alert-warning">
+                            <a class="alert-link" href="" ng-click="vm.requestResetPassword()">Did you forget your password?</a>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div ng-if="vm.isAuthenticated()" class="user-profile clearfix">
+        <!--<div  class="user-profile clearfix">-->
+        <div class="al-user-profile" uib-dropdown>
+            <a uib-dropdown-toggle class="profile-toggle-link">
+                <img ng-src="{{::( 'no_photo'| profilePicture )}}">
+                <!--<img ng-if="vm.isAuthenticated()" ng-src="{{::( 'no_photo'| profilePicture )}}">-->
+            </a>
+            <ul class="top-dropdown-menu profile-dropdown" uib-dropdown-menu>
+                <li ><i class="dropdown-arr"></i></li>
+                <li ><a href="#/profile"><i class="fa fa-user"></i>Profile</a></li>
+                <li ><a ui-sref="settings"><i class="fa fa-cog"></i>Settings</a></li>
+                <li ><a ui-sref="password"><i class="fa fa-lock"></i>Password</a></li>
+                <li ><a ui-sref="sessions"><i class="fa fa-cloud"></i>Session</a></li>
+                <li ><a href="" class="signout" ng-click="vm.logout()" id="logout"><i class="fa fa-power-off"></i>Sign out</a></li>
+            </ul>
+        </div>
+
+        <!--<msg-center></msg-center>-->
+    </div>
+</div>

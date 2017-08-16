@@ -1,0 +1,68 @@
+<div class="widgets">
+
+    <div class="row">        
+        <div class="col-md-6">
+            <div ba-panel ba-panel-title="{{modalTitle}}" ba-panel-class="with-scroll">
+                <form class="form-horizontal" name="form1">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="control-label col-xs-4" for="username">Username :</label>
+                                <div class="col-xs-8">                     
+                                    <input class="form-control" type="text" id="username" name="username" placeholder="Nama User" ng-model="userinfo.user" required ui-validate="{usernameAvailable: isUsernameAvailable}" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="control-label col-xs-4" for="fullname">Group :</label>
+                                <div class="col-xs-8">                     
+                                    <input class="form-control" type="text" id="groupName" name="groupName" placeholder="Nama Lengkap" ng-model="userinfo.group" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group" ng-class="{error: form1.oldPass.$invalid}">
+                                <label class="control-label col-xs-4" for="oldPass">Password Lama :</label>
+                                <div class="col-xs-6">                     
+                                    <input class="form-control" type="password" id="oldPass" name="oldPass" placeholder="Password Lama" ng-model="currentUser.oldPass" required>
+                                </div>
+                                <span ng-show="form1.oldPass.$error.required" class="help-block col-xs-2">Harus diisi</span>
+                                <span ng-show="oldPasswordNotValid" class="help-block col-xs-2">Password tidak sesuai</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group" ng-class="{error: form1.newPass.$invalid}">
+                                <label class="control-label col-xs-4" for="newPass">Password Baru :</label>
+                                <div class="col-xs-6">                     
+                                    <input class="form-control" type="password" id="newPass" name="newPass" placeholder="Password Baru" ng-model="currentUser.newPass" required>
+                                </div>
+                                <span ng-show="form1.newPass.$error.required" class="help-block col-xs-2">Harus diisi</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group" ng-class="{error: form1.confirmPass.$invalid}">
+                                <label class="control-label col-xs-4" for="confirmPass"> Konfirmasi Password :</label>
+                                <div class="col-xs-6">                     
+                                    <input class="form-control" type="password" id="confirmPass" name="confirmPass" placeholder="Konfirmasi Password Baru" ng-model="currentUser.confirmPass" required>
+                                </div>
+                                <span ng-show="form1.confirmPass.$error.required" class="help-block col-xs-2">Harus diisi</span>
+                            </div>
+                        </div>
+                    </div>                                      
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="button" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() ||form1.$invalid">Simpan</button>
+                            <button type="button" class="btn btn-danger" ng-click="clear()">Batal</button>
+                        </div>
+                    </div>
+                </form>                
+            </div>                    
+        </div>            
+    </div>
+</div>
+</div>
