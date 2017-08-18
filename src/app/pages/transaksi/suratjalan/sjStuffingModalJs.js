@@ -48,10 +48,7 @@
                 if (idx === -1) {
                     stuffing = {
                         id: sd.id,
-                        kontainer: {
-                            id: sd.id_kontainer,
-                            nomor: sd.nomor
-                        },
+                        noKontainer: sd.no_kontainer,
                         kapalBerangkat: {
                             id: sd.id_kapal_berangkat,
                             tglBerangkat: sd.tgl_berangkat,
