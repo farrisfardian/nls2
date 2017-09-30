@@ -40,7 +40,16 @@
                 toastr.success('Hapus data sukses!');
             });
         };
-
+        
+        $scope.cetak = function (c, ex, tipe) {
+            var link = 'api/report/per-stuffing.' + tipe + '?id=' + c.id_stuffing + '&ex=' + ex;
+            if (tipe == 'pdf') {
+//                    window.open(link, '_blank', 'width=screen.width, height=screen.height');
+                window.open(link, '_blank', 'width=1024, height=768');
+            } else {
+                location.href = link;
+            }
+        }
 
 
     }

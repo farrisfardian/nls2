@@ -104,7 +104,18 @@
                 <td>{{ c.merk}}</td>
                 <td>{{c.toko_tujuan}}</td>
                 <td>{{c.pengirim}}</td>
-                <td>{{c.no_kontainer}}</td>
+                <td>
+                    <!--{{c.no_kontainer}}-->
+                    <div class="buttons" uib-dropdown dropdown-append-to-body>
+                        <a href="" type="button" uib-dropdown-toggle>
+                            {{c.no_kontainer}} <span class="caret"></span>
+                        </a>
+                        <ul uib-dropdown-menu>
+                            <li><a href ng-click="cetak(c, false, 'pdf')">PDF</a></li>
+                            <li><a href ng-click="cetak(c, false, 'xlsx')">XLS</a></li>
+                        </ul>
+                    </div>
+                </td>
                 <td>
                     <div class="buttons" >
                         <button class="btn btn-primary editable-table-button btn-xs" 
