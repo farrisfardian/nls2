@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2017-05-13T10:23:39 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="packing-list" pageWidth="612" pageHeight="1008" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="76" uuid="b8b76c8b-a069-48df-acd7-9c0db1840a9f">
 	<property name="ireport.zoom" value="1.0000000000000016"/>
 	<property name="ireport.x" value="0"/>
@@ -346,7 +344,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 						<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
 						<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{satuan_kirim}.equalsIgnoreCase( "FCL" )?$V{jmlKontainer}.toString()+" Kontainer":$F{satuan_kirim}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{satuan_kirim}.equalsIgnoreCase( "FCL" )?$V{jmlKontainer}.toString()+" Container ("+$F{satuan_kirim}+")":$F{satuan_kirim}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement mode="Transparent" x="0" y="0" width="190" height="14" backcolor="#7CB2EC" uuid="b7466b1d-9fce-4817-9cbe-b0a8c258f3f4"/>
