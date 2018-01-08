@@ -50,6 +50,9 @@ public class SuratJalan extends AbstractAuditingEntity implements Serializable {
     @Column(name = "tagihan_pengirim")
     private Boolean tagihanPengirim;
 
+    @Column(name = "sisipan")
+    private Boolean sisipan;
+
     @ManyToOne
     @JoinColumn(name = "id_stuffing")
     private Stuffing stuffing;
@@ -69,6 +72,10 @@ public class SuratJalan extends AbstractAuditingEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_kondisi")
     private Kondisi kondisi;
+
+    @ManyToOne
+    @JoinColumn(name = "id_jenis_item")
+    private JenisItem jenisItem;
 
     @OneToMany(mappedBy = "suratJalan", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
@@ -152,6 +159,28 @@ public class SuratJalan extends AbstractAuditingEntity implements Serializable {
 
     public void setBahan(BahanSj bahan) {
         this.bahan = bahan;
+    }
+
+    public JenisItem getJenisItem() {
+        return jenisItem;
+    }
+
+    public void setJenisItem(JenisItem jenisItem) {
+        this.jenisItem = jenisItem;
+    }
+
+    /**
+     * @return the sisipan
+     */
+    public Boolean getSisipan() {
+        return sisipan;
+    }
+
+    /**
+     * @param sisipan the sisipan to set
+     */
+    public void setSisipan(Boolean sisipan) {
+        this.sisipan = sisipan;
     }
 
 }

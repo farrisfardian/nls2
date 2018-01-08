@@ -9,7 +9,7 @@
         $scope.listData = [];
         $scope.cari = param.cari;
         $scope.reloadData = function () {
-            TokoService.lookupToko($scope.cari).success(function (d) {
+            TokoService.lookupToko($scope.cari === '' ? 'null' : $scope.cari).success(function (d) {
                 console.log('data', d);
                 $scope.listData = d;
                 $timeout(function () {

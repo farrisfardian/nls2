@@ -143,8 +143,71 @@
                                 </div>
                             </div>
                         </div>
-<!--                    </div>  
-                    <div ba-panel ba-panel-title="Item">-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Jenis Item</label>
+                                    <div class="col-sm-9" ng-class="{error: form1.jenisItem.$invalid}">
+                                        <ui-select ng-model="vm.jenisItem"
+                                                   class="btn-group bootstrap-select form-control"
+                                                   ng-disabled="false"
+                                                   append-to-body="true"
+                                                   search-enabled="true" ng-required="true" name="jenisItem">
+                                            <ui-select-match placeholder="Pilih Jenis Item">
+                                                {{$select.selected.nama}}
+                                            </ui-select-match>
+                                            <ui-select-choices
+                                                repeat="item in listJenisItem | filter: $select.search">
+                                                <span ng-bind-html="item.nama"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.jenisItem.$error.required">
+                                            Harus Diisi
+                                        </span>
+                                    </div>
+                                </div>                                      
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Sisipan</label>
+                                    <div class="col-sm-10" ng-class="{error: form1.sisipan.$invalid}">
+                                        <ba-switcher switcher-style="primary" switcher-value="vm.sisipan" ></ba-switcher>
+                                    </div>
+                                </div>                                      
+                            </div>
+                        </div>
+<!--                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Port Asal</label>
+                                    <div class="col-sm-10" ng-class="{error: form1.kotaAsal.$invalid}">
+                                        <ui-select ng-model="vm.kotaAsal" name="kotaAsal"
+                                                   class="btn-group bootstrap-select form-control"
+                                                   ng-required="true"
+                                                   append-to-body="true"
+                                                   search-enabled="true" required="true" 
+                                                   >
+                                            <ui-select-match placeholder="Pilih Kota">
+                                                {{$select.selected.nama}}
+                                            </ui-select-match>
+                                            <ui-select-choices
+                                                repeat="item in listKota | filter: $select.search">
+                                                <span ng-bind-html="item.nama"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kotaAsal.$error.required">
+                                            Harus Diisi
+                                        </span>
+                                    </div>
+                                </div>                                      
+
+                            </div>
+                        </div>-->
+
+                        <!--                    </div>  
+                                            <div ba-panel ba-panel-title="Item">-->
                         <div class="row">
                             <div class="col-sm-12">
                                 <div>
@@ -173,14 +236,14 @@
                                                     {{$index + 1}}
                                                 </td>
                                                 <td style="text-align:right"> {{c.coli| number:0 }}</td>
-                                                <td> {{c.item.nama }}</td>
+                                                <td> {{c.item.nama}}</td>
                                                 <td style="text-align:right"> {{c.p| number:0 }}</td>
                                                 <td style="text-align:right"> {{c.l| number:0 }}</td>
                                                 <td style="text-align:right"> {{c.t| number:0 }}</td>
                                                 <td style="text-align:right"> {{c.fixVolume>0? c.fixVolume: hitungSubTotalMetrik(c) | number:4}}</td>
                                                 <td> 
                                                     <button class="btn-primary btn-xs" 
-                                                                data-toggle="modal" ng-click="editSjStuffing(c)">{{c.sjStufings[0].stuffing.noKontainer}}</button>
+                                                            data-toggle="modal" ng-click="editSjStuffing(c)">{{c.sjStufings[0].stuffing.noKontainer}}</button>
                                                 </td>
                                                 <td>
                                                     <div class="buttons" >

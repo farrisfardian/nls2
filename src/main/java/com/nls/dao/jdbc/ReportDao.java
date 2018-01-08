@@ -64,6 +64,72 @@ public class ReportDao {
 
     /**
      *
+     * @param idNota
+     * @return Data invoice
+     */
+    public Object getNota(String idNota) {
+        String sql = "select * from fn_get_nota(" + idNota + ") as (id int, tanggal varchar, nomor varchar, min_bayar boolean, kepada text, kapal varchar, tgl_berangkat text, kota_tujuan varchar, jenis_item varchar, kondisi text, satuan_kirim varchar, volume double precision, harga double precision, jml_min_bayar double precision, tambahan_min_bayar numeric, no_kontainer varchar, jml_text text, idx int, tgl_kapal date)";
+        System.out.println("getNota: " + sql);
+        return mr.mapList(sql);
+    }
+
+    /**
+     *
+     * @param idPembayaranNota
+     * @return Data invoice
+     */
+    public Object getPembayaranNota(String idPembayaranNota) {
+        String sql = "select * from fn_get_pembayaran_nota(" + idPembayaranNota + ") as (id int, tgl_bayar varchar, no_pembayaran varchar, total_bayar numeric, kepada text, no_invoice varchar, tgl_invoice varchar, tagihan numeric, terbayar numeric, sisa numeric, bayar numeric, terbilang_total text,kapal_berangkat text)";
+        System.out.println("getPembayaranNota: " + sql);
+        return mr.mapList(sql);
+    }
+
+    /**
+     *
+     * @param idPembayaranNota
+     * @return Data invoice
+     */
+    public Object getRincianNota(String idToko, String idMerk, String tglAwal, String tglAkhir) {
+        String sql = "select *,fn_tanggal_ind(current_date) as tanggal from fn_get_rincian_nota(" + idToko + ", " + idMerk + ", '" + tglAwal + "', '" + tglAkhir + "') as (id int, nomor varchar, toko varchar, merk varchar, total_tagihan numeric, terbayar numeric, jenis_item text, kapal_berangkat text, tgl_awal_berangkat text, tgl_akhir_berangkat text)";
+        System.out.println("getPembayaranNota: " + sql);
+        return mr.mapList(sql);
+    }
+
+    /**
+     *
+     * @param idNota
+     * @return
+     */
+    public Object getKapalBerangkatByNota(String idNota) {
+        String sql = "select distinct kapal, tgl_berangkat from fn_get_nota(" + idNota + ") as (id int, tanggal varchar, nomor varchar, min_bayar boolean, kepada text, kapal varchar, tgl_berangkat text, kota_tujuan varchar, jenis_item varchar, kondisi text, satuan_kirim varchar, volume double precision, harga double precision, jml_min_bayar double precision, tambahan_min_bayar numeric, no_kontainer varchar, jml_text text, idx int, tgl_kapal date) where tgl_berangkat <> '-'";
+        System.out.println("getKapalBerangkatByNota: " + sql);
+        return mr.mapList(sql);
+    }
+
+    /**
+     *
+     * @param idNota
+     * @return
+     */
+    public Object getTotalTerbilangByNota(String idNota) {
+        String sql = "select terbilang2nd(sum(case when min_bayar=true then case when tambahan_min_bayar>0 then tambahan_min_bayar + (harga*round(volume::numeric,3)) else (harga*round(volume::numeric,3)) end else (harga*round(volume::numeric,3)) end)::numeric)||' Rupiah' terbilang,sum(case when min_bayar=true then case when tambahan_min_bayar>0 then tambahan_min_bayar + (harga*round(volume::numeric,3)) else (harga*round(volume::numeric,3)) end else (harga*round(volume::numeric,3)) end)::numeric::int::double precision total from fn_get_nota(" + idNota + ") as (id int, tanggal varchar, nomor varchar, min_bayar boolean, kepada text, kapal varchar, tgl_berangkat text, kota_tujuan varchar, jenis_item varchar, kondisi text, satuan_kirim varchar, volume double precision, harga double precision, jml_min_bayar double precision, tambahan_min_bayar numeric, no_kontainer varchar, jml_text text, idx int, tgl_kapal date)";
+        System.out.println("getTotalTerbilangByNota: " + sql);
+        return mr.mapSingle(sql);
+    }
+    
+    /**
+     *
+     * @param idNota
+     * @return
+     */
+    public Object getTotalTerbilangByRincianNota(String idToko, String idMerk, String tglAwal, String tglAkhir) {
+        String sql = "select coalesce(sum(coalesce(total_tagihan,0)),0) as total_tagihan, coalesce(sum(coalesce(terbayar,0)),0) as terbayar, coalesce(sum(coalesce(total_tagihan,0) - coalesce(terbayar,0)),0) as sisa_tagihan, terbilang2nd(coalesce(sum(coalesce(total_tagihan,0)),0)) as terbilang_total_tagihan, terbilang2nd(coalesce(sum(coalesce(terbayar,0)),0)) terbilang_terbayar, terbilang2nd(coalesce(sum(coalesce(total_tagihan,0) - coalesce(terbayar,0)),0)) as terbilang_sisa_tagihan from fn_get_rincian_nota(" + idToko + ", " + idMerk + ", '" + tglAwal + "', '" + tglAkhir + "') as (id int, nomor varchar, toko varchar, merk varchar, total_tagihan numeric, terbayar numeric, jenis_item text, kapal_berangkat text, tgl_awal_berangkat text, tgl_akhir_berangkat text)";
+        System.out.println("getTotalTerbilangByNota: " + sql);
+        return mr.mapSingle(sql);
+    }
+
+    /**
+     *
      * @param grup contoh : 'kota_tujuan', 'kondisi', 'customer', 'kapal',
      * 'nomor_kontainer', 'emkl', 'pengirim'
      * @param tglMulai format : yyyy-mm-dd
@@ -73,7 +139,7 @@ public class ReportDao {
      * @return
      */
     public Object rekapColiKubikasiPerGrup(String grup, String tglMulai, String tglSampai, String order, int limit) {
-        String sql = "select * from fn_rekap_by_grup('" + grup + "'," + (tglMulai == null ? "null" : "'" + tglMulai + "'") + "," + (tglSampai == null ? "null" : "'" + tglSampai + "'") + ",'" + order + "') as (grup varchar, coli bigint, kubikasi numeric) limit " + limit;
+        String sql = "select * from fn_rekap_by_grup_new('" + grup + "'," + (tglMulai == null ? "null" : "'" + tglMulai + "'") + "," + (tglSampai == null ? "null" : "'" + tglSampai + "'") + ",'" + order + "') as (grup varchar, coli bigint, kubikasi numeric, kontainer bigint) limit " + limit;
         return mr.mapList(sql);
     }
 }

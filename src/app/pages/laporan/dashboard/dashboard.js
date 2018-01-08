@@ -10,8 +10,8 @@
             tgl1: $scope.d,
             tgl2: new Date(),
             grup: {name: 'Kota Tujuan', value: 'kota_tujuan'},
-            order: {name: 'Kubikasi Terbesar', value: 'kubikasi_desc'},
-            limit: 5,
+            order: {name: 'Kontainer Terbesar', value: 'kontainer_desc'},
+            limit: 6
         };
         $scope.optionsTgl = {format: 'DD/MM/YYYY', showClear: false};
         $scope.listGrup = [
@@ -19,7 +19,7 @@
             {name: 'Kondisi', value: 'kondisi'},
             {name: 'Customer', value: 'customer'},
             {name: 'Kapal', value: 'kapal'},
-            {name: 'Kontainer', value: 'nomor_kontainer'},
+//            {name: 'Kontainer', value: 'nomor_kontainer'},
             {name: 'Emkl', value: 'emkl'},
             {name: 'Pengirim', value: 'pengirim'}
         ];
@@ -30,6 +30,8 @@
             {name: 'Coli Terkecil', value: 'coli_asc'},
             {name: 'Kubikasi Terbesar', value: 'kubikasi_desc'},
             {name: 'Kubikasi Terkecil', value: 'kubikasi_asc'},
+            {name: 'Kontainer Terbesar', value: 'kontainer_desc'},
+            {name: 'Kontainer Terkecil', value: 'kontainer_asc'},
         ];
 
         $scope.initGrupColiKubikasiChart = function (series, categories, grup, idContainer) {
@@ -70,6 +72,45 @@
                 series: series
             });
         };
+        $scope.initGrupKontainerChart = function (series, categories, grup, idContainer) {
+            $scope.grupKontainerChart = Highcharts.chart(idContainer, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Rekap Kontainer berdasarkan ' + grup
+                },
+                subtitle: {
+                    text: 'Sumber : Data Transaksi NLS'
+                },
+                xAxis: {
+                    categories: categories,
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Jumlah'
+                    }
+                },
+                colors:['#990000'],
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: series
+            });
+        };
 
         $scope.reloadData = function () {
             $scope.param = {
@@ -77,11 +118,12 @@
                 tgl2: $filter('date')(new Date($scope.options.tgl2), 'yyyy-MM-dd'),
                 grup: $scope.options.grup.value,
                 order: $scope.options.order.value,
-                limit: $scope.options.limit,
+                limit: $scope.options.limit
             };
             console.log('$scope.param', $scope.param);
             DashboardService.rekapColiKubikasi($scope.param).success(function (data) {
                 $scope.categories = [];
+                $scope.categories2 = [];
                 $scope.seriesColi = {
                     name: 'Coli',
                     data: []
@@ -90,17 +132,26 @@
                     name: 'Kubikasi (metrik kubik)',
                     data: []
                 };
+                $scope.seriesKontainer = {
+                    name: 'Kontainer',
+                    data: []
+                };
                 for (var i = 0; i < data.length; i++) {
                     $scope.categories.push(data[i].grup);
+                    $scope.categories2.push(data[i].grup);
                     $scope.seriesColi.data.push(data[i].coli);
                     $scope.seriesKubikasi.data.push(data[i].kubikasi);
+                    $scope.seriesKontainer.data.push(data[i].kontainer);
                 }
                 $scope.listSeries = [];
+                $scope.listSeries2 = [];
                 $scope.listSeries.push($scope.seriesColi);
                 $scope.listSeries.push($scope.seriesKubikasi);
+                $scope.listSeries2.push($scope.seriesKontainer);
                 console.log('$scope.categories', $scope.categories);
                 console.log('$scope.listSeries', $scope.listSeries);
                 $scope.initGrupColiKubikasiChart($scope.listSeries, $scope.categories, $scope.options.grup.name, 'grupColiKubikasiChart');
+                $scope.initGrupKontainerChart($scope.listSeries2, $scope.categories2, $scope.options.grup.name, 'grupKontainerChart');
             });
         };
 

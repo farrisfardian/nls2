@@ -28,13 +28,13 @@
                         "stateRef": 
                         "master.item"
                     }, 
-//                    {
-//                        "name": "master.kontainer", 
-//                        "title": "Kontainer", 
-//                        "level": 1, 
-//                        "order": 100, 
-//                        "stateRef": "master.kontainer"
-//                    }, 
+                    {
+                        "name": "master.tambahanBiaya", 
+                        "title": "Tambahan Biaya", 
+                        "level": 1, 
+                        "order": 100, 
+                        "stateRef": "master.tambahanBiaya"
+                    }, 
                     {
                         "name": "master.jenisItem", 
                         "title": "Jenis Item", 
@@ -90,6 +90,20 @@
                         "level": 1, 
                         "order": 900, 
                         "stateRef": "master.kapalBerangkat"
+                    }, 
+                    {
+                        "name": "master.kategoriHarga", 
+                        "title": "Kategori Harga", 
+                        "level": 1, 
+                        "order": 901, 
+                        "stateRef": "master.kategoriHarga"
+                    }, 
+                    {
+                        "name": "master.settingHarga", 
+                        "title": "Setting Harga", 
+                        "level": 1, 
+                        "order": 902, 
+                        "stateRef": "master.settingHarga"
                     }
                 ]
             }, 
@@ -121,6 +135,20 @@
                         "level": 1, 
                         "order": 100, 
                         "stateRef": "transaksi.suratjalan"
+                    },
+                    {
+                        "name": "transaksi.nota", 
+                        "title": "Nota", 
+                        "level": 1, 
+                        "order": 100, 
+                        "stateRef": "transaksi.nota"
+                    },
+                    {
+                        "name": "transaksi.pembayaran", 
+                        "title": "Pembayaran", 
+                        "level": 1, 
+                        "order": 100, 
+                        "stateRef": "transaksi.pembayaran"
                     }
                 ]
             }, 
@@ -166,6 +194,13 @@
                         "level": 1, 
                         "order": 0, 
                         "stateRef": "laporan.container"
+                    },
+                    {
+                        "name": "laporan.rincian-nota", 
+                        "title": "Rincian Nota", 
+                        "level": 1, 
+                        "order": 0, 
+                        "stateRef": "laporan.rincian-nota"
                     }
                 ]
             },

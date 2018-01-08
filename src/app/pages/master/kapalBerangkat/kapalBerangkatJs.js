@@ -61,7 +61,7 @@
             $scope.modalTitle = "Edit KapalBerangkat";
             console.log('edit', x);
             KapalBerangkatService.cariSatu("kode", x.id).success(function (data) {
-                if (data.tglBerangkat != null && data.tglBerangkat != undefined) {
+                if (data.tglBerangkat !== null && data.tglBerangkat !== undefined) {
                     data.tglBerangkat = new Date(data.tglBerangkat);
                 }
                 $scope.vm = angular.copy(data);

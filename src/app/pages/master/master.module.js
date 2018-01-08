@@ -68,6 +68,22 @@
                         order: 200,
                     },
                 })
+                .state('master.tambahanBiaya', {
+                    url: '/tambahanBiaya',
+//                    templateUrl: 'app/pages/master/jenisItem/jenis-item.html',
+//                    controller: 'JenisItemCtrl',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/master/tambahanBiaya/tambahan-biaya.html',
+                            controller: 'TambahanBiayaCtrl',
+                        }
+                    },
+//          controllerAs: 'vm',
+                    title: 'Tambahan Biaya',
+                    sidebarMeta: {
+                        order: 200,
+                    },
+                })
                 .state('master.kapal', {
                     url: '/kapal',
 //                    templateUrl: 'app/pages/master/kapal/kapal.html',
@@ -178,6 +194,34 @@
                     title: 'Kapal Berangkat',
                     sidebarMeta: {
                         order: 900,
+                    },
+                })
+                .state('master.kategoriHarga', {
+                    url: '/kategoriHarga',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/master/kategoriHarga/kategori-harga.html',
+                            controller: 'KategoriHargaCtrl',
+                        }
+                    },
+//          controllerAs: 'vm',
+                    title: 'Kategori Harga',
+                    sidebarMeta: {
+                        order: 901,
+                    },
+                })
+                .state('master.settingHarga', {
+                    url: '/settingHarga',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/master/settingHarga/setting-harga.html',
+                            controller: 'SettingHargaCtrl',
+                        }
+                    },
+//          controllerAs: 'vm',
+                    title: 'Setting Harga',
+                    sidebarMeta: {
+                        order: 901,
                     },
                 })
     }

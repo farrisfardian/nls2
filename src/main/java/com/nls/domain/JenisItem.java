@@ -29,7 +29,15 @@ public class JenisItem {
 
     @Column
     private String nama;
-    
+
+    public JenisItem() {
+    }
+
+    public JenisItem(Integer id, String nama) {
+        this.id = id;
+        this.nama = nama;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -45,5 +53,5 @@ public class JenisItem {
     public void setNama(String nama) {
         this.nama = nama;
     }
-    
+
 }

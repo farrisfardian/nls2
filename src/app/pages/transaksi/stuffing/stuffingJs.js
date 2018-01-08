@@ -6,7 +6,7 @@
             .controller('StuffingModalController', StuffingModalController);
 
     /** @ngInject */
-    function StuffingCtrl($scope, $uibModal, $log, $filter, toastr, StuffingService, KotaService, KontainerService, KapalBerangkatService, EmklService, SatuanKirimService) {
+    function StuffingCtrl($scope, $uibModal, $log, $filter, toastr, StuffingService, KotaService, KontainerService, KapalBerangkatService, EmklService, SatuanKirimService, EnumService) {
         $scope.search = "";
         $scope.oldSearch = "";
         $scope.deskKapalBerangkat = "";
@@ -14,6 +14,9 @@
             currentPage: 1,
             totalItems: 0
         };
+        EnumService.getUkuranKontainer().success(function (data) {
+            $scope.listUkuranKontainer = data;
+        });
         $scope.options = {format: 'DD/MM/YYYY', showClear: false};
         $scope.param = {tglAwal: new Date(), tglAkhir: new Date(), cari: ""};
         $scope.reloadData = function () {
@@ -52,6 +55,7 @@
             $scope.modalTitle = "Edit Stuffing";
             console.log('edit', x);
             StuffingService.cariSatu("kode", x.id).success(function (data) {
+                console.log('edit', data);
                 if (data.tglClosing !== null && data.tglClosing !== undefined) {
                     data.tglClosing = new Date(data.tglClosing);
                 }
@@ -145,7 +149,13 @@
             } else {
                 location.href = link;
             }
-        }
+        };
+
+        $scope.$watch('vm.satuanKirim', function () {
+            if ($scope.vm.satuanKirim.nama === 'LCL') {
+                $scope.vm.ukuranKontainer = null;
+            }
+        });
     }
 
     function StuffingModalController($uibModalInstance, toastr, $scope, StuffingService, KotaService, KontainerService, KapalBerangkatService, EmklService, SatuanKirimService, data) {

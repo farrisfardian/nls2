@@ -7,11 +7,14 @@ package com.nls.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.nls.constant.UkuranPaket;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,9 +54,13 @@ public class SuratJalanDetail {
     @Column
     private Boolean paket;
 
+    @ManyToOne
+    @JoinColumn(name = "id_kategori_harga")
+    private KategoriHarga kategoriHarga;
+
     @Column(columnDefinition = "text")
     private String spesifikasi;
-    
+
     @Column(columnDefinition = "text")
     private String catatan;
 
@@ -65,7 +72,7 @@ public class SuratJalanDetail {
     @ManyToOne
     @JoinColumn(name = "id_item")
     private Item item;
-    @OneToMany(cascade = { CascadeType.ALL }, orphanRemoval = true, mappedBy = "sjDetail", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true, mappedBy = "sjDetail", fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<SJStuffing> sjStufings = new HashSet<SJStuffing>();
 
@@ -163,6 +170,20 @@ public class SuratJalanDetail {
 
     public void setCatatan(String catatan) {
         this.catatan = catatan;
+    }
+
+    /**
+     * @return the kategoriHarga
+     */
+    public KategoriHarga getKategoriHarga() {
+        return kategoriHarga;
+    }
+
+    /**
+     * @param kategoriHarga the kategoriHarga to set
+     */
+    public void setKategoriHarga(KategoriHarga kategoriHarga) {
+        this.kategoriHarga = kategoriHarga;
     }
 
 }

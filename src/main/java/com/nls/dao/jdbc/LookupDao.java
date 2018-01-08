@@ -36,6 +36,46 @@ public class LookupDao {
         return mr.mapList(sql);
     }
 
+    public Object lookupTagihanTerbayar(String idToko, String idMerk, String status) {
+        String sql = "select * from fn_get_tagihan_terbayar(" + idToko + ", " + idMerk + ", " + (status.equalsIgnoreCase("null") ? "null" : "'" + status + "'") + ") as (id int, nomor varchar, tanggal date, tagihan double precision, terbayar numeric)";
+
+        return mr.mapList(sql);
+    }
+
+    public Object lookupKapalBerangkatPerTokoMerkTujuan(String idToko, String idMerk) {
+        String sql = "select * from fn_get_kapal_berangkat_by_toko_merk(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ") as (kapal varchar, tgl_berangkat date, tgl_ind varchar, nomor_kontainer varchar, id_kapal_berangkat int, sat_kirim varchar, kota varchar, id_toko int, id_merk int)";
+        System.out.println("lookupKapalBerangkatPerTokoMerkTujuan : " + sql);
+        return mr.mapList(sql);
+    }
+
+    public Object lookupNotaPerTokoMerkTujuan(String idToko, String idMerk) {
+        String sql = "select * from fn_get_nota_by_toko_merk(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ") as r (id int, created_by varchar, created_date timestamp without time zone, last_modified_by varchar, last_modified_date timestamp without time zone, nomor varchar, tanggal date, id_toko int, min_bayar boolean, id_merk int, id_kota_asal int, total_tagihan numeric, kota_asal varchar)";
+        System.out.println("lookupNotaPerTokoMerkTujuan : " + sql);
+        return mr.mapList(sql);
+    }
+
+    public Object lookupDetailNotaPerTokoMerkTujuan(String idToko, String idMerk, String idKapalBerangkat) {
+        String sql = "select * from fn_gen_detail_nota(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ", " + (idKapalBerangkat.equalsIgnoreCase("null") ? idKapalBerangkat : "ARRAY[" + idKapalBerangkat + "]") + ") as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, harga_satuan numeric)";
+
+        return mr.mapList(sql);
+    }
+
+    public Object lookupSubtotalDetailNotaPerTokoMerkTujuan(String idToko, String idMerk, String idKapalBerangkat) {
+        String sql = "select id_kapal_berangkat, nomor_kontainer, sum(coalesce(harga_satuan,0)*coalesce(case when sat_kirim='FCL' then jml else kubikasi end,0)) subtotal from fn_gen_detail_nota(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ", " + (idKapalBerangkat.equalsIgnoreCase("null") ? idKapalBerangkat : "ARRAY[" + idKapalBerangkat + "]") + ") as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, harga_satuan numeric) group by id_kapal_berangkat,nomor_kontainer";
+
+        return mr.mapList(sql);
+    }
+
+    public String getNomorNota(Integer idKotaAsal, Integer idKotaTujuan) {
+        String sql = "select fn_get_nomor_nota(" + idKotaAsal + "," + idKotaTujuan + ") as nomor";
+        return mr.mapSingle(sql).get("nomor").toString();
+    }
+
+    public String getNomorPembayaran() {
+        String sql = "select fn_get_nomor_pembayaran() as nomor";
+        return mr.mapSingle(sql).get("nomor").toString();
+    }
+
     public Object lookupStuffingAktif(Integer idKota) {
         String sql = "select st.id, st.no_kontainer, kt.nama kota_tujuan, coalesce(k.nama,'') nama_kapal, k.id as id_kapal, kb.id as id_kapal_berangkat, kb.tgl_berangkat \n"
                 + "from t_stuffing st \n"
@@ -83,6 +123,17 @@ public class LookupDao {
         return mr.mapList(sql);
     }
 
+    public Object lookupKategoriHarga(String s) {
+        String sql = "select t.id, t.nama, coalesce(t.ukuran_kontainer,'') ukuran_kontainer, coalesce(k.nama,'') satuan_kirim, coalesce(t.paket,false) as paket \n"
+                + "from m_kategori_harga t \n"
+                + "left join m_satuan_kirim k on k.id=t.id_satuan_kirim\n"
+                + "where coalesce(t.nama,'')||coalesce(t.ukuran_kontainer,'')||coalesce(k.nama,'') ilike '%" + s + "%' \n"
+                //                + "and t.id not in(select id_toko from m_merk) \n"
+                + "order by t.nama";
+
+        return mr.mapList(sql);
+    }
+
     public Object lookupSuratJalan(String s) {
         String sql = "select t.id, t.nama, t.alamat, k.nama nama_kota\n"
                 + "from m_toko t \n"
@@ -119,8 +170,8 @@ public class LookupDao {
                 + "inner join m_toko t on t.id=m.id_toko\n"
                 + "left join t_kapal_berangkat kb on st.id_kapal_berangkat=kb.id\n"
                 + "where "
-                + "st.id_kota="+idKota+" and \n"
-                + "st.id_kapal_berangkat " + (id==0? " is null ": "="+id) + "\n"
+                + "st.id_kota=" + idKota + " and \n"
+                + "st.id_kapal_berangkat " + (id == 0 ? " is null " : "=" + id) + "\n"
                 + "order by t.nama, m.nama";
 
         System.out.println("sql : " + sql);
@@ -148,8 +199,8 @@ public class LookupDao {
                 + "  left join public.m_satuan_kirim sk on st.id_satuan_kirim = sk.id \n"
                 + "  left join public.m_kapal kp on kb.id_kapal = kp.id\n"
                 + "WHERE \n"
-                + "st.id_kota="+idKota+" and \n"
-                + (id==0?"st.id_kapal_berangkat is null ": "kb.id = " + id  )+"\n"
+                + "st.id_kota=" + idKota + " and \n"
+                + (id == 0 ? "st.id_kapal_berangkat is null " : "kb.id = " + id) + "\n"
                 + "order by coalesce(kb.tgl_berangkat,'1985-11-11'::date) desc, kt.nama \n";
         logger.warn("Query [{}]", query);
         return mr.mapList(query);
@@ -169,12 +220,13 @@ public class LookupDao {
                 + "  sk.nama as satuan_kirim, \n"
                 + "  kb.tgl_berangkat, \n"
                 + "  st.no_kontainer as nomor_kontainer, \n"
+                + "  st.ukuran_kontainer, \n"
                 + "  kt.nama as kota_tujuan\n"
                 + "FROM \n"
                 + "  public.t_stuffing st \n"
                 + "  left join public.m_emkl em on st.id_emkl = em.id \n"
                 + "  left join public.t_kapal_berangkat kb on st.id_kapal_berangkat = kb.id \n"
-//                + "  left join public.m_kontainer ko on st.id_kontainer = ko.id \n"
+                //                + "  left join public.m_kontainer ko on st.id_kontainer = ko.id \n"
                 + "  left join public.m_kota kt on st.id_kota = kt.id \n"
                 + "  left join public.m_satuan_kirim sk on st.id_satuan_kirim = sk.id \n"
                 + "  left join public.m_kapal kp on kb.id_kapal = kp.id\n"
@@ -182,6 +234,90 @@ public class LookupDao {
                 + "  coalesce(kb.tgl_berangkat,current_date) between '" + tglAwal + "'::date and '" + tglAkhir + "'::date\n"
                 + "  and coalesce(em.nama,'')||coalesce(kp.nama,'')||coalesce(sk.nama,'')||coalesce(st.no_kontainer,'')||coalesce(kt.nama,'') ilike '%" + cari + "%' "
                 + "order by coalesce(kb.tgl_berangkat,'1985-11-11'::date) desc, kt.nama \n";
+        System.out.println("query all : " + query);
+        Integer totalElement = mr.countRecordset(query);
+        int totalPages = totalElement == 0 ? 0 : totalElement <= page.getPageSize() ? 1
+                : (totalElement / page.getPageSize()) + (totalElement % page.getPageSize() >= 1 ? 1 : 0);
+        boolean isFirstPage = totalPages == 0 || page.getPageNumber() == 0;
+        boolean isLastPage = totalPages == 0 || page.getPageNumber() == 0;
+
+        query = query + "limit " + page.getPageSize() + "\n"
+                + "offset " + (page.getOffset());
+        System.out.println("query paging : " + query);
+        logger.warn("Query [{}]", query);
+        mm.addAttribute("content", mr.mapList(query));
+        mm.put("size", page.getPageSize());
+        mm.put("totalElements", totalElement);
+        mm.put("totalPages", totalPages);
+        mm.put("number", page.getPageNumber());
+        mm.put("firstPage", isFirstPage);
+        mm.put("lastPage", isLastPage);
+        return mm;
+    }
+
+    public Object lookupNota(String cari, String tglAwal, String tglAkhir, PageRequest page) {
+        ModelMap mm = new ModelMap();
+        System.out.println("Page.Size: " + page.getPageSize());
+        System.out.println("Page.Offset: " + page.getOffset());
+        System.out.println("cari: " + cari);
+        String query = "SELECT distinct n.id,\n"
+                + "  m.nama merk, \n"
+                + "  t.nama toko, \n"
+                + "  k.nama kota, \n"
+                + "  n.nomor, \n"
+                + "  n.tanggal, \n"
+                + "  coalesce(kb.tgl_berangkat,'1985-11-11'::date) as tgl_berangkat\n"
+                + "FROM \n"
+                + "  public.t_nota n \n"
+                + "  join public.t_nota_detail nd on nd.id_nota = n.id\n"
+                + "  join public.t_kapal_berangkat kb on nd.id_kapal_berangkat = kb.id\n"
+                + "  join public.m_toko t on n.id_toko = t.id \n"
+                + "  left join public.m_merk m on n.id_merk = m.id\n"
+                + "  join m_kota k on k.id = t.id_kota\n"
+                + "WHERE \n"
+                + "  coalesce(kb.tgl_berangkat,current_date) between '" + tglAwal + "'::date and '" + tglAkhir + "'::date\n"
+                + "  and coalesce(m.nama, '')|| coalesce(t.nama, '')|| coalesce(n.nomor, '') ilike '%" + cari + "%' "
+                + "order by coalesce(kb.tgl_berangkat,'1985-11-11'::date) desc, n.tanggal desc \n";
+        System.out.println("query all : " + query);
+        Integer totalElement = mr.countRecordset(query);
+        int totalPages = totalElement == 0 ? 0 : totalElement <= page.getPageSize() ? 1
+                : (totalElement / page.getPageSize()) + (totalElement % page.getPageSize() >= 1 ? 1 : 0);
+        boolean isFirstPage = totalPages == 0 || page.getPageNumber() == 0;
+        boolean isLastPage = totalPages == 0 || page.getPageNumber() == 0;
+
+        query = query + "limit " + page.getPageSize() + "\n"
+                + "offset " + (page.getOffset());
+        System.out.println("query paging : " + query);
+        logger.warn("Query [{}]", query);
+        mm.addAttribute("content", mr.mapList(query));
+        mm.put("size", page.getPageSize());
+        mm.put("totalElements", totalElement);
+        mm.put("totalPages", totalPages);
+        mm.put("number", page.getPageNumber());
+        mm.put("firstPage", isFirstPage);
+        mm.put("lastPage", isLastPage);
+        return mm;
+    }
+    
+    public Object lookupPembayaran(String cari, String tglAwal, String tglAkhir, PageRequest page) {
+        ModelMap mm = new ModelMap();
+        System.out.println("Page.Size: " + page.getPageSize());
+        System.out.println("Page.Offset: " + page.getOffset());
+        System.out.println("cari: " + cari);
+        String query = "SELECT n.id,\n"
+                + "  m.nama merk, \n"
+                + "  t.nama toko, \n"
+                + "  n.nomor, \n"
+                + "  n.total_bayar, \n"
+                + "  n.tanggal \n"
+                + "FROM \n"
+                + "  public.t_pembayaran_nota n \n"
+                + "  join public.m_toko t on n.id_toko = t.id \n"
+                + "  left join public.m_merk m on n.id_merk = m.id\n"
+                + "WHERE \n"
+                + "  coalesce(n.tanggal,current_date) between '" + tglAwal + "'::date and '" + tglAkhir + "'::date\n"
+                + "  and coalesce(m.nama, '')|| coalesce(t.nama, '')|| coalesce(n.nomor, '') ilike '%" + cari + "%' "
+                + "order by n.tanggal desc \n";
         System.out.println("query all : " + query);
         Integer totalElement = mr.countRecordset(query);
         int totalPages = totalElement == 0 ? 0 : totalElement <= page.getPageSize() ? 1

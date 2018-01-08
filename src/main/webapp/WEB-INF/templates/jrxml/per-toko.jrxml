@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="packing-list" pageWidth="612" pageHeight="1008" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="76" uuid="b8b76c8b-a069-48df-acd7-9c0db1840a9f">
+<!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
+<!-- 2017-12-12T12:49:19 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="packing-list" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b8b76c8b-a069-48df-acd7-9c0db1840a9f">
 	<property name="ireport.zoom" value="1.0000000000000016"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.unit." value="mm"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="mm"/>
 	<parameter name="realPath" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select kota_tujuan, kondisi,
@@ -87,7 +97,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textElement textAlignment="Center">
 						<font fontName="DejaVu Sans" isBold="true" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["PACKING LIST CUSTOMER"]]></textFieldExpression>
+					<textFieldExpression><![CDATA["CARGO MANIFEST CUSTOMER"]]></textFieldExpression>
 				</textField>
 				<image onErrorType="Blank">
 					<reportElement x="1" y="1" width="66" height="59" uuid="76b5a809-faf6-4658-a3af-38c9cd632731">
@@ -105,7 +115,10 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textFieldExpression><![CDATA["TUJUAN :"+$F{kota_tujuan}.toUpperCase()]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" evaluationTime="Report">
-					<reportElement x="384" y="1" width="188" height="70" uuid="d00af3ed-881f-4e4f-938e-1ee83b7650cf"/>
+					<reportElement x="384" y="1" width="188" height="53" uuid="d00af3ed-881f-4e4f-938e-1ee83b7650cf">
+						<property name="local_mesure_unitheight" value="mm"/>
+						<property name="com.jaspersoft.studio.unit.height" value="mm"/>
+					</reportElement>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -115,7 +128,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" size="8"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Batas Klaim Kehilangan/Kerusakan Barang \nMaks. 15 Hari Setelah Barang Diterima.\nMohon Pemilik Barang Mengasuransikan Barangnya. Barang Yang Tidak Diasuransikan, Apabila Ada Musibah Dari Pihak Ekspedisi Tidak Menerima Claim."]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Batas waktu pengajuan klaim barang \nmaks. 15 Hari sejak barang diterima. \nMohon barang yang dikirim diasuransikan. Terima kasih."]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="156" y="1" width="124" height="12" uuid="37590d9b-c220-4936-97e9-7744ef7b3ddf"/>
@@ -186,7 +199,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 	<group name="kapal">
 		<groupExpression><![CDATA[$F{kota_tujuan}]]></groupExpression>
 		<groupHeader>
-			<band height="29">
+			<band height="48">
 				<staticText>
 					<reportElement x="0" y="0" width="67" height="15" uuid="d5c4c42a-d672-4929-ad3b-0145c1742703"/>
 					<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
@@ -203,103 +216,164 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					</textElement>
 					<textFieldExpression><![CDATA[": "+$F{kapal}+", Berangkat Tgl "+$F{tgl_ind}]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement mode="Opaque" x="0" y="15" width="22" height="14" backcolor="#7CB2EC" uuid="2d3dd971-9fcb-48b8-9bc6-82a390a8b79e"/>
-					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-						<topPen lineWidth="0.75"/>
-						<leftPen lineWidth="0.75"/>
-						<bottomPen lineWidth="0.75"/>
-					</box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[NO]]></text>
-				</staticText>
-				<staticText>
-					<reportElement mode="Opaque" x="22" y="15" width="45" height="14" backcolor="#7CB2EC" uuid="6d42afcc-7e24-452c-b610-077310cb1863"/>
-					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-						<topPen lineWidth="0.75"/>
-						<leftPen lineWidth="0.75"/>
-						<bottomPen lineWidth="0.75"/>
-					</box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[TGL MSK]]></text>
-				</staticText>
-				<staticText>
-					<reportElement mode="Opaque" x="67" y="15" width="89" height="14" backcolor="#7CB2EC" uuid="f98ecdb1-1d82-40e6-9d6c-fae4e9749932"/>
-					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-						<topPen lineWidth="0.75"/>
-						<leftPen lineWidth="0.75"/>
-						<bottomPen lineWidth="0.75"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[PENGIRIM]]></text>
-				</staticText>
-				<staticText>
-					<reportElement mode="Opaque" x="190" y="15" width="30" height="14" backcolor="#7CB2EC" uuid="b44eef34-0401-4a35-9ada-8c30883efb12"/>
-					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-						<topPen lineWidth="0.75"/>
-						<leftPen lineWidth="0.75"/>
-						<bottomPen lineWidth="0.75"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[COLI]]></text>
-				</staticText>
-				<staticText>
-					<reportElement mode="Opaque" x="220" y="15" width="199" height="14" backcolor="#7CB2EC" uuid="01f0e103-1e50-491e-8560-af34bed240c9"/>
-					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-						<topPen lineWidth="0.75"/>
-						<leftPen lineWidth="0.75"/>
-						<bottomPen lineWidth="0.75"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[JENIS BARANG]]></text>
-				</staticText>
-				<staticText>
-					<reportElement mode="Opaque" x="419" y="15" width="90" height="14" backcolor="#7CB2EC" uuid="84464ced-7314-49ef-abee-ecc8706716c4"/>
-					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-						<topPen lineWidth="0.75"/>
-						<leftPen lineWidth="0.75"/>
-						<bottomPen lineWidth="0.75"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[UKURAN (CM)]]></text>
-				</staticText>
-				<staticText>
-					<reportElement mode="Opaque" x="509" y="15" width="63" height="14" backcolor="#7CB2EC" uuid="2863b789-94c7-4d11-acad-50370220265e"/>
-					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-						<topPen lineWidth="0.75"/>
-						<leftPen lineWidth="0.75"/>
-						<bottomPen lineWidth="0.75"/>
-						<rightPen lineWidth="0.75"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[M3/TON]]></text>
-				</staticText>
-				<staticText>
-					<reportElement mode="Opaque" x="156" y="15" width="34" height="14" backcolor="#7CB2EC" uuid="987f9e97-ac13-46b2-9e64-f1a5f5c12102"/>
-					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-						<topPen lineWidth="0.75"/>
-						<leftPen lineWidth="0.75"/>
-						<bottomPen lineWidth="0.75"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[KODE]]></text>
-				</staticText>
+				<frame>
+					<reportElement x="0" y="18" width="572" height="30" uuid="96d2e10e-4854-4225-9b71-528c31f8cf39"/>
+					<staticText>
+						<reportElement mode="Opaque" x="227" y="0" width="203" height="30" backcolor="#7CB2EC" uuid="9319fd5e-2e41-4230-a72b-024cb971d2a0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Deskripsi Barang / Rincian Barang]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="67" y="0" width="89" height="30" backcolor="#7CB2EC" uuid="a8e19004-ed5b-41c1-a2ac-510ac5b2c7a4">
+							<property name="local_mesure_unitheight" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Pengirim]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="0" width="22" height="30" backcolor="#7CB2EC" uuid="6b748310-1ffe-4263-96af-1799f142e76a">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[NO]]></text>
+					</staticText>
+					<textField>
+						<reportElement mode="Opaque" x="517" y="0" width="55" height="30" forecolor="#000000" backcolor="#7CB2EC" uuid="7c145842-7359-4d37-a91a-177385a6d7ea"/>
+						<box padding="0" topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="styled">
+							<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+							<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Volume (M3/TON)"]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Opaque" x="430" y="0" width="87" height="16" backcolor="#7CB2EC" uuid="ad73ba9f-c734-490e-9a5d-87c1b3460152">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Dimensi (CM)]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="156" y="0" width="36" height="30" backcolor="#7CB2EC" uuid="06afd1eb-effc-4879-8362-13e4a032e853">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Total Coli]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="22" y="0" width="45" height="30" backcolor="#7CB2EC" uuid="e84ca7a8-3338-45e4-8032-03b471502602">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Tgl Kirim Barang]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="192" y="0" width="35" height="30" backcolor="#7CB2EC" uuid="630b141e-dcb4-4874-8cc9-aeed52edd392">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Coli]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="430" y="16" width="31" height="14" backcolor="#7CB2EC" uuid="b1103089-7be7-4d6b-828b-2aba0f8c5d33">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[P]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="461" y="16" width="27" height="14" backcolor="#7CB2EC" uuid="56b56e28-e755-45c2-aa61-79f4278568b6">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[L]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="488" y="16" width="29" height="14" backcolor="#7CB2EC" uuid="7f31fdba-d38d-4146-9930-37246c81c57a">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</reportElement>
+						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="DejaVu Sans" size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[T]]></text>
+					</staticText>
+				</frame>
 			</band>
 		</groupHeader>
 	</group>
@@ -308,7 +382,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 		<groupFooter>
 			<band height="14">
 				<textField pattern="#,##0">
-					<reportElement x="190" y="0" width="30" height="14" uuid="0296df80-3934-4a78-a045-b8341fd8c89b"/>
+					<reportElement x="192" y="0" width="34" height="14" uuid="0296df80-3934-4a78-a045-b8341fd8c89b"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="1.0"/>
 						<leftPen lineWidth="1.0"/>
@@ -321,7 +395,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textFieldExpression><![CDATA[$V{subColiSatuanKirim}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.000">
-					<reportElement x="509" y="0" width="63" height="14" uuid="93000cab-4f50-40ef-82ba-7378a1f0357c"/>
+					<reportElement x="517" y="0" width="55" height="14" uuid="93000cab-4f50-40ef-82ba-7378a1f0357c"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="1.0"/>
 						<leftPen lineWidth="1.0"/>
@@ -334,7 +408,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textFieldExpression><![CDATA[$V{subKubikasiSatuanKirim}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement mode="Transparent" x="220" y="0" width="289" height="14" forecolor="#000000" backcolor="#7CB2EC" uuid="221c719a-9b40-49b8-bfb2-713425463d35"/>
+					<reportElement mode="Transparent" x="227" y="0" width="289" height="14" forecolor="#000000" backcolor="#7CB2EC" uuid="221c719a-9b40-49b8-bfb2-713425463d35"/>
 					<box padding="0" topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -347,7 +421,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textFieldExpression><![CDATA[$F{satuan_kirim}.equalsIgnoreCase( "FCL" )?$V{jmlKontainer}.toString()+" Container ("+$F{satuan_kirim}+")":$F{satuan_kirim}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Transparent" x="0" y="0" width="190" height="14" backcolor="#7CB2EC" uuid="b7466b1d-9fce-4817-9cbe-b0a8c258f3f4"/>
+					<reportElement mode="Transparent" x="0" y="0" width="192" height="14" backcolor="#7CB2EC" uuid="b7466b1d-9fce-4817-9cbe-b0a8c258f3f4"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -369,7 +443,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 		<groupFooter>
 			<band height="15">
 				<textField pattern="#,##0">
-					<reportElement x="190" y="0" width="30" height="14" uuid="622aaf6b-00bf-4798-9131-271825ea4bdb"/>
+					<reportElement x="192" y="0" width="34" height="14" uuid="622aaf6b-00bf-4798-9131-271825ea4bdb"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="1.0"/>
 						<leftPen lineWidth="1.0"/>
@@ -382,7 +456,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textFieldExpression><![CDATA[$V{subColiMerk}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.000">
-					<reportElement x="509" y="0" width="63" height="14" uuid="801e0ffa-725f-4bd6-b750-fae17db7ab4b"/>
+					<reportElement x="517" y="0" width="55" height="14" uuid="801e0ffa-725f-4bd6-b750-fae17db7ab4b"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="1.0"/>
 						<leftPen lineWidth="1.0"/>
@@ -395,7 +469,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textFieldExpression><![CDATA[$V{subKubikasiMerk}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Transparent" x="220" y="0" width="289" height="14" backcolor="#7CB2EC" uuid="6bad82c8-e7b6-4e94-8ec8-5787bc5bb0a8"/>
+					<reportElement mode="Transparent" x="227" y="0" width="289" height="14" backcolor="#7CB2EC" uuid="6bad82c8-e7b6-4e94-8ec8-5787bc5bb0a8"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -407,7 +481,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<text><![CDATA[]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Transparent" x="0" y="0" width="190" height="14" backcolor="#7CB2EC" uuid="39e25adb-8da1-4093-bb44-26ceea707ceb"/>
+					<reportElement mode="Transparent" x="0" y="0" width="192" height="14" backcolor="#7CB2EC" uuid="39e25adb-8da1-4093-bb44-26ceea707ceb"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -416,7 +490,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
 					</textElement>
-					<text><![CDATA[SUB TOTAL MERK]]></text>
+					<text><![CDATA[SUB TOTAL CUSTOMER]]></text>
 				</staticText>
 			</band>
 		</groupFooter>
@@ -429,9 +503,9 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<reportElement mode="Transparent" x="0" y="1" width="572" height="14" backcolor="#7CB2EC" uuid="42e1b0a7-b71e-4a2f-a2c8-3136e8008e50"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="1.0"/>
-						<leftPen lineWidth="1.0"/>
+						<leftPen lineWidth="0.0"/>
 						<bottomPen lineWidth="1.0"/>
-						<rightPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
 					</box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
@@ -449,7 +523,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 						<textElement>
 							<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
 						</textElement>
-						<text><![CDATA[MERK]]></text>
+						<text><![CDATA[CUSTOMER]]></text>
 					</staticText>
 					<textField isStretchWithOverflow="true">
 						<reportElement x="67" y="0" width="505" height="14" uuid="dbc57784-7001-4e8f-b907-43001f606705"/>
@@ -522,7 +596,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 			<band height="14">
 				<printWhenExpression><![CDATA[$F{jml_kontainer} > 1]]></printWhenExpression>
 				<staticText>
-					<reportElement mode="Transparent" x="220" y="0" width="199" height="14" backcolor="#7CB2EC" uuid="727be34c-da02-432c-8a9f-5582cfde78a4"/>
+					<reportElement mode="Transparent" x="227" y="0" width="202" height="14" backcolor="#7CB2EC" uuid="727be34c-da02-432c-8a9f-5582cfde78a4"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -534,7 +608,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<text><![CDATA[]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Transparent" x="156" y="0" width="34" height="14" backcolor="#7CB2EC" uuid="82ca2e8c-8de5-4384-b1eb-0c385e903730"/>
+					<reportElement mode="Transparent" x="156" y="0" width="36" height="14" backcolor="#7CB2EC" uuid="82ca2e8c-8de5-4384-b1eb-0c385e903730"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -558,7 +632,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<text><![CDATA[]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Transparent" x="419" y="0" width="90" height="14" backcolor="#7CB2EC" uuid="b4ad97df-986a-4ff5-b5bb-1545f3f2640e"/>
+					<reportElement mode="Transparent" x="430" y="0" width="87" height="14" backcolor="#7CB2EC" uuid="b4ad97df-986a-4ff5-b5bb-1545f3f2640e"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -594,7 +668,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<text><![CDATA[]]></text>
 				</staticText>
 				<textField pattern="#,##0">
-					<reportElement x="190" y="0" width="30" height="14" uuid="352227bc-8f9f-4430-b8b7-3200d885f99d"/>
+					<reportElement x="192" y="0" width="34" height="14" uuid="352227bc-8f9f-4430-b8b7-3200d885f99d"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="1.0"/>
 						<leftPen lineWidth="1.0"/>
@@ -607,7 +681,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textFieldExpression><![CDATA[$V{subColiContainer}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.000">
-					<reportElement x="509" y="0" width="63" height="14" uuid="4be51b77-f3bd-479d-84cf-9c73ab67de8c"/>
+					<reportElement x="517" y="0" width="55" height="14" uuid="4be51b77-f3bd-479d-84cf-9c73ab67de8c"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="1.0"/>
 						<leftPen lineWidth="1.0"/>
@@ -650,7 +724,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement stretchType="RelativeToBandHeight" x="220" y="0" width="199" height="14" uuid="c4a1b32e-7661-4f5a-ac71-4f7f2670378e"/>
+					<reportElement stretchType="RelativeToBandHeight" x="227" y="0" width="202" height="14" uuid="c4a1b32e-7661-4f5a-ac71-4f7f2670378e"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.0"/>
@@ -662,7 +736,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textFieldExpression><![CDATA[$F{total_coli_sj}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="#,##0.000">
-					<reportElement stretchType="RelativeToBandHeight" x="419" y="0" width="153" height="14" uuid="2ce4e724-6849-4bfa-9d07-dcb40ca14fd9"/>
+					<reportElement stretchType="RelativeToBandHeight" x="430" y="0" width="142" height="14" uuid="2ce4e724-6849-4bfa-9d07-dcb40ca14fd9"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="0.75"/>
 						<leftPen lineWidth="0.75"/>
@@ -686,7 +760,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement stretchType="RelativeToBandHeight" x="156" y="0" width="64" height="14" uuid="1ca3bcd7-49d0-4087-b26e-eaa097fa6b41"/>
+					<reportElement stretchType="RelativeToBandHeight" x="156" y="0" width="71" height="14" uuid="1ca3bcd7-49d0-4087-b26e-eaa097fa6b41"/>
 					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 						<topPen lineWidth="0.7"/>
 						<leftPen lineWidth="0.75"/>
@@ -767,7 +841,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0">
-				<reportElement stretchType="RelativeToBandHeight" x="190" y="0" width="30" height="14" uuid="04004d5e-7e1c-4d97-ad8a-756c0c2f79f5"/>
+				<reportElement stretchType="RelativeToBandHeight" x="192" y="0" width="35" height="14" uuid="04004d5e-7e1c-4d97-ad8a-756c0c2f79f5"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -779,7 +853,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 				<textFieldExpression><![CDATA[$F{coli}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="220" y="0" width="199" height="14" uuid="b1b698df-0761-4511-b673-158de04a54a8"/>
+				<reportElement stretchType="RelativeToBandHeight" x="227" y="0" width="202" height="14" uuid="b1b698df-0761-4511-b673-158de04a54a8"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -791,7 +865,9 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 				<textFieldExpression><![CDATA[$F{jenis_barang}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="419" y="0" width="90" height="14" uuid="75022632-7fe4-450b-b5f1-04dd4f7bfb5e"/>
+				<reportElement stretchType="RelativeToBandHeight" x="430" y="0" width="87" height="14" uuid="75022632-7fe4-450b-b5f1-04dd4f7bfb5e">
+					<printWhenExpression><![CDATA[$F{paket}==true || ($F{paket}==false &&($F{fix_volume}>0||($F{p}==0 && $F{l}==0&& $F{t}==0)))]]></printWhenExpression>
+				</reportElement>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -803,7 +879,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 				<textFieldExpression><![CDATA[$F{ukuran}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.000">
-				<reportElement stretchType="RelativeToBandHeight" x="509" y="0" width="63" height="14" uuid="e1877bca-956c-4ab4-a056-1b6da9b6469f"/>
+				<reportElement stretchType="RelativeToBandHeight" x="517" y="0" width="55" height="14" uuid="e1877bca-956c-4ab4-a056-1b6da9b6469f"/>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -843,7 +919,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="idSuratJalan">
-				<reportElement stretchType="RelativeToBandHeight" x="156" y="0" width="34" height="14" uuid="1771744c-7b74-4e62-9a32-509ed4bf9db3">
+				<reportElement stretchType="RelativeToBandHeight" x="156" y="0" width="36" height="14" uuid="1771744c-7b74-4e62-9a32-509ed4bf9db3">
 					<printWhenExpression><![CDATA[$V{idx}==1]]></printWhenExpression>
 				</reportElement>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
@@ -857,7 +933,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 				<textFieldExpression><![CDATA[$V{subColi}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="156" y="0" width="34" height="14" uuid="ba419aa1-38fd-4aca-8899-22a015f3d809">
+				<reportElement stretchType="RelativeToBandHeight" x="156" y="0" width="36" height="14" uuid="ba419aa1-38fd-4aca-8899-22a015f3d809">
 					<printWhenExpression><![CDATA[$V{idx}>1]]></printWhenExpression>
 				</reportElement>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
@@ -868,6 +944,48 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<font fontName="DejaVu Sans" size="8" isBold="false" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.###;#,-##0.###">
+				<reportElement stretchType="RelativeToBandHeight" x="430" y="0" width="31" height="14" uuid="7409d853-39f1-4c07-ab12-c1b28a1235bd">
+					<printWhenExpression><![CDATA[!($F{paket}==true || ($F{paket}==false &&($F{fix_volume}>0||($F{p}==0 && $F{l}==0&& $F{t}==0))))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{p}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.###;#,-##0.###">
+				<reportElement stretchType="RelativeToBandHeight" x="461" y="0" width="27" height="14" uuid="5587737d-267b-4b2f-986a-5c84a22ff1fb">
+					<printWhenExpression><![CDATA[!($F{paket}==true || ($F{paket}==false &&($F{fix_volume}>0||($F{p}==0 && $F{l}==0&& $F{t}==0))))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{l}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.###;#,-##0.###">
+				<reportElement stretchType="RelativeToBandHeight" x="488" y="0" width="29" height="14" uuid="b3e775a7-9d0d-490c-bfed-ccc29de1befa">
+					<printWhenExpression><![CDATA[!($F{paket}==true || ($F{paket}==false &&($F{fix_volume}>0||($F{p}==0 && $F{l}==0&& $F{t}==0))))]]></printWhenExpression>
+				</reportElement>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{t}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

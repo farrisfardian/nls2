@@ -5,10 +5,12 @@
  */
 package com.nls.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.nls.constant.UkuranKontainer;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,9 +54,10 @@ public class Stuffing {
     @JoinColumn(name = "id_satuan_kirim")
     private SatuanKirim satuanKirim;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id_kontainer", nullable = false)
-//    private Kontainer kontainer;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ukuran_kontainer")
+    private UkuranKontainer ukuranKontainer;
+    
     @NotNull
     @NotEmpty
     @Column(name = "no_kontainer", nullable = false, length = 30)
@@ -62,6 +65,24 @@ public class Stuffing {
     
     @Column(columnDefinition = "boolean default true", nullable = false)
     private Boolean aktif=Boolean.TRUE;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_kota_asal")
+    private Kota kotaAsal;
+    /**
+     * @return the kotaAsal
+     */
+    public Kota getKotaAsal() {
+        return kotaAsal;
+    }
+
+    /**
+     * @param kotaAsal the kotaAsal to set
+     */
+    public void setKotaAsal(Kota kotaAsal) {
+        this.kotaAsal = kotaAsal;
+    }
+
 
     public Integer getId() {
         return id;
@@ -133,6 +154,14 @@ public class Stuffing {
 
     public void setNoKontainer(String noKontainer) {
         this.noKontainer = noKontainer;
+    }
+
+    public UkuranKontainer getUkuranKontainer() {
+        return ukuranKontainer;
+    }
+
+    public void setUkuranKontainer(UkuranKontainer ukuranKontainer) {
+        this.ukuranKontainer = ukuranKontainer;
     }
 
 }

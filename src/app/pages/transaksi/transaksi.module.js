@@ -51,6 +51,32 @@
                         order: 100,
                     },
                 })
+                .state('transaksi.nota', {
+                    url: '/nota',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/transaksi/nota/nota.html',
+                            controller: 'NotaCtrl'
+                        }
+                    },
+                    title: 'Nota',
+                    sidebarMeta: {
+                        order: 100,
+                    },
+                })
+                .state('transaksi.pembayaran', {
+                    url: '/pembayaran',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/transaksi/pembayaran/pembayaran.html',
+                            controller: 'PembayaranCtrl'
+                        }
+                    },
+                    title: 'Pembayaran',
+                    sidebarMeta: {
+                        order: 100,
+                    },
+                })
                 .state('transaksi.suratjalanedit', {
                     url: '/suratjalan/:idSj',
                     views: {

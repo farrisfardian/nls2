@@ -26,7 +26,8 @@
             cariSatu: cariSatu,
             cariSemua: cariSemua,
             hapus: hapus,
-            filterByIdKotaAndAktif: filterByIdKotaAndAktif
+            filterByIdKotaAndAktif: filterByIdKotaAndAktif,
+            filterByTokoMerkTujuan: filterByTokoMerkTujuan
         }
 
 //        return service;
@@ -48,6 +49,10 @@
         }
         function filterByIdKotaAndAktif(idKota) {
             return $http.get(url + '/all-aktif-by-kota/' + idKota);
+        }
+        function filterByTokoMerkTujuan(idToko, idMerk) {
+            console.log(url + '/idToko/idMerk/' + idToko + '/' + idMerk)
+            return $http.get(url + '/idToko/idMerk/' + idToko + '/' + idMerk);
         }
         function hapus(obj) {
             if (obj.id != null) {

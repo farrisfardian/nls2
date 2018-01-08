@@ -4,7 +4,7 @@
     angular.module('BlurAdmin.pages.transaksi')
             .controller('SuratJalanItemModalCtrl', suratJalanItemModalCtrl);
 
-    function suratJalanItemModalCtrl($scope, $log, $uibModal, $uibModalInstance, $ngBootbox, data, ItemService, toastr) {
+    function suratJalanItemModalCtrl($scope, $log, $uibModal, $uibModalInstance, $ngBootbox, data, ItemService, toastr,  KategoriHargaService) {
         $scope.vm = {
             coli: 1,
             paket: false,
@@ -17,6 +17,10 @@
 
         $scope.subTotal = 0;
         $scope.oldColi = null;
+        
+        KategoriHargaService.filterPaketSatuanKirim(true,'LCL').success(function (data) {
+            $scope.listKategoriHarga = data;
+        });
 
         $scope.modalTitle = (data == null || data == undefined || data == {} ? "Tambah" : "Edit") + " Item";
         console.log('$scope.modalTitle', data);
@@ -57,8 +61,31 @@
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
+        $scope.lookupKategoriHarga = function () {
+            console.log('Baru', $scope.vm);
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/pages/tpl/lookup-kategori-harga.html',
+                controller: 'LookupKategoriHargaCtrl',
+                size: 'md',
+                resolve: {
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                console.log('selectedItem', selectedItem);
+                $scope.vm.kategoriHarga = {
+                    id: selectedItem.id,
+                    nama: selectedItem.nama,
+                };
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
 
         $scope.simpan = function () {
+            if ($scope.vm.paket !== true) {
+                $scope.vm.ukuranPaket = null;
+            }
             if ($scope.vm.item == null || $scope.vm.item == undefined || $scope.vm.item.id == undefined) {
                 ItemService.cariSatu('nama', $scope.vm.item.nama).success(function (d) {
                     if (d.id == null || d.id == undefined) {
@@ -89,7 +116,7 @@
         $scope.tambahkan = function () {
             console.log('item', $scope.vm.item);
             if ($scope.oldColi !== null && $scope.vm.coli !== $scope.oldColi) {
-                $ngBootbox.confirm({message: "<b>Jumlah coli berubah dari "+$scope.oldColi+" menjadi "+$scope.vm.coli+" maka setting pembagian continer akan direset. Anda yakin akan menyimpannya?</b>", title: 'Perhatian!!!'})
+                $ngBootbox.confirm({message: "<b>Jumlah coli berubah dari " + $scope.oldColi + " menjadi " + $scope.vm.coli + " maka setting pembagian continer akan direset. Anda yakin akan menyimpannya?</b>", title: 'Perhatian!!!'})
                         .then(function () {
                             $scope.simpan();
                         }, function () {

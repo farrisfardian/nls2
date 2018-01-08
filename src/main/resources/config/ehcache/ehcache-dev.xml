@@ -5,9 +5,9 @@
 
     <cache-template name="simple">
         <expiry>
-            <ttl unit="seconds">3600</ttl>
+            <ttl unit="seconds">28800</ttl>
         </expiry>
-        <heap unit="entries">100</heap>
+        <heap unit="entries">800</heap>
     </cache-template>
 
     <cache alias="com.nls.domain.User" uses-template="simple"/>

@@ -101,5 +101,18 @@
                         order: 0,
                     },
                 })
+                .state('laporan.rincian-nota', {
+                    url: '/rincian-nota',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/laporan/rincianNota/rincianNota.html',
+                            controller: 'RincianNotaCtrl'
+                        }
+                    },
+                    title: 'Rincian Nota',
+                    sidebarMeta: {
+                        order: 0,
+                    },
+                })
     }
 })();

@@ -11,6 +11,11 @@
         http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
+    <util:map id="customSubReportUrls"></util:map>
+    <util:list id="subReportNotaData">
+        <!-- This value must be declared exactly as you declared it in the master JRXML file -->
+        <value>dataSourceKapal</value>
+    </util:list>
     <bean id="api/report/coba" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
           p:url="/WEB-INF/templates/jrxml/coba.jrxml"/>
     <bean id="api/report/per-stuffing" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
@@ -21,5 +26,13 @@
           p:url="/WEB-INF/templates/jrxml/per-toko.jrxml"/>
     <bean id="api/report/jml-container-pertujuan" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
           p:url="/WEB-INF/templates/jrxml/jml-container-pertujuan.jrxml"/>
-
+    <bean id="api/report/get-pembayaran-nota" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+          p:url="/WEB-INF/templates/jrxml/pembayaran-nota-nls.jrxml"/>
+    <bean id="api/report/get-rincian-nota" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+          p:url="/WEB-INF/templates/jrxml/rincian-nota-nls.jrxml"/>
+    <bean id="api/report/get-nota" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView" 
+          p:url="/WEB-INF/templates/jrxml/nota-nls.jrxml"
+          p:reportDataKey="dataSource"
+          p:subReportUrls-ref="customSubReportUrls"
+          p:subReportDataKeys-ref="subReportNotaData"/>
 </beans>

@@ -5,7 +5,7 @@
             .controller('SuratJalanCtrl', SuratJalanCtrl)
 
     function SuratJalanCtrl($scope, $log, $uibModal, $stateParams, SuratJalanService, KotaService,
-            KondisiService, TokoService, toastr, $timeout) {
+            KondisiService, TokoService, toastr, $timeout, JenisItemService) {
         $scope.open = open;
         $scope.opened = false;
         $scope.format = 'dd-MM-yyyy';
@@ -19,8 +19,9 @@
         function open() {
             $scope.opened = true;
         }
-
-
+        JenisItemService.cariSemua().success(function (data) {
+            $scope.listJenisItem = data;
+        });
 
         KotaService.cariSemua().success(function (data) {
             $scope.listKota = data;
@@ -93,9 +94,9 @@
                     } else {
                         window.close();
                     }
-                }).error(function(error){
+                }).error(function (error) {
                     toastr.error('SImpan Surat Jalan Gagal!!!')
-                }).fail(function(error){
+                }).fail(function (error) {
                     toastr.error('SImpan Surat Jalan Gagal!!!')
                 });
             }
@@ -107,7 +108,8 @@
                 merk: {nama: ''},
                 toko: {nama: ''},
                 stuffing: {},
-                listSuratJalanDetail: []
+                listSuratJalanDetail: [],
+                sisipan: false
             };
             $scope.totalColi = 0;
             $scope.totKubikasi = 0;

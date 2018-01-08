@@ -152,12 +152,16 @@
                                     <label class="control-label" for="tglBerangkat">Berangkat</label>
                                 </div>
                                 <div class="col-sm-8" >
-                                    <p class="input-group">
+                                    <div class="input-group">
+                                        <input class="form-control" datetimepicker ng-model="vm.tglBerangkat" options="dateOptions" name="tglBerangkat"/>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+<!--                                    <p class="input-group">
                                         <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" datepicker-options="dateOptions" ng-model="vm.tglBerangkat" is-open="opened" ng-required="true" close-text="Close" alt-input-formats="dd/MM/yyyy" show-button-bar="false" name="tglBerangkat" />
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-default" ng-click="openDate()"><i class="glyphicon glyphicon-calendar"></i></button>
                                         </span>
-                                    </p>
+                                    </p>-->
                                 </div>
                             </div>                    
                             <div class="form-group">

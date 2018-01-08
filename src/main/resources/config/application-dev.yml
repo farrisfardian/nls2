@@ -26,12 +26,14 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
+        hikari:                    
+          leak-detection-threshold: 1000
         url: jdbc:postgresql://localhost:5432/nls
-#        username: test
-#        password: test
+        username: test
+        password: test
 #        url: jdbc:postgresql://192.168.1.10:5432/nls
-        username: nls-web
-        password: nlsSurabaya2017
+#        username: nls-web
+#        password: nlsSurabaya2017
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL

@@ -46,15 +46,15 @@ public class TokoController {
 
     @Autowired
     LookupDao lookupDao;
-    
+
 //    @Autowired
 //    AppService appService;
     private final Logger logger = LoggerFactory.getLogger(TokoController.class);
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public Iterable<Toko> cariSemua() {
-        Iterable<Toko> hasil=dao.findAll();
-        for(Toko x: hasil){
+        Iterable<Toko> hasil = dao.findAll();
+        for (Toko x : hasil) {
             fixLie(x);
         }
         return hasil;
@@ -68,7 +68,7 @@ public class TokoController {
         PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
                 Sort.Direction.ASC, "nama");
         Page<Toko> result = dao.findAll(pr);
-        for(Toko x: result){
+        for (Toko x : result) {
             fixLie(x);
         }
         return result;
@@ -76,7 +76,7 @@ public class TokoController {
 
     @RequestMapping(value = "{column}/{value}", method = RequestMethod.GET)
     public Toko cariSatu(@PathVariable("column") String column, @PathVariable("value") String value) {
-        Toko hasil=null;
+        Toko hasil = null;
         if (column.equalsIgnoreCase("kode")) {
             hasil = dao.findOne(Integer.valueOf(value));
         } else if (column.equalsIgnoreCase("nama")) {
@@ -95,13 +95,13 @@ public class TokoController {
             HttpServletResponse response) {
         PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
                 Sort.Direction.ASC, "nama");
-        Page<Toko> hasil= dao.filter("%" + nama.toUpperCase() + "%", pr);
-        for(Toko t: hasil){
+        Page<Toko> hasil = dao.filter("%" + nama.toUpperCase() + "%", pr);
+        for (Toko t : hasil) {
             fixLie(t);
         }
         return hasil;
     }
-    
+
     @RequestMapping(value = "/idkota/cari/{idkota}/{cari:.+}", method = RequestMethod.GET)
     @ResponseBody
     public Object cariComposite(@PathVariable("idkota") String idkota, @PathVariable("cari") String cari,
@@ -111,7 +111,6 @@ public class TokoController {
                 Sort.Direction.ASC, "tanggal");
         return lookupDao.lookupToko((cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), idkota, pr);
     }
-
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void hapus(@PathVariable String id) {
@@ -148,46 +147,46 @@ public class TokoController {
         return dao.save(x);
     }
 
-    
     @RequestMapping(value = "/count", method = RequestMethod.GET)
     public Long countAll() {
         return dao.count();
     }
-    
+
     @RequestMapping(value = "toko/lookup/{s}", method = RequestMethod.GET)
     public Object lookupToko(@PathVariable("s") String s) {
-        return lookupDao.lookupToko(s);
+        return lookupDao.lookupToko(s.equalsIgnoreCase("null") ? "" : s);
     }
-    
+
     @RequestMapping(value = "toko/list/kapal-berangkat/{id}", method = RequestMethod.GET)
     public Object listPerKota(@PathVariable("id") Integer id) {
         return lookupDao.lookupTokoPerKapalBerangkat(id);
     }
-    
+
     @RequestMapping(value = "merk/list/kapal-berangkat/{ik}/{id}", method = RequestMethod.GET)
     public Object listMerkPerKota(@PathVariable("ik") Integer ik, @PathVariable("id") Integer id) {
         return lookupDao.lookupMerkTokoPerKapalBerangkat(ik, id);
     }
-    
+
     @RequestMapping(value = "merk/lookup/{ik}/{s}", method = RequestMethod.GET)
     public Object lookupMerk(@PathVariable("ik") Integer ik, @PathVariable("s") String s) {
         return lookupDao.lookupMerk(s, ik);
     }
-    
+
     @RequestMapping(value = "merk/lookup/{ik}", method = RequestMethod.GET)
     public Object lookupMerkAll(@PathVariable("ik") Integer ik) {
         return lookupDao.lookupMerk("", ik);
     }
-    
+
     @RequestMapping(value = "merk/findOne/{id}", method = RequestMethod.GET)
     public Object findOneMerk(@PathVariable("id") Integer id) {
         return merkDao.findOne(id);
     }
-    
-    public void fixLie(Toko t){
-        if(t==null)
+
+    public void fixLie(Toko t) {
+        if (t == null) {
             return;
-        for(Merk m: t.getListMerk()){
+        }
+        for (Merk m : t.getListMerk()) {
             m.setToko(null);
         }
     }
