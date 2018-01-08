@@ -1,0 +1,64 @@
+<div class="widgets">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class=" form-group input-group">
+                <input id="search" type="text" class="col-xs-2 form-control" ng-model="search" ng-keypress="$event.keyCode == 13 ? reloadData() : undefined"placeholder="Masukkan pencarian" autofocus>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="reloadData()"><i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
+            </div>
+            <div ba-panel ba-panel-title="Master Menu" ba-panel-class="with-scroll">
+                <table class="table table-bordered table-hover table-condensed">
+                    <tr>
+                        <td></td>
+                        <td>Nama Menu</td>
+                        <td>Title</td>
+                        <td>Parent</td>
+                        <td>State Ref</td>
+                        <td>Level</td>
+                        <td>Order</td>
+                        <td class="col-sm-3">
+                            <button class="btn btn-info editable-table-button btn-xs" ng-click="baru()">Tambah</button>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="c in dataPage.content" class="editable-row">
+                        <td>
+                            {{((paging.currentPage - 1) * paging.maxSize) + $index + 1}}
+                        </td>
+                        <td>
+                            {{ c.name || 'empty' }}
+                        </td>
+                        <td>
+                            {{ c.title || 'empty' }}
+                        </td>
+                        <td>
+                            {{ c.parent.nama || 'empty' }}
+                        </td>
+                        <td>
+                            {{ c.stateRef || 'empty' }}
+                        </td>
+                        <td>
+                            {{ c.level || 'empty' }}
+                        </td>
+                        <td>
+                            {{ c.order || 'empty' }}
+                        </td>
+                        <td>
+                            <div class="buttons" >
+                                <button class="btn btn-primary editable-table-button btn-xs" 
+                                        data-toggle="modal" ng-click="edit(c, 'app/pages/setting/menu/menu-modal.html', 'md')">Edit</button>
+                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Menu {{c.name}}?" ng-confirm="hapus(c)">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div align="center" ng-show="dataPage.totalPages > 1">
+                    <ul uib-pagination total-items="paging.totalItems" ng-model="paging.currentPage" max-size="paging.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="reloadData()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                    <pre>Page: {{paging.currentPage}} / {{paging.maxPage}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

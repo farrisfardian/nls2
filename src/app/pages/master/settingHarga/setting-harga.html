@@ -1,0 +1,453 @@
+<div class="widgets">
+    <div class="row">
+        <div class="col-md-12" ng-hide="modalTitle === ''">
+            <div ba-panel ba-panel-title="{{modalTitle}}">
+                <form class="form-horizontal" name="form1" id="form1">
+                    <div>
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="tglBerlaku">Tgl Berlaku mulai </label>
+                                    </div>
+                                    <div class="col-sm-4" >
+                                        <div class="input-group">
+                                            <input class="form-control" datetimepicker ng-model="vm.tglBerlaku" options="options" name="tglBerlaku" ng-required="true"/>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tglBerlaku.$error.required">
+                                                Harus Diisi
+                                            </span>                        
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <label class="control-label" for="kota">Asal</label>
+                                    </div>
+                                    <div class="col-sm-4" ng-class="{error: form1.kotaAsal.$invalid}">
+                                        <ui-select ng-model="vm.kotaAsal" name="kotaAsal"
+                                                   class="btn-group bootstrap-select form-control"
+                                                   ng-required="true"
+                                                   append-to-body="true"
+                                                   search-enabled="true" required="true" 
+                                                   >
+                                            <ui-select-match placeholder="Pilih Kota">
+                                                {{$select.selected.nama}}
+                                            </ui-select-match>
+                                            <ui-select-choices
+                                                repeat="item in listKota | filter: $select.search">
+                                                <span ng-bind-html="item.nama"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kotaAsal.$error.required">
+                                            Harus Diisi
+                                        </span>
+                                    </div>
+                                      
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-xs-2">
+                                        <label class="control-label" for="toko">Toko Tujuan</label>
+                                    </div>
+                                    <div class="col-sm-4" ng-class="{error: form1.toko.$invalid}">
+                                        <p class="input-group">
+                                            <input type="text" class="form-control" ng-model="vm.toko.nama" name="toko" ng-disabled="true" ng-required="true"/>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="lookupToko('save')" ><i class="glyphicon glyphicon-search"></i></button>
+                                            </span>
+                                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.toko.$error.required">
+                                                Harus Diisi
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <label class="control-label" for="kota">Tujuan</label>
+                                    </div>
+                                    <div class="col-sm-4" ng-class="{error: form1.kota.$invalid}">
+                                        <ui-select ng-model="vm.kotaTujuan" name="kota"
+                                                   class="btn-group bootstrap-select form-control"
+                                                   ng-required="true"
+                                                   append-to-body="true"
+                                                   search-enabled="true" required="true" 
+                                                   ng-change="resetMerek()"
+                                                   ng-disabled="true"
+                                                   >
+                                            <ui-select-match placeholder="Pilih Kota">
+                                                {{$select.selected.nama}}
+                                            </ui-select-match>
+                                            <ui-select-choices
+                                                repeat="item in listKota | filter: $select.search">
+                                                <span ng-bind-html="item.nama"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kota.$error.required">
+                                            Harus Diisi
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="kondisi">Kondisi</label>
+                                    </div>
+                                    <div class="col-sm-4" >
+                                        <ui-select ng-model="vm.kondisi" name="kondisi"
+                                                   class="btn-group bootstrap-select form-control"
+                                                   ng-required="true"
+                                                   append-to-body="true"
+                                                   search-enabled="true"
+                                                   >
+                                            <ui-select-match placeholder="Pilih Kondisi">
+                                                {{$select.selected.nama}}
+                                            </ui-select-match>
+                                            <ui-select-choices
+                                                repeat="item in listKondisi | filter: $select.search">
+                                                <span ng-bind-html="item.nama"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kondisi.$error.required">
+                                            Harus Diisi
+                                        </span>
+                                    </div>
+                                    <!--                                    <div class="col-xs-2">
+                                                                            <label class="control-label" for="satuanKirim">Satuan Kirim</label>
+                                                                        </div>
+                                                                        <div class="col-sm-4" ng-class="{error: form1.satuanKirim.$invalid}">
+                                                                            <ui-select ng-model="vm.satuanKirim" name="satuanKirim"
+                                                                                       class="btn-group bootstrap-select form-control"
+                                                                                       ng-required="true"
+                                                                                       append-to-body="true"
+                                                                                       search-enabled="true"
+                                                                                       >
+                                                                                <ui-select-match placeholder="Pilih Satuan Kirim">
+                                                                                    {{$select.selected.nama}}
+                                                                                </ui-select-match>
+                                                                                <ui-select-choices
+                                                                                    repeat="item in listSatuanKirim | filter: $select.search">
+                                                                                    <span ng-bind-html="item.nama"></span>
+                                                                                </ui-select-choices>
+                                                                            </ui-select>
+                                                                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.satuanKirim.$error.required">
+                                                                                Harus Diisi
+                                                                            </span>
+                                                                        </div>  -->
+                                </div>
+                            </div>
+                            <!--                            <div class="col-md-12" style="background-color: cornflowerblue">
+                                                            <label class="form-control" style="text-align: center">Harga LCL</label>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-2">
+                                                                    <label class="control-label" for="hargaNonpaket">Harga Non Paket</label>
+                                                                </div>
+                                                                <div class="col-sm-4" >
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="number" ng-model="vm.hargaNonpaket" min="0" name="hargaNonpaket" ng-required="true"/>
+                                                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.hargaNonpaket.$error.required">
+                                                                            Harus Diisi
+                                                                        </span>                        
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <label class="control-label" for="hargaPaketBesar">Harga Paket Besar</label>
+                                                                </div>
+                                                                <div class="col-sm-4" >
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="number" ng-model="vm.hargaPaketBesar" min="0" name="hargaPaketBesar" ng-required="true"/>
+                                                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.hargaPaketBesar.$error.required">
+                                                                            Harus Diisi
+                                                                        </span>                        
+                                                                    </div>
+                                                                </div>  
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-2">
+                                                                    <label class="control-label" for="hargaPaketSedang">Harga Paket Sedang</label>
+                                                                </div>
+                                                                <div class="col-sm-4" >
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="number" ng-model="vm.hargaPaketSedang" min="0" name="hargaPaketSedang" ng-required="true"/>
+                                                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.hargaPaketSedang.$error.required">
+                                                                            Harus Diisi
+                                                                        </span>                        
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <label class="control-label" for="hargaPaketKecil">Harga Paket Kecil</label>
+                                                                </div>
+                                                                <div class="col-sm-4" >
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="number" ng-model="vm.hargaPaketKecil" min="0" name="hargaPaketKecil" ng-required="true"/>
+                                                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.hargaPaketKecil.$error.required">
+                                                                            Harus Diisi
+                                                                        </span>                        
+                                                                    </div>
+                                                                </div>  
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12" style="background-color: crimson">
+                                                            <label class="form-control" style="text-align: center">Harga FCL</label>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-2">
+                                                                    <label class="control-label" for="harga20feet">Harga 20 feet</label>
+                                                                </div>
+                                                                <div class="col-sm-4" >
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="number" ng-model="vm.harga20feet" min="0" name="harga20feet" ng-required="true"/>
+                                                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.harga20feet.$error.required">
+                                                                            Harus Diisi
+                                                                        </span>                        
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <label class="control-label" for="harga20feetOpen">Harga 20 feet (Open)</label>
+                                                                </div>
+                                                                <div class="col-sm-4" >
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="number" ng-model="vm.harga20feetOpen" min="0" name="harga20feetOpen" ng-required="true"/>
+                                                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.harga20feetOpen.$error.required">
+                                                                            Harus Diisi
+                                                                        </span>                        
+                                                                    </div>
+                                                                </div>  
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-2">
+                                                                    <label class="control-label" for="harga40feet">Harga 40 feet</label>
+                                                                </div>
+                                                                <div class="col-sm-4" >
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="number" ng-model="vm.harga40feet" min="0" name="harga40feet" ng-required="true"/>
+                                                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.harga40feet.$error.required">
+                                                                            Harus Diisi
+                                                                        </span>                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
+                            <table class="table table-bordered table-striped table-condensed" style="font-size: small; margin: 0 0 0 0;padding: 0 0 0 0" >
+                                <thead>
+                                    <tr>
+                                        <th><button class="btn btn-info btn-xs" ng-click="baruDetail()">Tambah</button></th>
+                                        <th>Kategori</th>
+                                        <th>Keterangan</th>
+                                        <th>Harga</th>
+                                        <th style="width: 100px">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tr ng-repeat="c in vm.listDetail" class="editable-row">
+                                    <td>
+                                        {{$index + 1}}
+                                    </td>
+                                    <td>
+                                <ui-select ng-model="c.kategoriHarga" name="kategoriHarga"
+                                           class="btn-group bootstrap-select form-control"
+                                           ng-required="true"
+                                           append-to-body="true"
+                                           search-enabled="true"
+                                           >
+                                    <ui-select-match placeholder="Pilih Kategori">
+                                        {{$select.selected.nama}}
+                                    </ui-select-match>
+                                    <ui-select-choices
+                                        repeat="item in listKategoriHarga | filter: $select.search">
+                                        <span ng-bind-html="item.nama"></span><br>
+                                        <small>
+                                            <b>
+                                                <span ng-bind-html="item.satuanKirim.nama"></span>&nbsp;
+                                                <span ng-show="item.paket === true">Paket</span>
+                                            </b>
+                                        </small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                </td>                            
+                                <td>
+                                    Satuan Kirim : {{c.kategoriHarga.satuanKirim.nama}}, Paket : {{c.kategoriHarga.paket===true?'Ya':'Tidak'}},Ukuran Kontainer : {{c.kategoriHarga.ukuranKontainer===null?'-':c.kategoriHarga.ukuranKontainer}}
+                                </td>                            
+                                <td>
+                                    <input class="form-control" ng-model="c.harga">
+                                </td>                            
+                                <td>
+                                    <div class="buttons" >
+                                        <button class="btn btn-danger editable-table-button btn-xs" ng-click="hapusDetail($index)">Hapus</button>
+                                    </div>
+                                </td>                        
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-9 col-sm-3">
+                                <button type="button" class="btn btn-primary" ng-click="simpan()" ng-disabled="form1.$invalid">Simpan</button>
+                                <button type="button" class="btn btn-danger" ng-click="clear()">Batal</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-12" ng-show="modalTitle === ''">
+            <div ba-panel ba-panel-title="Setting Harga" >
+                <form name="formUtama" id="formUtama">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <label class="control-label" for="toko">Toko Tujuan</label>
+                                </div>
+                                <div class="col-sm-4" ng-class="{error: formUtama.toko.$invalid}">
+                                    <p class="input-group">
+                                        <input type="text" class="form-control" ng-model="param.toko.nama" name="toko" ng-disabled="true" ng-required="true"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="lookupToko('list')" ><i class="glyphicon glyphicon-search"></i></button>
+                                        </span>
+                                    </p>
+                                </div>                        
+                                <!--                                <div class="col-xs-2">
+                                                                    <label class="control-label" for="merek">Merek</label>
+                                                                </div>
+                                                                <div class="col-sm-4" ng-class="{error: formUtama.merek.$invalid}">
+                                                                    <ui-select ng-model="param.merk"
+                                                                               class="btn-group bootstrap-select form-control"
+                                                                               ng-disabled="param.toko === null"
+                                                                               append-to-body="true"
+                                                                               search-enabled="true"  ng-required="true" 
+                                                                               >
+                                                                        <ui-select-match placeholder="Pilih Merek">
+                                                                            {{$select.selected.nama}}
+                                                                        </ui-select-match>
+                                                                        <ui-select-choices
+                                                                            repeat="item in param.toko.listMerk | filter: $select.search">
+                                                                            <span ng-bind-html="item.nama"></span>
+                                                                        </ui-select-choices>
+                                                                    </ui-select>
+                                                                </div>                            -->
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label" for="tglBerlaku">Tgl Berlaku mulai </label>
+                                </div>
+                                <div class="col-sm-4" >
+                                    <div class="input-group">
+                                        <input class="form-control" datetimepicker ng-model="param.tglBerlaku" options="options" name="tglBerlaku"/>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tglBerlaku.$error.required">
+                                            Harus Diisi
+                                        </span>                        
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label class="control-label" for="kota">Tujuan</label>
+                                </div>
+                                <div class="col-sm-4" ng-class="{error: formUtama.kota.$invalid}">
+                                    <ui-select ng-model="param.kota"
+                                               class="btn-group bootstrap-select form-control"
+                                               ng-disabled="false"
+                                               append-to-body="true"
+                                               search-enabled="true" required="true" 
+                                               ng-change="resetMerek()"
+                                               >
+                                        <ui-select-match placeholder="Pilih Kota">
+                                            {{$select.selected.nama}}
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                            repeat="item in listKota | filter: $select.search">
+                                            <span ng-bind-html="item.nama"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kota.$error.required">
+                                        Harus Diisi
+                                    </span>
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-sm-offset-10 col-xs-2">
+                                <button class="btn btn-primary" type="button" ng-click="reloadData()"><i class="glyphicon glyphicon-search" ng-disabled="formUtama.$invalid"></i>Cari
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" form-group">
+                        <!--                    <input id="search" type="text" class="col-xs-2 form-control" ng-model="param.cari" ng-keypress="$event.keyCode == 13 ? reloadData() : undefined" placeholder="Masukkan pencarian" autofocus>-->
+                        <!--<span class="input-group-btn">-->
+                        <!--</span>-->
+                    </div>
+                </form>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-condensed" style="font-size: small; margin: 0 0 0 0;padding: 0 0 0 0" >
+                        <thead>
+                            <tr>
+                                <th><button class="btn btn-info btn-xs" ng-click="baru()">Tambah</button></th>
+                                <th>Keterangan</th>
+                                <th style="width: 100px">Actions</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="c in dataPage.content" class="editable-row">
+                            <td>
+                                {{$index + 1}}
+                            </td>
+                            <td style="margin-left: 0;margin-right: 0">
+                                <table class="table table-no-borders table-condensed" style="width: 100%;background: transparent" >
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align: left">Toko Tujuan</td>
+                                            <td> : {{c.toko}}</td>
+                                            <td>Asal</td>
+                                            <td>: {{c.kota_asal}}</td>
+                                        </tr>
+                                        <!--                                        <tr>
+                                                                                    <td>Merek</td>
+                                                                                    <td colspan="3">: {{c.merk}}</td>
+                                                                                </tr>-->
+                                        <tr>
+                                            <td style="text-align: left">Tgl Berlaku</td>
+                                            <td>: {{c.tgl_berlaku|date:'dd/MM/yyyy'}}</td>
+                                            <td>Tujuan</td>
+                                            <td>: {{c.kota}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left">Kondisi</td>
+                                            <td>: {{c.kondisi}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" style="text-align: left" >
+                                                <ul>
+                                                    <li ng-repeat="x in c.detail track by x.id" ng-bind-html="x.desc">
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>                                        
+                                    </tbody>
+                                </table>
+                            </td>                            
+                            <td>
+                                <div class="buttons" >
+                                    <button class="btn btn-primary editable-table-button btn-xs" 
+                                            data-toggle="modal" ng-click="edit(c)">Edit</button>
+                                    <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus Setting Harga ini?" ng-confirm="hapus(c)">Hapus</button>
+                                    <button class="btn btn-info editable-table-button btn-xs" 
+                                            data-toggle="modal" ng-click="update(c)">Update</button>
+                                </div>
+                            </td>                        
+                        </tr>
+                    </table>
+                </div>
+                <div align="center" ng-show="dataPage.totalPages > 1">
+                    <ul uib-pagination total-items="paging.totalItems" ng-model="paging.currentPage" max-size="paging.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="reloadData()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                    <pre>Page: {{paging.currentPage}} / {{paging.maxPage}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
