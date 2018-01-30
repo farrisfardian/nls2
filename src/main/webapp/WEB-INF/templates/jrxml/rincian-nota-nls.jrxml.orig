@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
+<<<<<<< HEAD
 <!-- 2018-01-20T14:42:17 -->
+=======
+<!-- 2018-01-06T20:39:57 -->
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nota-nls" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e51cd78-67de-4253-a5af-029e0e769742">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -47,8 +51,11 @@
 	<parameter name="totalTerbayar" class="java.math.BigDecimal"/>
 	<parameter name="terbilangTotalSisaTagihan" class="java.lang.String"/>
 	<parameter name="totalSisaTagihan" class="java.math.BigDecimal"/>
+<<<<<<< HEAD
 	<parameter name="tglAwal" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="tglAkhir" class="java.lang.String" isForPrompting="false"/>
+=======
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 	<queryString language="SQL">
 		<![CDATA[select *,total_tagihan-terbayar as sisa, fn_tanggal_ind(current_date) as tanggal from fn_get_rincian_nota(null, null, '2017-08-01', '2018-01-01') as (id int, nomor varchar, toko varchar, merk varchar, total_tagihan numeric, terbayar numeric, jenis_item text, kapal_berangkat text, tgl_awal_berangkat text, tgl_akhir_berangkat text)]]>
 	</queryString>
@@ -86,7 +93,11 @@
 					<textElement>
 						<font fontName="SansSerif" size="11"/>
 					</textElement>
+<<<<<<< HEAD
 					<textFieldExpression><![CDATA["Tgl Berangkat : "+$P{tglAwal}+" s.d "+$P{tglAkhir}]]></textFieldExpression>
+=======
+					<textFieldExpression><![CDATA["Tgl Berangkat : "+$F{tgl_awal_berangkat}+" s.d "+$F{tgl_akhir_berangkat}]]></textFieldExpression>
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 				</textField>
 				<frame>
 					<reportElement positionType="Float" mode="Opaque" x="0" y="50" width="802" height="27" backcolor="#BD61FF" uuid="22866f52-e57a-429e-9949-ab7c2af4639f"/>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
+<<<<<<< HEAD
 <!-- 2018-01-27T15:39:48 -->
+=======
+<!-- 2017-12-16T10:38:24 -->
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nota-nls" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e51cd78-67de-4253-a5af-029e0e769742">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
@@ -43,7 +47,11 @@
 	<parameter name="total" class="java.lang.Double"/>
 	<parameter name="dataSourceKapal" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<queryString language="SQL">
+<<<<<<< HEAD
 		<![CDATA[select * from fn_get_nota(2) as (id int, tanggal varchar, nomor varchar, min_bayar boolean, kepada text, kapal varchar, tgl_berangkat text, kota_tujuan varchar, jenis_item varchar, kondisi text, satuan_kirim varchar, volume double precision, harga double precision, jml_min_bayar double precision, tambahan_min_bayar numeric, no_kontainer varchar, jml_text text, idx int, tgl_kapal date, coli int)]]>
+=======
+		<![CDATA[select * from fn_get_nota(2) as (id int, tanggal varchar, nomor varchar, min_bayar boolean, kepada text, kapal varchar, tgl_berangkat text, kota_tujuan varchar, jenis_item varchar, kondisi text, satuan_kirim varchar, volume double precision, harga double precision, jml_min_bayar double precision, tambahan_min_bayar numeric, no_kontainer varchar, jml_text text, idx int, tgl_kapal date)]]>
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 	</queryString>
 	<field name="id" class="java.lang.Integer"/>
 	<field name="tanggal" class="java.lang.String"/>
@@ -64,7 +72,10 @@
 	<field name="jml_text" class="java.lang.String"/>
 	<field name="idx" class="java.lang.Integer"/>
 	<field name="tgl_kapal" class="java.sql.Date"/>
+<<<<<<< HEAD
 	<field name="coli" class="java.lang.Integer"/>
+=======
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 	<variable name="nomor" class="java.lang.Integer" resetType="Group" resetGroup="kapalBerangkat" calculation="Count">
 		<variableExpression><![CDATA[$F{kapal}]]></variableExpression>
 	</variable>
@@ -149,7 +160,11 @@
 						<textFieldExpression><![CDATA["No"]]></textFieldExpression>
 					</textField>
 					<textField isStretchWithOverflow="true">
+<<<<<<< HEAD
 						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="30" y="0" width="190" height="27" backcolor="#BD61FF" uuid="1cfdbe4b-a01f-41f6-865e-ce73e00cd71d">
+=======
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="30" y="0" width="200" height="27" backcolor="#BD61FF" uuid="1cfdbe4b-a01f-41f6-865e-ce73e00cd71d">
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 							<property name="local_mesure_unitheight" value="pixel"/>
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
@@ -165,7 +180,11 @@
 						<textFieldExpression><![CDATA["Keterangan"]]></textFieldExpression>
 					</textField>
 					<textField isStretchWithOverflow="true">
+<<<<<<< HEAD
 						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="220" y="0" width="60" height="27" backcolor="#BD61FF" uuid="ea3a82f5-3dce-416f-8074-5beefd4add58">
+=======
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="230" y="0" width="60" height="27" backcolor="#BD61FF" uuid="ea3a82f5-3dce-416f-8074-5beefd4add58">
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 							<property name="local_mesure_unitheight" value="pixel"/>
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
@@ -181,7 +200,11 @@
 						<textFieldExpression><![CDATA["Kondisi"]]></textFieldExpression>
 					</textField>
 					<textField isStretchWithOverflow="true">
+<<<<<<< HEAD
 						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="280" y="0" width="90" height="27" backcolor="#BD61FF" uuid="5e0a1be1-c67a-47ef-b794-88898d246c8c">
+=======
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="290" y="0" width="80" height="27" backcolor="#BD61FF" uuid="5e0a1be1-c67a-47ef-b794-88898d246c8c">
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 							<property name="local_mesure_unitheight" value="pixel"/>
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
@@ -244,7 +267,11 @@
 		<groupHeader>
 			<band height="15">
 				<textField isStretchWithOverflow="true">
+<<<<<<< HEAD
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="30" y="0" width="190" height="15" uuid="fcfcf74e-3a23-4451-adb5-aa01763a1905">
+=======
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="30" y="0" width="200" height="15" uuid="fcfcf74e-3a23-4451-adb5-aa01763a1905">
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 						<property name="local_mesure_unitheight" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -257,10 +284,17 @@
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
 						<font fontName="SansSerif" size="9" isBold="true"/>
 					</textElement>
+<<<<<<< HEAD
 					<textFieldExpression><![CDATA[$F{kapal}.equalsIgnoreCase( "Tambahan Biaya" )?"Tambahan Biaya":($F{kapal}+", "+$F{tgl_berangkat})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="320" y="0" width="50" height="15" uuid="e3ff139a-8c46-4a9f-8b84-55b2351a0632">
+=======
+					<textFieldExpression><![CDATA[$F{kapal}.equalsIgnoreCase( "-" )?"Tambahan Biaya":($F{kapal}+", "+$F{tgl_berangkat})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="290" y="0" width="80" height="15" uuid="e3ff139a-8c46-4a9f-8b84-55b2351a0632">
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 						<property name="local_mesure_unitheight" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -270,10 +304,17 @@
 						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
+<<<<<<< HEAD
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
 						<font fontName="SansSerif" size="7" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{kapal}.equalsIgnoreCase( "Tambahan Biaya" )?"":"Vol / Unit"]]></textFieldExpression>
+=======
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+						<font fontName="SansSerif" size="9" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="450" y="0" width="105" height="15" uuid="0426a342-183c-42e4-9b07-55685bbc1745">
@@ -292,7 +333,11 @@
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
+<<<<<<< HEAD
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="220" y="0" width="30" height="15" uuid="5fbc872d-efd9-4f7e-b515-c9405c49030e">
+=======
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="230" y="0" width="30" height="15" uuid="5fbc872d-efd9-4f7e-b515-c9405c49030e">
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 						<property name="local_mesure_unitheight" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -340,7 +385,11 @@
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
+<<<<<<< HEAD
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="250" y="0" width="30" height="15" uuid="537cd234-cb39-4a68-a24a-d9f22de7666e">
+=======
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="260" y="0" width="30" height="15" uuid="537cd234-cb39-4a68-a24a-d9f22de7666e">
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 						<property name="local_mesure_unitheight" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -355,6 +404,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[""]]></textFieldExpression>
 				</textField>
+<<<<<<< HEAD
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="280" y="0" width="40" height="15" uuid="69cdf542-3bfc-4966-bde0-569d9cd2847d">
 						<property name="local_mesure_unitheight" value="pixel"/>
@@ -371,6 +421,8 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{kapal}.equalsIgnoreCase( "Tambahan Biaya" )?"":"Coli"]]></textFieldExpression>
 				</textField>
+=======
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 			</band>
 		</groupHeader>
 	</group>
@@ -443,7 +495,11 @@
 				<textFieldExpression><![CDATA[$V{nomor}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
+<<<<<<< HEAD
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="30" y="0" width="190" height="15" uuid="1d3c2ad9-e407-4cc2-b3e1-f1edf6db0347">
+=======
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="30" y="0" width="200" height="15" uuid="1d3c2ad9-e407-4cc2-b3e1-f1edf6db0347">
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -459,7 +515,11 @@
 				<textFieldExpression><![CDATA[$F{jenis_item}+($F{no_kontainer}.equalsIgnoreCase( "-" )?"":("\n("+$F{no_kontainer}+")"))]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
+<<<<<<< HEAD
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="220" y="0" width="30" height="15" uuid="95cbbf11-a142-4550-855e-552467d9a75f">
+=======
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="230" y="0" width="30" height="15" uuid="95cbbf11-a142-4550-855e-552467d9a75f">
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -475,7 +535,11 @@
 				<textFieldExpression><![CDATA[$F{satuan_kirim}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00#">
+<<<<<<< HEAD
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="320" y="0" width="50" height="15" uuid="684aef54-c7bf-4624-b08b-b90d204e7812">
+=======
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="290" y="0" width="80" height="15" uuid="684aef54-c7bf-4624-b08b-b90d204e7812">
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -523,7 +587,11 @@
 				<textFieldExpression><![CDATA[$F{jml_text}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
+<<<<<<< HEAD
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="250" y="0" width="30" height="15" uuid="3a81da69-1cf5-4617-90ae-181f252e9641">
+=======
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="260" y="0" width="30" height="15" uuid="3a81da69-1cf5-4617-90ae-181f252e9641">
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -554,6 +622,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA["Rp."]]></textFieldExpression>
 			</textField>
+<<<<<<< HEAD
 			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="280" y="0" width="40" height="15" uuid="2decc430-4fee-4131-a63c-caefbc6fd2da">
 					<property name="local_mesure_unitheight" value="pixel"/>
@@ -570,6 +639,8 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{coli}]]></textFieldExpression>
 			</textField>
+=======
+>>>>>>> cd34e5fa0a6c4907a70577f14c9e0451ed765d19
 		</band>
 	</detail>
 	<pageFooter>
