@@ -145,7 +145,7 @@
                                 </td>
                                 <td>
                                     <b>{{c.kapalBerangkat.kapal.nama}}</b>, {{c.kapalBerangkat.tglBerangkat|date:'dd-MM-yyyy'}}<br>
-                                    {{c.jenisItem.nama}}<br>
+                                    {{c.jenisItems}}<br>
                                     ({{c.noKontainer}})
                                 </td>
                                 <td>
@@ -165,8 +165,10 @@
                                 </td>
                                 <td>
                                     <div class="buttons" >
+<!--                                        <button class="btn btn-primary editable-table-button btn-xs" 
+                                                data-toggle="modal" ng-click="detail(c)">Detail</button>-->
                                         <button class="btn btn-primary editable-table-button btn-xs" 
-                                                data-toggle="modal" ng-click="detail(c)">Detail</button>
+                                                data-toggle="modal" ng-click="baruTambahanBiaya(c)">+ Biaya</button>
                                     </div>
                                 </td>
                             </tr>
@@ -179,16 +181,17 @@
                         <table class="table table-bordered table-hover table-condensed">
                             <thead>
                                 <tr>
-                                    <th colspan="6">Tambahan Biaya</th>
+                                    <th colspan="7">Tambahan Biaya</th>
                                 </tr>
                                 <tr>
                                     <th>No</th>
                                     <th>Item Tambahan</th>
                                     <th>Jumlah</th>
                                     <th>Harga Satuan</th>
+                                    <th>Keterangan</th>
                                     <th>Total</th>
                                     <th>                                
-                                        <button type="button" class="btn btn-default" ng-click="baruTambahanBiaya()" >tambah</button>
+                                        <!--<button type="button" class="btn btn-default" ng-click="baruTambahanBiaya()" >tambah</button>-->
                                     </th>
                                 </tr>
                             </thead>
@@ -217,6 +220,11 @@
                             <td>
                                 <input name="harga" ng-model="c.harga" type="number" class="form-control" ng-change="hitungGrandTotalTambahan()">
                             </td>
+                            <td>                                
+                                <b>{{c.kapalBerangkat.kapal.nama}}</b>, {{c.kapalBerangkat.tglBerangkat|date:'dd-MM-yyyy'}}<br>
+                                {{c.jenisItems}}<br>
+                                ({{c.noKontainer}})
+                            </td>
                             <td style="text-align: right">
                                 {{ c.jumlah * c.harga| number:2}}
                             </td>
@@ -228,13 +236,13 @@
                             </td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="text-align: right">Grand Total</td>
+                                <td colspan="5" style="text-align: right">Grand Total</td>
                                 <td style="text-align: right">{{grandTotalTambahan|number:2}}</td>
                             </tr>
                         </table>
                         <div class="form-group">
                             <div class="col-sm-offset-9 col-sm-3">
-                                <button type="button" class="btn btn-primary" ng-click="simpan()" ng-disabled="form1.$invalid || vm.listDetail.length == 0">Simpan</button>
+                                <button type="button" class="btn btn-primary" ng-click="simpan()" ng-disabled="form1.$invalid || vm.listDetail.length === 0">Simpan</button>
                                 <button type="button" class="btn btn-danger" ng-click="clear()">Batal</button>
                             </div>
                         </div>

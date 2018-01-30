@@ -91,7 +91,7 @@
                 <td>Kubikasi</td>
                 <td>Kapal</td>
                 <td>Kontainer</td>                
-                <td>Cetak</td>                
+                <td>Opsi</td>                
             </tr>
             <tr ng-repeat="c in dataPage.content" class="editable-row">
                 <td>
@@ -125,6 +125,8 @@
                                 <li><a href ng-click="cetak(c, true, 'xlsx')">XLS</a></li>
                             </ul>
                         </div>
+                        <button class="btn btn-primary editable-table-button btn-xs" 
+                                data-toggle="modal" ng-click="edit(c)">Edit</button>
                     </div>
                 </td>
             </tr>

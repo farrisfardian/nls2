@@ -36,7 +36,7 @@
                 toastr.success('Hapus data sukses!');
             });
         };
-        
+
         $scope.cetak = function (c, ex, tipe) {
             var link = 'api/report/per-stuffing.' + tipe + '?id=' + c.id_stuffing + '&ex=' + ex;
             if (tipe == 'pdf') {

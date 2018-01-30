@@ -6,6 +6,7 @@
 package com.nls.web;
 
 import com.nls.dao.jdbc.ReportDao;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Map;
 import javax.servlet.ServletContext;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author ustadho
  */
 @Controller
+@Transactional
 @RequestMapping("api/report/")
 public class ReportController {
 
@@ -168,6 +171,8 @@ public class ReportController {
         String idMerk = request.getParameter("idMerk");
         String tglAwal = request.getParameter("tglAwal");
         String tglAkhir = request.getParameter("tglAkhir");
+        String[] arrTglAwal = tglAwal.split("-");
+        String[] arrTglAkhir = tglAkhir.split("-");
         String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
         realPath = realPath.replace("\\", "\\\\");
         logger.warn("format: [{}]", format);
@@ -178,11 +183,50 @@ public class ReportController {
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
                 .addAttribute("realPath", realPath)
                 .addAttribute("format", format)
-                .addAttribute("totalTagihan", totalTerbilangByRincianNota.get("total_tagihan"))
+                .addAttribute("totalTagihan", (BigDecimal) totalTerbilangByRincianNota.get("total_tagihan"))
+                .addAttribute("totalTerbayar", (BigDecimal) totalTerbilangByRincianNota.get("total_terbayar"))
+                .addAttribute("totalSisaTagihan", (BigDecimal) totalTerbilangByRincianNota.get("total_sisa_tagihan"))
                 .addAttribute("terbilangTotalTagihan", totalTerbilangByRincianNota.get("terbilang_total_tagihan"))
-                .addAttribute("totalTerbayar", totalTerbilangByRincianNota.get("terbayar"))
-                .addAttribute("totalSisaTagihan", totalTerbilangByRincianNota.get("sisa_tagihan"))
+                .addAttribute("terbilangTotalTerbayar", totalTerbilangByRincianNota.get("terbilang_total_terbayar"))
+                .addAttribute("terbilangTotalSisaTagihan", totalTerbilangByRincianNota.get("terbilang_total_sisa_tagihan"))
+                .addAttribute("tglAwal", arrTglAwal[2] + "/" + arrTglAwal[1] + "/" + arrTglAwal[0])
+                .addAttribute("tglAkhir", arrTglAkhir[2] + "/" + arrTglAkhir[1] + "/" + arrTglAkhir[0])
                 .addAttribute("dataSource", dao.getRincianNota(idToko, idMerk, tglAwal, tglAkhir));
+    }
+
+    @RequestMapping(value = "get-rekap-nota-tagihan*", method = RequestMethod.GET)
+    private ModelMap getRekapNotaTagihan(HttpServletRequest request) throws ParseException {
+        String uri = request.getRequestURI();
+        String format = uri.substring(uri.lastIndexOf(".") + 1);
+
+        String idToko = request.getParameter("idToko");
+        String idMerk = request.getParameter("idMerk");
+        String idKotaTujuan = request.getParameter("idKotaTujuan");
+        String idKapal = request.getParameter("idKapal");
+        String toko = request.getParameter("toko");
+        String merk = request.getParameter("merk");
+        String kotaTujuan = request.getParameter("kotaTujuan");
+        String kapal = request.getParameter("kapal");
+        String tglAwal = request.getParameter("tglAwal");
+        String tglAkhir = request.getParameter("tglAkhir");
+        String[] arrTglAwal = tglAwal.split("-");
+        String[] arrTglAkhir = tglAkhir.split("-");
+        String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
+        realPath = realPath.replace("\\", "\\\\");
+        logger.warn("format: [{}]", format);
+
+        return new ModelMap()
+                //                .addAttribute("tanggal1", tg1)
+                //                .addAttribute("logo", realPath + "igg-kop.jpg")
+                .addAttribute("realPath", realPath)
+                .addAttribute("format", format)
+                .addAttribute("toko", toko.equalsIgnoreCase("null") ? null : toko)
+                .addAttribute("merk", merk.equalsIgnoreCase("null") ? null : merk)
+                .addAttribute("kota", kotaTujuan.equalsIgnoreCase("null") ? null : kotaTujuan)
+                .addAttribute("kapal", kapal.equalsIgnoreCase("null") ? null : kapal)
+                .addAttribute("tglAwal", arrTglAwal[2] + "/" + arrTglAwal[1] + "/" + arrTglAwal[0])
+                .addAttribute("tglAkhir", arrTglAkhir[2] + "/" + arrTglAkhir[1] + "/" + arrTglAkhir[0])
+                .addAttribute("dataSource", dao.getRekapNotaTagihan(idToko, idMerk, idKapal, idKotaTujuan, tglAwal, tglAkhir));
     }
 
     @RequestMapping(value = "get-pembayaran-nota*", method = RequestMethod.GET)

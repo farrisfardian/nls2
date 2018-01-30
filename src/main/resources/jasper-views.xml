@@ -30,6 +30,8 @@
           p:url="/WEB-INF/templates/jrxml/pembayaran-nota-nls.jrxml"/>
     <bean id="api/report/get-rincian-nota" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
           p:url="/WEB-INF/templates/jrxml/rincian-nota-nls.jrxml"/>
+    <bean id="api/report/get-rekap-nota-tagihan" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+          p:url="/WEB-INF/templates/jrxml/rekap-nota-tagihan.jrxml"/>
     <bean id="api/report/get-nota" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView" 
           p:url="/WEB-INF/templates/jrxml/nota-nls.jrxml"
           p:reportDataKey="dataSource"

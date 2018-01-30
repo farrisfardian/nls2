@@ -15,7 +15,10 @@
             totalItems: 0
         };
         $scope.listKapalBerangkat = [];
+        $scope.listKapalOpsiBiaya = [];
         $scope.listMerk = [];
+        $scope.listNoKontainer = [];
+        $scope.listJenisItems = [];
         EnumService.getUkuranKontainer().success(function (data) {
             $scope.listUkuranKontainer = data;
         });
@@ -92,8 +95,6 @@
             } else {
                 NotaService.listDetailNotaTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat).success(function (data) {
                     $scope.vm.listDetail = data;
-                    $scope.grandTotal = 0;
-                    $scope.hitungGrandTotal();
                     console.log('$scope.vm.listDetail', $scope.vm.listDetail);
                     if ($scope.vm.minBayar === true) {
                         NotaService.listSubtotalDetailNotaTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat).success(function (data) {
@@ -107,7 +108,40 @@
                                     }
                                 }
                             }
+                            $scope.hitungGrandTotal();
                         });
+                    }
+                    $scope.listNoKontainer = [];
+                    var currentNoKontainer = '';
+                    var noKontainerExists = false;
+                    var noJenisItemsExists = false;
+                    var noJenisItemsExists = false;
+                    for (var k = 0; k < $scope.vm.listDetail.length; k++) {
+                        currentNoKontainer = $scope.vm.listDetail[k].noKontainer;
+                        noKontainerExists = false;
+                        for (var l = 0; l < $scope.vm.listNoKontainer.length; l++) {
+                            if (currentNoKontainer === $scope.vm.listNoKontainer[l]) {
+                                noKontainerExists = true;
+                                break;
+                            }
+                        }
+                        if (noKontainerExists === false) {
+                            $scope.listNoKontainer.push($scope.vm.listDetail[k].noKontainer);
+                        }
+                    }
+                    for (var i = 0; i < $scope.vm.listTambahanBiaya.length; i++) {
+                        currentNoKontainer = $scope.vm.listTambahanBiaya[i].noKontainer;
+                        noJenisItemsExists = false;
+                        noKontainerExists = false;
+                        for (var k = 0; k < $scope.vm.listDetail.length; k++) {
+                            if (currentNoKontainer === $scope.vm.listDetail[k].noKontainer) {
+                                noKontainerExists = true;
+                                break;
+                            }
+                        }
+                        if (noKontainerExists === false) {
+                            $scope.vm.listTambahanBiaya[i].noKontainer = null;
+                        }
                     }
                 });
             }
@@ -136,21 +170,21 @@
             });
             modalInstance.result.then(function (sd) {
                 console.log('selectedNota', sd);
-                $scope.listkapalBerangkat = sd;
+                $scope.listKapalBerangkat = sd;
                 if ($scope.vm.listKapalBerangkat === null || $scope.vm.listKapalBerangkat === undefined) {
                     $scope.vm.listKapalBerangkat = [];
                 }
                 var exist = false;
-                for (var i = 0; i < $scope.listkapalBerangkat.length; i++) {
+                for (var i = 0; i < $scope.listKapalBerangkat.length; i++) {
                     var exist = false;
                     for (var j = 0; j < $scope.vm.listKapalBerangkat.length; j++) {
-                        if ($scope.listkapalBerangkat[i].id_kapal_berangkat === $scope.vm.listKapalBerangkat[j].kapalBerangkat.id) {
+                        if ($scope.listKapalBerangkat[i].id_kapal_berangkat === $scope.vm.listKapalBerangkat[j].kapalBerangkat.id) {
                             exist = true;
                         }
                     }
                     if (!exist) {
                         $scope.vm.listKapalBerangkat.push({
-                            kapalBerangkat: {id: $scope.listkapalBerangkat[i].id_kapal_berangkat, tglBerangkat: new Date($scope.listkapalBerangkat[i].tgl_berangkat), kapal: {nama: $scope.listkapalBerangkat[i].kapal}}
+                            kapalBerangkat: {id: $scope.listKapalBerangkat[i].id_kapal_berangkat, tglBerangkat: new Date($scope.listKapalBerangkat[i].tgl_berangkat), kapal: {nama: $scope.listKapalBerangkat[i].kapal}}
                         });
                     }
                 }
@@ -173,11 +207,13 @@
             var strKapalBerangkat = '';
             var idx = 0;
             if (!($scope.vm.listKapalBerangkat === undefined || $scope.vm.listKapalBerangkat === null)) {
+                $scope.listKapalOpsiBiaya = [];
                 for (var j = 0; j < $scope.vm.listKapalBerangkat.length; j++) {
                     if (idx > 0) {
                         strKapalBerangkat = strKapalBerangkat + ',';
                     }
                     strKapalBerangkat = strKapalBerangkat + $scope.vm.listKapalBerangkat[j].kapalBerangkat.id;
+                    $scope.listKapalOpsiBiaya.push($scope.vm.listKapalBerangkat[j].kapalBerangkat);
                     idx = idx + 1;
                 }
             }
@@ -225,10 +261,10 @@
         $scope.hitungGrandTotal = function () {
             $scope.grandTotal = 0;
             for (var i = 0; i < $scope.vm.listDetail.length; i++) {
-                $scope.grandTotal = $scope.grandTotal + ($scope.vm.listDetail[i].volume * $scope.vm.listDetail[i].harga);
+                $scope.grandTotal = $scope.vm.minBayar === true ? $scope.grandTotal + ($scope.vm.listDetail[i].volume * $scope.vm.listDetail[i].harga) + $scope.vm.listDetail[i].tambahanMinBayar : $scope.grandTotal + ($scope.vm.listDetail[i].volume * $scope.vm.listDetail[i].harga);
             }
         };
-        $scope.baruTambahanBiaya = function () {
+        $scope.baruTambahanBiaya = function (notaDetail) {
             if ($scope.vm.listTambahanBiaya === undefined || $scope.vm.listDetail === null) {
                 $scope.vm.listTambahanBiaya = [];
             }
@@ -236,16 +272,25 @@
                     {
                         tambahanBiaya: null,
                         harga: 0,
-                        jumlah: 0
+                        jumlah: 0,
+                        kapalBerangkat: notaDetail.kapalBerangkat,
+                        noKontainer: notaDetail.noKontainer,
+                        jenisItems: notaDetail.jenisItems
                     }
             );
             console.log('Detail Baru');
         };
         $scope.hapusTambahanBiaya = function (idx) {
             $scope.vm.listTambahanBiaya.splice(idx, 1);
+            $scope.hitungGrandTotalTambahan();
         };
 
         $scope.hapusKapalBerangkat = function (idx) {
+            for (var i = 0; i < $scope.vm.listTambahanBiaya.length; i++) {
+                if ($scope.vm.listKapalBerangkat[idx].kapalBerangkat.id === $scope.vm.listTambahanBiaya[i].kapalBerangkat.id) {
+                    $scope.vm.listTambahanBiaya.splice(i, 1);
+                }
+            }
             $scope.vm.listKapalBerangkat.splice(idx, 1);
             var strKapalBerangkat = $scope.susunKapalBerangkat();
             $scope.fillDetailNota($scope.vm.tokoTujuan.id, $scope.vm.merkTujuan === null || $scope.vm.merkTujuan === undefined ? 'null' : $scope.vm.merkTujuan.id, strKapalBerangkat);
@@ -282,7 +327,7 @@
         };
 
         $scope.cetak = function (c, tipe) {
-            var link = 'api/report/get-nota.' + tipe + '?idNota=' + c.id ;
+            var link = 'api/report/get-nota.' + tipe + '?idNota=' + c.id;
             if (tipe == 'pdf') {
 //                    window.open(link, '_blank', 'width=screen.width, height=screen.height');
                 window.open(link, '_blank', 'width=1024, height=768');

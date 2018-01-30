@@ -55,13 +55,13 @@ public class LookupDao {
     }
 
     public Object lookupDetailNotaPerTokoMerkTujuan(String idToko, String idMerk, String idKapalBerangkat) {
-        String sql = "select * from fn_gen_detail_nota(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ", " + (idKapalBerangkat.equalsIgnoreCase("null") ? idKapalBerangkat : "ARRAY[" + idKapalBerangkat + "]") + ") as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, harga_satuan numeric)";
-
+        String sql = "select * from fn_gen_detail_nota2(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ", " + (idKapalBerangkat.equalsIgnoreCase("null") ? idKapalBerangkat : "ARRAY[" + idKapalBerangkat + "]") + ") as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, harga_satuan numeric)";
+        System.out.println("lookupDetailNotaPerTokoMerkTujuan : " + sql);
         return mr.mapList(sql);
     }
 
     public Object lookupSubtotalDetailNotaPerTokoMerkTujuan(String idToko, String idMerk, String idKapalBerangkat) {
-        String sql = "select id_kapal_berangkat, nomor_kontainer, sum(coalesce(harga_satuan,0)*coalesce(case when sat_kirim='FCL' then jml else kubikasi end,0)) subtotal from fn_gen_detail_nota(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ", " + (idKapalBerangkat.equalsIgnoreCase("null") ? idKapalBerangkat : "ARRAY[" + idKapalBerangkat + "]") + ") as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, harga_satuan numeric) group by id_kapal_berangkat,nomor_kontainer";
+        String sql = "select id_kapal_berangkat, nomor_kontainer, sum(coalesce(harga_satuan,0)*coalesce(case when sat_kirim='FCL' then jml else kubikasi end,0)) subtotal from fn_gen_detail_nota2(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ", " + (idKapalBerangkat.equalsIgnoreCase("null") ? idKapalBerangkat : "ARRAY[" + idKapalBerangkat + "]") + ") as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, harga_satuan numeric) group by id_kapal_berangkat,nomor_kontainer";
 
         return mr.mapList(sql);
     }
@@ -69,6 +69,12 @@ public class LookupDao {
     public String getNomorNota(Integer idKotaAsal, Integer idKotaTujuan) {
         String sql = "select fn_get_nomor_nota(" + idKotaAsal + "," + idKotaTujuan + ") as nomor";
         return mr.mapSingle(sql).get("nomor").toString();
+    }
+
+    public String getNomorSuratJalan(Integer idKotaAsal, Integer idKotaTujuan, String tanggal) {
+        String sql = "select fn_get_nomor_sj(" + (idKotaAsal == null ? "null" : idKotaAsal) + "," + (idKotaTujuan == null ? "null" : idKotaTujuan) + ",'" + tanggal + "') as nomor";
+//        return mr.mapSingle(sql).get("nomor").toString();
+        return mr.mapSingle(sql).get("nomor") == null ? null : mr.mapSingle(sql).get("nomor").toString();
     }
 
     public String getNomorPembayaran() {
@@ -298,7 +304,7 @@ public class LookupDao {
         mm.put("lastPage", isLastPage);
         return mm;
     }
-    
+
     public Object lookupPembayaran(String cari, String tglAwal, String tglAkhir, PageRequest page) {
         ModelMap mm = new ModelMap();
         System.out.println("Page.Size: " + page.getPageSize());
@@ -353,7 +359,7 @@ public class LookupDao {
                 + "  km.nama kota_tujuan, \n"
                 + "  sj.nomor as no_sj, \n"
                 + "  st.no_kontainer as no_kontainer,\n"
-                + "  st.id id_stuffing \n"
+                + "  st.id id_stuffing, sj.indeks \n"
                 + "FROM \n"
                 + "  public.t_surat_jalan sj \n"
                 + "  left join public.m_merk m  on sj.id_merk = m.id\n"
@@ -365,7 +371,7 @@ public class LookupDao {
                 + "  sj.tanggal between '" + tglAwal + "'::date and '" + tglAkhir + "'::date\n"
                 + "  and case when 0 = " + idKota + " then true else km.id = " + idKota + " end\n"
                 //                + "  and tk.nama||m.nama||tm.nama||km.nama||sj.nomor ilike '%" + cari + "%' order by sj.tanggal, tm.nama \n";
-                + "  and coalesce(tk.nama,'')||coalesce(m.nama,'')||coalesce(tm.nama,'')||coalesce(km.nama,'')||coalesce(sj.nomor,'')||coalesce(st.no_kontainer,'') ilike '%" + cari + "%' order by sj.tanggal, tm.nama \n";
+                + "  and coalesce(tk.nama,'')||coalesce(m.nama,'')||coalesce(tm.nama,'')||coalesce(km.nama,'')||coalesce(sj.nomor,'')||coalesce(st.no_kontainer,'')||coalesce(sj.indeks,'') ilike '%" + cari + "%' order by coalesce(sj.indeks,''), sj.tanggal, tm.nama \n";
         System.out.println("query all : " + query);
         Integer totalElement = mr.countRecordset(query);
         int totalPages = totalElement == 0 ? 0 : totalElement <= page.getPageSize() ? 1
@@ -405,7 +411,7 @@ public class LookupDao {
                 + "  st.no_kontainer as no_kontainer,\n"
                 + "  k.nama as kapal, \n  "
                 + "  sjd.coli,\n"
-                + "  round(hitung_subtotal_metrik(sjd.id)::numeric,3) as kubikasi "
+                + "  round(hitung_subtotal_metrik(sjd.id)::numeric,3) as kubikasi, sj.indeks "
                 + "FROM \n"
                 + "  public.t_surat_jalan sj \n"
                 + "  join t_surat_jalan_detail sjd on sjd.id_surat_jalan = sj.id\n"

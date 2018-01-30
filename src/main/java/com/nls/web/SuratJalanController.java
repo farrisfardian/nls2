@@ -12,6 +12,8 @@ import com.nls.domain.SJStuffing;
 import com.nls.domain.SuratJalan;
 import com.nls.domain.SuratJalanDetail;
 import java.security.InvalidParameterException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -22,6 +24,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
+@Transactional
 @RequestMapping("api/transaksi/sj")
 public class SuratJalanController {
 
@@ -48,6 +52,8 @@ public class SuratJalanController {
     @Autowired
     SJStuffingDao sjStuffingDao;
     private final Logger logger = LoggerFactory.getLogger(SuratJalanController.class);
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @RequestMapping("item/lookup")
     public Object lookupItemAll() {
@@ -143,6 +149,7 @@ public class SuratJalanController {
                 }
             }
         }
+        x.setIndeks(lookupDao.getNomorSuratJalan(x.getStuffing().getKotaAsal() == null ? null : x.getStuffing().getKotaAsal().getId(), x.getStuffing().getKota() == null ? null : x.getStuffing().getKota().getId(), sdf.format(x.getTanggal() == null ? new Date() : x.getTanggal())));
         dao.save(x);
         return x;
     }
@@ -161,6 +168,9 @@ public class SuratJalanController {
                     sj.setSjDetail(d);
                 }
             }
+        }
+        if (x.getIndeks() == null) {
+            x.setIndeks(lookupDao.getNomorSuratJalan(x.getStuffing().getKotaAsal() == null ? null : x.getStuffing().getKotaAsal().getId(), x.getStuffing().getKota() == null ? null : x.getStuffing().getKota().getId(), sdf.format(x.getTanggal() == null ? new Date() : x.getTanggal())));
         }
         dao.save(x);
         return x;

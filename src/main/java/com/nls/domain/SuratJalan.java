@@ -46,6 +46,9 @@ public class SuratJalan extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "nomor")
     private String nomorSJ;
+    
+    @Column(name = "indeks")
+    private String indeks;
 
     @Column(name = "tagihan_pengirim")
     private Boolean tagihanPengirim;
@@ -181,6 +184,20 @@ public class SuratJalan extends AbstractAuditingEntity implements Serializable {
      */
     public void setSisipan(Boolean sisipan) {
         this.sisipan = sisipan;
+    }
+
+    /**
+     * @return the indeks
+     */
+    public String getIndeks() {
+        return indeks;
+    }
+
+    /**
+     * @param indeks the indeks to set
+     */
+    public void setIndeks(String indeks) {
+        this.indeks = indeks;
     }
 
 }

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12" ng-controller="SuratJalanCtrl">
                 <div ba-panel >
-                    <div ba-panel ba-panel-title="Tujuan">
+                    <div ba-panel ba-panel-title="Tujuan {{vm.indeks===null?'':' - Indeks SJ : '+vm.indeks}}">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -42,6 +42,28 @@
                                                 </button>
                                             </span>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="kota">Satuan</label>
+                                    </div>
+                                    <div class="col-sm-10" ng-class="{error: formKota.kota.$invalid}">
+                                        <label class="form-control" for="kota">{{vm.stuffing.satuanKirim.nama}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label" for="kota">Berangkat</label>
+                                    </div>
+                                    <div class="col-sm-10" ng-class="{error: formKota.kota.$invalid}">
+                                        <label class="form-control" for="kota">{{vm.stuffing.kapalBerangkat.tglBerangkat|date:'dd/MM/yyyy'}} - {{vm.stuffing.kapalBerangkat.kapal.nama}}</label>
                                     </div>
                                 </div>
                             </div>

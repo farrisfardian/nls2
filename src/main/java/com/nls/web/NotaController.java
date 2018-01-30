@@ -6,26 +6,22 @@
 package com.nls.web;
 
 import com.nls.constant.UkuranKontainer;
-import com.nls.constant.UkuranPaket;
 import com.nls.dao.JenisItemDao;
 import com.nls.dao.KapalBerangkatDao;
 import com.nls.dao.KondisiDao;
 import com.nls.dao.NotaDao;
 import com.nls.dao.SatuanKirimDao;
 import com.nls.dao.jdbc.LookupDao;
-import com.nls.domain.KapalBerangkat;
 import com.nls.domain.Nota;
 import com.nls.domain.NotaDetail;
 import com.nls.domain.NotaKapalBerangkat;
 import com.nls.domain.NotaTambahanBiaya;
-import com.nls.service.AppService;
 import java.math.BigDecimal;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +64,7 @@ public class NotaController {
 
     @Autowired
     LookupDao lookupDao;
-    
+
     private final Logger logger = LoggerFactory.getLogger(NotaController.class);
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -128,8 +124,11 @@ public class NotaController {
             y.setKondisi(x.get("id_kondisi") == null ? null : kondisiDao.findOne((Integer) x.get("id_kondisi")));
             y.setKapalBerangkat(x.get("id_kapal_berangkat") == null ? null : kapalBerangkatDao.findOne((Integer) x.get("id_kapal_berangkat")));
             y.setJenisItem(x.get("id_jenis_item") == null ? null : jenisItemDao.findOne((Integer) x.get("id_jenis_item")));
+            y.setJenisItems((String) x.get("jenis_item"));
             y.setVolume(((String) x.get("sat_kirim")).equalsIgnoreCase("LCL") ? (BigDecimal) x.get("kubikasi") : (BigDecimal) x.get("jml"));
             y.setHarga((BigDecimal) x.get("harga_satuan"));
+            y.setColi((Integer) x.get("coli"));
+            y.setIdSj((String) x.get("id_sj"));
             list.add(y);
         }
         return list;

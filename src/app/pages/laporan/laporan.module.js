@@ -114,5 +114,18 @@
                         order: 0,
                     },
                 })
+                .state('laporan.rekap-nota', {
+                    url: '/rekap-nota',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/laporan/rekapNota/rekapNota.html',
+                            controller: 'RekapNotaCtrl'
+                        }
+                    },
+                    title: 'Rekap Nota',
+                    sidebarMeta: {
+                        order: 0,
+                    },
+                })
     }
 })();

@@ -43,13 +43,22 @@ public class NotaDetail {
 
     @Column(name = "harga")
     private BigDecimal harga;
-    
+
     @Column(name = "tambahan_min_bayar")
     private BigDecimal tambahanMinBayar;
 
     @ManyToOne
     @JoinColumn(name = "id_jenis_item")
     private JenisItem jenisItem;
+
+    @Column(name = "jenis_items")
+    private String jenisItems;
+
+    @Column(name = "id_sj", columnDefinition = "text")
+    private String idSj;
+
+    @Column(name = "coli")
+    private Integer coli;
 
     @ManyToOne
     @JoinColumn(name = "id_kondisi")
@@ -173,6 +182,48 @@ public class NotaDetail {
      */
     public void setTambahanMinBayar(BigDecimal tambahanMinBayar) {
         this.tambahanMinBayar = tambahanMinBayar;
+    }
+
+    /**
+     * @return the jenisItems
+     */
+    public String getJenisItems() {
+        return jenisItems;
+    }
+
+    /**
+     * @param jenisItems the jenisItems to set
+     */
+    public void setJenisItems(String jenisItems) {
+        this.jenisItems = jenisItems;
+    }
+
+    /**
+     * @return the coli
+     */
+    public Integer getColi() {
+        return coli;
+    }
+
+    /**
+     * @param coli the coli to set
+     */
+    public void setColi(Integer coli) {
+        this.coli = coli;
+    }
+
+    /**
+     * @return the idSj
+     */
+    public String getIdSj() {
+        return idSj;
+    }
+
+    /**
+     * @param idSj the idSj to set
+     */
+    public void setIdSj(String idSj) {
+        this.idSj = idSj;
     }
 
 }

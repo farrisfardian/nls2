@@ -201,6 +201,13 @@
                         "level": 1, 
                         "order": 0, 
                         "stateRef": "laporan.rincian-nota"
+                    },
+                    {
+                        "name": "laporan.rekap-nota", 
+                        "title": "Rekap Nota", 
+                        "level": 1, 
+                        "order": 0, 
+                        "stateRef": "laporan.rekap-nota"
                     }
                 ]
             },
