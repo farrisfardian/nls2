@@ -8,9 +8,15 @@ package com.nls.web;
 import com.nls.dao.jdbc.ReportDao;
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +112,52 @@ public class ReportController {
         String it = request.getParameter("it");
         String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
         realPath = realPath.replace("\\", "\\\\");
+        logger.warn("format: [{}]", format);
+        logger.warn("id: [{}]", id);
+        logger.warn("idMerk: [{}]", it);
+
+        return new ModelMap()
+                //                .addAttribute("tanggal1", tg1)
+                //                .addAttribute("logo", realPath + "igg-kop.jpg")
+                .addAttribute("realPath", realPath)
+                .addAttribute("format", format)
+                .addAttribute("dataSource", dao.perKapalMerkToko(Integer.valueOf(id), it));
+    }
+    
+    @RequestMapping(value = "per-merk-toko-pisah-emkl*", method = RequestMethod.GET)
+    private ModelMap perMerkTokoPisahEmkl(HttpServletRequest request) throws ParseException {
+        String uri = request.getRequestURI();
+        String format = uri.substring(uri.lastIndexOf(".") + 1);
+
+        String id = request.getParameter("id");
+        String it = request.getParameter("it");
+        String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
+        realPath = realPath.replace("\\", "\\\\");
+        logger.warn("format: [{}]", format);
+        logger.warn("id: [{}]", id);
+        logger.warn("idMerk: [{}]", it);
+
+        return new ModelMap()
+                //                .addAttribute("tanggal1", tg1)
+                //                .addAttribute("logo", realPath + "igg-kop.jpg")
+                .addAttribute("realPath", realPath)
+                .addAttribute("format", format)
+                .addAttribute("dataSource", dao.perKapalMerkTokoPisahEmkl(Integer.valueOf(id), it));
+    }
+
+    @RequestMapping(value = "kirim-email/per-merk-toko*", method = RequestMethod.GET)
+    private ModelMap kirimEmailPerMerkToko(HttpServletRequest request) throws ParseException, JRException {
+        String uri = request.getRequestURI();
+        String format = uri.substring(uri.lastIndexOf(".") + 1);
+
+        String id = request.getParameter("id");
+        String it = request.getParameter("it");
+        String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
+        realPath = realPath.replace("\\", "\\\\");
+        String jrxmlPath = realPath + "per-toko.jrxml";
+        JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlPath);
+        ModelMap parameters = new ModelMap().addAttribute("realPath", realPath);
+        JasperFillManager.fillReport(jasperReport, parameters, new JRBeanCollectionDataSource((List<Map<String, Object>>) dao.perKapalMerkToko(Integer.valueOf(id), it)));
         logger.warn("format: [{}]", format);
         logger.warn("id: [{}]", id);
         logger.warn("idMerk: [{}]", it);

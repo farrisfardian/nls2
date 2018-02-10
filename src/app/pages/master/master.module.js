@@ -224,5 +224,19 @@
                         order: 901,
                     },
                 })
+                .state('master.settingAplikasi', {
+                    url: '/settingAplikasi',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/master/settingAplikasi/setting-aplikasi.html',
+                            controller: 'SettingAplikasiCtrl',
+                        }
+                    },
+//          controllerAs: 'vm',
+                    title: 'Setting Aplikasi',
+                    sidebarMeta: {
+                        order: 902,
+                    },
+                })
     }
 })();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2018-01-06T15:06:15 -->
+<!-- 2018-02-10T09:30:55 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="packing-list" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b8b76c8b-a069-48df-acd7-9c0db1840a9f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="net.sf.jasperreports.default.font.name" value="DejaVu Sans"/>
@@ -831,7 +831,22 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band splitType="Stretch"/>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="150" y="1" width="130" height="12" uuid="7690dc62-fd8b-4982-98f8-1215eb05c55f"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="1" width="90" height="12" uuid="cd2ca5fa-c92a-4d09-80f2-e740bad4d46f"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="16" splitType="Stretch">

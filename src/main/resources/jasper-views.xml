@@ -24,6 +24,8 @@
           p:url="/WEB-INF/templates/jrxml/per-toko.jrxml"/>
     <bean id="api/report/per-merk-toko" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
           p:url="/WEB-INF/templates/jrxml/per-toko.jrxml"/>
+    <bean id="api/report/per-merk-toko-pisah-emkl" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+          p:url="/WEB-INF/templates/jrxml/per-toko-pisah-emkl.jrxml"/>
     <bean id="api/report/jml-container-pertujuan" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
           p:url="/WEB-INF/templates/jrxml/jml-container-pertujuan.jrxml"/>
     <bean id="api/report/get-pembayaran-nota" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"

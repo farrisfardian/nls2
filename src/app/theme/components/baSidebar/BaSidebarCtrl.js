@@ -104,6 +104,13 @@
                         "level": 1, 
                         "order": 902, 
                         "stateRef": "master.settingHarga"
+                    }, 
+                    {
+                        "name": "master.settingAplikasi", 
+                        "title": "Setting Aplikasi", 
+                        "level": 1, 
+                        "order": 903, 
+                        "stateRef": "master.settingAplikasi"
                     }
                 ]
             }, 

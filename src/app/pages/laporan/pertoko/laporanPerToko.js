@@ -32,14 +32,14 @@
                 return;
             } else {
                 var kapal = angular.isDefined($scope.kapal) && angular.isDefined($scope.kapal.selected) && $scope.kapal.selected != null && $scope.kapal.selected.id != null ? $scope.kapal.selected.id : 0;
-                var kota = angular.isDefined($scope.kota) && angular.isDefined($scope.kota.selected) && $scope.kota.selected!=null&& $scope.kota.selected.id!=null ? $scope.kota.selected.id : 0;
+                var kota = angular.isDefined($scope.kota) && angular.isDefined($scope.kota.selected) && $scope.kota.selected != null && $scope.kota.selected.id != null ? $scope.kota.selected.id : 0;
                 TokoService.listMerkKapalBerangkat(kota, kapal).success(function (data) {
                     $scope.listToko = data;
                     console.log('listToko', data);
                 });
             }
         }
-        $scope.cetak = function (tipe) {
+        $scope.cetak = function (tipe, isPisahEmkl) {
             var idMerks = "";
             for (var i = 0; i < $scope.listToko.length; i++) {
                 if ($scope.listToko[i].terpilih == true) {
@@ -52,7 +52,7 @@
             }
             console.log('idMerks', idMerks);
             var kapal = angular.isDefined($scope.kapal) && angular.isDefined($scope.kapal.selected) && $scope.kapal.selected != null && $scope.kapal.selected.id != null ? $scope.kapal.selected.id : 0;
-            var link = 'api/report/per-merk-toko.' + tipe + '?id=' + kapal + '&it=' + idMerks;
+            var link = 'api/report/' + (isPisahEmkl === true ? 'per-merk-toko-pisah-emkl.' : 'per-merk-toko.') + tipe + '?id=' + kapal + '&it=' + idMerks;
             if (tipe == 'pdf') {
                 window.open(link, '_blank', 'width=1024, height=768');
             } else {

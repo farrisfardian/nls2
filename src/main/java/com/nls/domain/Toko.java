@@ -42,6 +42,9 @@ public class Toko {
 
     @Column
     private String alamat;
+    
+    @Column
+    private String email;
 
     @Column
     private String kontak;
@@ -123,6 +126,20 @@ public class Toko {
 
     public void setAktif(Boolean aktif) {
         this.aktif = aktif;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     
