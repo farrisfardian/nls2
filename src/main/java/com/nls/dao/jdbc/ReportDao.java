@@ -55,7 +55,7 @@ public class ReportDao {
         System.out.println("perKapalMerkToko: " + sql);
         return mr.mapList(sql);
     }
-    
+
     public Object perKapalMerkTokoPisahEmkl(Integer idKapal, String idMerkToko) {
         //case when ukuran not ilike '%x%' and ukuran not ilike '%paket%' and ukuran not ilike '' then '0'::text else ukuran end as 
         String sql = "select kota_tujuan, kondisi, \n"
@@ -63,6 +63,35 @@ public class ReportDao {
                 + "id, tanggal, pengirim, coli, jenis_barang, p, l, \n"
                 + "t, paket, ukuran, "
                 + "kubikasi, fix_volume, total_coli_sj, pisah, satuan_kirim, jml_kontainer  "
+                + "from fn_pl_rpt_per_kapal_merk_toko_pisah_emkl(" + idKapal + ", ARRAY[" + idMerkToko + "]) as (kota_tujuan varchar, kondisi varchar, \n"
+                + "customer varchar, kapal varchar, tgl_berangkat date, tgl_ind varchar, merk varchar, alamat varchar, nomor_kontainer varchar, emkl varchar, \n"
+                + "id integer, tanggal date, pengirim varchar, coli integer, jenis_barang text, p double precision, l double precision, \n"
+                + "t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume double precision, total_coli_sj text, pisah boolean, satuan_kirim varchar, "
+                + "jml_kontainer bigint)";
+        System.out.println("perKapalMerkToko: " + sql);
+        return mr.mapList(sql);
+    }
+
+    public Object perKapalMerkTokoPisahEmklFilter(Integer idKapal, String idMerkToko, String kotaTujuan, String customer, String tglBerangkat, String emkl) {
+        //case when ukuran not ilike '%x%' and ukuran not ilike '%paket%' and ukuran not ilike '' then '0'::text else ukuran end as 
+        String sql = "select kota_tujuan, kondisi, \n"
+                + "customer, kapal, tgl_berangkat, tgl_ind, merk, alamat, nomor_kontainer, emkl, \n"
+                + "id, tanggal, pengirim, coli, jenis_barang, p, l, \n"
+                + "t, paket, ukuran, "
+                + "kubikasi, fix_volume, total_coli_sj, pisah, satuan_kirim, jml_kontainer  "
+                + "from fn_pl_rpt_per_kapal_merk_toko_pisah_emkl(" + idKapal + ", ARRAY[" + idMerkToko + "]) as (kota_tujuan varchar, kondisi varchar, \n"
+                + "customer varchar, kapal varchar, tgl_berangkat date, tgl_ind varchar, merk varchar, alamat varchar, nomor_kontainer varchar, emkl varchar, \n"
+                + "id integer, tanggal date, pengirim varchar, coli integer, jenis_barang text, p double precision, l double precision, \n"
+                + "t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume double precision, total_coli_sj text, pisah boolean, satuan_kirim varchar, "
+                + "jml_kontainer bigint) where kota_tujuan = '" + kotaTujuan + "' and \n"
+                + "customer= '" + customer + "' " + (tglBerangkat == null || tglBerangkat.equalsIgnoreCase("null") ? "and tgl_berangkat is null" : "and to_char(tgl_berangkat,'yyyy-mm-dd')= '" + tglBerangkat + "'") + " and emkl = '" + emkl + "' \n";
+        System.out.println("perKapalMerkToko: " + sql);
+        return mr.mapList(sql);
+    }
+
+    public Object perKapalMerkTokoPisahEmklDistinct(Integer idKapal, String idMerkToko) {
+        String sql = "select distinct kota_tujuan, \n"
+                + "customer, to_char(tgl_berangkat,'yyyy-mm-dd') tgl_berangkat, emkl \n"
                 + "from fn_pl_rpt_per_kapal_merk_toko_pisah_emkl(" + idKapal + ", ARRAY[" + idMerkToko + "]) as (kota_tujuan varchar, kondisi varchar, \n"
                 + "customer varchar, kapal varchar, tgl_berangkat date, tgl_ind varchar, merk varchar, alamat varchar, nomor_kontainer varchar, emkl varchar, \n"
                 + "id integer, tanggal date, pengirim varchar, coli integer, jenis_barang text, p double precision, l double precision, \n"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2018-02-10T11:28:00 -->
+<!-- 2018-02-20T06:38:00 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="packing-list" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b8b76c8b-a069-48df-acd7-9c0db1840a9f">
 	<property name="ireport.zoom" value="1.0000000000000016"/>
 	<property name="ireport.x" value="0"/>
@@ -160,64 +160,7 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 			</band>
 		</groupFooter>
 	</group>
-	<group name="merk">
-		<groupExpression><![CDATA[$F{merk}]]></groupExpression>
-		<groupFooter>
-			<band height="15">
-				<textField pattern="#,##0">
-					<reportElement x="192" y="0" width="34" height="14" uuid="622aaf6b-00bf-4798-9131-271825ea4bdb"/>
-					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-						<topPen lineWidth="1.0"/>
-						<leftPen lineWidth="1.0"/>
-						<bottomPen lineWidth="1.0"/>
-						<rightPen lineWidth="1.0"/>
-					</box>
-					<textElement textAlignment="Center">
-						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{subColiMerk}]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.000">
-					<reportElement x="517" y="0" width="55" height="14" uuid="801e0ffa-725f-4bd6-b750-fae17db7ab4b"/>
-					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-						<topPen lineWidth="1.0"/>
-						<leftPen lineWidth="1.0"/>
-						<bottomPen lineWidth="1.0"/>
-						<rightPen lineWidth="1.0"/>
-					</box>
-					<textElement textAlignment="Right">
-						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{subKubikasiMerk}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement mode="Transparent" x="227" y="0" width="289" height="14" backcolor="#7CB2EC" uuid="6bad82c8-e7b6-4e94-8ec8-5787bc5bb0a8"/>
-					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-						<topPen lineWidth="0.75"/>
-						<leftPen lineWidth="0.75"/>
-						<bottomPen lineWidth="0.75"/>
-					</box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[]]></text>
-				</staticText>
-				<staticText>
-					<reportElement mode="Transparent" x="0" y="0" width="192" height="14" backcolor="#7CB2EC" uuid="39e25adb-8da1-4093-bb44-26ceea707ceb"/>
-					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-						<topPen lineWidth="0.75"/>
-						<leftPen lineWidth="0.75"/>
-						<bottomPen lineWidth="0.75"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
-					</textElement>
-					<text><![CDATA[SUB TOTAL CUSTOMER]]></text>
-				</staticText>
-			</band>
-		</groupFooter>
-	</group>
-	<group name="emkl" isStartNewPage="true">
+	<group name="emkl" keepTogether="true">
 		<groupExpression><![CDATA[$F{emkl}]]></groupExpression>
 		<groupHeader>
 			<band height="145">
@@ -477,6 +420,63 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 				</frame>
 			</band>
 		</groupHeader>
+	</group>
+	<group name="merk">
+		<groupExpression><![CDATA[$F{merk}]]></groupExpression>
+		<groupFooter>
+			<band height="15">
+				<textField pattern="#,##0">
+					<reportElement x="192" y="0" width="34" height="14" uuid="622aaf6b-00bf-4798-9131-271825ea4bdb"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{subColiMerk}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.000">
+					<reportElement x="517" y="0" width="55" height="14" uuid="801e0ffa-725f-4bd6-b750-fae17db7ab4b"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{subKubikasiMerk}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="227" y="0" width="289" height="14" backcolor="#7CB2EC" uuid="6bad82c8-e7b6-4e94-8ec8-5787bc5bb0a8"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="0" width="192" height="14" backcolor="#7CB2EC" uuid="39e25adb-8da1-4093-bb44-26ceea707ceb"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8" isBold="true" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[SUB TOTAL CUSTOMER]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
 	</group>
 	<group name="container">
 		<groupExpression><![CDATA[$F{nomor_kontainer}]]></groupExpression>

@@ -79,12 +79,13 @@
                                     <td>{{x.kontak}}</td>
                                     <td>{{x.telepon}}</td>
                                     <td>
-                                        <input type="checkbox" id="terpilih" ng-model="x.terpilih" style="cursor:pointer" >
+                                        <input type="checkbox" id="terpilih" ng-model="x.terpilih" style="cursor:pointer" ng-click="klikToko(x,$index)">
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <button class="btn btn-info pull-right" ng-click="cetak('pdf',true)">Cetak</button>
+                        <button class="btn btn-info pull-right" ng-click="cetak('email',true)" ng-disabled="listSelectedToko.length!==1" title="Hanya aktif bila yg dipilih adalah toko yg sama">Kirim Email</button>
                         <button class="btn btn-info pull-right" ng-click="cetak('xlsx',true)">XLS</button>
                     </div>
                 </form>

@@ -167,7 +167,7 @@ public class LookupDao {
     }
 
     public Object lookupMerkTokoPerKapalBerangkat(Integer idKota, Integer id) {
-        String sql = "select distinct t.id, t.nama, t.alamat, t.kontak, t.telepon, m.id as id_merk, m.nama as merk, false as terpilih \n"
+        String sql = "select distinct t.id, t.nama, t.alamat, t.kontak, t.telepon, t.email, m.id as id_merk, m.nama as merk, false as terpilih \n"
                 + "from t_stuffing st \n"
                 + "inner join t_sj_stuffing sj on sj.id_stuffing=st.id\n"
                 + "inner join t_surat_jalan_detail d on d.id=sj.id_sj_detail\n"

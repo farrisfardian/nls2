@@ -3,10 +3,11 @@
 
     angular.module('BlurAdmin.pages.laporan')
             .controller('LaporanPerMerkCtrl', LaporanPackingListCtrl)
-    function LaporanPackingListCtrl($scope, KotaService, TokoService, KapalBerangkatService) {
+    function LaporanPackingListCtrl($scope, $http, $uibModal, $log, toastr, KotaService, TokoService, KapalBerangkatService) {
         $scope.kota = {};
         $scope.kapal = {};
         $scope.open = open;
+        $scope.listSelectedToko = [];
         $scope.opened = false;
         $scope.format = 'dd-MM-yyyy';
         $scope.tgl1 = new Date();
@@ -41,6 +42,7 @@
         }
         $scope.cetak = function (tipe, isPisahEmkl) {
             var idMerks = "";
+            var listToko = [];
             for (var i = 0; i < $scope.listToko.length; i++) {
                 if ($scope.listToko[i].terpilih == true) {
                     if (idMerks == "") {
@@ -48,6 +50,7 @@
                     } else {
                         idMerks += "," + $scope.listToko[i].id_merk;
                     }
+                    listToko.push($scope.listToko[i]);
                 }
             }
             console.log('idMerks', idMerks);
@@ -55,12 +58,79 @@
             var link = 'api/report/' + (isPisahEmkl === true ? 'per-merk-toko-pisah-emkl.' : 'per-merk-toko.') + tipe + '?id=' + kapal + '&it=' + idMerks;
             if (tipe == 'pdf') {
                 window.open(link, '_blank', 'width=1024, height=768');
-            } else {
+            } else if (tipe == 'xlsx') {
                 location.href = link;
+            } else if (tipe == 'email') {
+
+                $scope.kirimEmail({
+                    toko: $scope.listSelectedToko[0].nama,
+                    email: $scope.listSelectedToko[0].email,
+                    kapal: kapal,
+                    idMerks: idMerks,
+                    listToko: listToko,
+                });
+//                $http.get("api/report/kirim-email/per-merk-toko-pisah-emkl" + '?id=' + kapal + '&it=' + idMerks + "&subjek=tes&isi=TES KIRIM EMAIL").success(function (data) {
+//                    console.log('kirim email ', data);
+//                    alert('Berhasil kirim email');
+//                }).error(function (e) {
+//                    alert('Ada masalah saat kirim email');
+//                });
+            }
+        };
+        $scope.kirimEmail = function (x) {
+            console.log('kirimEmail', x);
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/pages/tpl/send-email-pl-toko.html',
+                controller: 'SendEmailPlTokoCtrl',
+                size: 'lg',
+                resolve: {
+                    param: function () {
+                        return {
+                            email: x.email,
+                            kapal: x.kapal,
+                            idMerks: x.idMerks,
+                            listToko: x.listToko,
+                        }
+                    },
+                }
+            });
+            modalInstance.result.then(function (sd) {
+                console.log('Kirim Email', sd);
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+        $scope.klikToko = function (x, idx) {
+            if (x.terpilih === true) {
+                var exists = false;
+                for (var i = 0; i < $scope.listSelectedToko.length; i++) {
+                    if (x.id === $scope.listSelectedToko[i].id) {
+                        exists = true;
+                    }
+                }
+                if (exists === false) {
+                    $scope.listSelectedToko.push(x);
+                }
+            } else {
+                var hapus = true;
+                for (var i = 0; i < $scope.listToko.length; i++) {
+                    if ($scope.listToko[i].terpilih === true && i !== idx && $scope.listToko[i].id === x.id) {
+                        hapus = false;
+                    }
+                }
+                if (hapus === true) {
+                    for (var i = 0; i < $scope.listSelectedToko.length; i++) {
+                        if (x.id === $scope.listSelectedToko[i].id) {
+                            $scope.listSelectedToko.splice(i, 1);
+                        }
+                    }
+                }
             }
         }
         $scope.$watch('kota.selected', function () {
             $scope.kapal.selected = null;
+            $scope.listSelectedToko = [];
             $scope.listKapal = [];
             if ($scope.kota.selected != null) {
                 $scope.reloadKapal();
@@ -70,6 +140,7 @@
 
         $scope.$watch('kapal.selected', function () {
             $scope.reloadToko();
+            $scope.listSelectedToko = [];
         })
 
     }
