@@ -22,16 +22,16 @@ import org.springframework.mail.javamail.MimeMessageHelper;
  * @author farris
  */
 public class EmailSender {
-    
+
     private String email;
     private String password;
     private String smtpHost;
     private String smtpAuth;
     private String smtpPort;
-    
+
     public EmailSender() {
     }
-    
+
     public EmailSender(String email, String password, String smtpHost, String smtpAuth, String smtpPort) {
         this.email = email;
         this.password = password;
@@ -39,7 +39,7 @@ public class EmailSender {
         this.smtpAuth = smtpAuth;
         this.smtpPort = smtpPort;
     }
-    
+
     public void kirimEmail(String to, String subjek, String konten, HashMap<String, DataSource> attachments) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         // Get system properties
@@ -53,6 +53,9 @@ public class EmailSender {
         properties.setProperty("mail.smtp.auth", smtpAuth);
         properties.setProperty("mail.smtp.port", smtpPort);
         properties.setProperty("mail.smtp.starttls.enable", "true");
+        if (smtpHost.contains("yahoo")) {
+            properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        }
 
         // Get the default Session object.
         Session session = Session.getDefaultInstance(properties,
@@ -61,7 +64,7 @@ public class EmailSender {
                 return new PasswordAuthentication(email, password);
             }
         });
-        
+
         try {
             // Create a default MimeMessage object.
             MimeMessage message = new MimeMessage(session);
