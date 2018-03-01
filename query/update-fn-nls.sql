@@ -1,4 +1,4 @@
-﻿-- Function: fn_pl_rpt_per_kapal_merk_toko_pisah_emkl(integer, integer[])
+-- Function: fn_pl_rpt_per_kapal_merk_toko_pisah_emkl(integer, integer[])
 
 -- DROP FUNCTION fn_pl_rpt_per_kapal_merk_toko_pisah_emkl(integer, integer[]);
 
@@ -103,7 +103,8 @@ for rcd in
 	order by coalesce(k.nama,'') , coalesce(kp.nama,''),
 	-- kb.tgl_berangkat, 
     st.id_satuan_kirim,
-    t.nama, sk.nama, coalesce(e.nama,''), coalesce(m.nama,''), ss.id_stuffing, sj.tanggal, sj.id, d.id
+--  sk.nama, 
+    coalesce(e.nama,''), t.nama, coalesce(m.nama,''), ss.id_stuffing, sj.tanggal, sj.id, d.id
 loop
 	return next rcd;
 END LOOP;	
