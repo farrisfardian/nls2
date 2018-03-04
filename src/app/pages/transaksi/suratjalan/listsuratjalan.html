@@ -33,6 +33,14 @@
                             </span>                        
                         </div>                        
                     </div>
+                    <div class="col-sm-1">
+                        <label class="control-label" for="statusNota">Status Nota</label>
+                    </div>
+                    <div class="col-sm-3" >
+                        <select class="form-control" ng-model="vm.statusNota" name="statusNota">
+                            <option ng-repeat="c in listStatusNota" ng-value="c">{{c}}</option>                   
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>

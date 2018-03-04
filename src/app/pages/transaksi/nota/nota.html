@@ -304,7 +304,7 @@
                     </thead>
                     <tr ng-repeat="c in dataPage.content" class="editable-row">
                         <td>
-                            {{$index + 1}}
+                            {{((paging.currentPage-1)*paging.maxSize)+$index + 1}}
                         </td>
                         <td>
                             {{ c.toko}}

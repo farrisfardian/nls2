@@ -110,14 +110,14 @@ public class SuratJalanController {
         return sjStuffingDao.save(x);
     }
 
-    @RequestMapping(value = "/tglawal/tglakhir/idkota/cari/{tglawal}/{tglakhir}/{idkota}/{cari:.+}", method = RequestMethod.GET)
+    @RequestMapping(value = "/tglawal/tglakhir/idkota/cari/statusNota/{tglawal}/{tglakhir}/{idkota}/{cari:.+}/{statusNota}", method = RequestMethod.GET)
     @ResponseBody
-    public Object cariComposite(@PathVariable("tglawal") String tglawal, @PathVariable("tglakhir") String tglakhir, @PathVariable("idkota") String idkota, @PathVariable("cari") String cari,
+    public Object cariComposite(@PathVariable("tglawal") String tglawal, @PathVariable("tglakhir") String tglakhir, @PathVariable("idkota") String idkota, @PathVariable("cari") String cari, @PathVariable("statusNota") String statusNota,
             Pageable pageable,
             HttpServletResponse response) {
         PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
                 Sort.Direction.ASC, "tanggal");
-        return lookupDao.lookupSuratJalan((cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), idkota, tglawal, tglakhir, pr);
+        return lookupDao.lookupSuratJalan((cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), idkota, tglawal, tglakhir, statusNota, pr);
     }
 
     @RequestMapping(value = "infoitem/tglawal/tglakhir/idtoko/cari/{tglawal}/{tglakhir}/{idtoko}/{cari:.+}", method = RequestMethod.GET)

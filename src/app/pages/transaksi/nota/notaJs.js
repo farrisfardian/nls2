@@ -92,6 +92,8 @@
         $scope.fillDetailNota = function (idTokoTujuan, idMerkTujuan, idKapalBerangkat) {
             if (idKapalBerangkat === '') {
                 $scope.vm.listDetail = [];
+                $scope.hitungGrandTotalTambahan();
+                $scope.hitungGrandTotal();
             } else {
                 NotaService.listDetailNotaTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat).success(function (data) {
                     $scope.vm.listDetail = data;
@@ -115,20 +117,19 @@
                     var currentNoKontainer = '';
                     var noKontainerExists = false;
                     var noJenisItemsExists = false;
-                    var noJenisItemsExists = false;
-                    for (var k = 0; k < $scope.vm.listDetail.length; k++) {
-                        currentNoKontainer = $scope.vm.listDetail[k].noKontainer;
-                        noKontainerExists = false;
-                        for (var l = 0; l < $scope.vm.listNoKontainer.length; l++) {
-                            if (currentNoKontainer === $scope.vm.listNoKontainer[l]) {
-                                noKontainerExists = true;
-                                break;
-                            }
-                        }
-                        if (noKontainerExists === false) {
-                            $scope.listNoKontainer.push($scope.vm.listDetail[k].noKontainer);
-                        }
-                    }
+//                    for (var k = 0; k < $scope.vm.listDetail.length; k++) {
+//                        currentNoKontainer = $scope.vm.listDetail[k].noKontainer;
+//                        noKontainerExists = false;
+//                        for (var l = 0; l < $scope.vm.listNoKontainer.length; l++) {
+//                            if (currentNoKontainer === $scope.vm.listNoKontainer[l]) {
+//                                noKontainerExists = true;
+//                                break;
+//                            }
+//                        }
+//                        if (noKontainerExists === false) {
+//                            $scope.listNoKontainer.push($scope.vm.listDetail[k].noKontainer);
+//                        }
+//                    }
                     for (var i = 0; i < $scope.vm.listTambahanBiaya.length; i++) {
                         currentNoKontainer = $scope.vm.listTambahanBiaya[i].noKontainer;
                         noJenisItemsExists = false;
@@ -143,6 +144,8 @@
                             $scope.vm.listTambahanBiaya[i].noKontainer = null;
                         }
                     }
+                    $scope.hitungGrandTotalTambahan();
+                    $scope.hitungGrandTotal();
                 });
             }
         };

@@ -345,7 +345,7 @@ public class LookupDao {
         return mm;
     }
 
-    public Object lookupSuratJalan(String cari, String idKota, String tglAwal, String tglAkhir, PageRequest page) {
+    public Object lookupSuratJalan(String cari, String idKota, String tglAwal, String tglAkhir, String statusNota, PageRequest page) {
         ModelMap mm = new ModelMap();
         System.out.println("Page.Size: " + page.getPageSize());
         System.out.println("Page.Offset: " + page.getOffset());
@@ -370,6 +370,10 @@ public class LookupDao {
                 + "WHERE \n"
                 + "  sj.tanggal between '" + tglAwal + "'::date and '" + tglAkhir + "'::date\n"
                 + "  and case when 0 = " + idKota + " then true else km.id = " + idKota + " end\n"
+                + "  and case when 'Semua' = '" + statusNota + "' then true \n"
+                + "  when 'Sudah' = '" + statusNota + "' then sj.id in (select distinct unnest(string_to_array(string_agg(id_sj,','),','))::int from t_nota_detail where id_sj is not null) \n"
+                + "  when 'Belum' = '" + statusNota + "' then sj.id not in (select distinct unnest(string_to_array(string_agg(id_sj,','),','))::int from t_nota_detail where id_sj is not null) \n"
+                + "  end\n"
                 //                + "  and tk.nama||m.nama||tm.nama||km.nama||sj.nomor ilike '%" + cari + "%' order by sj.tanggal, tm.nama \n";
                 + "  and coalesce(tk.nama,'')||coalesce(m.nama,'')||coalesce(tm.nama,'')||coalesce(km.nama,'')||coalesce(sj.nomor,'')||coalesce(st.no_kontainer,'')||coalesce(sj.indeks,'') ilike '%" + cari + "%' order by coalesce(sj.indeks,''), sj.tanggal, tm.nama \n";
         System.out.println("query all : " + query);

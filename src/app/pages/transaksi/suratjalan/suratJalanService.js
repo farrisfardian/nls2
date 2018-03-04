@@ -16,11 +16,11 @@
             query: function (search, p, callback) {
                 return this.entity.queryPage({"a": search, "page": p, "size": 10}, callback)
             },
-            entityComposite: $resource(url + '/tglawal/tglakhir/idkota/cari/:tglawal/:tglakhir/:idkota/:a', {}, {
+            entityComposite: $resource(url + '/tglawal/tglakhir/idkota/cari/statusNota/:tglawal/:tglakhir/:idkota/:a/:statusNota', {}, {
                 queryPage: {method: 'GET', isArray: false}
             }),
-            queryComposite: function (tglawal, tglakhir, idkota, search, p, callback) {
-                return this.entityComposite.queryPage({"a": search, "tglawal": tglawal, "tglakhir": tglakhir, "idkota": idkota, "page": p, "size": 10}, callback)
+            queryComposite: function (tglawal, tglakhir, idkota, search, statusNota, p, callback) {
+                return this.entityComposite.queryPage({"a": search, "tglawal": tglawal, "tglakhir": tglakhir, "idkota": idkota, "statusNota": statusNota, "page": p, "size": 10}, callback)
             },
             infoItemComposite: $resource(url + '/infoitem/tglawal/tglakhir/idtoko/cari/:tglawal/:tglakhir/:idtoko/:a', {}, {
                 queryPage: {method: 'GET', isArray: false}
@@ -48,7 +48,7 @@
             }
         }
         function cariSatu(column, id) {
-            console.log('get '+url + '/' + column + '/' + id);
+            console.log('get ' + url + '/' + column + '/' + id);
             return $http.get(url + '/' + column + '/' + id);
         }
         function getSjStuffing(id) {
