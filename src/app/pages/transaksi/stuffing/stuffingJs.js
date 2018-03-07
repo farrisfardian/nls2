@@ -146,9 +146,45 @@
             if (tipe == 'pdf') {
 //                    window.open(link, '_blank', 'width=screen.width, height=screen.height');
                 window.open(link, '_blank', 'width=1024, height=768');
-            } else {
+            } else if (tipe == 'xlsx') {
                 location.href = link;
+            } else if (tipe == 'email') {
+                $scope.kirimEmail({
+                    emkl: c.emkl,
+                    email: '',
+                    ex: ex,
+                    idStuffing: c.id,
+                    listStuffing: [c],
+                });
             }
+        };
+
+        $scope.kirimEmail = function (x) {
+            console.log('kirimEmail', x);
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/pages/tpl/send-email-pl-stuffing.html',
+                controller: 'SendEmailPlStuffingCtrl',
+                size: 'lg',
+                resolve: {
+                    param: function () {
+                        return {
+                            email: x.email,
+                            emkl: x.emkl,
+                            ex: x.ex,
+                            idStuffing: x.idStuffing,
+                            listStuffing: x.listStuffing,
+                        }
+                    },
+                }
+            });
+            modalInstance.result.then(function (sd) {
+                toastr.success(sd.message);
+                console.log('Kirim Email', sd);
+            }, function () {
+                toastr.success('Kirim email gagal');
+                $log.info('Modal dismissed at: ' + new Date());
+            });
         };
 
         $scope.$watch('vm.satuanKirim', function () {

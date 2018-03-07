@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Level;
 import javax.activation.DataSource;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -105,6 +106,49 @@ public class ReportController {
                 .addAttribute("dataSource", dao.perStuffing(Integer.valueOf(id)));
     }
 
+    @RequestMapping(value = "kirim-email/per-stuffing*", method = RequestMethod.GET)
+    @ResponseBody
+    private Object kirimEmailPerStuffing(HttpServletRequest request) {
+        try {
+            String uri = request.getRequestURI();
+            String format = uri.substring(uri.lastIndexOf(".") + 1);
+
+            String id = request.getParameter("id");
+            Boolean ex = Boolean.valueOf(request.getParameter("ex"));
+            String subjek = request.getParameter("subjek");
+            String email = request.getParameter("email");
+            String isi = request.getParameter("isi");
+            String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
+            realPath = realPath.replace("\\", "\\\\");
+            String jrxmlPath = realPath + "packing-list-stuffing.jrxml";
+            HashMap<String, DataSource> attachments = new HashMap<>();
+            JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlPath);
+            ModelMap parameters = new ModelMap().addAttribute("realPath", realPath).addAttribute("lapExpedisi", ex);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SettingAplikasi lastByTgl = settingAplikasiDao.getLastByTgl(sdf.format(new Date()));
+
+            List<Map<String, Object>> perStuffing = (List<Map<String, Object>>) dao.perStuffing(Integer.valueOf(id));
+            JasperPrint fillReport = JasperFillManager.fillReport(jasperReport, parameters, new JRBeanCollectionDataSource(perStuffing));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            JasperExportManager.exportReportToPdfStream(fillReport, baos);
+            DataSource attachment = new ByteArrayDataSource(baos.toByteArray(), "application/pdf");
+            attachments.put((String) perStuffing.get(0).get("tgl_brgkt") + "_" + (String) perStuffing.get(0).get("kota_tujuan") + "_" + (String) perStuffing.get(0).get("emkl") + "_" + (String) perStuffing.get(0).get("nomor_kontainer") + ".PDF", attachment);
+
+            EmailSender emailSender = new EmailSender(lastByTgl.getEmailAplikasi(), lastByTgl.getPasswordEmailAplikasi(), lastByTgl.getMailSmtpHost(), lastByTgl.getMailSmtpAuth(), lastByTgl.getMailSmtpPort());
+            emailSender.kirimEmail(email, subjek, isi, attachments);
+            logger.warn("format: [{}]", format);
+            logger.warn("id: [{}]", id);
+            logger.warn("lapExpedisi: [{}]", ex);
+
+            return new ModelMap()
+                    .addAttribute("message", "Kirim email sukses");
+        } catch (JRException ex1) {
+            java.util.logging.Logger.getLogger(ReportController.class.getName()).log(Level.SEVERE, null, ex1);
+            return new ModelMap()
+                    .addAttribute("message", "Kirim email gagal");
+        }
+    }
+
     @RequestMapping(value = "per-toko*", method = RequestMethod.GET)
     private ModelMap perToko(HttpServletRequest request) throws ParseException {
         String uri = request.getRequestURI();
@@ -171,41 +215,47 @@ public class ReportController {
 
     @RequestMapping(value = "kirim-email/per-merk-toko-pisah-emkl*", method = RequestMethod.GET)
     @ResponseBody
-    private Object kirimEmailPerMerkTokoPisahEmkl(HttpServletRequest request) throws ParseException, JRException {
-        String uri = request.getRequestURI();
-        String format = uri.substring(uri.lastIndexOf(".") + 1);
+    private Object kirimEmailPerMerkTokoPisahEmkl(HttpServletRequest request) {
+        try {
+            String uri = request.getRequestURI();
+            String format = uri.substring(uri.lastIndexOf(".") + 1);
 
-        String id = request.getParameter("id");
-        String it = request.getParameter("it");
-        String subjek = request.getParameter("subjek");
-        String email = request.getParameter("email");
-        String isi = request.getParameter("isi");
-        String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
-        realPath = realPath.replace("\\", "\\\\");
-        String jrxmlPath = realPath + "per-toko-pisah-emkl.jrxml";
-        HashMap<String, DataSource> attachments = new HashMap<>();
-        JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlPath);
-        ModelMap parameters = new ModelMap().addAttribute("realPath", realPath);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        SettingAplikasi lastByTgl = settingAplikasiDao.getLastByTgl(sdf.format(new Date()));
+            String id = request.getParameter("id");
+            String it = request.getParameter("it");
+            String subjek = request.getParameter("subjek");
+            String email = request.getParameter("email");
+            String isi = request.getParameter("isi");
+            String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
+            realPath = realPath.replace("\\", "\\\\");
+            String jrxmlPath = realPath + "per-toko-pisah-emkl.jrxml";
+            HashMap<String, DataSource> attachments = new HashMap<>();
+            JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlPath);
+            ModelMap parameters = new ModelMap().addAttribute("realPath", realPath);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SettingAplikasi lastByTgl = settingAplikasiDao.getLastByTgl(sdf.format(new Date()));
 
-        List<Map<String, Object>> distinct = (List<Map<String, Object>>) dao.perKapalMerkTokoPisahEmklDistinct(Integer.valueOf(id), it);
-        for (int i = 0; i < distinct.size(); i++) {
-            JasperPrint fillReport = JasperFillManager.fillReport(jasperReport, parameters, new JRBeanCollectionDataSource((List<Map<String, Object>>) dao.perKapalMerkTokoPisahEmklFilter(Integer.valueOf(id), it, (String) distinct.get(i).get("kota_tujuan"), (String) distinct.get(i).get("customer"), (String) distinct.get(i).get("tgl_berangkat"), (String) distinct.get(i).get("emkl"))));
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            JasperExportManager.exportReportToPdfStream(fillReport, baos);
-            DataSource attachment = new ByteArrayDataSource(baos.toByteArray(), "application/pdf");
-            attachments.put((String) distinct.get(i).get("tgl_berangkat") + "_" + (String) distinct.get(i).get("kota_tujuan") + "_" + (String) distinct.get(i).get("emkl") + "_" + (String) distinct.get(i).get("customer") + ".PDF", attachment);
+            List<Map<String, Object>> distinct = (List<Map<String, Object>>) dao.perKapalMerkTokoPisahEmklDistinct(Integer.valueOf(id), it);
+            for (int i = 0; i < distinct.size(); i++) {
+                JasperPrint fillReport = JasperFillManager.fillReport(jasperReport, parameters, new JRBeanCollectionDataSource((List<Map<String, Object>>) dao.perKapalMerkTokoPisahEmklFilter(Integer.valueOf(id), it, (String) distinct.get(i).get("kota_tujuan"), (String) distinct.get(i).get("customer"), (String) distinct.get(i).get("tgl_berangkat"), (String) distinct.get(i).get("emkl"))));
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                JasperExportManager.exportReportToPdfStream(fillReport, baos);
+                DataSource attachment = new ByteArrayDataSource(baos.toByteArray(), "application/pdf");
+                attachments.put((String) distinct.get(i).get("tgl_berangkat") + "_" + (String) distinct.get(i).get("kota_tujuan") + "_" + (String) distinct.get(i).get("emkl") + "_" + (String) distinct.get(i).get("customer") + ".PDF", attachment);
 
+            }
+            EmailSender emailSender = new EmailSender(lastByTgl.getEmailAplikasi(), lastByTgl.getPasswordEmailAplikasi(), lastByTgl.getMailSmtpHost(), lastByTgl.getMailSmtpAuth(), lastByTgl.getMailSmtpPort());
+            emailSender.kirimEmail(email, subjek, isi, attachments);
+            logger.warn("format: [{}]", format);
+            logger.warn("id: [{}]", id);
+            logger.warn("idMerk: [{}]", it);
+
+            return new ModelMap()
+                    .addAttribute("message", "Kirim email sukses");
+        } catch (JRException ex) {
+            java.util.logging.Logger.getLogger(ReportController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ModelMap()
+                    .addAttribute("message", "Kirim email gagal");
         }
-        EmailSender emailSender = new EmailSender(lastByTgl.getEmailAplikasi(), lastByTgl.getPasswordEmailAplikasi(), lastByTgl.getMailSmtpHost(), lastByTgl.getMailSmtpAuth(), lastByTgl.getMailSmtpPort());
-        emailSender.kirimEmail(email, subjek, isi, attachments);
-        logger.warn("format: [{}]", format);
-        logger.warn("id: [{}]", id);
-        logger.warn("idMerk: [{}]", it);
-
-        return new ModelMap()
-                .addAttribute("message", "Kirim email sukses");
     }
 
     @RequestMapping(value = "jml-container-pertujuan*", method = RequestMethod.GET)
@@ -282,6 +332,61 @@ public class ReportController {
                 .addAttribute("tglAwal", arrTglAwal[2] + "/" + arrTglAwal[1] + "/" + arrTglAwal[0])
                 .addAttribute("tglAkhir", arrTglAkhir[2] + "/" + arrTglAkhir[1] + "/" + arrTglAkhir[0])
                 .addAttribute("dataSource", dao.getRincianNota(idToko, idMerk, tglAwal, tglAkhir));
+    }
+
+    @RequestMapping(value = "kirim-email/get-rincian-nota*", method = RequestMethod.GET)
+    private ModelMap kirimEmailGetRincianNota(HttpServletRequest request) throws ParseException {
+        try {
+            String uri = request.getRequestURI();
+            String format = uri.substring(uri.lastIndexOf(".") + 1);
+            String subjek = request.getParameter("subjek");
+            String email = request.getParameter("email");
+            String isi = request.getParameter("isi");
+            String idToko = request.getParameter("idToko");
+            String idMerk = request.getParameter("idMerk");
+            String tglAwal = request.getParameter("tglAwal");
+            String tglAkhir = request.getParameter("tglAkhir");
+            String[] arrTglAwal = tglAwal.split("-");
+            String[] arrTglAkhir = tglAkhir.split("-");
+            String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
+            realPath = realPath.replace("\\", "\\\\");
+            String jrxmlPath = realPath + "packing-list-stuffing.jrxml";
+            HashMap<String, DataSource> attachments = new HashMap<>();
+            JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlPath);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SettingAplikasi lastByTgl = settingAplikasiDao.getLastByTgl(sdf.format(new Date()));
+            
+            Map<String, Object> totalTerbilangByRincianNota = (Map<String, Object>) dao.getTotalTerbilangByRincianNota(idToko, idMerk, tglAwal, tglAkhir);
+            List<Map<String, Object>> report = (List<Map<String, Object>>) dao.getRincianNota(idToko, idMerk, tglAwal, tglAkhir);
+            
+            ModelMap parameters = new ModelMap().addAttribute("realPath", realPath)
+                    .addAttribute("format", format)
+                    .addAttribute("totalTagihan", (BigDecimal) totalTerbilangByRincianNota.get("total_tagihan"))
+                    .addAttribute("totalTerbayar", (BigDecimal) totalTerbilangByRincianNota.get("total_terbayar"))
+                    .addAttribute("totalSisaTagihan", (BigDecimal) totalTerbilangByRincianNota.get("total_sisa_tagihan"))
+                    .addAttribute("terbilangTotalTagihan", totalTerbilangByRincianNota.get("terbilang_total_tagihan"))
+                    .addAttribute("terbilangTotalTerbayar", totalTerbilangByRincianNota.get("terbilang_total_terbayar"))
+                    .addAttribute("terbilangTotalSisaTagihan", totalTerbilangByRincianNota.get("terbilang_total_sisa_tagihan"))
+                    .addAttribute("tglAwal", arrTglAwal[2] + "/" + arrTglAwal[1] + "/" + arrTglAwal[0])
+                    .addAttribute("tglAkhir", arrTglAkhir[2] + "/" + arrTglAkhir[1] + "/" + arrTglAkhir[0]);
+            JasperPrint fillReport = JasperFillManager.fillReport(jasperReport, parameters, new JRBeanCollectionDataSource(report));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            JasperExportManager.exportReportToPdfStream(fillReport, baos);
+            DataSource attachment = new ByteArrayDataSource(baos.toByteArray(), "application/pdf");
+            attachments.put("RINCIAN_NOTA_"+(String) report.get(0).get("tgl_awal_berangkat")+"_sd_"+(String) report.get(0).get("tgl_akhir_berangkat")+"_"+(String) report.get(0).get("toko") + ".PDF", attachment);            
+            
+            EmailSender emailSender = new EmailSender(lastByTgl.getEmailAplikasi(), lastByTgl.getPasswordEmailAplikasi(), lastByTgl.getMailSmtpHost(), lastByTgl.getMailSmtpAuth(), lastByTgl.getMailSmtpPort());
+            emailSender.kirimEmail(email, subjek, isi, attachments);
+            logger.warn("format: [{}]", format);
+            
+            return new ModelMap()
+                    .addAttribute("message", "Kirim email sukses");
+        } catch (JRException ex) {
+            java.util.logging.Logger.getLogger(ReportController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ModelMap()
+                    .addAttribute("message", "Kirim email gagal");
+        }
+
     }
 
     @RequestMapping(value = "get-rekap-nota-tagihan*", method = RequestMethod.GET)

@@ -20,7 +20,7 @@ public class ReportDao {
 
     public Object perStuffing(Integer id) {
         String sql = "select kota_tujuan, kondisi, \n"
-                + "customer, kapal, tgl_berangkat, tgl_ind, merk, alamat, nomor_kontainer, emkl, \n"
+                + "customer, kapal, tgl_berangkat, to_char(tgl_berangkat,'yyyy-mm-dd') tgl_brgkt, tgl_ind, merk, alamat, nomor_kontainer, emkl, \n"
                 + "id, tanggal, pengirim, coli, jenis_barang, p, l, \n"
                 + "t, paket, ukuran, kubikasi, fix_volume, total_coli_sj, pisah from fn_pl_rpt_per_stuffing(" + id + ") as (kota_tujuan varchar, kondisi varchar,\n"
                 + "customer varchar, kapal varchar, tgl_berangkat date, tgl_ind varchar, merk varchar, alamat varchar, nomor_kontainer varchar, emkl varchar,\n"

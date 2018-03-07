@@ -96,8 +96,10 @@
                 }
             });
             modalInstance.result.then(function (sd) {
+                toastr.success(sd.message);
                 console.log('Kirim Email', sd);
             }, function () {
+                toastr.success('Kirim email gagal');
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };

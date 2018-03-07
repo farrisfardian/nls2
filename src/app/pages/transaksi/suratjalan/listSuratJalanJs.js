@@ -19,6 +19,7 @@
             console.log('vm', $scope.vm);
             console.log('tglAwal', $filter('date')(new Date($scope.vm.tglAwal), 'yyyy-MM-dd'));
             $scope.dataPage = SuratJalanService.queryComposite($filter('date')(new Date($scope.vm.tglAwal), 'yyyy-MM-dd'), $filter('date')(new Date($scope.vm.tglAkhir), 'yyyy-MM-dd'), ($scope.vm.kota == null || $scope.vm.kota.id == undefined || $scope.vm.kota.id == null ? 0 : $scope.vm.kota.id), ($scope.vm.cari == '' ? 'null' : $scope.vm.cari), $scope.vm.statusNota, $scope.paging.currentPage - 1, function () {
+                console.log('reloadData', $scope.dataPage);
                 $scope.paging.maxSize = ($scope.dataPage.size);
                 $scope.paging.totalItems = $scope.dataPage.totalElements;
                 $scope.paging.currentPage = parseInt($scope.dataPage.number) + 1;

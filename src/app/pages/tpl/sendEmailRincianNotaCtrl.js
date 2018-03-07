@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('BlurAdmin')
-            .controller('SendEmailPlTokoCtrl', SendEmailPlTokoCtrl)
-    function SendEmailPlTokoCtrl($scope, $http, $uibModalInstance, param, $timeout) {
+            .controller('SendEmailRincianNotaCtrl', SendEmailRincianNotaCtrl)
+    function SendEmailRincianNotaCtrl($scope, $http, $uibModalInstance, param, $timeout) {
         $scope.selected = {};
-        console.log('SendEmailPlTokoCtrl --> param', param)
+        console.log('SendEmailRincianNotaCtrl --> param', param)
         $scope.listData = [];
         $scope.toko = param.toko;
         $scope.email = param.email;

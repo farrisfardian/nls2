@@ -1,0 +1,101 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+            <em class="ion-ios-close-empty sn-link-close"></em>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Kirim Packing List Stuffing via Email</h4>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12 input-group custom-search-form wrapper">
+            <form id="form1" name="form1">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="control-label" for="email">Email</label>
+                    </div>
+                    <div class="col-md-4" ng-class="{error: form1.email.$invalid}">
+                        <input ng-model="email" class="form-control" type="email" id="email" name="email" required >
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.email.$error.required">
+                            Silahkan isi email tujuan
+                        </span>
+                    </div>           
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary" ng-click="kirimEmail()" ng-disabled="form1.$invalid">Kirim Email</button>
+                        <button type="button" class="btn btn-danger" ng-click="$dismiss()">Batal</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="control-label" for="subjek">Subjek</label>
+                    </div>
+                    <div class="col-md-10" ng-class="{error: form1.subjek.$invalid}">
+                        <input ng-model="subjek" class="form-control" type="text" id="subjek" name="subjek" required>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.subjek.$error.required">
+                            Silahkan isi subjek email
+                        </span>
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="control-label" for="isi">Isi Email</label>
+                    </div>
+                    <div class="col-md-10" ng-class="{error: form1.email.$invalid}">
+                        <textarea ng-model="isi" class="form-control" rows="3" id="isi" name="isi" required></textarea>
+                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.isi.$error.required">
+                            Silahkan isi konten email
+                        </span>
+                    </div>                           
+                </div>
+            </form>
+        </div>
+        <div class="well-large">
+            <div class="box-content">
+                <table class="table table-bordered table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Tgl Closing</th>
+                            <th>Kontainer</th>
+                            <th>Tujuan</th>
+                            <th>Kapal</th>
+                            <th>Tgl Brkt</th>
+                            <th>Emkl</th>
+                            <th>Satuan Kirim</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="c in listStuffing" class="editable-row">
+                        <td>
+                            {{$index + 1}}
+                        </td>
+                        <td>
+                            {{ c.tgl_closing | date: 'dd/MM/yyyy' }}
+                        </td>
+                        <td>
+                            {{ c.nomor_kontainer}}<br>
+                            <span style="background-color: yellow">{{ c.ukuran_kontainer}}</span>
+                        </td>
+                        <td>
+                            {{ c.kota_tujuan}}
+                        </td>
+                        <td>
+                            {{ c.nama_kapal}}
+                        </td>
+                        <td>
+                            {{ c.tgl_berangkat | date: 'dd-MM-yyyy' }}
+                        </td>
+                        <td>
+                            {{ c.nama_emkl}}
+                        </td>
+                        <td>
+                            {{ c.satuan_kirim}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span style="color:white" class="help-block label label-info">
+            Pastikan semua kolom terisi dengan benar
+        </span>
+    </div>
+</div>
