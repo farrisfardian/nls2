@@ -127,5 +127,18 @@
                         order: 0,
                     },
                 })
+                .state('laporan.tracking-kapal', {
+                    url: '/tracking-kapal',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/laporan/trackingKapal/trackingKapal.html',
+                            controller: 'TrackingKapalCtrl'
+                        }
+                    },
+                    title: 'Tracking Kapal',
+                    sidebarMeta: {
+                        order: 0,
+                    },
+                })
     }
 })();

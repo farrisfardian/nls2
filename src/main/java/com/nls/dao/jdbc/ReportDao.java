@@ -135,7 +135,7 @@ public class ReportDao {
      * @return Data invoice
      */
     public Object getRincianNota(String idToko, String idMerk, String tglAwal, String tglAkhir) {
-        String sql = "select *,total_tagihan-terbayar as sisa, fn_tanggal_ind(current_date) as tanggal from fn_get_rincian_nota(" + idToko + ", " + idMerk + ", '" + tglAwal + "', '" + tglAkhir + "') as (id int, nomor varchar, toko varchar, merk varchar, total_tagihan numeric, terbayar numeric, jenis_item text, kapal_berangkat text, tgl_awal_berangkat text, tgl_akhir_berangkat text)";
+        String sql = "select *,total_tagihan-terbayar as sisa, fn_tanggal_ind(current_date) as tanggal, distinct_text(jenis_items,', ') as jenis_item from fn_get_rincian_nota(" + idToko + ", " + idMerk + ", '" + tglAwal + "', '" + tglAkhir + "') as (id int, nomor varchar, toko varchar, merk varchar, total_tagihan numeric, terbayar numeric, jenis_items text, kapal_berangkat text, tgl_awal_berangkat text, tgl_akhir_berangkat text)";
         System.out.println("getRincianNota: " + sql);
         return mr.mapList(sql);
     }

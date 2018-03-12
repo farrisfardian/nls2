@@ -215,6 +215,13 @@
                         "level": 1, 
                         "order": 0, 
                         "stateRef": "laporan.rekap-nota"
+                    },
+                    {
+                        "name": "laporan.tracking-kapal", 
+                        "title": "Tracking Kapal", 
+                        "level": 1, 
+                        "order": 0, 
+                        "stateRef": "laporan.tracking-kapal"
                     }
                 ]
             },
