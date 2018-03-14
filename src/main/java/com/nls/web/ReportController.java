@@ -10,27 +10,21 @@ import com.nls.dao.jdbc.ReportDao;
 import com.nls.domain.SettingAplikasi;
 import com.nls.helper.EmailSender;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 import java.util.logging.Level;
 import javax.activation.DataSource;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.mail.util.ByteArrayDataSource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -40,7 +34,6 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -103,6 +96,7 @@ public class ReportController {
                 .addAttribute("realPath", realPath)
                 .addAttribute("lapExpedisi", ex)
                 .addAttribute("format", format)
+                .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("dataSource", dao.perStuffing(Integer.valueOf(id)));
     }
 
@@ -167,6 +161,7 @@ public class ReportController {
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
                 .addAttribute("realPath", realPath)
                 .addAttribute("format", format)
+                .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("dataSource", dao.perKapalToko(Integer.valueOf(id), Integer.valueOf(it)));
     }
 
@@ -188,6 +183,7 @@ public class ReportController {
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
                 .addAttribute("realPath", realPath)
                 .addAttribute("format", format)
+                .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("dataSource", dao.perKapalMerkToko(Integer.valueOf(id), it));
     }
 
@@ -210,6 +206,7 @@ public class ReportController {
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
                 .addAttribute("realPath", realPath)
                 .addAttribute("format", format)
+                .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("dataSource", dao.perKapalMerkTokoPisahEmkl(Integer.valueOf(id), it));
     }
 
@@ -230,7 +227,7 @@ public class ReportController {
             String jrxmlPath = realPath + "per-toko-pisah-emkl.jrxml";
             HashMap<String, DataSource> attachments = new HashMap<>();
             JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlPath);
-            ModelMap parameters = new ModelMap().addAttribute("realPath", realPath);
+            ModelMap parameters = new ModelMap().addAttribute("realPath", realPath).addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"));
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             SettingAplikasi lastByTgl = settingAplikasiDao.getLastByTgl(sdf.format(new Date()));
 
@@ -276,6 +273,7 @@ public class ReportController {
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
                 .addAttribute("realPath", realPath)
                 .addAttribute("format", format)
+                .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("dataSource", dao.jmlContainerPerTujuan(tahun, bulan));
     }
 
@@ -289,13 +287,13 @@ public class ReportController {
         realPath = realPath.replace("\\", "\\\\");
         logger.warn("format: [{}]", format);
         logger.warn("tahun: [{}]", idNota);
-
         Map<String, Object> totalTerbilangByNota = (Map<String, Object>) dao.getTotalTerbilangByNota(idNota);
         return new ModelMap()
                 //                .addAttribute("tanggal1", tg1)
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
                 .addAttribute("realPath", realPath)
                 .addAttribute("format", format)
+                .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("total", totalTerbilangByNota.get("total"))
                 .addAttribute("terbilang", totalTerbilangByNota.get("terbilang"))
                 .addAttribute("dataSourceKapal", dao.getKapalBerangkatByNota(idNota))
@@ -323,6 +321,7 @@ public class ReportController {
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
                 .addAttribute("realPath", realPath)
                 .addAttribute("format", format)
+                .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("totalTagihan", (BigDecimal) totalTerbilangByRincianNota.get("total_tagihan"))
                 .addAttribute("totalTerbayar", (BigDecimal) totalTerbilangByRincianNota.get("total_terbayar"))
                 .addAttribute("totalSisaTagihan", (BigDecimal) totalTerbilangByRincianNota.get("total_sisa_tagihan"))
@@ -361,6 +360,7 @@ public class ReportController {
             
             ModelMap parameters = new ModelMap().addAttribute("realPath", realPath)
                     .addAttribute("format", format)
+                    .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                     .addAttribute("totalTagihan", (BigDecimal) totalTerbilangByRincianNota.get("total_tagihan"))
                     .addAttribute("totalTerbayar", (BigDecimal) totalTerbilangByRincianNota.get("total_terbayar"))
                     .addAttribute("totalSisaTagihan", (BigDecimal) totalTerbilangByRincianNota.get("total_sisa_tagihan"))
@@ -415,6 +415,7 @@ public class ReportController {
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
                 .addAttribute("realPath", realPath)
                 .addAttribute("format", format)
+                .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("toko", toko.equalsIgnoreCase("null") ? null : toko)
                 .addAttribute("merk", merk.equalsIgnoreCase("null") ? null : merk)
                 .addAttribute("kota", kotaTujuan.equalsIgnoreCase("null") ? null : kotaTujuan)
@@ -441,6 +442,7 @@ public class ReportController {
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
                 .addAttribute("realPath", realPath)
                 .addAttribute("format", format)
+                .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("tampilkanKapalBerangkat", tampilkanKapalBerangkat.equalsIgnoreCase("true") ? true : false)
                 .addAttribute("dataSource", dao.getPembayaranNota(idPembayaranNota));
     }
