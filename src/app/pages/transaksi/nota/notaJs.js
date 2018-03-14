@@ -6,7 +6,7 @@
             .controller('NotaModalController', NotaModalController);
 
     /** @ngInject */
-    function NotaCtrl($scope, $uibModal, $log, $filter, toastr, NotaService, KapalBerangkatService, EnumService, TokoService, TambahanBiayaService, KotaService) {
+    function NotaCtrl($scope, $uibModal, $log, $filter, $stateParams, toastr, NotaService, KapalBerangkatService, EnumService, TokoService, TambahanBiayaService, KotaService) {
         $scope.search = "";
         $scope.oldSearch = "";
         $scope.deskKapalBerangkat = "";
@@ -48,10 +48,9 @@
             $scope.reloadData();
         };
 
-        $scope.clear();
 
         $scope.baru = function () {
-            $scope.vm = {nomorManual: false};
+            $scope.vm = {nomorManual: false,listTambahanBiaya:[]};
             $scope.ori = {};
             $scope.modalTitle = "Tambah Nota";
             console.log('Baru');
@@ -342,6 +341,51 @@
         $scope.$watch('vm.minBayar', function () {
             $scope.refreshDataDetail();
         });
+
+        $scope.initForm = function (idToko, idMerk, idKapalBerangkat) {
+            TokoService.cariSatu("kode", idToko).success(function (data) {
+                $scope.vm.tokoTujuan = data;
+                $scope.listkapalBerangkat = [];
+                $scope.listMerk = $scope.vm.tokoTujuan.listMerk;
+                for (var i = 0; i < $scope.listMerk.length; i++) {
+                    if ($scope.listMerk[i].id === idMerk) {
+                        $scope.vm.merkTujuan = $scope.listMerk[i];
+                    }
+                }
+                toastr.success("Ambil toko sukses");
+                console.log('toko', $scope.vm.tokoTujuan);
+                KapalBerangkatService.cariSatu("kode", idKapalBerangkat).success(function (data) {
+                    $scope.listKapalBerangkat.push({id_kapal_berangkat: data.id, tgl_berangkat: data.tglBerangkat, kapal: data.kapal.nama})
+                    if ($scope.vm.listKapalBerangkat === null || $scope.vm.listKapalBerangkat === undefined) {
+                        $scope.vm.listKapalBerangkat = [];
+                    }
+                    var exist = false;
+                    for (var i = 0; i < $scope.listKapalBerangkat.length; i++) {
+                        var exist = false;
+                        for (var j = 0; j < $scope.vm.listKapalBerangkat.length; j++) {
+                            if ($scope.listKapalBerangkat[i].id_kapal_berangkat === $scope.vm.listKapalBerangkat[j].kapalBerangkat.id) {
+                                exist = true;
+                            }
+                        }
+                        if (!exist) {
+                            $scope.vm.listKapalBerangkat.push({
+                                kapalBerangkat: {id: $scope.listKapalBerangkat[i].id_kapal_berangkat, tglBerangkat: new Date($scope.listKapalBerangkat[i].tgl_berangkat), kapal: {nama: $scope.listKapalBerangkat[i].kapal}}
+                            });
+                        }
+                    }
+                    $scope.refreshDataDetail();
+                });
+            }).error(function (e) {
+                toastr.error("Ambil toko gagal");
+            });
+        };
+        console.log('data edit', $stateParams);
+        if ($stateParams.idToko === null || $stateParams.idToko === undefined || $stateParams.idToko === 0 || $stateParams.idToko === '') {
+            $scope.clear();
+        } else {
+            $scope.baru();
+            $scope.initForm($stateParams.idToko, $stateParams.idMerk, $stateParams.idKapalBerangkat);
+        }
 
     }
 

@@ -131,6 +131,8 @@
                         <button class="btn btn-primary editable-table-button btn-xs" 
                                 data-toggle="modal" ng-click="edit(c)">Edit</button>
                         <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data {{c.nama}}?" ng-confirm="hapus(c)">Delete</button>
+                        <button class="btn btn-success editable-table-button btn-xs" ng-show="c.id_kapal_berangkat !== null && c.ada_nota === false"
+                                data-toggle="modal" ng-click="buatNota(c)">Buat Nota</button>
                     </div>
                 </td>
             </tr>

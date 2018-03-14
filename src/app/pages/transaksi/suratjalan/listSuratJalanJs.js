@@ -32,6 +32,10 @@
             $window.open('#/transaksi/suratjalan/' + x.id, '_blank');
         };
 
+        $scope.buatNota = function (x) {
+            $window.open('#/transaksi/nota/' + x.id_toko_tujuan+'/'+x.id_merk_tujuan+'/'+x.id_kapal_berangkat, '_blank');
+        };
+        
         $scope.baru = function (x) {
             window.location.href = '#/transaksi/suratjalan';
         };

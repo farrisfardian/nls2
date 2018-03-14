@@ -90,6 +90,19 @@
                         order: 100,
                     },
                 })
+                .state('transaksi.notatambah', {
+                    url: '/nota/:idToko/:idMerk/:idKapalBerangkat',
+                    views: {
+                        'content@': {
+                            url: '/nota/:idToko/:idMerk/:idKapalBerangkat',
+                            templateUrl: 'app/pages/transaksi/nota/nota.html',
+                        }
+                    },
+                    title: 'Nota',
+                    sidebarMeta: {
+                        order: 100,
+                    },
+                })
                 .state('transaksi.listsuratjalan', {
                     url: '/listsuratjalan',
                     views: {
