@@ -42,6 +42,45 @@ public class LookupDao {
         return mr.mapList(sql);
     }
 
+    public Object lookupTagihanTerbayar(String idToko, String idMerk, String status, String cari, String tglAwal, String tglAkhir, PageRequest page) {
+        ModelMap mm = new ModelMap();
+        System.out.println("Page.Size: " + page.getPageSize());
+        System.out.println("Page.Offset: " + page.getOffset());
+        System.out.println("cari: " + cari);
+        String query = "select distinct r.*,"
+                + "  m.nama merk, \n"
+                + "  t.nama toko \n"
+                + " from fn_get_tagihan_terbayar(" + idToko + ", " + idMerk + ", " + (status.equalsIgnoreCase("null") ? "null" : "'" + status + "'") + ") as r (id int, nomor varchar, tanggal date, tagihan double precision, terbayar numeric) "
+                + "  join t_nota n on n.id=r.id "
+                + "  join public.t_nota_detail nd on nd.id_nota = n.id\n"
+                + "  join public.t_kapal_berangkat kb on nd.id_kapal_berangkat = kb.id\n"
+                + "  join public.m_toko t on n.id_toko = t.id \n"
+                + "  left join public.m_merk m on n.id_merk = m.id\n"
+                + "  where r.tanggal between '" + tglAwal + "'::date and '" + tglAkhir + "'::date "
+                + "  and coalesce(m.nama, '')|| coalesce(t.nama, '')|| coalesce(r.nomor, '') ilike '%" + cari + "%' "
+                + "  order by r.tanggal \n";
+        System.out.println("query all : " + query);
+        Integer totalElement = mr.countRecordset(query);
+        int totalPages = totalElement == 0 ? 0 : totalElement <= page.getPageSize() ? 1
+                : (totalElement / page.getPageSize()) + (totalElement % page.getPageSize() >= 1 ? 1 : 0);
+        boolean isFirstPage = totalPages == 0 || page.getPageNumber() == 0;
+        boolean isLastPage = totalPages == 0 || page.getPageNumber() == 0;
+
+        query = query + "limit " + page.getPageSize() + "\n"
+                + "offset " + (page.getOffset());
+        System.out.println("query paging : " + query);
+        logger.warn("Query [{}]", query);
+        mm.addAttribute("content", mr.mapList(query));
+        mm.put("size", page.getPageSize());
+        mm.put("totalElements", totalElement);
+        mm.put("totalPages", totalPages);
+        mm.put("number", page.getPageNumber());
+        mm.put("firstPage", isFirstPage);
+        mm.put("lastPage", isLastPage);
+        return mm;
+
+    }
+
     public Object lookupKapalBerangkatPerTokoMerkTujuan(String idToko, String idMerk) {
         String sql = "select * from fn_get_kapal_berangkat_by_toko_merk(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ") as (kapal varchar, tgl_berangkat date, tgl_ind varchar, nomor_kontainer varchar, id_kapal_berangkat int, sat_kirim varchar, kota varchar, id_toko int, id_merk int)";
         System.out.println("lookupKapalBerangkatPerTokoMerkTujuan : " + sql);

@@ -165,8 +165,8 @@
                                 </td>
                                 <td>
                                     <div class="buttons" >
-<!--                                        <button class="btn btn-primary editable-table-button btn-xs" 
-                                                data-toggle="modal" ng-click="detail(c)">Detail</button>-->
+                                        <!--                                        <button class="btn btn-primary editable-table-button btn-xs" 
+                                                                                        data-toggle="modal" ng-click="detail(c)">Detail</button>-->
                                         <button class="btn btn-primary editable-table-button btn-xs" 
                                                 data-toggle="modal" ng-click="baruTambahanBiaya(c)">+ Biaya</button>
                                     </div>
@@ -282,20 +282,82 @@
                         </div>
                     </div>
                 </div>
-                <div class=" form-group input-group">
-                    <input id="search" type="text" class="col-xs-2 form-control" ng-model="param.cari" ng-keypress="$event.keyCode == 13 ? reloadData() : undefined" placeholder="Masukkan pencarian" autofocus>
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="reloadData()"><i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-xs-2">
+                                <label class="control-label" for="toko">Toko</label>
+                            </div>
+                            <div class="col-sm-4" >
+                                <p class="input-group">
+                                    <label class="form-control" for="toko">{{param.toko.nama}} - {{param.toko.kota.nama}}</label>
+                                    <input type="hidden" class="form-control" ng-model="param.toko.nama" name="tokoTujuan" ng-required="true"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="lookupToko()" ><i class="glyphicon glyphicon-search"></i></button>
+                                        <button type="button" class="btn btn-default" ng-click="param.toko = null"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </span>
+                                </p>               
+                            </div> 
+                            <div class="col-xs-2">
+                                <label class="control-label" for="merkTujuan">Merk</label>
+                            </div>
+                            <div class="col-sm-4" >
+                                <p class="input-group">
+                                <ui-select ng-model="param.merk"
+                                           class="btn-group bootstrap-select form-control"
+                                           ng-disabled="param.toko === null || param.toko === undefined"
+                                           append-to-body="true"
+                                           search-enabled="true" 
+                                           >
+                                    <ui-select-match placeholder="Pilih Merk">
+                                        {{$select.selected.nama}}
+                                    </ui-select-match>
+                                    <ui-select-choices
+                                        repeat="item in param.toko.listMerk| filter: $select.search">
+                                        <span ng-bind-html="item.nama"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="param.merk = null"><i class="glyphicon glyphicon-remove"></i></button>
+                                </span>
+                                </p>                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-xs-2">
+                                <label class="control-label" for="status">Status</label>
+                            </div>
+                            <div class="col-sm-4" >
+                                <select class="form-control" ng-model="param.status">
+                                    <option ng-repeat="c in listStatusBayar" ng-value="c">{{c}}</option>
+                                </select>
+                            </div> 
+                            <div class="col-xs-2">
+                                <label class="control-label" for="merkTujuan">Cari</label>
+                            </div>
+                            <div class="col-sm-4" >
+                                <p class="input-group">
+                                    <input id="search" type="text" class="col-xs-2 form-control" ng-model="param.cari" ng-keypress="$event.keyCode == 13 ? reloadData() : undefined" placeholder="Masukkan pencarian" autofocus>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" ng-click="reloadData()"><i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </span>
+                                </p>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>                
 
                 <table class="table table-bordered table-hover table-condensed">
                     <thead>
                         <tr>
                             <th><button class="btn btn-info btn-xs" ng-click="baru()">Tambah</button></th>
                             <th>Toko</th>
-                            <th>Merk</th>
+                            <th>Merk & Jumlah</th>
                             <th>Nomor</th>
                             <th>Tanggal Nota</th>
                             <th>Tgl Brkt</th>
@@ -304,13 +366,14 @@
                     </thead>
                     <tr ng-repeat="c in dataPage.content" class="editable-row">
                         <td>
-                            {{((paging.currentPage-1)*paging.maxSize)+$index + 1}}
+                            {{((paging.currentPage - 1) * paging.maxSize) + $index + 1}}
                         </td>
                         <td>
                             {{ c.toko}}
                         </td>
                         <td>
                             {{ c.merk}}
+                            <br>Tagihan : <b style="color: red">{{ c.tagihan|number:2}}</b>. Terbayar : <b style="color: blue">{{ c.terbayar|number:2}}</b>. Prosentase : <b style="color: blue">{{ (c.terbayar/c.tagihan)*100|number:2}}%</b>
                         </td>
                         <td>
                             {{ c.nomor}}

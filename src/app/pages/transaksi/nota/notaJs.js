@@ -29,9 +29,14 @@
             $scope.listKota = data;
         });
         $scope.options = {format: 'DD/MM/YYYY', showClear: false};
-        $scope.param = {tglAwal: new Date(), tglAkhir: new Date(), cari: ""};
+        $scope.param = {tglAwal: new Date(), tglAkhir: new Date(), cari: "", toko: null, merk: null, status: "Semua"};
+        $scope.listStatusBayar = ['Semua', 'Lunas', 'Belum Lunas'];
         $scope.reloadData = function () {
-            $scope.dataPage = NotaService.queryComposite($filter('date')(new Date($scope.param.tglAwal), 'yyyy-MM-dd'), $filter('date')(new Date($scope.param.tglAkhir), 'yyyy-MM-dd'), ($scope.param.cari == '' ? 'null' : $scope.param.cari), $scope.paging.currentPage - 1, function () {
+            console.log('$scope.param', $scope.param);
+            $scope.dataPage = NotaService.queryGetTagihanTerbayar($filter('date')(new Date($scope.param.tglAwal), 'yyyy-MM-dd'), $filter('date')(new Date($scope.param.tglAkhir), 'yyyy-MM-dd'), ($scope.param.cari === '' ? 'null' : $scope.param.cari), ($scope.param.toko === null ? 'null' : $scope.param.toko.id), ($scope.param.merk === null ? 'null' : $scope.param.merk.id), ($scope.param.status === 'Semua' ? "null" : $scope.param.status), $scope.paging.currentPage - 1, function () {
+//                    $scope.dataPage = NotaService.queryComposite($filter('date')(new Date($scope.param.tglAwal), 'yyyy-MM-dd'), $filter('date')(new Date($scope.param.tglAkhir), 'yyyy-MM-dd'), ($scope.param.cari == '' ? 'null' : $scope.param.cari), $scope.paging.currentPage - 1, function () {
+//            $scope.dataPage = NotaService.queryComposite($filter('date')(new Date($scope.param.tglAwal), 'yyyy-MM-dd'), $filter('date')(new Date($scope.param.tglAkhir), 'yyyy-MM-dd'), ($scope.param.cari == '' ? 'null' : $scope.param.cari), $scope.paging.currentPage - 1, function () {
+                console.log('$scope.dataPage', $scope.dataPage);
                 $scope.paging.maxSize = ($scope.dataPage.size);
                 $scope.paging.totalItems = $scope.dataPage.totalElements;
                 $scope.paging.currentPage = parseInt($scope.dataPage.number) + 1;
@@ -50,7 +55,7 @@
 
 
         $scope.baru = function () {
-            $scope.vm = {nomorManual: false,listTambahanBiaya:[]};
+            $scope.vm = {nomorManual: false, listTambahanBiaya: []};
             $scope.ori = {};
             $scope.modalTitle = "Tambah Nota";
             console.log('Baru');
@@ -240,13 +245,19 @@
             });
             modalInstance.result.then(function (sd) {
                 console.log('selectedToko', sd);
+                ;
                 TokoService.cariSatu("kode", sd.id).success(function (data) {
-                    $scope.vm.tokoTujuan = data;
-                    $scope.vm.merkTujuan = null;
-                    $scope.listkapalBerangkat = null;
-                    $scope.listMerk = $scope.vm.tokoTujuan.listMerk;
                     toastr.success("Ambil toko sukses");
-                    console.log('toko', $scope.vm.tokoTujuan);
+                    console.log('toko', $scope.data);
+                    if ($scope.modalTitle === 'Tambah Nota' || $scope.modalTitle === 'Edit Nota') {
+                        $scope.vm.tokoTujuan = data;
+                        $scope.vm.merkTujuan = null;
+                        $scope.listkapalBerangkat = null;
+                        $scope.listMerk = $scope.vm.tokoTujuan.listMerk;
+                    } else {
+                        $scope.param.toko = data;
+                        $scope.param.merk = null;
+                    }
                 }).error(function (e) {
                     toastr.error("Ambil toko gagal");
                 });

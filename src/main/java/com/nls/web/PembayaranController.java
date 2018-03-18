@@ -113,7 +113,7 @@ public class PembayaranController {
                 Sort.Direction.ASC, "tanggal");
         return lookupDao.lookupPembayaran((cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), tglawal, tglakhir, pr);
     }
-
+    
     @RequestMapping(value = "get-tagihan-terbayar/{idTokoTujuan}/{idMerkTujuan}/{status}", method = RequestMethod.GET)
     public Object genDetailPembayaran(@PathVariable String idTokoTujuan, @PathVariable String idMerkTujuan, @PathVariable String status) {
         List<Map<String, Object>> list = (List<Map<String, Object>>) lookupDao.lookupTagihanTerbayar(idTokoTujuan, idMerkTujuan, status);

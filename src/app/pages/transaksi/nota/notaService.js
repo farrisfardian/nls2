@@ -22,6 +22,12 @@
             queryComposite: function (tglawal, tglakhir, search, p, callback) {
                 return this.entityComposite.queryPage({"a": search, "tglawal": tglawal, "tglakhir": tglakhir, "page": p, "size": 10}, callback)
             },
+            getTagihanTerbayar: $resource(url + '/tglAwal/tglAkhir/cari/idToko/idMerk/status/:tglawal/:tglakhir/:a/:idToko/:idMerk/:status', {}, {
+                queryPage: {method: 'GET', isArray: false}
+            }),
+            queryGetTagihanTerbayar: function (tglawal, tglakhir, search, idToko, idMerk, status, p, callback) {
+                return this.getTagihanTerbayar.queryPage({"a": search, "tglawal": tglawal, "tglakhir": tglakhir, "idToko": idToko, "idMerk": idMerk, "status": status, "page": p, "size": 10}, callback)
+            },
             simpan: simpan,
             cariSatu: cariSatu,
             lookup: lookup,
