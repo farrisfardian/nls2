@@ -47,7 +47,7 @@ public class LookupDao {
         System.out.println("Page.Size: " + page.getPageSize());
         System.out.println("Page.Offset: " + page.getOffset());
         System.out.println("cari: " + cari);
-        String query = "select distinct r.*,"
+        String query = "select distinct r.*, kb.tgl_berangkat,"
                 + "  m.nama merk, \n"
                 + "  t.nama toko \n"
                 + " from fn_get_tagihan_terbayar(" + idToko + ", " + idMerk + ", " + (status.equalsIgnoreCase("null") ? "null" : "'" + status + "'") + ") as r (id int, nomor varchar, tanggal date, tagihan double precision, terbayar numeric) "
@@ -56,7 +56,7 @@ public class LookupDao {
                 + "  join public.t_kapal_berangkat kb on nd.id_kapal_berangkat = kb.id\n"
                 + "  join public.m_toko t on n.id_toko = t.id \n"
                 + "  left join public.m_merk m on n.id_merk = m.id\n"
-                + "  where r.tanggal between '" + tglAwal + "'::date and '" + tglAkhir + "'::date "
+                + "  where kb.tgl_berangkat between '" + tglAwal + "'::date and '" + tglAkhir + "'::date "
                 + "  and coalesce(m.nama, '')|| coalesce(t.nama, '')|| coalesce(r.nomor, '') ilike '%" + cari + "%' "
                 + "  order by r.tanggal \n";
         System.out.println("query all : " + query);
