@@ -373,7 +373,7 @@
                         </td>
                         <td>
                             {{ c.merk}}
-                            <br>Tagihan : <b style="color: red">{{ c.tagihan|number:2}}</b>. Terbayar : <b style="color: blue">{{ c.terbayar|number:2}}</b>. Prosentase : <b style="color: blue">{{ (c.terbayar/c.tagihan)*100|number:2}}%</b>
+                            <br>Tagihan : <b style="color: red">{{ c.tagihan|number:2}}</b>. Terbayar : <b style="color: blue">{{ c.terbayar|number:2}}</b>. Prosentase : <b style="color: blue">{{ (c.terbayar / c.tagihan) * 100 | number:2}}%</b>
                         </td>
                         <td>
                             {{ c.nomor}}
@@ -389,6 +389,8 @@
                                 <button class="btn btn-primary editable-table-button btn-xs" 
                                         data-toggle="modal" ng-click="edit(c)">Edit</button>
                                 <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data nota {{c.nomor}}?" ng-confirm="hapus(c)">Hapus</button>
+                                <button class="btn btn-success editable-table-button btn-xs" ng-show="c.terbayar < c.tagihan"
+                                        data-toggle="modal" ng-click="buatPembayaran(c)">Bayar</button>
                                 <div class="btn-group" uib-dropdown dropdown-append-to-body>
                                     <button type="button" class="btn btn-default editable-table-button btn-xs" uib-dropdown-toggle>
                                         Cetak<span class="caret"></span>

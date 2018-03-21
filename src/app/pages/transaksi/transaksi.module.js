@@ -103,6 +103,19 @@
                         order: 100,
                     },
                 })
+                .state('transaksi.pembayarantambah', {
+                    url: '/pembayaran/:idToko/:idMerk/:idNotas',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/transaksi/pembayaran/pembayaran.html',
+                            controller: 'PembayaranCtrl'
+                        }
+                    },
+                    title: 'Pembayaran',
+                    sidebarMeta: {
+                        order: 100,
+                    },
+                })
                 .state('transaksi.listsuratjalan', {
                     url: '/listsuratjalan',
                     views: {

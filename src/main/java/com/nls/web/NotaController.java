@@ -138,7 +138,7 @@ public class NotaController {
     public Object genSubtotalDetailNota(@PathVariable String idTokoTujuan, @PathVariable String idMerkTujuan, @PathVariable String idKapalBerangkat) {
         return lookupDao.lookupSubtotalDetailNotaPerTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat);
     }
-    
+
     @RequestMapping(value = "/tglAwal/tglAkhir/cari/idToko/idMerk/status/{tglAwal}/{tglAkhir}/{cari:.+}/{idToko}/{idMerk}/{status}", method = RequestMethod.GET)
     @ResponseBody
     public Object cariTagihanTerbayar(@PathVariable("tglAwal") String tglAwal, @PathVariable("tglAkhir") String tglAkhir, @PathVariable("cari") String cari, @PathVariable("idToko") String idToko, @PathVariable("idMerk") String idMerk, @PathVariable("status") String status,
@@ -146,11 +146,16 @@ public class NotaController {
             HttpServletResponse response) {
         PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
                 Sort.Direction.ASC, "tanggal");
-        System.out.println("tglAwal : "+tglAwal+", tglAkhir : "+tglAkhir+", cari : "+cari+", idToko : "+idToko+", idMerk : "+idMerk+", status : "+status);
+        System.out.println("tglAwal : " + tglAwal + ", tglAkhir : " + tglAkhir + ", cari : " + cari + ", idToko : " + idToko + ", idMerk : " + idMerk + ", status : " + status);
 //        return lookupDao.lookupPembayaran((cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), tglawal, tglakhir, pr);
         return lookupDao.lookupTagihanTerbayar(idToko, idMerk, status, (cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), tglAwal, tglAkhir, pr);
     }
 
+    @RequestMapping(value = "get-tagihan-terbayar-multi/{idTokoTujuan}/{idMerkTujuan}/{status}/{idNotas}", method = RequestMethod.GET)
+    public Object getTagihanTerbayarMulti(@PathVariable String idTokoTujuan, @PathVariable String idMerkTujuan, @PathVariable String status, @PathVariable String idNotas) {
+        List<Map<String, Object>> list = (List<Map<String, Object>>) lookupDao.lookupTagihanTerbayar(idTokoTujuan, idMerkTujuan, status, idNotas);
+        return list;
+    }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void hapus(@PathVariable String id) {

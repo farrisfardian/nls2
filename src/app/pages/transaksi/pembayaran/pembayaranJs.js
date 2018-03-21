@@ -6,7 +6,7 @@
             .controller('PembayaranModalController', PembayaranModalController);
 
     /** @ngInject */
-    function PembayaranCtrl($scope, $uibModal, $log, $filter, toastr, PembayaranService, EnumService, TokoService, KotaService) {
+    function PembayaranCtrl($scope, $uibModal, $log, $filter, $stateParams, toastr, PembayaranService, EnumService, TokoService, KotaService, NotaService) {
         $scope.search = "";
         $scope.oldSearch = "";
         $scope.deskKapalBerangkat = "";
@@ -45,7 +45,7 @@
         $scope.clear();
 
         $scope.baru = function () {
-            $scope.vm = {nomorManual: false};
+            $scope.vm = {nomorManual: false, listDetail: []};
             $scope.ori = {};
             $scope.modalTitle = "Tambah Pembayaran";
             console.log('Baru');
@@ -224,6 +224,44 @@
                 location.href = link;
             }
         };
+
+        $scope.initForm = function (idToko, idMerk, idNotas) {
+            TokoService.cariSatu("kode", idToko).success(function (data) {
+                $scope.vm.tokoTujuan = data;
+                $scope.listkapalBerangkat = [];
+                $scope.listMerk = $scope.vm.tokoTujuan.listMerk;
+                for (var i = 0; i < $scope.listMerk.length; i++) {
+                    if ($scope.listMerk[i].id === parseInt(idMerk)) {
+                        $scope.vm.merkTujuan = $scope.listMerk[i];
+                    }
+                }
+                toastr.success("Ambil toko sukses");
+                console.log('toko', $scope.vm.tokoTujuan);
+                NotaService.getTagihanTerbayarMulti(idToko, idMerk, "Belum Lunas", idNotas).success(function (data) {
+                    $scope.listDetail = data;
+                    $scope.vm.listDetail = [];
+                    for (var i = 0; i < $scope.listDetail.length; i++) {
+                        $scope.vm.listDetail.push(
+                                {
+                                    tagihan: $scope.listDetail[i].tagihan,
+                                    terbayar: $scope.listDetail[i].terbayar,
+                                    nota: {id: $scope.listDetail[i].id, nomorInvoice: $scope.listDetail[i].nomor, tanggal: $scope.listDetail[i].tanggal},
+                                }
+                        );
+                    }
+                    
+                });
+            }).error(function (e) {
+                toastr.error("Ambil toko gagal");
+            });
+        };
+        console.log('data edit', $stateParams);
+        if ($stateParams.idToko === null || $stateParams.idToko === undefined || $stateParams.idToko === 0 || $stateParams.idToko === '') {
+            $scope.clear();
+        } else {
+            $scope.baru();
+            $scope.initForm($stateParams.idToko, $stateParams.idMerk, $stateParams.idNotas);
+        }
 
     }
 

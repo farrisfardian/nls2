@@ -33,7 +33,8 @@
             lookup: lookup,
             hapus: hapus,
             listDetailNotaTokoMerkTujuan: listDetailNotaTokoMerkTujuan,
-            listSubtotalDetailNotaTokoMerkTujuan: listSubtotalDetailNotaTokoMerkTujuan
+            listSubtotalDetailNotaTokoMerkTujuan: listSubtotalDetailNotaTokoMerkTujuan,
+            getTagihanTerbayarMulti: getTagihanTerbayarMulti
         }
 
 //        return service;
@@ -58,8 +59,12 @@
             return $http.get(url + "/gen-detail-nota/" + idTokoTujuan + "/" + idMerkTujuan + "/" + idKapalBerangkat);
         }
         function listSubtotalDetailNotaTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat) {
-            console.log('toko: ' + idTokoTujuan + ', merk: ' + idMerkTujuan + ', kapalBerangkat: ' + idKapalBerangkat)
+            console.log('toko: ' + idTokoTujuan + ', merk: ' + idMerkTujuan + ', kapalBerangkat: ' + idKapalBerangkat);
             return $http.get(url + "/gen-subtotal-detail-nota/" + idTokoTujuan + "/" + idMerkTujuan + "/" + idKapalBerangkat);
+        }
+        function getTagihanTerbayarMulti(idTokoTujuan, idMerkTujuan, status, idNotas) {
+            console.log('toko: ' + idTokoTujuan + ', merk: ' + idMerkTujuan + ', status: ' + status + ', idNotas: ' + idNotas);
+            return $http.get(url + "/get-tagihan-terbayar-multi/" + idTokoTujuan + "/" + idMerkTujuan + "/" + status + "/" + idNotas);
         }
         function hapus(id) {
             return $http.delete(url + '/' + id);

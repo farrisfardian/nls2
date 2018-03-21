@@ -6,7 +6,7 @@
             .controller('NotaModalController', NotaModalController);
 
     /** @ngInject */
-    function NotaCtrl($scope, $uibModal, $log, $filter, $stateParams, toastr, NotaService, KapalBerangkatService, EnumService, TokoService, TambahanBiayaService, KotaService) {
+    function NotaCtrl($scope, $uibModal, $log, $filter, $stateParams, $window, toastr, NotaService, KapalBerangkatService, EnumService, TokoService, TambahanBiayaService, KotaService) {
         $scope.search = "";
         $scope.oldSearch = "";
         $scope.deskKapalBerangkat = "";
@@ -352,6 +352,10 @@
         $scope.$watch('vm.minBayar', function () {
             $scope.refreshDataDetail();
         });
+        
+        $scope.buatPembayaran = function (x) {
+            $window.open('#/transaksi/pembayaran/' + x.id_toko+'/'+x.id_merk+'/'+x.id, '_blank');
+        };
 
         $scope.initForm = function (idToko, idMerk, idKapalBerangkat) {
             TokoService.cariSatu("kode", idToko).success(function (data) {
@@ -359,7 +363,7 @@
                 $scope.listkapalBerangkat = [];
                 $scope.listMerk = $scope.vm.tokoTujuan.listMerk;
                 for (var i = 0; i < $scope.listMerk.length; i++) {
-                    if ($scope.listMerk[i].id === idMerk) {
+                    if ($scope.listMerk[i].id === parseInt(idMerk)) {
                         $scope.vm.merkTujuan = $scope.listMerk[i];
                     }
                 }

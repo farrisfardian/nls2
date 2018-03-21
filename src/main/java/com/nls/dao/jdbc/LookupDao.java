@@ -42,14 +42,20 @@ public class LookupDao {
         return mr.mapList(sql);
     }
 
+    public Object lookupTagihanTerbayar(String idToko, String idMerk, String status, String idNotas) {
+        String sql = "select * from fn_get_tagihan_terbayar(" + idToko + ", " + idMerk + ", " + (status.equalsIgnoreCase("null") ? "null" : "'" + status + "'") + ") as (id int, nomor varchar, tanggal date, tagihan double precision, terbayar numeric) where id in (" + idNotas + ")";
+
+        return mr.mapList(sql);
+    }
+
     public Object lookupTagihanTerbayar(String idToko, String idMerk, String status, String cari, String tglAwal, String tglAkhir, PageRequest page) {
         ModelMap mm = new ModelMap();
         System.out.println("Page.Size: " + page.getPageSize());
         System.out.println("Page.Offset: " + page.getOffset());
         System.out.println("cari: " + cari);
         String query = "select distinct r.*, kb.tgl_berangkat,"
-                + "  m.nama merk, \n"
-                + "  t.nama toko \n"
+                + "  m.nama merk, m.id as id_merk,\n"
+                + "  t.nama toko, t.id as id_toko \n"
                 + " from fn_get_tagihan_terbayar(" + idToko + ", " + idMerk + ", " + (status.equalsIgnoreCase("null") ? "null" : "'" + status + "'") + ") as r (id int, nomor varchar, tanggal date, tagihan double precision, terbayar numeric) "
                 + "  join t_nota n on n.id=r.id "
                 + "  join public.t_nota_detail nd on nd.id_nota = n.id\n"
