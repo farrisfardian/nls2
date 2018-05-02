@@ -28,6 +28,12 @@ spring:
         type: com.zaxxer.hikari.HikariDataSource
         hikari:                    
           leak-detection-threshold: 1000
+          pool-name: NlsHikariPool
+          minimum-idle: 1
+          maximum-pool-size: 100
+          connection-timeout: 60000
+          max-lifetime: 2000000
+          idle-timeout: 30000
 #        url: jdbc:postgresql://localhost:5432/nls
 #        username: test
 #        password: test

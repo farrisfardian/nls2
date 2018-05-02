@@ -33,13 +33,15 @@ public class MapResultSet {
     DataSource dataSource;
 
     org.slf4j.Logger logger = LoggerFactory.getLogger(MapResultSet.class);
+    Connection conn;
+    ResultSet rs;
 
     public Map<String, Object> mapSingle(String sql) {
         Map<String, Object> hasil = new HashMap<String, Object>();
 
         try {
-            Connection conn = dataSource.getConnection();
-            ResultSet rs = conn.createStatement().executeQuery(sql);
+            conn = dataSource.getConnection();
+            rs = conn.createStatement().executeQuery(sql);
             ResultSetMetaData rm = rs.getMetaData();
             if (rs.next()) {
                 for (int i = 0; i < rm.getColumnCount(); i++) {
@@ -48,10 +50,11 @@ public class MapResultSet {
             }
             rs.close();
             conn.close();
-            rs = null;
-            conn = null;
         } catch (SQLException ex) {
             Logger.getLogger(MapResultSet.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            rs = null;
+            conn = null;
         }
         return hasil;
     }
@@ -61,8 +64,8 @@ public class MapResultSet {
         List<Map<String, Object>> hasil = new ArrayList<Map<String, Object>>();
 
         try {
-            Connection conn = dataSource.getConnection();
-            ResultSet rs = conn.createStatement().executeQuery(sql);
+            conn = dataSource.getConnection();
+            rs = conn.createStatement().executeQuery(sql);
             ResultSetMetaData rm = rs.getMetaData();
             while (rs.next()) {
                 Map<String, Object> row = new HashMap<String, Object>();
@@ -73,10 +76,11 @@ public class MapResultSet {
             }
             rs.close();
             conn.close();
-            rs = null;
-            conn = null;
         } catch (SQLException ex) {
             Logger.getLogger(MapResultSet.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            rs = null;
+            conn = null;
         }
         return hasil;
     }
@@ -94,8 +98,8 @@ public class MapResultSet {
     Integer countRecordset(String sql) {
         Integer i = new Integer(0);
         try {
-            Connection conn = dataSource.getConnection();
-            ResultSet rs = conn
+            conn = dataSource.getConnection();
+            rs = conn
                     .createStatement()
                     .executeQuery("select count(*) from (" + sql + ")as x");
             if (rs.next()) {
@@ -104,12 +108,13 @@ public class MapResultSet {
 
             rs.close();
             conn.close();
-            rs = null;
-            conn = null;
 
         } catch (SQLException ex) {
             logger.warn("Error [{}]", ex);
             return 0;
+        } finally {
+            rs = null;
+            conn = null;
         }
         return i;
     }
