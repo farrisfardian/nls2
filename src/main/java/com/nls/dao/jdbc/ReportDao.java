@@ -135,7 +135,7 @@ public class ReportDao {
      * @return Data invoice
      */
     public Object getRincianNota(String idToko, String idMerk, String tglAwal, String tglAkhir) {
-        String sql = "select *,total_tagihan-terbayar as sisa, fn_tanggal_ind(current_date) as tanggal, distinct_text(jenis_items,', ') as jenis_item from fn_get_rincian_nota(" + idToko + ", " + idMerk + ", '" + tglAwal + "', '" + tglAkhir + "') as (id int, nomor varchar, toko varchar, merk varchar, total_tagihan numeric, terbayar numeric, jenis_items text, kapal_berangkat text, tgl_awal_berangkat text, tgl_akhir_berangkat text)";
+        String sql = "select *,total_tagihan-terbayar as sisa, fn_tanggal_ind(current_date) as tanggal, distinct_text(jenis_items,', ') as jenis_item from fn_get_rincian_nota(" + idToko + ", " + idMerk + ", '" + tglAwal + "', '" + tglAkhir + "') as (id int, nomor varchar, toko varchar, merk varchar, total_tagihan numeric, terbayar numeric, jenis_items text, kapal_berangkat text, tgl_awal_berangkat text, tgl_akhir_berangkat text, rincian_bayar text)";
         System.out.println("getRincianNota: " + sql);
         return mr.mapList(sql);
     }
@@ -174,7 +174,7 @@ public class ReportDao {
      * @return
      */
     public Object getTotalTerbilangByRincianNota(String idToko, String idMerk, String tglAwal, String tglAkhir) {
-        String sql = "select coalesce(sum(coalesce(total_tagihan,0)),0) as total_tagihan, coalesce(sum(coalesce(terbayar,0)),0) as total_terbayar, coalesce(sum(coalesce(total_tagihan,0) - coalesce(terbayar,0)),0) as total_sisa_tagihan, terbilang2nd(coalesce(sum(coalesce(total_tagihan,0)),0)) as terbilang_total_tagihan, terbilang2nd(coalesce(sum(coalesce(terbayar,0)),0)) terbilang_total_terbayar, case when (coalesce(sum(coalesce(total_tagihan,0) - coalesce(terbayar,0)),0))<0 then 'Minus ' else '' end || terbilang2nd(abs(coalesce(sum(coalesce(total_tagihan,0) - coalesce(terbayar,0)),0))) as terbilang_total_sisa_tagihan from fn_get_rincian_nota(" + idToko + ", " + idMerk + ", '" + tglAwal + "', '" + tglAkhir + "') as (id int, nomor varchar, toko varchar, merk varchar, total_tagihan numeric, terbayar numeric, jenis_item text, kapal_berangkat text, tgl_awal_berangkat text, tgl_akhir_berangkat text)";
+        String sql = "select coalesce(sum(coalesce(total_tagihan,0)),0) as total_tagihan, coalesce(sum(coalesce(terbayar,0)),0) as total_terbayar, coalesce(sum(coalesce(total_tagihan,0) - coalesce(terbayar,0)),0) as total_sisa_tagihan, terbilang2nd(coalesce(sum(coalesce(total_tagihan,0)),0)) as terbilang_total_tagihan, terbilang2nd(coalesce(sum(coalesce(terbayar,0)),0)) terbilang_total_terbayar, case when (coalesce(sum(coalesce(total_tagihan,0) - coalesce(terbayar,0)),0))<0 then 'Minus ' else '' end || terbilang2nd(abs(coalesce(sum(coalesce(total_tagihan,0) - coalesce(terbayar,0)),0))) as terbilang_total_sisa_tagihan from fn_get_rincian_nota(" + idToko + ", " + idMerk + ", '" + tglAwal + "', '" + tglAkhir + "') as (id int, nomor varchar, toko varchar, merk varchar, total_tagihan numeric, terbayar numeric, jenis_item text, kapal_berangkat text, tgl_awal_berangkat text, tgl_akhir_berangkat text, rincian_bayar text)";
         System.out.println("getTotalTerbilangByNota: " + sql);
         return mr.mapSingle(sql);
     }

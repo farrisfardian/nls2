@@ -109,7 +109,7 @@ public class NotaController {
             HttpServletResponse response) {
         PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
                 Sort.Direction.ASC, "tanggal");
-        return lookupDao.lookupNota((cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), tglawal, tglakhir, pr);
+        return lookupDao.lookupNota((cari.equals("null") ? "" :  cari.replace("~", "/").toUpperCase()), tglawal, tglakhir, pr);
     }
 
     @RequestMapping(value = "gen-detail-nota/{idTokoTujuan}/{idMerkTujuan}/{idKapalBerangkat}", method = RequestMethod.GET)
@@ -148,7 +148,7 @@ public class NotaController {
                 Sort.Direction.ASC, "tanggal");
         System.out.println("tglAwal : " + tglAwal + ", tglAkhir : " + tglAkhir + ", cari : " + cari + ", idToko : " + idToko + ", idMerk : " + idMerk + ", status : " + status);
 //        return lookupDao.lookupPembayaran((cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), tglawal, tglakhir, pr);
-        return lookupDao.lookupTagihanTerbayar(idToko, idMerk, status, (cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), tglAwal, tglAkhir, pr);
+        return lookupDao.lookupTagihanTerbayar(idToko, idMerk, status, (cari.equals("null") ? "" : cari.replace("~", "/").toUpperCase()), tglAwal, tglAkhir, pr);
     }
 
     @RequestMapping(value = "get-tagihan-terbayar-multi/{idTokoTujuan}/{idMerkTujuan}/{status}/{idNotas}", method = RequestMethod.GET)

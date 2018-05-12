@@ -238,5 +238,33 @@
                         order: 902,
                     },
                 })
+                .state('master.jenisPembayaran', {
+                    url: '/jenisPembayaran',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/master/jenisPembayaran/jenis-pembayaran.html',
+                            controller: 'JenisPembayaranCtrl',
+                        }
+                    },
+//          controllerAs: 'vm',
+                    title: 'Jenis Pembayaran',
+                    sidebarMeta: {
+                        order: 903,
+                    },
+                })
+                .state('master.rekening', {
+                    url: '/rekening',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/master/rekening/rekening.html',
+                            controller: 'RekeningCtrl',
+                        }
+                    },
+//          controllerAs: 'vm',
+                    title: 'Rekening',
+                    sidebarMeta: {
+                        order: 903,
+                    },
+                })
     }
 })();

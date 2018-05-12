@@ -53,8 +53,14 @@ public class MapResultSet {
         } catch (SQLException ex) {
             Logger.getLogger(MapResultSet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            rs = null;
-            conn = null;
+            try {
+                rs.close();
+                conn.close();
+                rs = null;
+                conn = null;
+            } catch (SQLException ex) {
+                Logger.getLogger(MapResultSet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return hasil;
     }
@@ -79,8 +85,14 @@ public class MapResultSet {
         } catch (SQLException ex) {
             Logger.getLogger(MapResultSet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            rs = null;
-            conn = null;
+            try {
+                rs.close();
+                conn.close();
+                rs = null;
+                conn = null;
+            } catch (SQLException ex) {
+                Logger.getLogger(MapResultSet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return hasil;
     }
@@ -113,8 +125,14 @@ public class MapResultSet {
             logger.warn("Error [{}]", ex);
             return 0;
         } finally {
-            rs = null;
-            conn = null;
+            try {
+                rs.close();
+                conn.close();
+                rs = null;
+                conn = null;
+            } catch (SQLException ex) {
+                Logger.getLogger(MapResultSet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return i;
     }

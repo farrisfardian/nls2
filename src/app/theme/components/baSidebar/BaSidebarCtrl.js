@@ -111,6 +111,20 @@
                         "level": 1, 
                         "order": 903, 
                         "stateRef": "master.settingAplikasi"
+                    }, 
+                    {
+                        "name": "master.jenisPembayaran", 
+                        "title": "Jenis Pembayaran", 
+                        "level": 1, 
+                        "order": 904, 
+                        "stateRef": "master.jenisPembayaran"
+                    }, 
+                    {
+                        "name": "master.rekening", 
+                        "title": "Rekening", 
+                        "level": 1, 
+                        "order": 905, 
+                        "stateRef": "master.rekening"
                     }
                 ]
             }, 
