@@ -636,3 +636,171 @@ begin
 	return v_totkubikasi;
 end
 $$language plpgsql;
+
+-- Function: fn_gen_detail_nota2(integer, integer, integer[])
+
+-- DROP FUNCTION fn_gen_detail_nota2(integer, integer, integer[]);
+
+CREATE OR REPLACE FUNCTION fn_gen_detail_nota2(
+    v_id_toko_tujuan integer,
+    v_id_merk_tujuan integer,
+    v_id_kapal_berangkat integer[])
+  RETURNS SETOF record AS
+$BODY$
+declare
+	r record;
+begin
+	for r in
+		select b_lcl.*,
+		sh.harga
+		 from 
+		(
+		select coalesce(kt.nama,'') kota_tujuan, coalesce(k.nama,'') kondisi,
+			coalesce(t.nama,'') customer, coalesce(kp.nama,'') kapal, kb.tgl_berangkat,
+			fn_get_tgl_setting_harga(kb.tgl_berangkat::varchar, m.id_toko, st.id_kota_asal, kt.id, sj.id_kondisi) tgl_harga,	
+			fn_tanggal_ind(kb.tgl_berangkat) tgl_ind, 
+			case when v_id_merk_tujuan is null then ''::varchar else 
+			(coalesce(t.nama,'')||'/ ' ||coalesce(m.nama,''))::varchar end merk, 
+			coalesce(st.no_kontainer,'') nomor_kontainer, coalesce(ji.nama,'') jenis_item, 
+			ji.id as id_jenis_item,
+			case when kh.ukuran_kontainer is not null then 1 else d.id_kategori_harga end id_kategori_harga, st.ukuran_kontainer, st.id_kapal_berangkat, 
+			case when v_id_merk_tujuan is null then 0::int else sj.id_merk end id_merk, 
+			m.id_toko,coalesce(d.paket, false) paket, 'LCL'::varchar sat_kirim,kp.id as id_kapal,
+			sj.id_kondisi,st.id_kota_asal,
+			ROUND(sum(case when coalesce(d.paket, false) then coalesce(ss.coli,0) 
+			when not coalesce(d.paket, false) and d.fix_volume>0 then coalesce(ss.coli,0)*(d.fix_volume/(select sum(coli) from t_sj_stuffing where id_sj_detail = d.id)) else
+			coalesce(ss.coli,0) * 
+				case 	when d.p>0 and coalesce(d.l,0)=0 and coalesce(d.t,0)=0 then d.p
+					when d.p>0 and d.l>0 and coalesce(d.t,0)=0 then d.p*d.l/1000
+					when d.p>0 and d.l>0 and d.t>0 then d.p*d.l*d.t/1000000 else 0 end end::numeric(18,4)),3) as kubikasi,
+			0::numeric jml, sum(ss.coli)::int as coli, string_agg(distinct sj.id::varchar,',') as id_sj
+			from t_sj_stuffing ss 
+			inner join t_surat_jalan_detail d on d.id=ss.id_sj_detail
+			left join m_kategori_harga kh on kh.id = d.id_kategori_harga
+			inner join t_surat_jalan sj on d.id_surat_jalan=sj.id
+			inner join t_stuffing st on st.id=ss.id_stuffing
+			inner join m_satuan_kirim sk on sk.id = st.id_satuan_kirim        
+			inner join m_kota kt on kt.id=st.id_kota
+			left join m_kota ka on ka.id=sj.id_kota_asal
+			inner join m_merk m on m.id=sj.id_merk
+			inner join m_toko t on t.id=m.id_toko
+			inner join m_item i on i.id=d.id_item
+			inner join m_emkl e on e.id=st.id_emkl
+			inner join m_kondisi k on k.id=sj.id_kondisi
+			inner join m_toko pengirim on pengirim.id=sj.id_toko
+			inner join t_kapal_berangkat kb on kb.id=st.id_kapal_berangkat
+			inner join m_kapal kp on kp.id=kb.id_kapal
+			left join m_jenis_item ji on ji.id = sj.id_jenis_item			
+			where (sk.nama = 'LCL' or coalesce(sj.sisipan,false) = true)
+			and case when v_id_toko_tujuan is null then true else t.id = v_id_toko_tujuan end 
+		 	and case when v_id_merk_tujuan is null then true else sj.id_merk = v_id_merk_tujuan end
+		 	and case when v_id_kapal_berangkat is null then true else st.id_kapal_berangkat in (select unnest(v_id_kapal_berangkat)) end
+			group by 			
+			coalesce(kt.nama,''), coalesce(k.nama,''),  
+			coalesce(t.nama,''), coalesce(kp.nama,''), kb.tgl_berangkat, 
+			fn_get_tgl_setting_harga(kb.tgl_berangkat::varchar, m.id_toko),
+			coalesce(d.paket, false),
+			fn_tanggal_ind(kb.tgl_berangkat), 
+			case when v_id_merk_tujuan is null then ''::varchar else 
+			(coalesce(t.nama,'')||'/ ' ||coalesce(m.nama,''))::varchar end, 
+			coalesce(st.no_kontainer,''), coalesce(ji.nama,''),ji.id , d.id_kategori_harga, 
+			st.ukuran_kontainer, st.id_kapal_berangkat, 
+			case when v_id_merk_tujuan is null then 0::int else sj.id_merk end, m.id_toko, kp.id, 
+			sj.id_kondisi, st.id_kota_asal, kt.id, kh.ukuran_kontainer
+			order by 
+			coalesce(kt.nama,''), coalesce(k.nama,''),
+			coalesce(t.nama,''), coalesce(kp.nama,''), kb.tgl_berangkat, 
+			fn_tanggal_ind(kb.tgl_berangkat), 
+			case when v_id_merk_tujuan is null then ''::varchar else 
+			(coalesce(t.nama,'')||'/ ' ||coalesce(m.nama,''))::varchar end, 
+			coalesce(st.no_kontainer,''), coalesce(ji.nama,''), d.id_kategori_harga
+		) b_lcl left join
+		(select s.tgl_berlaku, s.id_kondisi, s.id_toko, d.id_kategori_harga, d.harga, s.id_kota_asal from c_setting_harga s join c_setting_harga_detail d on d.id_setting_harga = s.id) sh on b_lcl.id_toko = sh.id_toko and b_lcl.tgl_harga = sh.tgl_berlaku and b_lcl.id_kondisi = sh.id_kondisi and b_lcl.id_kategori_harga = sh.id_kategori_harga and b_lcl.id_kota_asal = sh.id_kota_asal
+		-- where kubikasi is  null 
+		-- order by tgl_berangkat, kota_tujuan, paket, kubikasi
+
+		union
+
+		select b_fcl.*,
+		sh.harga
+		from
+		(select kota_tujuan, kondisi, customer, kapal, tgl_berangkat, tgl_harga, tgl_ind, merk, nomor_kontainer, jenis_item, id_jenis_item, id_kategori_harga, ukuran_kontainer, id_kapal_berangkat, id_merk, id_toko, paket, sat_kirim, id_kapal,id_kondisi,id_kota_asal,kubikasi, count(*)::numeric jml,sum(coli)::int as coli, string_agg(id_sj::varchar,',') as id_sj
+		 from 
+		(
+		select coalesce(kt.nama,'') kota_tujuan, coalesce(k.nama,'') kondisi,
+			coalesce(t.nama,'') customer, coalesce(kp.nama,'') kapal, kb.tgl_berangkat,
+			fn_get_tgl_setting_harga(kb.tgl_berangkat::varchar, m.id_toko, st.id_kota_asal, kt.id, sj.id_kondisi) tgl_harga,		
+			fn_tanggal_ind(kb.tgl_berangkat) tgl_ind, 
+			case when v_id_merk_tujuan is null then ''::varchar else 
+			(coalesce(t.nama,'')||'/ ' ||coalesce(m.nama,''))::varchar end merk, 			
+			coalesce(st.no_kontainer,'') nomor_kontainer, string_agg(distinct coalesce(ji.nama,''),', ')::varchar jenis_item, 
+			0::int as id_jenis_item,
+-- 			ji.id as id_jenis_item,
+			case when kh.ukuran_kontainer is null then (select id from m_kategori_harga where ukuran_kontainer = st.ukuran_kontainer order by nama limit 1) else d.id_kategori_harga end id_kategori_harga, st.ukuran_kontainer, st.id_kapal_berangkat, 
+-- 			0::int id_kategori_harga, st.ukuran_kontainer, st.id_kapal_berangkat, 
+			case when v_id_merk_tujuan is null then 0::int else sj.id_merk end id_merk, 
+			m.id_toko,false paket, 'FCL'::varchar sat_kirim,kp.id as id_kapal,sj.id_kondisi,st.id_kota_asal,
+			sum(0::numeric(18,4)) as kubikasi, sum(ss.coli) as coli, string_agg(distinct sj.id::varchar,',') as id_sj
+			from t_sj_stuffing ss 
+			inner join t_surat_jalan_detail d on d.id=ss.id_sj_detail
+			left join m_kategori_harga kh on kh.id = d.id_kategori_harga
+			inner join t_surat_jalan sj on d.id_surat_jalan=sj.id
+			inner join t_stuffing st on st.id=ss.id_stuffing
+			inner join m_satuan_kirim sk on sk.id = st.id_satuan_kirim        
+			inner join m_kota kt on kt.id=st.id_kota
+			left join m_kota ka on ka.id=sj.id_kota_asal
+			inner join m_merk m on m.id=sj.id_merk
+			inner join m_toko t on t.id=m.id_toko
+			inner join m_item i on i.id=d.id_item
+			inner join m_emkl e on e.id=st.id_emkl
+			inner join m_kondisi k on k.id=sj.id_kondisi
+			inner join m_toko pengirim on pengirim.id=sj.id_toko
+			inner join t_kapal_berangkat kb on kb.id=st.id_kapal_berangkat
+			inner join m_kapal kp on kp.id=kb.id_kapal
+			left join m_jenis_item ji on ji.id = sj.id_jenis_item			
+			where (sk.nama = 'FCL'  and coalesce(sj.sisipan,false) = false)
+			and case when v_id_toko_tujuan is null then true else t.id = v_id_toko_tujuan end 
+		 	and case when v_id_merk_tujuan is null then true else sj.id_merk = v_id_merk_tujuan end
+		 	and case when v_id_kapal_berangkat is null then true else st.id_kapal_berangkat in (select unnest(v_id_kapal_berangkat)) end
+			group by 
+			coalesce(kt.nama,''), coalesce(k.nama,''),  
+			coalesce(t.nama,''), coalesce(kp.nama,''), kb.tgl_berangkat,
+			fn_get_tgl_setting_harga(kb.tgl_berangkat::varchar, m.id_toko),
+			fn_tanggal_ind(kb.tgl_berangkat), st.ukuran_kontainer,
+			case when v_id_merk_tujuan is null then ''::varchar else 
+			(coalesce(t.nama,'')||'/ ' ||coalesce(m.nama,''))::varchar end, 
+			coalesce(st.no_kontainer,''), st.id_kapal_berangkat, 
+			case when v_id_merk_tujuan is null then 0::int else sj.id_merk end, m.id_toko, kp.id,
+			sj.id_kondisi, st.id_kota_asal,d.id_kategori_harga, kt.id, kh.ukuran_kontainer
+			order by 
+			coalesce(kt.nama,''), coalesce(k.nama,''), st.ukuran_kontainer, 
+			coalesce(t.nama,''), coalesce(kp.nama,''), kb.tgl_berangkat, 
+			fn_tanggal_ind(kb.tgl_berangkat), 
+			case when v_id_merk_tujuan is null then ''::varchar else 
+			(coalesce(t.nama,'')||'/ ' ||coalesce(m.nama,''))::varchar end, 
+			coalesce(st.no_kontainer,'')
+		) b_fcl		
+		group by kota_tujuan, kondisi, customer, kapal, tgl_berangkat, tgl_harga, tgl_ind, merk, nomor_kontainer,  id_kategori_harga, ukuran_kontainer, id_kapal_berangkat, id_kondisi, id_kota_asal, id_merk, id_toko, paket, sat_kirim, id_kapal, kubikasi, jenis_item, id_jenis_item ) b_fcl
+		-- having count(*)>1
+		-- where kubikasi is  null 
+		left join
+		(select s.tgl_berlaku, s.id_kondisi, s.id_toko, k.ukuran_kontainer, d.id_kategori_harga, d.harga, s.id_kota_asal from c_setting_harga s join c_setting_harga_detail d on d.id_setting_harga = s.id join m_kategori_harga k on k.id = d.id_kategori_harga) sh on b_fcl.id_toko = sh.id_toko and b_fcl.tgl_harga = sh.tgl_berlaku and b_fcl.id_kondisi = sh.id_kondisi and b_fcl.ukuran_kontainer = sh.ukuran_kontainer and b_fcl.id_kota_asal = sh.id_kota_asal and b_fcl.id_kategori_harga = sh.id_kategori_harga
+		order by sat_kirim, tgl_berangkat, kota_tujuan, nomor_kontainer, paket, kubikasi
+	loop
+		return next r;
+	end loop;
+end
+/*
+select * from fn_gen_detail_nota2(344, null, ARRAY[122,27,52]) as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, harga_satuan numeric)
+
+select * from fn_gen_detail_nota2(413, 347, ARRAY[151]) as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, harga_satuan numeric)
+
+select * from fn_gen_detail_nota2(413, 347, ARRAY[176]) as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, harga_satuan numeric)
+
+*/
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fn_gen_detail_nota2(integer, integer, integer[])
+  OWNER TO postgres;
