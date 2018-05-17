@@ -19,6 +19,7 @@ import com.nls.domain.NotaTambahanBiaya;
 import java.math.BigDecimal;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
@@ -109,11 +110,12 @@ public class NotaController {
             HttpServletResponse response) {
         PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
                 Sort.Direction.ASC, "tanggal");
-        return lookupDao.lookupNota((cari.equals("null") ? "" :  cari.replace("~", "/").toUpperCase()), tglawal, tglakhir, pr);
+        return lookupDao.lookupNota((cari.equals("null") ? "" : cari.replace("~", "/").toUpperCase()), tglawal, tglakhir, pr);
     }
 
     @RequestMapping(value = "gen-detail-nota/{idTokoTujuan}/{idMerkTujuan}/{idKapalBerangkat}", method = RequestMethod.GET)
     public Object genDetailNota(@PathVariable String idTokoTujuan, @PathVariable String idMerkTujuan, @PathVariable String idKapalBerangkat) {
+        Map<String, Object> out = new HashMap<>();
         List<NotaDetail> list = new ArrayList<>();
         List<Map<String, Object>> lookupDetailNotaPerTokoMerkTujuan = (List<Map<String, Object>>) lookupDao.lookupDetailNotaPerTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat);
         for (Map<String, Object> x : lookupDetailNotaPerTokoMerkTujuan) {
@@ -131,7 +133,9 @@ public class NotaController {
             y.setIdSj((String) x.get("id_sj"));
             list.add(y);
         }
-        return list;
+        out.put("raw", lookupDetailNotaPerTokoMerkTujuan);
+        out.put("listDetail", list);
+        return out;
     }
 
     @RequestMapping(value = "gen-subtotal-detail-nota/{idTokoTujuan}/{idMerkTujuan}/{idKapalBerangkat}", method = RequestMethod.GET)

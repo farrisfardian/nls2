@@ -673,7 +673,7 @@ begin
 				case 	when d.p>0 and coalesce(d.l,0)=0 and coalesce(d.t,0)=0 then d.p
 					when d.p>0 and d.l>0 and coalesce(d.t,0)=0 then d.p*d.l/1000
 					when d.p>0 and d.l>0 and d.t>0 then d.p*d.l*d.t/1000000 else 0 end end::numeric(18,4)),3) as kubikasi,
-			0::numeric jml, sum(ss.coli)::int as coli, string_agg(distinct sj.id::varchar,',') as id_sj
+			0::numeric jml, sum(ss.coli)::int as coli, string_agg(distinct sj.id::varchar,',') as id_sj, sk.nama as sat_kirim_ori, coalesce(sj.sisipan,false) as sisipan
 			from t_sj_stuffing ss 
 			inner join t_surat_jalan_detail d on d.id=ss.id_sj_detail
 			left join m_kategori_harga kh on kh.id = d.id_kategori_harga
@@ -706,7 +706,7 @@ begin
 			coalesce(st.no_kontainer,''), coalesce(ji.nama,''),ji.id , d.id_kategori_harga, 
 			st.ukuran_kontainer, st.id_kapal_berangkat, 
 			case when v_id_merk_tujuan is null then 0::int else sj.id_merk end, m.id_toko, kp.id, 
-			sj.id_kondisi, st.id_kota_asal, kt.id, kh.ukuran_kontainer
+			sj.id_kondisi, st.id_kota_asal, kt.id, kh.ukuran_kontainer, sk.nama, coalesce(sj.sisipan,false)
 			order by 
 			coalesce(kt.nama,''), coalesce(k.nama,''),
 			coalesce(t.nama,''), coalesce(kp.nama,''), kb.tgl_berangkat, 
@@ -724,7 +724,7 @@ begin
 		select b_fcl.*,
 		sh.harga
 		from
-		(select kota_tujuan, kondisi, customer, kapal, tgl_berangkat, tgl_harga, tgl_ind, merk, nomor_kontainer, jenis_item, id_jenis_item, id_kategori_harga, ukuran_kontainer, id_kapal_berangkat, id_merk, id_toko, paket, sat_kirim, id_kapal,id_kondisi,id_kota_asal,kubikasi, count(*)::numeric jml,sum(coli)::int as coli, string_agg(id_sj::varchar,',') as id_sj
+		(select kota_tujuan, kondisi, customer, kapal, tgl_berangkat, tgl_harga, tgl_ind, merk, nomor_kontainer, jenis_item, id_jenis_item, id_kategori_harga, ukuran_kontainer, id_kapal_berangkat, id_merk, id_toko, paket, sat_kirim, id_kapal,id_kondisi,id_kota_asal,kubikasi, count(*)::numeric jml,sum(coli)::int as coli, string_agg(id_sj::varchar,',') as id_sj, sat_kirim_ori, sisipan
 		 from 
 		(
 		select coalesce(kt.nama,'') kota_tujuan, coalesce(k.nama,'') kondisi,
@@ -740,7 +740,7 @@ begin
 -- 			0::int id_kategori_harga, st.ukuran_kontainer, st.id_kapal_berangkat, 
 			case when v_id_merk_tujuan is null then 0::int else sj.id_merk end id_merk, 
 			m.id_toko,false paket, 'FCL'::varchar sat_kirim,kp.id as id_kapal,sj.id_kondisi,st.id_kota_asal,
-			sum(0::numeric(18,4)) as kubikasi, sum(ss.coli) as coli, string_agg(distinct sj.id::varchar,',') as id_sj
+			sum(0::numeric(18,4)) as kubikasi, sum(ss.coli) as coli, string_agg(distinct sj.id::varchar,',') as id_sj, sk.nama as sat_kirim_ori, coalesce(sj.sisipan,false) as sisipan
 			from t_sj_stuffing ss 
 			inner join t_surat_jalan_detail d on d.id=ss.id_sj_detail
 			left join m_kategori_harga kh on kh.id = d.id_kategori_harga
@@ -771,7 +771,7 @@ begin
 			(coalesce(t.nama,'')||'/ ' ||coalesce(m.nama,''))::varchar end, 
 			coalesce(st.no_kontainer,''), st.id_kapal_berangkat, 
 			case when v_id_merk_tujuan is null then 0::int else sj.id_merk end, m.id_toko, kp.id,
-			sj.id_kondisi, st.id_kota_asal,d.id_kategori_harga, kt.id, kh.ukuran_kontainer
+			sj.id_kondisi, st.id_kota_asal,d.id_kategori_harga, kt.id, kh.ukuran_kontainer, sk.nama, coalesce(sj.sisipan,false)
 			order by 
 			coalesce(kt.nama,''), coalesce(k.nama,''), st.ukuran_kontainer, 
 			coalesce(t.nama,''), coalesce(kp.nama,''), kb.tgl_berangkat, 
@@ -780,7 +780,7 @@ begin
 			(coalesce(t.nama,'')||'/ ' ||coalesce(m.nama,''))::varchar end, 
 			coalesce(st.no_kontainer,'')
 		) b_fcl		
-		group by kota_tujuan, kondisi, customer, kapal, tgl_berangkat, tgl_harga, tgl_ind, merk, nomor_kontainer,  id_kategori_harga, ukuran_kontainer, id_kapal_berangkat, id_kondisi, id_kota_asal, id_merk, id_toko, paket, sat_kirim, id_kapal, kubikasi, jenis_item, id_jenis_item ) b_fcl
+		group by kota_tujuan, kondisi, customer, kapal, tgl_berangkat, tgl_harga, tgl_ind, merk, nomor_kontainer,  id_kategori_harga, ukuran_kontainer, id_kapal_berangkat, id_kondisi, id_kota_asal, id_merk, id_toko, paket, sat_kirim, id_kapal, kubikasi, jenis_item, id_jenis_item, sat_kirim_ori, sisipan) b_fcl
 		-- having count(*)>1
 		-- where kubikasi is  null 
 		left join
@@ -791,11 +791,11 @@ begin
 	end loop;
 end
 /*
-select * from fn_gen_detail_nota2(344, null, ARRAY[122,27,52]) as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, harga_satuan numeric)
+select * from fn_gen_detail_nota2(344, null, ARRAY[122,27,52]) as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, sat_kirim_ori varchar, sisipan bool, harga_satuan numeric)
 
-select * from fn_gen_detail_nota2(413, 347, ARRAY[151]) as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, harga_satuan numeric)
+select * from fn_gen_detail_nota2(413, 347, ARRAY[151]) as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, sat_kirim_ori varchar, sisipan bool, harga_satuan numeric)
 
-select * from fn_gen_detail_nota2(413, 347, ARRAY[176]) as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, harga_satuan numeric)
+select * from fn_gen_detail_nota2(413, 347, ARRAY[176]) as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, sat_kirim_ori varchar, sisipan bool, harga_satuan numeric)
 
 */
 $BODY$

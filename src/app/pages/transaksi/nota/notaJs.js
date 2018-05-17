@@ -100,8 +100,8 @@
                 $scope.hitungGrandTotal();
             } else {
                 NotaService.listDetailNotaTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat).success(function (data) {
-                    $scope.vm.listDetail = data;
-                    console.log('$scope.vm.listDetail', $scope.vm.listDetail);
+                    $scope.vm.listDetail = data.listDetail;
+                    console.log('generateDetail', data);
                     if ($scope.vm.minBayar === true) {
                         NotaService.listSubtotalDetailNotaTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat).success(function (data) {
                             $scope.listSubtotal = data;
@@ -352,9 +352,9 @@
         $scope.$watch('vm.minBayar', function () {
             $scope.refreshDataDetail();
         });
-        
+
         $scope.buatPembayaran = function (x) {
-            $window.open('#/transaksi/pembayaran/' + x.id_toko+'/'+x.id_merk+'/'+x.id, '_blank');
+            $window.open('#/transaksi/pembayaran/' + x.id_toko + '/' + x.id_merk + '/' + x.id, '_blank');
         };
 
         $scope.initForm = function (idToko, idMerk, idKapalBerangkat) {
