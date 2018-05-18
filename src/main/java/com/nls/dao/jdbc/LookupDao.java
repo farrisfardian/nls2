@@ -113,6 +113,7 @@ public class LookupDao {
 
     public String getNomorNota(Integer idKotaAsal, Integer idKotaTujuan) {
         String sql = "select fn_get_nomor_nota(" + idKotaAsal + "," + idKotaTujuan + ") as nomor";
+        System.out.println("getNomorNota : "+sql);
         return mr.mapSingle(sql).get("nomor").toString();
     }
 
