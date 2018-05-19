@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2018-05-19T10:18:13 -->
+<!-- 2018-05-19T12:54:42 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nota-nls" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e51cd78-67de-4253-a5af-029e0e769742">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -140,7 +140,7 @@
 						<textFieldExpression><![CDATA["Jenis Barang"]]></textFieldExpression>
 					</textField>
 					<textField isStretchWithOverflow="true">
-						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="370" y="0" width="142" height="27" backcolor="#BD61FF" uuid="5e0a1be1-c67a-47ef-b794-88898d246c8c">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="370" y="0" width="192" height="27" backcolor="#BD61FF" uuid="5e0a1be1-c67a-47ef-b794-88898d246c8c">
 							<property name="local_mesure_unitheight" value="pixel"/>
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
@@ -156,7 +156,7 @@
 						<textFieldExpression><![CDATA["Kapal Berangkat"]]></textFieldExpression>
 					</textField>
 					<textField isStretchWithOverflow="true">
-						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="512" y="0" width="97" height="27" backcolor="#BD61FF" uuid="1514e963-9e65-498c-bae2-0353b222a179">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="562" y="0" width="86" height="27" backcolor="#BD61FF" uuid="1514e963-9e65-498c-bae2-0353b222a179">
 							<property name="local_mesure_unitheight" value="pixel"/>
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
@@ -172,7 +172,7 @@
 						<textFieldExpression><![CDATA["Tagihan"]]></textFieldExpression>
 					</textField>
 					<textField isStretchWithOverflow="true">
-						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="697" y="0" width="105" height="27" backcolor="#BD61FF" uuid="4af02823-507b-43ee-b873-12952c2b7475">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="725" y="0" width="77" height="27" backcolor="#BD61FF" uuid="4af02823-507b-43ee-b873-12952c2b7475">
 							<property name="local_mesure_unitheight" value="pixel"/>
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
@@ -188,7 +188,7 @@
 						<textFieldExpression><![CDATA["Sisa Tagihan"]]></textFieldExpression>
 					</textField>
 					<textField isStretchWithOverflow="true">
-						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="609" y="0" width="88" height="27" backcolor="#BD61FF" uuid="3564c5e1-7873-4e0f-8478-7beede0e992c">
+						<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="648" y="0" width="77" height="27" backcolor="#BD61FF" uuid="3564c5e1-7873-4e0f-8478-7beede0e992c">
 							<property name="local_mesure_unitheight" value="pixel"/>
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
@@ -367,7 +367,7 @@
 				<textFieldExpression><![CDATA[$F{jenis_item}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="370" y="0" width="142" height="15" uuid="684aef54-c7bf-4624-b08b-b90d204e7812">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="370" y="0" width="192" height="15" uuid="684aef54-c7bf-4624-b08b-b90d204e7812">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -383,7 +383,7 @@
 				<textFieldExpression><![CDATA[$F{kapal_berangkat}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="512" y="0" width="97" height="15" uuid="4b36d94f-dcc9-416d-a2ed-0789e7637bc8">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="562" y="0" width="86" height="15" uuid="4b36d94f-dcc9-416d-a2ed-0789e7637bc8">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -399,7 +399,7 @@
 				<textFieldExpression><![CDATA[$F{total_tagihan}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="697" y="0" width="105" height="15" uuid="f3e99fe1-080d-4eb9-a825-e72d0efa33b0">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="725" y="0" width="77" height="15" uuid="f3e99fe1-080d-4eb9-a825-e72d0efa33b0">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -415,7 +415,7 @@
 				<textFieldExpression><![CDATA[$F{sisa}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="609" y="0" width="88" height="15" uuid="2b3ccb49-2093-426e-a616-677ac6e2a38f">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="648" y="0" width="77" height="15" uuid="2b3ccb49-2093-426e-a616-677ac6e2a38f">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>

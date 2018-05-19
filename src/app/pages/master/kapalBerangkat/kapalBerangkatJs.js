@@ -17,8 +17,8 @@
         };
         $scope.opened = false;
         $scope.openedAwal = false;
-        $scope.openedAkhir = false;        
-        $scope.dateOptions = {format: 'DD/MM/YYYY', showClear: false};        
+        $scope.openedAkhir = false;
+        $scope.dateOptions = {format: 'DD/MM/YYYY', showClear: false};
         $scope.vm = {};
         $scope.ori = {};
         $scope.param = {tglAwal: new Date(), tglAkhir: new Date(), kota: null, kapal: null, cari: ""};
@@ -29,6 +29,7 @@
                 $scope.paging.totalItems = $scope.dataPage.totalElements;
                 $scope.paging.currentPage = parseInt($scope.dataPage.number) + 1;
                 $scope.paging.maxPage = $scope.dataPage.totalPages;
+                console.log('$scope.dataPage', $scope.dataPage);
             });
         };
 

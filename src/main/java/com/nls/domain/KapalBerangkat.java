@@ -37,6 +37,9 @@ public class KapalBerangkat {
     @Column(name = "aktif")
     private Boolean aktif;
     
+    @Column(name = "no_voyage")
+    private String noVoyage;
+    
     @ManyToOne
     @JoinColumn(name = "id_kota")
     private Kota kota;
@@ -83,6 +86,20 @@ public class KapalBerangkat {
 
     public void setAktif(Boolean aktif) {
         this.aktif = aktif;
+    }
+
+    /**
+     * @return the noVoyage
+     */
+    public String getNoVoyage() {
+        return noVoyage;
+    }
+
+    /**
+     * @param noVoyage the noVoyage to set
+     */
+    public void setNoVoyage(String noVoyage) {
+        this.noVoyage = noVoyage;
     }
 
 }

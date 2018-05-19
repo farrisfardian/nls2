@@ -104,6 +104,7 @@
                                             <td>Tgl Berangkat</td>
                                             <td>Kota Tujuan</td>
                                             <td>Aktif</td>
+                                            <td>Voyage</td>
                                             <td>
                                                 <button class="btn btn-info editable-table-button btn-xs" ng-click="baru()">Tambah</button>
                                             </td>
@@ -123,6 +124,9 @@
                                             </td>
                                             <td>
                                                 <i class="ion-checkmark-round" ng-show="c.aktif"></i>
+                                            </td>
+                                            <td>
+                                                {{c.no_voyage}}
                                             </td>
                                             <td>
                                                 <div class="buttons" >
@@ -219,6 +223,14 @@
                                     <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.aktif.$error.required">
                                         Harus Diisi
                                     </span>
+                                </div>
+                            </div>                                        
+                            <div class="form-group">
+                                <div class="col-xs-3">
+                                    <label class="control-label" for="noVoyage">No Voyage</label>
+                                </div>
+                                <div class="col-sm-8" ng-class="{error: form1.noVoyage.$invalid}">
+                                    <input type="text" class="form-control" ng-model="vm.noVoyage">
                                 </div>
                             </div>                                        
                             <div class="form-group">

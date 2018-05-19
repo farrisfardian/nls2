@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2018-03-15T05:38:09 -->
+<!-- 2018-05-19T13:41:25 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nota-nls" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e51cd78-67de-4253-a5af-029e0e769742">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
@@ -103,25 +103,25 @@
 					<textFieldExpression><![CDATA["di Tempat"]]></textFieldExpression>
 				</textField>
 				<componentElement>
-					<reportElement x="350" y="10" width="200" height="17" uuid="0add3117-dfb2-4376-94da-d193d27f71c3"/>
+					<reportElement x="300" y="10" width="255" height="17" uuid="0add3117-dfb2-4376-94da-d193d27f71c3"/>
 					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 						<datasetRun subDataset="listKapal" uuid="bbfc4e23-1005-4b87-9f00-33131c2e2c9a">
 							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{dataSourceKapal}.getData())]]></dataSourceExpression>
 						</datasetRun>
-						<jr:listContents height="17" width="200">
+						<jr:listContents height="17" width="255">
 							<textField isStretchWithOverflow="true">
 								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="50" height="17" uuid="d0d92bee-fc02-40d4-b666-cfff82f58bbf"/>
 								<textFieldExpression><![CDATA["KM\t:"]]></textFieldExpression>
 							</textField>
 							<textField isStretchWithOverflow="true">
-								<reportElement stretchType="RelativeToTallestObject" x="50" y="0" width="150" height="17" uuid="59501f4c-507c-465f-9af8-1ab6542e30e1"/>
+								<reportElement stretchType="RelativeToTallestObject" x="50" y="0" width="205" height="17" uuid="59501f4c-507c-465f-9af8-1ab6542e30e1"/>
 								<textFieldExpression><![CDATA[$F{kapal}+", "+$F{tgl_berangkat}]]></textFieldExpression>
 							</textField>
 						</jr:listContents>
 					</jr:list>
 				</componentElement>
 				<textField>
-					<reportElement positionType="Float" x="350" y="27" width="200" height="15" uuid="9267b905-fd6b-4dba-b545-af6afc2edf9b">
+					<reportElement positionType="Float" x="300" y="27" width="255" height="15" uuid="9267b905-fd6b-4dba-b545-af6afc2edf9b">
 						<property name="local_mesure_unitheight" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -736,7 +736,7 @@
 					<property name="com.jaspersoft.studio.unit.x" value="cm"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
-				<imageExpression><![CDATA[$P{realPath}+"ttd.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{realPath}+"ttd.jpg"]]></imageExpression>
 			</image>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00#">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="450" y="1" width="21" height="14" uuid="7c4eb02c-e74c-4f53-9869-61e3231df09b">

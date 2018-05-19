@@ -26,6 +26,7 @@ public class ReportDao {
                 + "customer varchar, kapal varchar, tgl_berangkat date, tgl_ind varchar, merk varchar, alamat varchar, nomor_kontainer varchar, emkl varchar,\n"
                 + "id integer, tanggal date, pengirim varchar, coli integer, jenis_barang text, p double precision, l double precision,\n"
                 + "t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume double precision, total_coli_sj text, pisah boolean)";
+        System.out.println("perStuffing : "+sql);
         return mr.mapList(sql);
     }
 
