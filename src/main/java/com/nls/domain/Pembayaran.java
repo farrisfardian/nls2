@@ -48,9 +48,6 @@ public class Pembayaran extends AbstractAuditingEntity implements Serializable {
     @Column(name = "nomor")
     private String nomor;
     
-    @Column(name = "no_rek_bg_cek", columnDefinition = "text")
-    private String noRekBgCek;
-
     @Column(name = "nomor_manual")
     private Boolean nomorManual;
 
@@ -62,10 +59,6 @@ public class Pembayaran extends AbstractAuditingEntity implements Serializable {
     @JoinColumn(name = "id_merk")
     private Merk merkTujuan;
     
-    @ManyToOne
-    @JoinColumn(name = "id_jenis_pembayaran")
-    private JenisPembayaran jenisPembayaran;
-
     @Column(name = "total_bayar")
     private BigDecimal totalBayar;
 
@@ -159,20 +152,6 @@ public class Pembayaran extends AbstractAuditingEntity implements Serializable {
      */
     public void setListDetail(Set<PembayaranDetail> listDetail) {
         this.listDetail = listDetail;
-    }
-
-    /**
-     * @return the noRekBgCek
-     */
-    public String getNoRekBgCek() {
-        return noRekBgCek;
-    }
-
-    /**
-     * @param noRekBgCek the noRekBgCek to set
-     */
-    public void setNoRekBgCek(String noRekBgCek) {
-        this.noRekBgCek = noRekBgCek;
     }
 
 }

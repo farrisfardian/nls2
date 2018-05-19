@@ -41,6 +41,13 @@ public class PembayaranDetail {
     
     @Column(name = "terbayar")
     private BigDecimal terbayar;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_jenis_pembayaran")
+    private JenisPembayaran jenisPembayaran;
+
+    @Column(name = "no_rek_bg_cek", columnDefinition = "text")
+    private String noRekBgCek;
 
     @ManyToOne
     @JoinColumn(name = "id_pembayaran")
@@ -130,6 +137,34 @@ public class PembayaranDetail {
      */
     public void setNota(Nota nota) {
         this.nota = nota;
+    }
+    
+    /**
+     * @return the noRekBgCek
+     */
+    public String getNoRekBgCek() {
+        return noRekBgCek;
+    }
+
+    /**
+     * @param noRekBgCek the noRekBgCek to set
+     */
+    public void setNoRekBgCek(String noRekBgCek) {
+        this.noRekBgCek = noRekBgCek;
+    }
+
+    /**
+     * @return the jenisPembayaran
+     */
+    public JenisPembayaran getJenisPembayaran() {
+        return jenisPembayaran;
+    }
+
+    /**
+     * @param jenisPembayaran the jenisPembayaran to set
+     */
+    public void setJenisPembayaran(JenisPembayaran jenisPembayaran) {
+        this.jenisPembayaran = jenisPembayaran;
     }
 
 }

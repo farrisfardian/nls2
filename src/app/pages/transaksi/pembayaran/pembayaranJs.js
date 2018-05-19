@@ -6,7 +6,7 @@
             .controller('PembayaranModalController', PembayaranModalController);
 
     /** @ngInject */
-    function PembayaranCtrl($scope, $uibModal, $log, $filter, $stateParams, toastr, PembayaranService, EnumService, TokoService, KotaService, NotaService) {
+    function PembayaranCtrl($scope, $uibModal, $log, $filter, $stateParams, toastr, PembayaranService, EnumService, TokoService, KotaService, NotaService, JenisPembayaranService, RekeningService) {
         $scope.search = "";
         $scope.oldSearch = "";
         $scope.deskKapalBerangkat = "";
@@ -16,11 +16,19 @@
         };
         $scope.listKapalBerangkat = [];
         $scope.listMerk = [];
+        $scope.listRekening = [];
+        $scope.listJenisPembayaran = [];
         EnumService.getUkuranKontainer().success(function (data) {
             $scope.listUkuranKontainer = data;
         });
         KotaService.cariSemua().success(function (data) {
             $scope.listKota = data;
+        });
+        RekeningService.cariSemua().success(function (data) {
+            $scope.listRekening = data;
+        });
+        JenisPembayaranService.cariSemua().success(function (data) {
+            $scope.listJenisPembayaran = data;
         });
         $scope.options = {format: 'DD/MM/YYYY', showClear: false};
         $scope.param = {tglAwal: new Date(), tglAkhir: new Date(), cari: ""};
@@ -180,6 +188,15 @@
         $scope.hapusTambahanBiaya = function (idx) {
             $scope.vm.listTambahanBiaya.splice(idx, 1);
         };
+        $scope.hapusDetail = function (idx) {
+            $scope.vm.listDetail.splice(idx, 1);
+            $scope.hitungGrandTotal();
+        };
+        $scope.updateNoRekBgCek = function (x) {
+            if (x.jenisPembayaran.kodekode !== 'TR') {
+                x.noRekBgCek = null;
+            }
+        };
 
         $scope.hapusKapalBerangkat = function (idx) {
             $scope.vm.listKapalBerangkat.splice(idx, 1);
@@ -199,6 +216,10 @@
                         return false;
                     } else if ($scope.vm.listDetail[i].bayar > ($scope.vm.listDetail[i].tagihan - $scope.vm.listDetail[i].terbayar)) {
                         $scope.vm.listDetail[i].bayar = $scope.vm.listDetail[i].tagihan - $scope.vm.listDetail[i].terbayar;
+                    } else if ($scope.vm.listDetail[i].jenisPembayaran == null) {
+                        toastr.error('Jenis Pembayaran tidak boleh kosong!! Pastikan Jenis Pembayaran sudah diisi');
+                        break;
+                        return false;
                     }
                 }
             }
@@ -207,7 +228,13 @@
 
         $scope.simpan = function () {
             if ($scope.validasi()) {
+                for (var i = 0; i < $scope.vm.listDetail.length; i++) {
+                    if ($scope.vm.listDetail[i].jenisPembayaran.kode === 'CA') {
+                        $scope.vm.listDetail[i].noRekBgCek = null;
+                    }
+                }
                 $scope.vm.totalBayar = $scope.grandTotal;
+                console.log('$scope.vm', $scope.vm);
                 PembayaranService.simpan($scope.vm, $scope.ori).success(function (d) {
                     toastr.success('Simpan data sukses!');
                     $scope.clear();
@@ -249,7 +276,7 @@
                                 }
                         );
                     }
-                    
+
                 });
             }).error(function (e) {
                 toastr.error("Ambil toko gagal");

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2018-05-12T12:49:42 -->
+<!-- 2018-05-19T10:18:13 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nota-nls" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e51cd78-67de-4253-a5af-029e0e769742">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -230,7 +230,7 @@
 			<band height="15">
 				<printWhenExpression><![CDATA[$F{rincian_bayar}.equals("")==false]]></printWhenExpression>
 				<textField isStretchWithOverflow="true" pattern="">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="512" y="0" width="290" height="15" uuid="9678ed0a-57bc-4dc3-98a4-f05f431f1371">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="370" y="0" width="432" height="15" uuid="9678ed0a-57bc-4dc3-98a4-f05f431f1371">
 						<property name="local_mesure_unitheight" value="pixel"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
