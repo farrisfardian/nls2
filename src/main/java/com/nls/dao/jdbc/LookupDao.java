@@ -106,8 +106,10 @@ public class LookupDao {
     }
 
     public Object lookupSubtotalDetailNotaPerTokoMerkTujuan(String idToko, String idMerk, String idKapalBerangkat) {
-        String sql = "select id_kapal_berangkat, nomor_kontainer, sum(coalesce(harga_satuan,0)*coalesce(case when sat_kirim='FCL' then jml else kubikasi end,0)) subtotal from fn_gen_detail_nota2(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ", " + (idKapalBerangkat.equalsIgnoreCase("null") ? idKapalBerangkat : "ARRAY[" + idKapalBerangkat + "]") + ") as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, harga_satuan numeric) group by id_kapal_berangkat,nomor_kontainer";
-
+        String sql = "select id_kapal_berangkat, nomor_kontainer, jenis_item, sum(coalesce(harga_satuan,0)*coalesce(case when sat_kirim='FCL' then jml else kubikasi end,0)) subtotal from fn_gen_detail_nota2(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ", " + (idKapalBerangkat.equalsIgnoreCase("null") ? idKapalBerangkat : "ARRAY[" + idKapalBerangkat + "]") + ") as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, sat_kirim_ori varchar, sisipan bool, harga_satuan numeric) group by id_kapal_berangkat,nomor_kontainer, jenis_item";
+        System.out.println("lookupSubtotalDetailNotaPerTokoMerkTujuan : "+sql);
+//        sql="select * from m_kota";
+//        System.out.println("lookupSubtotalDetailNotaPerTokoMerkTujuan : "+sql);
         return mr.mapList(sql);
     }
 

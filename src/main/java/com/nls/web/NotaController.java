@@ -140,6 +140,7 @@ public class NotaController {
 
     @RequestMapping(value = "gen-subtotal-detail-nota/{idTokoTujuan}/{idMerkTujuan}/{idKapalBerangkat}", method = RequestMethod.GET)
     public Object genSubtotalDetailNota(@PathVariable String idTokoTujuan, @PathVariable String idMerkTujuan, @PathVariable String idKapalBerangkat) {
+        System.out.println("idTokoTujuan : " + idTokoTujuan + ", idMerkTujuan : " + idMerkTujuan + ", idKapalBerangkat : " + idKapalBerangkat);
         return lookupDao.lookupSubtotalDetailNotaPerTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat);
     }
 

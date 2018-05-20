@@ -108,7 +108,7 @@
                             console.log('$scope.listSubtotal ', $scope.listSubtotal);
                             for (var i = 0; i < $scope.listSubtotal.length; i++) {
                                 for (var k = 0; k < $scope.vm.listDetail.length; k++) {
-                                    if ($scope.listSubtotal[i].id_kapal_berangkat === $scope.vm.listDetail[k].kapalBerangkat.id && $scope.listSubtotal[i].nomor_kontainer === $scope.vm.listDetail[k].noKontainer) {
+                                    if ($scope.listSubtotal[i].id_kapal_berangkat === $scope.vm.listDetail[k].kapalBerangkat.id && $scope.listSubtotal[i].nomor_kontainer === $scope.vm.listDetail[k].noKontainer && $scope.listSubtotal[i].jenis_item === $scope.vm.listDetail[k].jenisItems) {
                                         $scope.vm.listDetail[k].tambahanMinBayar = $scope.vm.jmlMinBayar > $scope.listSubtotal[i].subtotal ? $scope.vm.jmlMinBayar - $scope.listSubtotal[i].subtotal : 0;
                                         break;
                                     }
