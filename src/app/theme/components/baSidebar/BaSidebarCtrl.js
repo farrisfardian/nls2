@@ -25,105 +25,104 @@
                         "title": "Item", 
                         "level": 1, 
                         "order": 0, 
-                        "stateRef": 
-                        "master.item"
+                        "stateRef": "master.item"
                     }, 
                     {
-                        "name": "master.tambahanBiaya", 
+                        "name": "master.tambahan-biaya", 
                         "title": "Tambahan Biaya", 
                         "level": 1, 
-                        "order": 100, 
-                        "stateRef": "master.tambahanBiaya"
+                        "order": 0, 
+                        "stateRef": "master.tambahan-biaya"
                     }, 
                     {
-                        "name": "master.jenisItem", 
+                        "name": "master.jenis-item", 
                         "title": "Jenis Item", 
                         "level": 1, 
-                        "order": 200, 
-                        "stateRef": "master.jenisItem"
+                        "order": 0, 
+                        "stateRef": "master.jenis-item"
                     }, 
                     {
                         "name": "master.kapal", 
                         "title": "Kapal", 
                         "level": 1, 
-                        "order": 300, 
+                        "order": 0, 
                         "stateRef": "master.kapal"
                     }, 
                     {
                         "name": "master.kota", 
                         "title": "Kota", 
                         "level": 1, 
-                        "order": 400, 
+                        "order": 0, 
                         "stateRef": "master.kota"
                     }, 
                     {
-                        "name": "master.satuanKirim", 
+                        "name": "master.satuan-kirim", 
                         "title": "Satuan Kirim", 
                         "level": 1, 
-                        "order": 500, 
-                        "stateRef": "master.satuanKirim"
+                        "order": 0, 
+                        "stateRef": "master.satuan-kirim"
                     }, 
                     {
                         "name": "master.kondisi", 
                         "title": "Kondisi", 
                         "level": 1, 
-                        "order": 600, 
+                        "order": 0, 
                         "stateRef": "master.kondisi"
                     }, 
                     {
                         "name": "master.toko", 
                         "title": "Toko", 
                         "level": 1, 
-                        "order": 700, 
+                        "order": 0, 
                         "stateRef": "master.toko"
                     }, 
                     {
                         "name": "master.emkl", 
                         "title": "EMKL", 
                         "level": 1, 
-                        "order": 800, 
+                        "order": 0, 
                         "stateRef": "master.emkl"
                     }, 
                     {
-                        "name": "master.kapalBerangkat", 
+                        "name": "master.kapal-berangkat", 
                         "title": "Kapal Berangkat", 
                         "level": 1, 
-                        "order": 900, 
-                        "stateRef": "master.kapalBerangkat"
+                        "order": 0, 
+                        "stateRef": "master.kapal-berangkat"
                     }, 
                     {
-                        "name": "master.kategoriHarga", 
+                        "name": "master.kategori-harga", 
                         "title": "Kategori Harga", 
                         "level": 1, 
-                        "order": 901, 
-                        "stateRef": "master.kategoriHarga"
+                        "order": 0, 
+                        "stateRef": "master.kategori-harga"
                     }, 
                     {
-                        "name": "master.settingHarga", 
+                        "name": "master.setting-harga", 
                         "title": "Setting Harga", 
                         "level": 1, 
-                        "order": 902, 
-                        "stateRef": "master.settingHarga"
+                        "order": 0, 
+                        "stateRef": "master.setting-harga"
                     }, 
                     {
-                        "name": "master.settingAplikasi", 
+                        "name": "master.setting-aplikasi", 
                         "title": "Setting Aplikasi", 
                         "level": 1, 
-                        "order": 903, 
-                        "stateRef": "master.settingAplikasi"
+                        "order": 0, 
+                        "stateRef": "master.setting-aplikasi"
                     }, 
                     {
-                        "name": "master.jenisPembayaran", 
+                        "name": "master.jenis-pembayaran", 
                         "title": "Jenis Pembayaran", 
                         "level": 1, 
-                        "order": 904, 
-                        "stateRef": "master.jenisPembayaran"
+                        "order": 0, 
+                        "stateRef": "master.jenis-pembayaran"
                     }, 
                     {
                         "name": "master.rekening", 
                         "title": "Rekening", 
                         "level": 1, 
-                        "order": 905, 
+                        "order": 0, 
                         "stateRef": "master.rekening"
                     }
                 ]

@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('BlurAdmin')
+    angular.module('BlurAdmin.pages.master', ['ui.select', 'ngSanitize'])
             .config(routeConfig);
 
     /** @ngInject */
@@ -24,8 +24,6 @@
                 })
                 .state('master.item', {
                     url: '/item',
-//                    templateUrl: 'app/pages/master/item/item.html',
-//                    controller: 'ItemCtrl',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/item/item.html',
@@ -39,8 +37,6 @@
                 })
                 .state('master.kontainer', {
                     url: '/kontainer',
-//                    templateUrl: 'app/pages/master/kontainer/kontainer.html',
-//                    controller: 'KontainerCtrl',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/kontainer/kontainer.html',
@@ -49,62 +45,50 @@
                     },
                     title: 'Kontainer',
                     sidebarMeta: {
-                        order: 100,
+                        order: 0,
                     },
                 })
-                .state('master.jenisItem', {
-                    url: '/jenisItem',
-//                    templateUrl: 'app/pages/master/jenisItem/jenis-item.html',
-//                    controller: 'JenisItemCtrl',
+                .state('master.jenis-item', {
+                    url: '/jenis-item',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/jenisItem/jenis-item.html',
                             controller: 'JenisItemCtrl',
                         }
                     },
-//          controllerAs: 'vm',
                     title: 'Jenis Item',
                     sidebarMeta: {
-                        order: 200,
+                        order: 0,
                     },
                 })
-                .state('master.tambahanBiaya', {
-                    url: '/tambahanBiaya',
-//                    templateUrl: 'app/pages/master/jenisItem/jenis-item.html',
-//                    controller: 'JenisItemCtrl',
+                .state('master.tambahan-biaya', {
+                    url: '/tambahan-biaya',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/tambahanBiaya/tambahan-biaya.html',
                             controller: 'TambahanBiayaCtrl',
                         }
                     },
-//          controllerAs: 'vm',
                     title: 'Tambahan Biaya',
                     sidebarMeta: {
-                        order: 200,
+                        order: 0,
                     },
                 })
                 .state('master.kapal', {
                     url: '/kapal',
-//                    templateUrl: 'app/pages/master/kapal/kapal.html',
-//                    controller: 'KapalCtrl',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/kapal/kapal.html',
                             controller: 'KapalCtrl',
                         }
                     },
-//          controllerAs: 'vm',
                     title: 'Kapal',
                     sidebarMeta: {
-                        order: 300,
+                        order: 0,
                     },
                 })
                 .state('master.kota', {
                     url: '/kota',
-//                    templateUrl: 'app/pages/master/kota/kota.html',
-//                    controller: 'KotaCtrl',
-//          controllerAs: 'vm',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/kota/kota.html',
@@ -113,14 +97,11 @@
                     },
                     title: 'Kota',
                     sidebarMeta: {
-                        order: 400,
+                        order: 0,
                     },
                 })
-                .state('master.satuanKirim', {
-                    url: '/satuanKirim',
-//                    templateUrl: 'app/pages/master/satuanKirim/satuan-kirim.html',
-//                    controller: 'SatuanKirimCtrl',
-//          controllerAs: 'vm',
+                .state('master.satuan-kirim', {
+                    url: '/satuan-kirim',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/satuanKirim/satuan-kirim.html',
@@ -129,14 +110,11 @@
                     },
                     title: 'Satuan Kirim',
                     sidebarMeta: {
-                        order: 500,
+                        order: 0,
                     },
                 })
                 .state('master.kondisi', {
                     url: '/kondisi',
-                    templateUrl: 'app/pages/master/kondisi/kondisi.html',
-                    controller: 'KondisiCtrl',
-//          controllerAs: 'vm',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/kondisi/kondisi.html',
@@ -145,14 +123,11 @@
                     },
                     title: 'Kondisi',
                     sidebarMeta: {
-                        order: 600,
+                        order: 0,
                     },
                 })
                 .state('master.toko', {
                     url: '/toko',
-//                    templateUrl: 'app/pages/master/toko/toko.html',
-//                    controller: 'TokoCtrl',
-//          controllerAs: 'vm',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/toko/toko.html',
@@ -161,14 +136,11 @@
                     },
                     title: 'Toko',
                     sidebarMeta: {
-                        order: 700,
+                        order: 0,
                     },
                 })
                 .state('master.emkl', {
                     url: '/emkl',
-                    templateUrl: 'app/pages/master/emkl/emkl.html',
-                    controller: 'EmklCtrl',
-//          controllerAs: 'vm',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/emkl/emkl.html',
@@ -177,79 +149,72 @@
                     },
                     title: 'Emkl',
                     sidebarMeta: {
-                        order: 800,
+                        order: 0,
                     },
                 })
-                .state('master.kapalBerangkat', {
-                    url: '/kapalBerangkat',
-                    templateUrl: 'app/pages/master/kapalBerangkat/kapal-berangkat.html',
-//                    controller: 'KapalBerangkatCtrl',
+                .state('master.kapal-berangkat', {
+                    url: '/kapal-berangkat',
                     views: {
                         'content@': {
-                            url: '/kapalBerangkat',
-                            templateUrl: 'app/pages/master/kapalBerangkat/kapal-berangkat.html'
+                            templateUrl: 'app/pages/master/kapalBerangkat/kapal-berangkat.html',
+                            controller: 'KapalBerangkatCtrl',
                         }
                     },
-//          controllerAs: 'vm',
                     title: 'Kapal Berangkat',
                     sidebarMeta: {
-                        order: 900,
+                        order: 0,
                     },
                 })
-                .state('master.kategoriHarga', {
-                    url: '/kategoriHarga',
+                .state('master.kategori-harga', {
+                    url: '/kategori-harga',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/kategoriHarga/kategori-harga.html',
                             controller: 'KategoriHargaCtrl',
                         }
                     },
-//          controllerAs: 'vm',
                     title: 'Kategori Harga',
                     sidebarMeta: {
-                        order: 901,
+                        order: 0,
                     },
                 })
-                .state('master.settingHarga', {
-                    url: '/settingHarga',
+                .state('master.setting-harga', {
+                    url: '/setting-harga',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/settingHarga/setting-harga.html',
                             controller: 'SettingHargaCtrl',
                         }
                     },
-//          controllerAs: 'vm',
                     title: 'Setting Harga',
                     sidebarMeta: {
-                        order: 901,
+                        order: 0,
                     },
                 })
-                .state('master.settingAplikasi', {
-                    url: '/settingAplikasi',
+                .state('master.setting-aplikasi', {
+                    url: '/setting-aplikasi',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/settingAplikasi/setting-aplikasi.html',
                             controller: 'SettingAplikasiCtrl',
                         }
                     },
-//          controllerAs: 'vm',
                     title: 'Setting Aplikasi',
                     sidebarMeta: {
-                        order: 902,
+                        order: 0,
                     },
                 })
-                .state('master.jenisPembayaran', {
-                    url: '/jenisPembayaran',
+                .state('master.jenis-pembayaran', {
+                    url: '/jenis-pembayaran',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/master/jenisPembayaran/jenis-pembayaran.html',
                             controller: 'JenisPembayaranCtrl',
                         }
                     },
-//          controllerAs: 'vm',
                     title: 'Jenis Pembayaran',
                     sidebarMeta: {
-                        order: 903,
+                        order: 0,
                     },
                 })
                 .state('master.rekening', {
@@ -260,10 +225,9 @@
                             controller: 'RekeningCtrl',
                         }
                     },
-//          controllerAs: 'vm',
                     title: 'Rekening',
                     sidebarMeta: {
-                        order: 903,
+                        order: 0,
                     },
                 })
     }

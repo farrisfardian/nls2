@@ -41,12 +41,13 @@
                                        append-to-body="true"
                                        search-enabled="true">
                                 <ui-select-match placeholder="Pilih Kapal" allow-clear="true">
-                                    {{$select.selected.kapal.nama}}  ,Tgl Brkt {{$select.selected.tglBerangkat| date:'dd-MM-yy'}}
+                                    {{$select.selected.kapal.nama}} Voy.{{$select.selected.noVoyage}}, Tgl Brkt {{$select.selected.tglBerangkat| date:'dd-MM-yy'}}
                                 </ui-select-match>
                                 <ui-select-choices
                                     repeat="item in listKapal | filter: $select.search">
                                     <div ng-bind-html="item.kapal.nama"></div>
                                     <small>
+                                        Voy.{{item.noVoyage}}, 
                                         Tgl. Brkt: {{item.tglBerangkat| date:'dd-MM-yy'}}
                                     </small>
                                 </ui-select-choices>
