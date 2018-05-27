@@ -7,6 +7,8 @@
 
     angular.module('BlurAdmin.pages.master', ['ui.select', 'ngSanitize'])
             .config(routeConfig);
+    
+//    routeConfig.$inject = ['$stateProvider'];
 
     /** @ngInject */
     function routeConfig($stateProvider) {

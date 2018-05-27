@@ -230,6 +230,13 @@
                         "stateRef": "laporan.rekap-nota"
                     },
                     {
+                        "name": "laporan.rekap-pembayaran", 
+                        "title": "Rekap Pembayaran", 
+                        "level": 1, 
+                        "order": 0, 
+                        "stateRef": "laporan.rekap-pembayaran"
+                    },
+                    {
                         "name": "laporan.tracking-kapal", 
                         "title": "Tracking Kapal", 
                         "level": 1, 

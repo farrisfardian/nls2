@@ -15,6 +15,7 @@
 //    'BlurAdmin.pages.maps',
 //    'BlurAdmin.pages.profile',
 //        'BlurAdmin',
+        'BlurAdmin.pages.master',
         'BlurAdmin.pages.transaksi',
         'BlurAdmin.pages.laporan',
         'BlurAdmin.pages.setting',

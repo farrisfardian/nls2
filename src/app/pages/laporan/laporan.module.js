@@ -127,6 +127,19 @@
                         order: 0,
                     },
                 })
+                .state('laporan.rekap-pembayaran', {
+                    url: '/rekap-pembayaran',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/laporan/rekapPembayaran/rekapPembayaran.html',
+                            controller: 'RekapPembayaranCtrl'
+                        }
+                    },
+                    title: 'Rekap Pembayaran',
+                    sidebarMeta: {
+                        order: 0,
+                    },
+                })
                 .state('laporan.tracking-kapal', {
                     url: '/tracking-kapal',
                     views: {

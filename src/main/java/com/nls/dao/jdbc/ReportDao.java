@@ -26,7 +26,7 @@ public class ReportDao {
                 + "customer varchar, kapal varchar, tgl_berangkat date, tgl_ind varchar, merk varchar, alamat varchar, nomor_kontainer varchar, emkl varchar,\n"
                 + "id integer, tanggal date, pengirim varchar, coli integer, jenis_barang text, p double precision, l double precision,\n"
                 + "t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume double precision, total_coli_sj text, pisah boolean)";
-        System.out.println("perStuffing : "+sql);
+        System.out.println("perStuffing : " + sql);
         return mr.mapList(sql);
     }
 
@@ -144,6 +144,12 @@ public class ReportDao {
     public Object getRekapNotaTagihan(String idToko, String idMerk, String idKapal, String idKota, String tglAwal, String tglAkhir) {
         String sql = "select * from fn_rekap_nota_tagihan(" + idToko + ", " + idMerk + ", " + idKapal + ", " + idKota + ", '" + tglAwal + "', '" + tglAkhir + "') as (nomor varchar, min_bayar bool, jml_min_bayar double precision, jenis_item varchar, toko varchar, merk varchar, kapal varchar, no_kontainer varchar, tgl_berangkat date, total double precision, tanggal varchar)";
         System.out.println("getRekapNotaTagihan: " + sql);
+        return mr.mapList(sql);
+    }
+
+    public Object getRekapPembayaran(String tglAwal, String tglAkhir) {
+        String sql = "select *, fn_tanggal_ind(current_date) as tanggal from fn_rekap_pembayaran_per_berangkat('" + tglAwal + "', '" + tglAkhir + "') as (nota_tagihan varchar, nota_bayar varchar, tgl_bayar date, kapal varchar, tgl_berangkat date, tagihan_kapal double precision, tot_tagihan_nota double precision, prosentase double precision, tot_terbayar numeric, terbayar_kapal double precision)";
+        System.out.println("getRekapPembayaran: " + sql);
         return mr.mapList(sql);
     }
 
