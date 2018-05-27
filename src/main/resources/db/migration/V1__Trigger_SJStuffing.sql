@@ -819,14 +819,14 @@ begin
 		, tb.bayar as tot_terbayar, (round((tk.tagihan/tn.tagihan)*100::double precision)*tb.bayar)/100::double precision as terbayar_kapal 
 		from
 		(
-		select nomor, kapal, tgl_berangkat, sum(total) as tagihan from fn_rekap_nota_tagihan(null, null, null, null, '2018-01-01', '2018-11-11') 
+		select nomor, kapal, tgl_berangkat, sum(total) as tagihan from fn_rekap_nota_tagihan(null, null, null, null, v_tgl1, v_tgl2) 
 		as (nomor varchar, min_bayar bool, jml_min_bayar double precision, jenis_item varchar, toko varchar, merk varchar, kapal varchar, 
 		no_kontainer varchar, tgl_berangkat date, total double precision, tanggal varchar) 
 		group by nomor, kapal, tgl_berangkat order by tgl_berangkat, nomor, kapal
 		) tk
 		join
 		(
-		select nomor, sum(total) as tagihan from fn_rekap_nota_tagihan(null, null, null, null, '2018-01-01', '2018-11-11') as 
+		select nomor, sum(total) as tagihan from fn_rekap_nota_tagihan(null, null, null, null, v_tgl1, v_tgl2) as 
 		(nomor varchar, min_bayar bool, jml_min_bayar double precision, jenis_item varchar, toko varchar, merk varchar, kapal varchar, 
 		no_kontainer varchar, tgl_berangkat date, total double precision, tanggal varchar) 
 		group by nomor order by nomor
@@ -843,7 +843,7 @@ begin
 	end loop;
 end
 /*
-select * from fn_rekap_pembayaran_per_berangkat('2018-01-01', '2018-11-30') as (nota_tagihan varchar, nota_bayar varchar, tgl_bayar date, kapal varchar, tgl_berangkat date, tagihan_kapal double precision, tot_tagihan_nota double precision, prosentase double precision, tot_terbayar numeric, terbayar_kapal double precision)
+select * from fn_rekap_pembayaran_per_berangkat('2018-01-01', '2018-01-30') as (nota_tagihan varchar, nota_bayar varchar, tgl_bayar date, kapal varchar, tgl_berangkat date, tagihan_kapal double precision, tot_tagihan_nota double precision, prosentase double precision, tot_terbayar numeric, terbayar_kapal double precision)
 */
 $BODY$
   LANGUAGE plpgsql;
