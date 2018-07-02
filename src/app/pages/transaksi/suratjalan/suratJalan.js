@@ -5,7 +5,7 @@
             .controller('SuratJalanCtrl', SuratJalanCtrl)
 
     function SuratJalanCtrl($scope, $log, $uibModal, $stateParams, SuratJalanService, KotaService,
-            KondisiService, TokoService, toastr, $timeout, JenisItemService) {
+            KondisiService, TokoService, toastr, $timeout, JenisItemService, StuffingService) {
         $scope.open = open;
         $scope.opened = false;
         $scope.format = 'dd-MM-yyyy';
@@ -239,21 +239,22 @@
             });
             modalInstance.result.then(function (sd) {
                 console.log('selectedStuffing', sd);
-                $scope.vm.stuffing = {
-                    id: sd.id,
-                    noKontainer: sd.no_kontainer
-//                    kontainer: {
-//                        id: sd.id_kontainer,
-//                        nomor: sd.nomor
-//                    }
-                };
-                console.log('$scope.vm.stuffing', $scope.vm.stuffing);
-                for (var i = 0; i < $scope.vm.listSuratJalanDetail.length; i++) {
-                    $scope.vm.listSuratJalanDetail[i].sjStufings = [{
-                            stuffing: $scope.vm.stuffing,
-                            coli: $scope.vm.listSuratJalanDetail[i].coli
-                        }];
-                }
+                StuffingService.cariSatu('kode', sd.id).success(function (data) {
+                    $scope.vm.stuffing = data;
+                    console.log('$scope.vm.stuffing', $scope.vm.stuffing);
+                    for (var i = 0; i < $scope.vm.listSuratJalanDetail.length; i++) {
+                        $scope.vm.listSuratJalanDetail[i].sjStufings = [{
+                                stuffing: $scope.vm.stuffing,
+                                coli: $scope.vm.listSuratJalanDetail[i].coli
+                            }];
+                    }
+                }).error(function (err) {
+                    toastr.error('Gagal ambil data Stuffing');
+                });
+//                $scope.vm.stuffing = {
+//                    id: sd.id,
+//                    noKontainer: sd.no_kontainer
+//                };
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });

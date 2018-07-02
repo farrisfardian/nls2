@@ -335,6 +335,8 @@
                 NotaService.simpan($scope.vm, $scope.ori).success(function (d) {
                     toastr.success('Simpan data sukses!');
                     $scope.clear();
+                }).error(function (err) {
+                    toastr.error(err);
                 });
             }
         };

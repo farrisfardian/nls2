@@ -191,6 +191,11 @@ public class NotaController {
         String idKapalBerangkat = "";
         int i = 0;
         if (!x.getNomorManual()) {
+            if (x.getKotaAsal().getKodeNota() == null) {
+                throw new InvalidParameterException("Kode Nota untuk Kota Asal tidak ditemukan! Isi dulu di Master Kota");
+            } else if (x.getTokoTujuan().getKota().getKodeNota() == null) {
+                throw new InvalidParameterException("Kode Nota untuk Kota Tujuan tidak ditemukan! Isi dulu di Master Kota");
+            }
             String nomorNota = lookupDao.getNomorNota(x.getKotaAsal().getId(), x.getTokoTujuan().getKota().getId());
             x.setNomorInvoice(nomorNota);
         }
