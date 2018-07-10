@@ -47,6 +47,7 @@
                                     repeat="item in listKapal | filter: $select.search">
                                     <div ng-bind-html="item.kapal.nama"></div>
                                     <small>
+                                        Voy.{{item.noVoyage}}, 
                                         Tgl. Brkt: {{item.tglBerangkat| date:'dd-MM-yy'}}
                                     </small>
                                 </ui-select-choices>
