@@ -36,6 +36,8 @@
           p:url="/WEB-INF/templates/jrxml/rekap-nota-tagihan.jrxml"/>
     <bean id="api/report/get-rekap-pembayaran" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
           p:url="/WEB-INF/templates/jrxml/rekap-pembayaran.jrxml"/>
+    <bean id="api/report/rekap-nota-belum-lunas" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+          p:url="/WEB-INF/templates/jrxml/rekap-nota-belum-lunas.jrxml"/>
     <bean id="api/report/get-nota" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView" 
           p:url="/WEB-INF/templates/jrxml/nota-nls.jrxml"
           p:reportDataKey="dataSource"

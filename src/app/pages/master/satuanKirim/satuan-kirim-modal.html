@@ -22,6 +22,26 @@
                         </span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-xs-3" >
+                        &nbsp;
+                    </div>
+                    <div class="col-sm-3 checkbox" >
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="supportPaket" ng-model="vm.supportPaket" ng-change="vm.supportUkuranKontainer = !vm.supportPaket">
+                            <span>Support Paket</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-2" >
+                        &nbsp;
+                    </div>
+                    <div class="col-sm-4 checkbox" >
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="supportUkuranKontainer" ng-model="vm.supportUkuranKontainer" ng-change="vm.supportPaket = !vm.supportUkuranKontainer">
+                            <span>Support Ukuran Kontainer</span>
+                        </label>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

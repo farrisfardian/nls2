@@ -140,6 +140,17 @@ public class ReportDao {
         System.out.println("getRincianNota: " + sql);
         return mr.mapList(sql);
     }
+   
+    /**
+     *
+     * @param idPembayaranNota
+     * @return Data invoice
+     */
+    public Object rekapNotaBelumLunas(String idToko, String idMerk, String tglAwal, String tglAkhir) {
+        String sql = "select *,total_tagihan-terbayar as sisa, fn_tanggal_ind(current_date) as tanggal, distinct_text(jenis_items,', ') as jenis_item from fn_get_rincian_nota(" + idToko + ", " + idMerk + ", '" + tglAwal + "', '" + tglAkhir + "') as (id int, nomor varchar, toko varchar, merk varchar, total_tagihan numeric, terbayar numeric, jenis_items text, kapal_berangkat text, tgl_awal_berangkat text, tgl_akhir_berangkat text, rincian_bayar text) where total_tagihan>terbayar";
+        System.out.println("getRincianNota: " + sql);
+        return mr.mapList(sql);
+    }
 
     public Object getRekapNotaTagihan(String idToko, String idMerk, String idKapal, String idKota, String tglAwal, String tglAkhir) {
         String sql = "select * from fn_rekap_nota_tagihan(" + idToko + ", " + idMerk + ", " + idKapal + ", " + idKota + ", '" + tglAwal + "', '" + tglAkhir + "') as (nomor varchar, min_bayar bool, jml_min_bayar double precision, jenis_item varchar, toko varchar, merk varchar, kapal varchar, no_kontainer varchar, tgl_berangkat date, total double precision, tanggal varchar)";

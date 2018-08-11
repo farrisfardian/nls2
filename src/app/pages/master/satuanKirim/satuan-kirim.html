@@ -14,6 +14,8 @@
                     <tr>
                         <td></td>
                         <td>Nama Satuan Kirim</td>
+                        <td>Support Paket</td>
+                        <td>Support Ukuran Kontainer</td>
                         <td>
                             <button class="btn btn-info editable-table-button btn-xs" ng-click="baru()">Tambah</button>
                         </td>
@@ -24,6 +26,12 @@
                         </td>
                         <td>
                             {{ c.nama || 'empty' }}
+                        </td>
+                        <td>
+                            <i class="glyphicon glyphicon-check" ng-show="c.supportPaket"></i>
+                        </td>
+                        <td>
+                            <i class="glyphicon glyphicon-check" ng-show="c.supportUkuranKontainer"></i>
                         </td>
                         <td>
                             <div class="buttons" >

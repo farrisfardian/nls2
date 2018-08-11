@@ -230,6 +230,13 @@
                         "stateRef": "laporan.rekap-nota"
                     },
                     {
+                        "name": "laporan.rekap-nota-belum-lunas", 
+                        "title": "Rekap Nota Belum Lunas", 
+                        "level": 1, 
+                        "order": 0, 
+                        "stateRef": "laporan.rekap-nota-belum-lunas"
+                    },
+                    {
                         "name": "laporan.rekap-pembayaran", 
                         "title": "Rekap Pembayaran", 
                         "level": 1, 

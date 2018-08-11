@@ -332,6 +332,32 @@ public class ReportController {
                 .addAttribute("tglAkhir", arrTglAkhir[2] + "/" + arrTglAkhir[1] + "/" + arrTglAkhir[0])
                 .addAttribute("dataSource", dao.getRincianNota(idToko, idMerk, tglAwal, tglAkhir));
     }
+    
+    @RequestMapping(value = "rekap-nota-belum-lunas*", method = RequestMethod.GET)
+    private ModelMap rekapNotaBelumLunas(HttpServletRequest request) throws ParseException {
+        String uri = request.getRequestURI();
+        String format = uri.substring(uri.lastIndexOf(".") + 1);
+
+        String idToko = request.getParameter("idToko");
+        String idMerk = request.getParameter("idMerk");
+        String tglAwal = request.getParameter("tglAwal");
+        String tglAkhir = request.getParameter("tglAkhir");
+        String[] arrTglAwal = tglAwal.split("-");
+        String[] arrTglAkhir = tglAkhir.split("-");
+        String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
+        realPath = realPath.replace("\\", "\\\\");
+        logger.warn("format: [{}]", format);
+
+        return new ModelMap()
+                //                .addAttribute("tanggal1", tg1)
+                //                .addAttribute("logo", realPath + "igg-kop.jpg")
+                .addAttribute("realPath", realPath)
+                .addAttribute("format", format)
+                .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
+                .addAttribute("tglAwal", arrTglAwal[2] + "/" + arrTglAwal[1] + "/" + arrTglAwal[0])
+                .addAttribute("tglAkhir", arrTglAkhir[2] + "/" + arrTglAkhir[1] + "/" + arrTglAkhir[0])
+                .addAttribute("dataSource", dao.rekapNotaBelumLunas(idToko, idMerk, tglAwal, tglAkhir));
+    }
 
     @RequestMapping(value = "kirim-email/get-rincian-nota*", method = RequestMethod.GET)
     private ModelMap kirimEmailGetRincianNota(HttpServletRequest request) throws ParseException {

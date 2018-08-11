@@ -30,6 +30,12 @@ public class SatuanKirim {
     @Column(length = 50)
     private String nama;
     
+    @Column(name = "support_paket")
+    private Boolean supportPaket;
+    
+    @Column(name = "support_ukuran_kontainer")
+    private Boolean supportUkuranKontainer;
+    
     public Integer getId() {
         return id;
     }
@@ -44,6 +50,34 @@ public class SatuanKirim {
 
     public void setNama(String nama) {
         this.nama = nama;
+    }
+
+    /**
+     * @return the supportPaket
+     */
+    public Boolean getSupportPaket() {
+        return supportPaket;
+    }
+
+    /**
+     * @param supportPaket the supportPaket to set
+     */
+    public void setSupportPaket(Boolean supportPaket) {
+        this.supportPaket = supportPaket;
+    }
+
+    /**
+     * @return the supportUkuranKontainer
+     */
+    public Boolean getSupportUkuranKontainer() {
+        return supportUkuranKontainer;
+    }
+
+    /**
+     * @param supportUkuranKontainer the supportUkuranKontainer to set
+     */
+    public void setSupportUkuranKontainer(Boolean supportUkuranKontainer) {
+        this.supportUkuranKontainer = supportUkuranKontainer;
     }
     
 }

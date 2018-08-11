@@ -1,0 +1,101 @@
+<div class="widgets">
+    <div class="row">
+        <div class="col-md-12">
+            <form name="form1">
+                <div ba-panel ba-panel-title="Rekap Nota Belum Lunas" >
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label" for="tglAwal">Tgl Brgkt Awal</label>
+                                </div>
+                                <div class="col-sm-3" >
+                                    <div class="input-group">
+                                        <input class="form-control" datetimepicker ng-model="param.tglAwal" options="options" name="tglAwal"/>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tglAwal.$error.required">
+                                            Harus Diisi
+                                        </span>                        
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="control-label" for="tglAkhir">Tgl Brgkt Akhir</label>
+                                </div>
+                                <div class="col-sm-3" >
+                                    <div class="input-group">
+                                        <input class="form-control" datetimepicker ng-model="param.tglAkhir" options="options" name="tglAkhir"/>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tglAkhir.$error.required">
+                                            Harus Diisi
+                                        </span>                        
+                                    </div>                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <label class="control-label" for="toko">Toko</label>
+                                </div>
+                                <div class="col-sm-4" ng-class="{error: form1.tokoTujuan.$invalid}">
+                                    <p class="input-group">
+                                        <label class="form-control" for="toko">{{param.tokoTujuan.nama}} - {{param.tokoTujuan.kota.nama}}</label>
+                                        <input type="hidden" class="form-control" ng-model="param.tokoTujuan.nama" name="tokoTujuan" ng-required="true"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="lookupToko()" ><i class="glyphicon glyphicon-search"></i></button>
+                                        </span>
+                                    </p>                                
+                                    <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.tokoTujuan.$error.required">
+                                        Harus Diisi
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-xs-2">
+                                    <label class="control-label" for="merkTujuan">Merk</label>
+                                </div>
+                                <div class="col-sm-10" ng-class="{error: form1.merkTujuan.$invalid}">
+                                    <p class="input-group">
+                                    <ui-select ng-model="param.merkTujuan"
+                                               class="btn-group bootstrap-select form-control"
+                                               ng-disabled="param.tokoTujuan === null || param.tokoTujuan === undefined"
+                                               append-to-body="true"
+                                               search-enabled="true" 
+                                               >
+                                        <ui-select-match placeholder="Pilih Merk">
+                                            {{$select.selected.nama}}
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                            repeat="item in param.tokoTujuan.listMerk| filter: $select.search">
+                                            <span ng-bind-html="item.nama"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="param.merkTujuan = null"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </span>
+                                    </p>                                
+                                </div>                                                                              
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="col-sm-offset-9 col-sm-3">
+                                    <button type="button" class="btn btn-primary" ng-click="cetak('pdf')" ng-disabled="form1.$invalid">Cetak</button>
+                                    <button type="button" class="btn btn-primary" ng-click="cetak('xlsx')" ng-disabled="form1.$invalid">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

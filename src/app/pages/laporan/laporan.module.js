@@ -127,6 +127,19 @@
                         order: 0,
                     },
                 })
+                .state('laporan.rekap-nota-belum-lunas', {
+                    url: '/rekap-nota-belum-lunas',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/laporan/rekapNotaBelumLunas/rekapNotaBelumLunas.html',
+                            controller: 'RekapNotaBelumLunasCtrl'
+                        }
+                    },
+                    title: 'Rekap Nota Belum Lunas',
+                    sidebarMeta: {
+                        order: 0,
+                    },
+                })
                 .state('laporan.rekap-pembayaran', {
                     url: '/rekap-pembayaran',
                     views: {

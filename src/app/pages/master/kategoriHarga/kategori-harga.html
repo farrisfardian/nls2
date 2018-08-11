@@ -105,21 +105,21 @@
                                 </div>
                             </div>                    
                             <div class="form-group">
-                                <div class="col-xs-2" ng-show="vm.satuanKirim.nama === 'LCL'">
+                                <div class="col-xs-2" ng-show="vm.satuanKirim.supportPaket === true">
                                     &nbsp;
                                 </div>
-                                <div class="col-sm-4 checkbox" ng-show="vm.satuanKirim.nama === 'LCL'">
+                                <div class="col-sm-4 checkbox" ng-show="vm.satuanKirim.supportPaket === true">
                                     <label class="custom-checkbox">
                                         <input type="checkbox" id="aktif" ng-model="vm.paket">
                                         <span>Paket</span>
                                     </label>
                                 </div>
-                                <div class="col-xs-2" ng-show="vm.satuanKirim.nama === 'FCL'">
+                                <div class="col-xs-2" ng-show="vm.satuanKirim.supportUkuranKontainer === true">
                                     Ukuran Kontainer
                                 </div>
-                                <div class="col-sm-4" ng-show="vm.satuanKirim.nama === 'FCL'">
+                                <div class="col-sm-4" ng-show="vm.satuanKirim.supportUkuranKontainer === true">
                                     <div class="input-group">
-                                        <select class="form-control" ng-model="vm.ukuranKontainer" ng-required="vm.satuanKirim.nama==='FCL'" name="ukuranKontainer" >
+                                        <select class="form-control" ng-model="vm.ukuranKontainer" ng-required="vm.satuanKirim..supportUkuranKontainer === true" name="ukuranKontainer" >
                                             <option ng-repeat="x in listUkuranKontainer" ng-value="x">{{x}}</option>
                                         </select>
                                         <span style="float:right; color:white" class="help-block label label-danger" ng-show="formDialog.ukuranKontainer.$error.required">
