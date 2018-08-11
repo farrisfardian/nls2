@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="col-sm-4" ng-show="vm.satuanKirim.supportUkuranKontainer === true">
                                     <div class="input-group">
-                                        <select class="form-control" ng-model="vm.ukuranKontainer" ng-required="vm.satuanKirim..supportUkuranKontainer === true" name="ukuranKontainer" >
+                                        <select class="form-control" ng-model="vm.ukuranKontainer" ng-required="vm.satuanKirim.supportUkuranKontainer === true" name="ukuranKontainer" >
                                             <option ng-repeat="x in listUkuranKontainer" ng-value="x">{{x}}</option>
                                         </select>
                                         <span style="float:right; color:white" class="help-block label label-danger" ng-show="formDialog.ukuranKontainer.$error.required">
