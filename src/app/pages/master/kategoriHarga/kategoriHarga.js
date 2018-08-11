@@ -73,6 +73,12 @@
         };
 
         $scope.simpan = function () {
+            if(vm.satuanKirim.supportPaket === true){
+                vm.ukuranKontainer=null;
+            }
+            if(vm.satuanKirim.supportUkuranKontainer === true){
+                vm.paket=null;
+            }
             KategoriHargaService.simpan($scope.vm, $scope.ori).success(function (d) {
                 toastr.success('Simpan data sukses!');
                 $scope.clear();
