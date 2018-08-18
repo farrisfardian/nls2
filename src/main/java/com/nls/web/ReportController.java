@@ -332,7 +332,7 @@ public class ReportController {
                 .addAttribute("tglAkhir", arrTglAkhir[2] + "/" + arrTglAkhir[1] + "/" + arrTglAkhir[0])
                 .addAttribute("dataSource", dao.getRincianNota(idToko, idMerk, tglAwal, tglAkhir));
     }
-    
+
     @RequestMapping(value = "rekap-nota-belum-lunas*", method = RequestMethod.GET)
     private ModelMap rekapNotaBelumLunas(HttpServletRequest request) throws ParseException {
         String uri = request.getRequestURI();
@@ -380,10 +380,10 @@ public class ReportController {
             JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlPath);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             SettingAplikasi lastByTgl = settingAplikasiDao.getLastByTgl(sdf.format(new Date()));
-            
+
             Map<String, Object> totalTerbilangByRincianNota = (Map<String, Object>) dao.getTotalTerbilangByRincianNota(idToko, idMerk, tglAwal, tglAkhir);
             List<Map<String, Object>> report = (List<Map<String, Object>>) dao.getRincianNota(idToko, idMerk, tglAwal, tglAkhir);
-            
+
             ModelMap parameters = new ModelMap().addAttribute("realPath", realPath)
                     .addAttribute("format", format)
                     .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
@@ -399,12 +399,12 @@ public class ReportController {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             JasperExportManager.exportReportToPdfStream(fillReport, baos);
             DataSource attachment = new ByteArrayDataSource(baos.toByteArray(), "application/pdf");
-            attachments.put("RINCIAN_NOTA_"+(String) report.get(0).get("tgl_awal_berangkat")+"_sd_"+(String) report.get(0).get("tgl_akhir_berangkat")+"_"+(String) report.get(0).get("toko") + ".PDF", attachment);            
-            
+            attachments.put("RINCIAN_NOTA_" + (String) report.get(0).get("tgl_awal_berangkat") + "_sd_" + (String) report.get(0).get("tgl_akhir_berangkat") + "_" + (String) report.get(0).get("toko") + ".PDF", attachment);
+
             EmailSender emailSender = new EmailSender(lastByTgl.getEmailAplikasi(), lastByTgl.getPasswordEmailAplikasi(), lastByTgl.getMailSmtpHost(), lastByTgl.getMailSmtpAuth(), lastByTgl.getMailSmtpPort());
             emailSender.kirimEmail(email, subjek, isi, attachments);
             logger.warn("format: [{}]", format);
-            
+
             return new ModelMap()
                     .addAttribute("message", "Kirim email sukses");
         } catch (JRException ex) {
@@ -450,7 +450,7 @@ public class ReportController {
                 .addAttribute("tglAkhir", arrTglAkhir[2] + "/" + arrTglAkhir[1] + "/" + arrTglAkhir[0])
                 .addAttribute("dataSource", dao.getRekapNotaTagihan(idToko, idMerk, idKapal, idKotaTujuan, tglAwal, tglAkhir));
     }
-    
+
     @RequestMapping(value = "get-rekap-pembayaran*", method = RequestMethod.GET)
     private ModelMap getRekapPembayaran(HttpServletRequest request) throws ParseException {
         String uri = request.getRequestURI();
@@ -458,12 +458,15 @@ public class ReportController {
 
         String tglAwal = request.getParameter("tglAwal");
         String tglAkhir = request.getParameter("tglAkhir");
+        String idKapalBerangkat = request.getParameter("idKapalBerangkat");
         String[] arrTglAwal = tglAwal.split("-");
         String[] arrTglAkhir = tglAkhir.split("-");
         String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
         realPath = realPath.replace("\\", "\\\\");
         logger.warn("format: [{}]", format);
-
+        System.out.println("tglAwal = " + tglAwal + ", tglAkhir = " + tglAkhir + ", idKapalBerangkat = " + idKapalBerangkat);
+        idKapalBerangkat = idKapalBerangkat.equalsIgnoreCase("null") ? "null" : "ARRAY[" + idKapalBerangkat + "]";
+        
         return new ModelMap()
                 //                .addAttribute("tanggal1", tg1)
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
@@ -472,7 +475,8 @@ public class ReportController {
                 .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("tglAwal", arrTglAwal[2] + "/" + arrTglAwal[1] + "/" + arrTglAwal[0])
                 .addAttribute("tglAkhir", arrTglAkhir[2] + "/" + arrTglAkhir[1] + "/" + arrTglAkhir[0])
-                .addAttribute("dataSource", dao.getRekapPembayaran(tglAwal, tglAkhir));
+                .addAttribute("dataSource", dao.getRekapPembayaran(tglAwal, tglAkhir, idKapalBerangkat))
+                ;
     }
 
     @RequestMapping(value = "get-pembayaran-nota*", method = RequestMethod.GET)

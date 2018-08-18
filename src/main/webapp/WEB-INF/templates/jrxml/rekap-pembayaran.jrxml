@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2018-05-27T16:41:00 -->
+<!-- 2018-08-18T11:22:34 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nota-nls" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e51cd78-67de-4253-a5af-029e0e769742">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -50,8 +50,7 @@
 	<parameter name="tglAwal" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="tglAkhir" class="java.lang.String" isForPrompting="false"/>
 	<queryString language="SQL">
-		<![CDATA[select *, fn_tanggal_ind(current_date) as tanggal from fn_rekap_pembayaran_per_berangkat('2018-01-01', '2018-11-30') as (nota_tagihan varchar, nota_bayar varchar, tgl_bayar date, kapal varchar, tgl_berangkat date, tagihan_kapal double precision, tot_tagihan_nota double precision, prosentase double precision, tot_terbayar numeric, terbayar_kapal double precision)
-]]>
+		<![CDATA[select *, fn_tanggal_ind(current_date) as tanggal from fn_rekap_pembayaran_per_berangkat('2018-05-01', '2018-08-18', ARRAY[240]) as (nota_tagihan varchar, nota_bayar varchar, tgl_bayar date, kapal varchar, tgl_berangkat date, tagihan_kapal double precision, tot_tagihan_nota double precision, prosentase double precision, tot_terbayar numeric, terbayar_kapal double precision, semua_kapal text)]]>
 	</queryString>
 	<field name="kapal" class="java.lang.String"/>
 	<field name="tgl_berangkat" class="java.sql.Date"/>
@@ -64,6 +63,7 @@
 	<field name="tot_terbayar" class="java.math.BigDecimal"/>
 	<field name="terbayar_kapal" class="java.lang.Double"/>
 	<field name="tanggal" class="java.lang.String"/>
+	<field name="semua_kapal" class="java.lang.String"/>
 	<variable name="totalPerKapalBerangkat" class="java.lang.Double" resetType="Group" resetGroup="kapalBerangkat" calculation="Sum">
 		<variableExpression><![CDATA[$F{terbayar_kapal}]]></variableExpression>
 	</variable>
@@ -263,6 +263,7 @@
 				<reportElement positionType="Float" x="1" y="69" width="801" height="15" uuid="9267b905-fd6b-4dba-b545-af6afc2edf9b">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{semua_kapal}==null]]></printWhenExpression>
 				</reportElement>
 				<textElement>
 					<font fontName="SansSerif" size="11"/>

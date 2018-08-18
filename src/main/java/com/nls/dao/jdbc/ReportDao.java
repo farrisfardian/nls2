@@ -140,7 +140,7 @@ public class ReportDao {
         System.out.println("getRincianNota: " + sql);
         return mr.mapList(sql);
     }
-   
+
     /**
      *
      * @param idPembayaranNota
@@ -158,8 +158,8 @@ public class ReportDao {
         return mr.mapList(sql);
     }
 
-    public Object getRekapPembayaran(String tglAwal, String tglAkhir) {
-        String sql = "select *, fn_tanggal_ind(current_date) as tanggal from fn_rekap_pembayaran_per_berangkat('" + tglAwal + "', '" + tglAkhir + "') as (nota_tagihan varchar, nota_bayar varchar, tgl_bayar date, kapal varchar, tgl_berangkat date, tagihan_kapal double precision, tot_tagihan_nota double precision, prosentase double precision, tot_terbayar numeric, terbayar_kapal double precision)";
+    public Object getRekapPembayaran(String tglAwal, String tglAkhir, String kapalBerangkat) {
+        String sql = "select *, fn_tanggal_ind(current_date) as tanggal from fn_rekap_pembayaran_per_berangkat('" + tglAwal + "', '" + tglAkhir + "', " + kapalBerangkat + ") as (nota_tagihan varchar, nota_bayar varchar, tgl_bayar date, kapal varchar, tgl_berangkat date, tagihan_kapal double precision, tot_tagihan_nota double precision, prosentase double precision, tot_terbayar numeric, terbayar_kapal double precision, semua_kapal text)";
         System.out.println("getRekapPembayaran: " + sql);
         return mr.mapList(sql);
     }
