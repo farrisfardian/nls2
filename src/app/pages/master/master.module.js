@@ -180,6 +180,71 @@
                         order: 0,
                     },
                 })
+                .state('master.kategori-barang', {
+                    url: '/kategori-barang',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/master/kategoriBarang/kategori-barang.html',
+                            controller: 'KategoriBarangCtrl',
+                        }
+                    },
+                    title: 'Kategori Barang',
+                    sidebarMeta: {
+                        order: 0,
+                    },
+                })
+                .state('master.pelayaran', {
+                    url: '/pelayaran',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/master/pelayaran/pelayaran.html',
+                            controller: 'PelayaranCtrl',
+                        }
+                    },
+                    title: 'Pelayaran',
+                    sidebarMeta: {
+                        order: 0,
+                    },
+                })
+                .state('master.pricelist-pelayaran', {
+                    url: '/pricelist-pelayaran',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/master/pricelistPelayaran/pricelist-pelayaran.html',
+                            controller: 'PricelistPelayaranCtrl',
+                        }
+                    },
+                    title: 'Pricelist Pelayaran',
+                    sidebarMeta: {
+                        order: 0,
+                    },
+                })
+                .state('master.dooring', {
+                    url: '/dooring',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/master/dooring/dooring.html',
+                            controller: 'DooringCtrl',
+                        }
+                    },
+                    title: 'Setting Dooring',
+                    sidebarMeta: {
+                        order: 0,
+                    },
+                })
+                .state('master.provit', {
+                    url: '/provit',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/master/provit/provit.html',
+                            controller: 'ProvitCtrl',
+                        }
+                    },
+                    title: 'Setting Provit',
+                    sidebarMeta: {
+                        order: 0,
+                    },
+                })
                 .state('master.setting-harga', {
                     url: '/setting-harga',
                     views: {

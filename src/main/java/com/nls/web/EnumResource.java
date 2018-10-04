@@ -5,6 +5,7 @@
  */
 package com.nls.web;
 
+import com.nls.constant.JenisStuffing;
 import com.nls.constant.UkuranKontainer;
 import com.nls.constant.UkuranPaket;
 import org.slf4j.Logger;
@@ -33,5 +34,10 @@ public class EnumResource {
     @RequestMapping(value = "/ukuran-kontainer", method = RequestMethod.GET)
     public UkuranKontainer[] getEnumUkuranKontainer() {
         return UkuranKontainer.values();
+    }
+    
+    @RequestMapping(value = "/jenis-stuffing", method = RequestMethod.GET)
+    public JenisStuffing[] getEnumJenisStuffing() {
+        return JenisStuffing.values();
     }
 }

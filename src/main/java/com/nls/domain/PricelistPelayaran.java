@@ -5,28 +5,29 @@
  */
 package com.nls.domain;
 
-import com.nls.constant.JenisStuffing;
-import com.nls.constant.UkuranKontainer;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author faheem
  */
 @Entity
-@Table(name = "setting_pricelist_pelayaran")
+@Table(name = "setting_pricelist_pelayaran", uniqueConstraints = @UniqueConstraint(columnNames = {"id_kota_asal", "id_kota_tujuan", "id_pelayaran", "tgl_berlaku", "id_satuan_kirim"}))
 public class PricelistPelayaran {
 
     @Id
@@ -34,11 +35,8 @@ public class PricelistPelayaran {
     private Integer id;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "tmt_berlaku")
-    private Date tmtBerlaku;
-
-    @Column(name = "harga")
-    private Double harga;
+    @Column(name = "tgl_berlaku")
+    private Date tglBerlaku;
 
     @ManyToOne
     @JoinColumn(name = "id_kota_tujuan")
@@ -49,10 +47,6 @@ public class PricelistPelayaran {
     private Kota kotaAsal;
 
     @ManyToOne
-    @JoinColumn(name = "id_kategori_barang")
-    private KategoriBarang kategoriBarang;
-
-    @ManyToOne
     @JoinColumn(name = "id_pelayaran")
     private Pelayaran pelayaran;
 
@@ -60,13 +54,9 @@ public class PricelistPelayaran {
     @JoinColumn(name = "id_satuan_kirim")
     private SatuanKirim satuanKirim;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "jenis_stuffing")
-    private JenisStuffing jenisStuffing;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "ukuran_kontainer")
-    private UkuranKontainer ukuranKontainer;
+    @OneToMany(mappedBy = "pricelist", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private Set<PricelistPelayaranDetail> listDetail;
 
     public Integer getId() {
         return id;
@@ -74,20 +64,6 @@ public class PricelistPelayaran {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    /**
-     * @return the harga
-     */
-    public Double getHarga() {
-        return harga;
-    }
-
-    /**
-     * @param harga the harga to set
-     */
-    public void setHarga(Double harga) {
-        this.harga = harga;
     }
 
     /**
@@ -105,31 +81,73 @@ public class PricelistPelayaran {
     }
 
     /**
-     * @return the kategoriBarang
+     * @return the tglBerlaku
      */
-    public KategoriBarang getKategoriBarang() {
-        return kategoriBarang;
+    public Date getTglBerlaku() {
+        return tglBerlaku;
     }
 
     /**
-     * @param kategoriBarang the kategoriBarang to set
+     * @param tglBerlaku the tglBerlaku to set
      */
-    public void setKategoriBarang(KategoriBarang kategoriBarang) {
-        this.kategoriBarang = kategoriBarang;
+    public void setTglBerlaku(Date tglBerlaku) {
+        this.tglBerlaku = tglBerlaku;
     }
 
     /**
-     * @return the tmtBerlaku
+     * @return the kotaAsal
      */
-    public Date getTmtBerlaku() {
-        return tmtBerlaku;
+    public Kota getKotaAsal() {
+        return kotaAsal;
     }
 
     /**
-     * @param tmtBerlaku the tmtBerlaku to set
+     * @param kotaAsal the kotaAsal to set
      */
-    public void setTmtBerlaku(Date tmtBerlaku) {
-        this.tmtBerlaku = tmtBerlaku;
+    public void setKotaAsal(Kota kotaAsal) {
+        this.kotaAsal = kotaAsal;
+    }
+
+    /**
+     * @return the pelayaran
+     */
+    public Pelayaran getPelayaran() {
+        return pelayaran;
+    }
+
+    /**
+     * @param pelayaran the pelayaran to set
+     */
+    public void setPelayaran(Pelayaran pelayaran) {
+        this.pelayaran = pelayaran;
+    }
+
+    /**
+     * @return the satuanKirim
+     */
+    public SatuanKirim getSatuanKirim() {
+        return satuanKirim;
+    }
+
+    /**
+     * @param satuanKirim the satuanKirim to set
+     */
+    public void setSatuanKirim(SatuanKirim satuanKirim) {
+        this.satuanKirim = satuanKirim;
+    }
+
+    /**
+     * @return the listDetail
+     */
+    public Set<PricelistPelayaranDetail> getListDetail() {
+        return listDetail;
+    }
+
+    /**
+     * @param listDetail the listDetail to set
+     */
+    public void setListDetail(Set<PricelistPelayaranDetail> listDetail) {
+        this.listDetail = listDetail;
     }
 
 }

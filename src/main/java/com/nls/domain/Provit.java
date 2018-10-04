@@ -27,8 +27,8 @@ import javax.persistence.UniqueConstraint;
  * @author faheem
  */
 @Entity
-@Table(name = "setting_komponen_biaya", uniqueConstraints = @UniqueConstraint(columnNames = {"id_kota_tujuan", "tgl_berlaku"}))
-public class SettingKomponenBiaya {
+@Table(name = "setting_provit", uniqueConstraints = @UniqueConstraint(columnNames = {"id_kota_asal", "tgl_berlaku"}))
+public class Provit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,12 +39,12 @@ public class SettingKomponenBiaya {
     private Date tglBerlaku;
 
     @ManyToOne
-    @JoinColumn(name = "id_kota_tujuan")
-    private Kota kotaTujuan;
+    @JoinColumn(name = "id_kota_asal")
+    private Kota kotaAsal;
 
-    @OneToMany(mappedBy = "settingKomponenBiaya", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "provit", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
-    private Set<SettingKomponenBiayaDetail> listDetail;
+    private Set<ProvitDetail> listDetail;
 
     public Integer getId() {
         return id;
@@ -52,20 +52,6 @@ public class SettingKomponenBiaya {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    /**
-     * @return the kotaTujuan
-     */
-    public Kota getKotaTujuan() {
-        return kotaTujuan;
-    }
-
-    /**
-     * @param kotaTujuan the kotaTujuan to set
-     */
-    public void setKotaTujuan(Kota kotaTujuan) {
-        this.kotaTujuan = kotaTujuan;
     }
 
     /**
@@ -83,16 +69,30 @@ public class SettingKomponenBiaya {
     }
 
     /**
+     * @return the kotaAsal
+     */
+    public Kota getKotaAsal() {
+        return kotaAsal;
+    }
+
+    /**
+     * @param kotaAsal the kotaAsal to set
+     */
+    public void setKotaAsal(Kota kotaAsal) {
+        this.kotaAsal = kotaAsal;
+    }
+
+    /**
      * @return the listDetail
      */
-    public Set<SettingKomponenBiayaDetail> getListDetail() {
+    public Set<ProvitDetail> getListDetail() {
         return listDetail;
     }
 
     /**
      * @param listDetail the listDetail to set
      */
-    public void setListDetail(Set<SettingKomponenBiayaDetail> listDetail) {
+    public void setListDetail(Set<ProvitDetail> listDetail) {
         this.listDetail = listDetail;
     }
 

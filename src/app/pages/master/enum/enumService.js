@@ -11,7 +11,8 @@
         var url = 'api/master/enum';
         return {
             getUkuranPaket: getUkuranPaket,
-            getUkuranKontainer: getUkuranKontainer
+            getUkuranKontainer: getUkuranKontainer,
+            getJenisStuffing: getJenisStuffing
         }
 
 //        return service;
@@ -24,6 +25,9 @@
         
         function getUkuranKontainer() {
             return $http.get(url + '/ukuran-kontainer');
+        }
+        function getJenisStuffing() {
+            return $http.get(url + '/jenis-stuffing');
         }
     }
 

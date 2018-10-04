@@ -27,8 +27,8 @@ import javax.persistence.UniqueConstraint;
  * @author faheem
  */
 @Entity
-@Table(name = "setting_komponen_biaya", uniqueConstraints = @UniqueConstraint(columnNames = {"id_kota_tujuan", "tgl_berlaku"}))
-public class SettingKomponenBiaya {
+@Table(name = "setting_dooring", uniqueConstraints = @UniqueConstraint(columnNames = {"id_kota_asal", "id_kota_tujuan", "tgl_berlaku"}))
+public class Dooring {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,9 +42,13 @@ public class SettingKomponenBiaya {
     @JoinColumn(name = "id_kota_tujuan")
     private Kota kotaTujuan;
 
-    @OneToMany(mappedBy = "settingKomponenBiaya", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "id_kota_asal")
+    private Kota kotaAsal;
+
+    @OneToMany(mappedBy = "dooring", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
-    private Set<SettingKomponenBiayaDetail> listDetail;
+    private Set<DooringDetail> listDetail;
 
     public Integer getId() {
         return id;
@@ -83,16 +87,30 @@ public class SettingKomponenBiaya {
     }
 
     /**
+     * @return the kotaAsal
+     */
+    public Kota getKotaAsal() {
+        return kotaAsal;
+    }
+
+    /**
+     * @param kotaAsal the kotaAsal to set
+     */
+    public void setKotaAsal(Kota kotaAsal) {
+        this.kotaAsal = kotaAsal;
+    }
+
+    /**
      * @return the listDetail
      */
-    public Set<SettingKomponenBiayaDetail> getListDetail() {
+    public Set<DooringDetail> getListDetail() {
         return listDetail;
     }
 
     /**
      * @param listDetail the listDetail to set
      */
-    public void setListDetail(Set<SettingKomponenBiayaDetail> listDetail) {
+    public void setListDetail(Set<DooringDetail> listDetail) {
         this.listDetail = listDetail;
     }
 

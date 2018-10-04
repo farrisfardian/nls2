@@ -124,6 +124,41 @@
                         "level": 1, 
                         "order": 0, 
                         "stateRef": "master.rekening"
+                    }, 
+                    {
+                        "name": "master.kategori-barang", 
+                        "title": "Kategori Barang", 
+                        "level": 1, 
+                        "order": 0, 
+                        "stateRef": "master.kategori-barang"
+                    },
+                    {
+                        "name": "master.pelayaran", 
+                        "title": "Pelayaran", 
+                        "level": 1, 
+                        "order": 0, 
+                        "stateRef": "master.pelayaran"
+                    },
+                    {
+                        "name": "master.pricelist-pelayaran", 
+                        "title": "Pricelist Pelayaran", 
+                        "level": 1, 
+                        "order": 0, 
+                        "stateRef": "master.pricelist-pelayaran"
+                    },
+                    {
+                        "name": "master.dooring", 
+                        "title": "Setting Dooring", 
+                        "level": 1, 
+                        "order": 0, 
+                        "stateRef": "master.dooring"
+                    },
+                    {
+                        "name": "master.provit", 
+                        "title": "Setting Provit", 
+                        "level": 1, 
+                        "order": 0, 
+                        "stateRef": "master.provit"
                     }
                 ]
             }, 
