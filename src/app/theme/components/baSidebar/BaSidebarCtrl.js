@@ -14,275 +14,286 @@
 //        $scope.menuItems = baSidebarService.getMenuItems();
         $scope.menuItems = [
             {
-                "name": "master", 
-                "title": "Master", 
-                "level": 0, "order": 100, 
-                "icon": "ion-compose", 
-                "stateRef": "master", 
+                "name": "master",
+                "title": "Master",
+                "level": 0, "order": 100,
+                "icon": "ion-compose",
+                "stateRef": "master",
                 "subMenu": [
                     {
-                        "name": "master.item", 
-                        "title": "Item", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.item",
+                        "title": "Item",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.item"
-                    }, 
+                    },
                     {
-                        "name": "master.tambahan-biaya", 
-                        "title": "Tambahan Biaya", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.tambahan-biaya",
+                        "title": "Tambahan Biaya",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.tambahan-biaya"
-                    }, 
+                    },
                     {
-                        "name": "master.jenis-item", 
-                        "title": "Jenis Item", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.jenis-item",
+                        "title": "Jenis Item",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.jenis-item"
-                    }, 
+                    },
                     {
-                        "name": "master.kapal", 
-                        "title": "Kapal", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.kapal",
+                        "title": "Kapal",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.kapal"
-                    }, 
+                    },
                     {
-                        "name": "master.kota", 
-                        "title": "Kota", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.kota",
+                        "title": "Kota",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.kota"
-                    }, 
+                    },
                     {
-                        "name": "master.satuan-kirim", 
-                        "title": "Satuan Kirim", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.satuan-kirim",
+                        "title": "Satuan Kirim",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.satuan-kirim"
-                    }, 
+                    },
                     {
-                        "name": "master.kondisi", 
-                        "title": "Kondisi", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.kondisi",
+                        "title": "Kondisi",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.kondisi"
-                    }, 
+                    },
                     {
-                        "name": "master.toko", 
-                        "title": "Toko", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.toko",
+                        "title": "Toko",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.toko"
-                    }, 
+                    },
                     {
-                        "name": "master.emkl", 
-                        "title": "EMKL", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.emkl",
+                        "title": "EMKL",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.emkl"
-                    }, 
+                    },
                     {
-                        "name": "master.kapal-berangkat", 
-                        "title": "Kapal Berangkat", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.kapal-berangkat",
+                        "title": "Kapal Berangkat",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.kapal-berangkat"
-                    }, 
+                    },
                     {
-                        "name": "master.kategori-harga", 
-                        "title": "Kategori Harga", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.kategori-harga",
+                        "title": "Kategori Harga",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.kategori-harga"
-                    }, 
+                    },
                     {
-                        "name": "master.setting-harga", 
-                        "title": "Setting Harga", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.setting-harga",
+                        "title": "Setting Harga",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.setting-harga"
-                    }, 
+                    },
                     {
-                        "name": "master.setting-aplikasi", 
-                        "title": "Setting Aplikasi", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.setting-aplikasi",
+                        "title": "Setting Aplikasi",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.setting-aplikasi"
-                    }, 
+                    },
                     {
-                        "name": "master.jenis-pembayaran", 
-                        "title": "Jenis Pembayaran", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.jenis-pembayaran",
+                        "title": "Jenis Pembayaran",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.jenis-pembayaran"
-                    }, 
+                    },
                     {
-                        "name": "master.rekening", 
-                        "title": "Rekening", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.rekening",
+                        "title": "Rekening",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.rekening"
-                    }, 
+                    },
                     {
-                        "name": "master.kategori-barang", 
-                        "title": "Kategori Barang", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.kategori-barang",
+                        "title": "Kategori Barang",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.kategori-barang"
                     },
                     {
-                        "name": "master.pelayaran", 
-                        "title": "Pelayaran", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "master.pelayaran",
+                        "title": "Pelayaran",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "master.pelayaran"
                     },
-                    {
-                        "name": "master.pricelist-pelayaran", 
-                        "title": "Pricelist Pelayaran", 
-                        "level": 1, 
-                        "order": 0, 
-                        "stateRef": "master.pricelist-pelayaran"
-                    },
-                    {
-                        "name": "master.dooring", 
-                        "title": "Setting Dooring", 
-                        "level": 1, 
-                        "order": 0, 
-                        "stateRef": "master.dooring"
-                    },
-                    {
-                        "name": "master.provit", 
-                        "title": "Setting Provit", 
-                        "level": 1, 
-                        "order": 0, 
-                        "stateRef": "master.provit"
-                    }
+                    
                 ]
-            }, 
+            },
             {
-                "name": "transaksi", 
-                "title": "Transaksi", 
-                "level": 0, 
-                "order": 200, 
-                "icon": "ion-map", 
-                "stateRef": "transaksi", 
+                "name": "pricelist",
+                "title": "Pricelist",
+                "level": 0,
+                "order": 200,
+                "icon": "ion-map",
+                "stateRef": "pricelist",
                 "subMenu": [
                     {
-                        "name": "transaksi.stuffing", 
-                        "title": "Stuffing", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "pricelist.pricelist-pelayaran",
+                        "title": "Pricelist Pelayaran",
+                        "level": 1,
+                        "order": 0,
+                        "stateRef": "pricelist.pricelist-pelayaran"
+                    },
+                    {
+                        "name": "pricelist.dooring",
+                        "title": "Setting Dooring",
+                        "level": 1,
+                        "order": 0,
+                        "stateRef": "pricelist.dooring"
+                    },
+                    {
+                        "name": "pricelist.provit",
+                        "title": "Setting Provit",
+                        "level": 1,
+                        "order": 0,
+                        "stateRef": "pricelist.provit"
+                    }
+                ]
+            },
+            {
+                "name": "transaksi",
+                "title": "Transaksi",
+                "level": 0,
+                "order": 200,
+                "icon": "ion-map",
+                "stateRef": "transaksi",
+                "subMenu": [
+                    {
+                        "name": "transaksi.stuffing",
+                        "title": "Stuffing",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "transaksi.stuffing"
-                    }, 
+                    },
                     {
-                        "name": "transaksi.listsuratjalan", 
-                        "title": "List Surat Jalan", 
-                        "level": 1, 
-                        "order": 100, 
+                        "name": "transaksi.listsuratjalan",
+                        "title": "List Surat Jalan",
+                        "level": 1,
+                        "order": 100,
                         "stateRef": "transaksi.listsuratjalan"
-                    }, 
+                    },
                     {
-                        "name": "transaksi.suratjalan", 
-                        "title": "Surat Jalan", 
-                        "level": 1, 
-                        "order": 100, 
+                        "name": "transaksi.suratjalan",
+                        "title": "Surat Jalan",
+                        "level": 1,
+                        "order": 100,
                         "stateRef": "transaksi.suratjalan"
                     },
                     {
-                        "name": "transaksi.nota", 
-                        "title": "Nota", 
-                        "level": 1, 
-                        "order": 100, 
+                        "name": "transaksi.nota",
+                        "title": "Nota",
+                        "level": 1,
+                        "order": 100,
                         "stateRef": "transaksi.nota"
                     },
                     {
-                        "name": "transaksi.pembayaran", 
-                        "title": "Pembayaran", 
-                        "level": 1, 
-                        "order": 100, 
+                        "name": "transaksi.pembayaran",
+                        "title": "Pembayaran",
+                        "level": 1,
+                        "order": 100,
                         "stateRef": "transaksi.pembayaran"
                     }
                 ]
-            }, 
+            },
             {
-                "name": "laporan", 
-                "title": "Laporan", 
-                "level": 0, 
-                "order": 300, 
-                "icon": "ion-compose", 
-                "stateRef": "laporan", 
+                "name": "laporan",
+                "title": "Laporan",
+                "level": 0,
+                "order": 300,
+                "icon": "ion-compose",
+                "stateRef": "laporan",
                 "subMenu": [
                     {
-                        "name": "laporan.dashboard", 
-                        "title": "Dashboard", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "laporan.dashboard",
+                        "title": "Dashboard",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "laporan.dashboard"
-                    }, 
+                    },
                     {
-                        "name": "laporan.pertoko", 
-                        "title": "Per Toko", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "laporan.pertoko",
+                        "title": "Per Toko",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "laporan.pertoko"
                     },
                     {
-                        "name": "laporan.perkapal", 
-                        "title": "Stuffing / Kapal", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "laporan.perkapal",
+                        "title": "Stuffing / Kapal",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "laporan.perkapal"
                     },
                     {
-                        "name": "laporan.infoitem", 
-                        "title": "Info Item", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "laporan.infoitem",
+                        "title": "Info Item",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "laporan.infoitem"
                     },
                     {
-                        "name": "laporan.container", 
-                        "title": "Jml Container Bulanan", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "laporan.container",
+                        "title": "Jml Container Bulanan",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "laporan.container"
                     },
                     {
-                        "name": "laporan.rincian-nota", 
-                        "title": "Rincian Nota", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "laporan.rincian-nota",
+                        "title": "Rincian Nota",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "laporan.rincian-nota"
                     },
                     {
-                        "name": "laporan.rekap-nota", 
-                        "title": "Rekap Nota", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "laporan.rekap-nota",
+                        "title": "Rekap Nota",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "laporan.rekap-nota"
                     },
                     {
-                        "name": "laporan.rekap-nota-belum-lunas", 
-                        "title": "Rekap Nota Belum Lunas", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "laporan.rekap-nota-belum-lunas",
+                        "title": "Rekap Nota Belum Lunas",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "laporan.rekap-nota-belum-lunas"
                     },
                     {
-                        "name": "laporan.rekap-pembayaran", 
-                        "title": "Rekap Pembayaran", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "laporan.rekap-pembayaran",
+                        "title": "Rekap Pembayaran",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "laporan.rekap-pembayaran"
                     },
                     {
-                        "name": "laporan.tracking-kapal", 
-                        "title": "Tracking Kapal", 
-                        "level": 1, 
-                        "order": 0, 
+                        "name": "laporan.tracking-kapal",
+                        "title": "Tracking Kapal",
+                        "level": 1,
+                        "order": 0,
                         "stateRef": "laporan.tracking-kapal"
                     }
                 ]
@@ -354,7 +365,6 @@
                         "order": 200,
                         "stateRef": "master.matauang"
                     },
-                    
                 ]
             },
         ];

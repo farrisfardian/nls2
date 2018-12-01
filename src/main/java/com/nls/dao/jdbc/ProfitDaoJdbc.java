@@ -21,12 +21,12 @@ import org.springframework.ui.ModelMap;
  * @author faheem
  */
 @Repository
-public class ProvitDaoJdbc {
+public class ProfitDaoJdbc {
 
     @Autowired
     MapResultSet mr;
 
-    private final org.slf4j.Logger logger = LoggerFactory.getLogger(ProvitDaoJdbc.class);
+    private final org.slf4j.Logger logger = LoggerFactory.getLogger(ProfitDaoJdbc.class);
 
     public Object listProvit(String idKotaAsal, String tglBerlaku, PageRequest page) {
         ModelMap mm = new ModelMap();

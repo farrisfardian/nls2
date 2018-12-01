@@ -35,10 +35,10 @@ public class PricelistPelayaranDaoJdbc {
         System.out.println("tanggal1: " + tglBerlaku);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String query = "select * from fn_get_setting_pricelist_pelayaran(" + idKotaTujuan + ", " + idKotaAsal + ", " + idPelayaran + ", '" + tglBerlaku + "') as ("
+        String query = "select * from fn_get_setting_pricelist_pelayaran(" + idKotaAsal + ", " + idPelayaran + ", '" + tglBerlaku + "') as ("
                 + "  id int,  \n"
                 + "  tgl_berlaku date,  \n"
-                + "  kota_asal varchar, kota_tujuan varchar, \n"
+                + "  kota_asal varchar, \n"
                 + "  satuan_kirim varchar, pelayaran varchar,\n"
                 + "  detail text) ";
         logger.warn("Query [{}]", query);

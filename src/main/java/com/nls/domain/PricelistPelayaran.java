@@ -27,7 +27,7 @@ import javax.persistence.UniqueConstraint;
  * @author faheem
  */
 @Entity
-@Table(name = "setting_pricelist_pelayaran", uniqueConstraints = @UniqueConstraint(columnNames = {"id_kota_asal", "id_kota_tujuan", "id_pelayaran", "tgl_berlaku", "id_satuan_kirim"}))
+@Table(name = "setting_pricelist_pelayaran", uniqueConstraints = @UniqueConstraint(columnNames = {"id_kota_asal", "tgl_berlaku"}))
 public class PricelistPelayaran {
 
     @Id
@@ -39,20 +39,16 @@ public class PricelistPelayaran {
     private Date tglBerlaku;
 
     @ManyToOne
-    @JoinColumn(name = "id_kota_tujuan")
-    private Kota kotaTujuan;
-
-    @ManyToOne
     @JoinColumn(name = "id_kota_asal")
     private Kota kotaAsal;
 
-    @ManyToOne
-    @JoinColumn(name = "id_pelayaran")
-    private Pelayaran pelayaran;
-
-    @ManyToOne
-    @JoinColumn(name = "id_satuan_kirim")
-    private SatuanKirim satuanKirim;
+//    @ManyToOne
+//    @JoinColumn(name = "id_pelayaran")
+//    private Pelayaran pelayaran;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "id_satuan_kirim")
+//    private SatuanKirim satuanKirim;
 
     @OneToMany(mappedBy = "pricelist", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
@@ -64,20 +60,6 @@ public class PricelistPelayaran {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    /**
-     * @return the kotaTujuan
-     */
-    public Kota getKotaTujuan() {
-        return kotaTujuan;
-    }
-
-    /**
-     * @param kotaTujuan the kotaTujuan to set
-     */
-    public void setKotaTujuan(Kota kotaTujuan) {
-        this.kotaTujuan = kotaTujuan;
     }
 
     /**
@@ -108,33 +90,33 @@ public class PricelistPelayaran {
         this.kotaAsal = kotaAsal;
     }
 
-    /**
-     * @return the pelayaran
-     */
-    public Pelayaran getPelayaran() {
-        return pelayaran;
-    }
-
-    /**
-     * @param pelayaran the pelayaran to set
-     */
-    public void setPelayaran(Pelayaran pelayaran) {
-        this.pelayaran = pelayaran;
-    }
-
-    /**
-     * @return the satuanKirim
-     */
-    public SatuanKirim getSatuanKirim() {
-        return satuanKirim;
-    }
-
-    /**
-     * @param satuanKirim the satuanKirim to set
-     */
-    public void setSatuanKirim(SatuanKirim satuanKirim) {
-        this.satuanKirim = satuanKirim;
-    }
+//    /**
+//     * @return the pelayaran
+//     */
+//    public Pelayaran getPelayaran() {
+//        return pelayaran;
+//    }
+//
+//    /**
+//     * @param pelayaran the pelayaran to set
+//     */
+//    public void setPelayaran(Pelayaran pelayaran) {
+//        this.pelayaran = pelayaran;
+//    }
+//
+//    /**
+//     * @return the satuanKirim
+//     */
+//    public SatuanKirim getSatuanKirim() {
+//        return satuanKirim;
+//    }
+//
+//    /**
+//     * @param satuanKirim the satuanKirim to set
+//     */
+//    public void setSatuanKirim(SatuanKirim satuanKirim) {
+//        this.satuanKirim = satuanKirim;
+//    }
 
     /**
      * @return the listDetail

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2018-05-19T13:41:25 -->
+<!-- 2018-12-01T12:57:50 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nota-nls" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e51cd78-67de-4253-a5af-029e0e769742">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
@@ -589,7 +589,7 @@
 				<textFieldExpression><![CDATA["NOTE : \nMOHON TRANSFER KE REKENING :"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="0" y="112" width="555" height="15" uuid="c8faacb4-7b35-41b6-b433-0048989c04bb">
+				<reportElement positionType="Float" x="0" y="129" width="555" height="15" uuid="c8faacb4-7b35-41b6-b433-0048989c04bb">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -599,7 +599,7 @@
 				<textFieldExpression><![CDATA["(MOHON INFO JIKA SUDAH MELAKUKAN PEMBAYARAN/TRANSFER)"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" mode="Opaque" x="0" y="154" width="230" height="15" backcolor="#BD61FF" uuid="55d8aea5-f192-4adf-9400-e9f65edb4532">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="171" width="230" height="15" backcolor="#BD61FF" uuid="55d8aea5-f192-4adf-9400-e9f65edb4532">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
@@ -614,7 +614,7 @@
 				<textFieldExpression><![CDATA["MAX 15 HARI SETELAH BARANG DITERIMA"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="330" y="143" width="225" height="15" uuid="97c3f0ca-e4ef-4aaf-9c88-ca5f7a2084cb">
+				<reportElement positionType="Float" x="330" y="160" width="225" height="15" uuid="97c3f0ca-e4ef-4aaf-9c88-ca5f7a2084cb">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -624,7 +624,7 @@
 				<textFieldExpression><![CDATA["Surabaya, "+$F{tanggal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="330" y="159" width="225" height="15" uuid="d99ccbd7-0ea9-4948-92b0-5a915aa81782">
+				<reportElement positionType="Float" x="330" y="176" width="225" height="15" uuid="d99ccbd7-0ea9-4948-92b0-5a915aa81782">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -634,7 +634,7 @@
 				<textFieldExpression><![CDATA["PT. NUSANTARA LOGISTIC SEJAHTERA"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="330" y="245" width="225" height="15" uuid="1e7e2459-9b38-4585-9fb2-15bf1c7695cb">
+				<reportElement positionType="Float" x="330" y="262" width="225" height="15" uuid="1e7e2459-9b38-4585-9fb2-15bf1c7695cb">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -647,7 +647,7 @@
 				<textFieldExpression><![CDATA["Bambang Suprapto,S.Pd"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" mode="Opaque" x="0" y="139" width="230" height="15" backcolor="#BD61FF" uuid="da089805-d985-4267-b2d0-97082d1e2c4c">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="156" width="230" height="15" backcolor="#BD61FF" uuid="da089805-d985-4267-b2d0-97082d1e2c4c">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -732,7 +732,7 @@
 				</staticText>
 			</frame>
 			<image onErrorType="Blank">
-				<reportElement positionType="Float" x="401" y="175" width="80" height="69" uuid="f72424d5-c69e-41a9-9e73-f37c014f4258">
+				<reportElement positionType="Float" x="401" y="192" width="80" height="69" uuid="f72424d5-c69e-41a9-9e73-f37c014f4258">
 					<property name="com.jaspersoft.studio.unit.x" value="cm"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
@@ -754,6 +754,17 @@
 				</textElement>
 				<textFieldExpression><![CDATA["Rp."]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Transparent" x="0" y="108" width="555" height="12" forecolor="#000000" backcolor="#FFFFFF" uuid="298aec9b-294f-4c32-85d0-c931e020fcdb">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box padding="0" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<text><![CDATA[- BNI : 0231686631 A/N BINTI MUNKOLIDAH"]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>
