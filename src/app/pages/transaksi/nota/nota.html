@@ -127,7 +127,11 @@
                         <table class="table table-bordered table-hover table-condensed">
                             <thead>
                                 <tr>
-                                    <th colspan="8">Detail Tagihan</th>
+                                    <th colspan="8">Detail Tagihan
+                                        <button class="btn btn-danger" ng-show="adaHargaKosong" ng-click="bukaDialog('dialogPerhatian')">
+                                            Perhatian!!
+                                        </button>
+                                    </th>
                                 </tr>
                                 <tr>
                                     <th>No</th>
@@ -247,6 +251,24 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal-content modal-lg" id="dialogPerhatian" style="display: none" >
+                        <div class="modal-header">
+<!--                            <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+                                <em class="ion-ios-close-empty sn-link-close"></em>
+                            </button>-->
+                            <h4 class="modal-title">Perhatian, bila ada harga yg kosong maka :</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Pastikan <b>Setting Harga</b> milik Toko sudah diinput dengan benar.</p>
+                            <p>Pastikan <b>Kategori Harga pada Detail item Surat Jalan</b> sudah diinput sesuai dengan <b>Setting Harga milik Toko</b>.</p>
+                            <p>Pastikan <b>Kota Asal dan Kota Tujuan pada Setting Harga</b> sesuai dengan <b>Kota Asal dan Kota Tujuan pada Stuffing</b>.</p>
+                        </div>
+                    </div>
+<!--                    <div id="dialogPerhatian" ba-panel ba-panel-title="Perhatian, bila ada harga yg kosong periksa :" style="display: none">
+                        <p>Pastikan <b>Setting Harga</b> milik Toko sudah diinput dengan benar.</p>
+                        <p>Pastikan <b>Kategori Harga pada Surat Jalan</b> sudah diinput sesuai dengan <b>Setting Harga milik Toko</b>.</p>
+                        <p>Pastikan <b>Kota Asal dan Kota Tujuan pada Setting Harga</b> sesuai dengan <b>Kota Asal dan Kota Tujuan pada Stuffing</b>.</p>
+                    </div>-->
                 </form>
             </div>
         </div>

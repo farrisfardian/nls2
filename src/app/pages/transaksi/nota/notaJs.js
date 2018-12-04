@@ -10,6 +10,7 @@
         $scope.search = "";
         $scope.oldSearch = "";
         $scope.deskKapalBerangkat = "";
+        $scope.adaHargaKosong = false;
         $scope.paging = {
             currentPage: 1,
             totalItems: 0
@@ -94,6 +95,7 @@
         }
 
         $scope.fillDetailNota = function (idTokoTujuan, idMerkTujuan, idKapalBerangkat) {
+            $scope.adaHargaKosong = false;
             if (idKapalBerangkat === '') {
                 $scope.vm.listDetail = [];
                 $scope.hitungGrandTotalTambahan();
@@ -102,6 +104,11 @@
                 NotaService.listDetailNotaTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat).success(function (data) {
                     $scope.vm.listDetail = data.listDetail;
                     console.log('generateDetail', data);
+                    for (var i = 0; i < $scope.vm.listDetail.length; i++) {
+                        if ($scope.vm.listDetail[i].harga === null) {
+                            $scope.adaHargaKosong = true;
+                        }
+                    }
                     if ($scope.vm.minBayar === true) {
                         NotaService.listSubtotalDetailNotaTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat).success(function (data) {
                             $scope.listSubtotal = data;
@@ -395,6 +402,9 @@
             }).error(function (e) {
                 toastr.error("Ambil toko gagal");
             });
+        };
+        $scope.bukaDialog = function (idDialog) {
+            $('#' + idDialog).dialog();
         };
         console.log('data edit', $stateParams);
         if ($stateParams.idToko === null || $stateParams.idToko === undefined || $stateParams.idToko === 0 || $stateParams.idToko === '') {
