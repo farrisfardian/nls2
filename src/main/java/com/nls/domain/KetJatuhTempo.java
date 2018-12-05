@@ -20,8 +20,8 @@ import javax.persistence.Table;
  * @author faheem
  */
 @Entity
-@Table(name = "m_rekening")
-public class Rekening {
+@Table(name = "m_ket_jatuh_tempo")
+public class KetJatuhTempo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,9 @@ public class Rekening {
     
     @Column
     private Integer urut;
+    
+    @Column(name = "is_default")
+    private Boolean isDefault;
 
     @Column(columnDefinition = "text")
     private String nama;
@@ -61,6 +64,20 @@ public class Rekening {
      */
     public void setUrut(Integer urut) {
         this.urut = urut;
+    }
+
+    /**
+     * @return the isDefault
+     */
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    /**
+     * @param isDefault the isDefault to set
+     */
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
     }
     
 }
