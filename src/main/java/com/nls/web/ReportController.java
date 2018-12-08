@@ -296,6 +296,8 @@ public class ReportController {
                 .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("total", totalTerbilangByNota.get("total"))
                 .addAttribute("terbilang", totalTerbilangByNota.get("terbilang"))
+                .addAttribute("dataSourceRekening", dao.getRekening())
+                .addAttribute("dataSourceKetJatuhTempo", dao.getKetJatuhTempoByNota(idNota))
                 .addAttribute("dataSourceKapal", dao.getKapalBerangkatByNota(idNota))
                 .addAttribute("dataSource", dao.getNota(idNota));
     }
@@ -330,6 +332,8 @@ public class ReportController {
                 .addAttribute("terbilangTotalSisaTagihan", totalTerbilangByRincianNota.get("terbilang_total_sisa_tagihan"))
                 .addAttribute("tglAwal", arrTglAwal[2] + "/" + arrTglAwal[1] + "/" + arrTglAwal[0])
                 .addAttribute("tglAkhir", arrTglAkhir[2] + "/" + arrTglAkhir[1] + "/" + arrTglAkhir[0])
+                .addAttribute("dataSourceRekening", dao.getRekening())
+                .addAttribute("dataSourceKetJatuhTempo", dao.getKetJatuhTempoByNota("0"))
                 .addAttribute("dataSource", dao.getRincianNota(idToko, idMerk, tglAwal, tglAkhir));
     }
 
@@ -448,6 +452,8 @@ public class ReportController {
                 .addAttribute("kapal", kapal.equalsIgnoreCase("null") ? null : kapal)
                 .addAttribute("tglAwal", arrTglAwal[2] + "/" + arrTglAwal[1] + "/" + arrTglAwal[0])
                 .addAttribute("tglAkhir", arrTglAkhir[2] + "/" + arrTglAkhir[1] + "/" + arrTglAkhir[0])
+                .addAttribute("dataSourceRekening", dao.getRekening())
+                .addAttribute("dataSourceKetJatuhTempo", dao.getKetJatuhTempoByNota("0"))
                 .addAttribute("dataSource", dao.getRekapNotaTagihan(idToko, idMerk, idKapal, idKotaTujuan, tglAwal, tglAkhir));
     }
 
@@ -466,7 +472,7 @@ public class ReportController {
         logger.warn("format: [{}]", format);
         System.out.println("tglAwal = " + tglAwal + ", tglAkhir = " + tglAkhir + ", idKapalBerangkat = " + idKapalBerangkat);
         idKapalBerangkat = idKapalBerangkat.equalsIgnoreCase("null") ? "null" : "ARRAY[" + idKapalBerangkat + "]";
-        
+
         return new ModelMap()
                 //                .addAttribute("tanggal1", tg1)
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
@@ -475,8 +481,7 @@ public class ReportController {
                 .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("tglAwal", arrTglAwal[2] + "/" + arrTglAwal[1] + "/" + arrTglAwal[0])
                 .addAttribute("tglAkhir", arrTglAkhir[2] + "/" + arrTglAkhir[1] + "/" + arrTglAkhir[0])
-                .addAttribute("dataSource", dao.getRekapPembayaran(tglAwal, tglAkhir, idKapalBerangkat))
-                ;
+                .addAttribute("dataSource", dao.getRekapPembayaran(tglAwal, tglAkhir, idKapalBerangkat));
     }
 
     @RequestMapping(value = "get-pembayaran-nota*", method = RequestMethod.GET)

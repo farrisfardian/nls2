@@ -6,7 +6,7 @@
             .controller('NotaModalController', NotaModalController);
 
     /** @ngInject */
-    function NotaCtrl($scope, $uibModal, $log, $filter, $stateParams, $window, toastr, NotaService, KapalBerangkatService, EnumService, TokoService, TambahanBiayaService, KotaService) {
+    function NotaCtrl($scope, $uibModal, $log, $filter, $stateParams, $window, toastr, NotaService, KapalBerangkatService, EnumService, TokoService, TambahanBiayaService, KotaService, KetJatuhTempoService) {
         $scope.search = "";
         $scope.oldSearch = "";
         $scope.deskKapalBerangkat = "";
@@ -28,6 +28,9 @@
         });
         KotaService.cariSemua().success(function (data) {
             $scope.listKota = data;
+        });
+        KetJatuhTempoService.cariSemua().success(function (data) {
+            $scope.listKetJatuhTempo = data;
         });
         $scope.options = {format: 'DD/MM/YYYY', showClear: false};
         $scope.param = {tglAwal: new Date(), tglAkhir: new Date(), cari: "", toko: null, merk: null, status: "Semua"};
@@ -303,6 +306,20 @@
         $scope.hapusTambahanBiaya = function (idx) {
             $scope.vm.listTambahanBiaya.splice(idx, 1);
             $scope.hitungGrandTotalTambahan();
+        };
+        $scope.baruKetJatuhTempo = function () {
+            if ($scope.vm.listKetJatuhTempo === undefined || $scope.vm.listKetJatuhTempo === null) {
+                $scope.vm.listKetJatuhTempo = [];
+            }
+            $scope.vm.listKetJatuhTempo.push(
+                    {
+                        ketJatuhTempo: null
+                    }
+            );
+            console.log('baruKetJatuhTempo');
+        };
+        $scope.hapusKetJatuhTempo = function (idx) {
+            $scope.vm.listKetJatuhTempo.splice(idx, 1);
         };
 
         $scope.hapusKapalBerangkat = function (idx) {

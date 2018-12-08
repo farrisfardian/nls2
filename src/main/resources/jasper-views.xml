@@ -15,6 +15,13 @@
     <util:list id="subReportNotaData">
         <!-- This value must be declared exactly as you declared it in the master JRXML file -->
         <value>dataSourceKapal</value>
+        <value>dataSourceRekening</value>
+        <value>dataSourceKetJatuhTempo</value>
+    </util:list>
+    <util:list id="subReportRincianNotaData">
+        <!-- This value must be declared exactly as you declared it in the master JRXML file -->
+        <value>dataSourceRekening</value>
+        <value>dataSourceKetJatuhTempo</value>
     </util:list>
     <bean id="api/report/coba" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
           p:url="/WEB-INF/templates/jrxml/coba.jrxml"/>
@@ -31,9 +38,15 @@
     <bean id="api/report/get-pembayaran-nota" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
           p:url="/WEB-INF/templates/jrxml/pembayaran-nota-nls.jrxml"/>
     <bean id="api/report/get-rincian-nota" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
-          p:url="/WEB-INF/templates/jrxml/rincian-nota-nls.jrxml"/>
+          p:url="/WEB-INF/templates/jrxml/rincian-nota-nls.jrxml" 
+          p:reportDataKey="dataSource"
+          p:subReportUrls-ref="customSubReportUrls"
+          p:subReportDataKeys-ref="subReportRincianNotaData"/>
     <bean id="api/report/get-rekap-nota-tagihan" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
-          p:url="/WEB-INF/templates/jrxml/rekap-nota-tagihan.jrxml"/>
+          p:url="/WEB-INF/templates/jrxml/rekap-nota-tagihan.jrxml"
+          p:reportDataKey="dataSource"
+          p:subReportUrls-ref="customSubReportUrls"
+          p:subReportDataKeys-ref="subReportRincianNotaData"/>
     <bean id="api/report/get-rekap-pembayaran" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
           p:url="/WEB-INF/templates/jrxml/rekap-pembayaran.jrxml"/>
     <bean id="api/report/rekap-nota-belum-lunas" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"

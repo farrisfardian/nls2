@@ -5,6 +5,8 @@
  */
 package com.nls.dao.jdbc;
 
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -173,6 +175,37 @@ public class ReportDao {
         String sql = "select distinct kapal, tgl_berangkat from fn_get_nota(" + idNota + ") as (id int, tanggal varchar, nomor varchar, min_bayar boolean, kepada text, kapal varchar, tgl_berangkat text, kota_tujuan varchar, jenis_item varchar, kondisi text, satuan_kirim varchar, volume double precision, harga double precision, jml_min_bayar double precision, tambahan_min_bayar numeric, no_kontainer varchar, jml_text text, idx int, tgl_kapal date, coli int) where kapal <> 'Tambahan Biaya'";
         System.out.println("getKapalBerangkatByNota: " + sql);
         return mr.mapList(sql);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Object getRekening() {
+        String sql = "select * from m_rekening order by urut";
+        System.out.println("getRekening: " + sql);
+        return mr.mapList(sql);
+    }
+
+    /**
+     *
+     * @param idNota
+     * @return
+     */
+    public Object getKetJatuhTempoByNota(String idNota) {
+        String sql = "select jt.nama from t_nota_ket_jatuh_tempo nk \n"
+                + "join m_ket_jatuh_tempo jt on nk.id_ket_jatuh_tempo = jt.id\n"
+                + "where id_nota = " + idNota + "\n"
+                + "order by jt.urut";
+        List<Map<String, Object>> mapList = mr.mapList(sql);
+        if (mapList.isEmpty()) {
+            sql = "select jt.nama from m_ket_jatuh_tempo jt \n"
+                    + "where coalesce(is_default,false) \n"
+                    + "order by jt.urut";
+            mapList = mr.mapList(sql);
+        }
+        System.out.println("getKetJatuhTempoByNota: " + sql);
+        return mapList;
     }
 
     /**
