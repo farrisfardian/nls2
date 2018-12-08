@@ -23,16 +23,33 @@ import javax.persistence.Table;
 @Table(name = "m_rekening")
 public class Rekening {
 
+    /**
+     * @return the tampilDiReport
+     */
+    public Boolean getTampilDiReport() {
+        return tampilDiReport;
+    }
+
+    /**
+     * @param tampilDiReport the tampilDiReport to set
+     */
+    public void setTampilDiReport(Boolean tampilDiReport) {
+        this.tampilDiReport = tampilDiReport;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @Column
     private Integer urut;
 
     @Column(columnDefinition = "text")
     private String nama;
     
+    @Column(name = "tampil_di_report")
+    private Boolean tampilDiReport;
+
     public Integer getId() {
         return id;
     }
@@ -62,5 +79,5 @@ public class Rekening {
     public void setUrut(Integer urut) {
         this.urut = urut;
     }
-    
+
 }

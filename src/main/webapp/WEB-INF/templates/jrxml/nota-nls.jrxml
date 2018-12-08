@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2018-12-08T12:29:31 -->
+<!-- 2018-12-08T13:05:43 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nota-nls" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e51cd78-67de-4253-a5af-029e0e769742">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
@@ -597,7 +597,7 @@ order by jt.urut]]>
 	<summary>
 		<band height="327" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="0" y="37" width="555" height="22" uuid="f05329c1-86c8-45d2-82d8-b1fb84084f7e">
+				<reportElement positionType="Float" x="0" y="39" width="555" height="22" uuid="f05329c1-86c8-45d2-82d8-b1fb84084f7e">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -667,7 +667,7 @@ order by jt.urut]]>
 				<textFieldExpression><![CDATA["JATUH TEMPO PEMBAYARAN : "]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00#">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="471" y="1" width="84" height="14" uuid="e02e1c9a-756b-48f4-9b0b-8710bc89ae52">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="471" y="1" width="84" height="16" uuid="e02e1c9a-756b-48f4-9b0b-8710bc89ae52">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -683,7 +683,7 @@ order by jt.urut]]>
 				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00#">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="23" width="555" height="14" uuid="3e6ebe21-782b-4ba6-86ba-809b9e13989e">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="23" width="555" height="16" uuid="3e6ebe21-782b-4ba6-86ba-809b9e13989e">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -706,7 +706,7 @@ order by jt.urut]]>
 				<imageExpression><![CDATA[$P{realPath}+"ttd.jpg"]]></imageExpression>
 			</image>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00#">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="450" y="1" width="21" height="14" uuid="7c4eb02c-e74c-4f53-9869-61e3231df09b">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="450" y="1" width="21" height="16" uuid="7c4eb02c-e74c-4f53-9869-61e3231df09b">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>

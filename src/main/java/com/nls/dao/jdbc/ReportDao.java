@@ -182,7 +182,7 @@ public class ReportDao {
      * @return
      */
     public Object getRekening() {
-        String sql = "select * from m_rekening order by urut";
+        String sql = "select * from m_rekening where coalesce(tampil_di_report,false) order by urut";
         System.out.println("getRekening: " + sql);
         return mr.mapList(sql);
     }
