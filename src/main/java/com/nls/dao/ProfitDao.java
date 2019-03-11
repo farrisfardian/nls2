@@ -5,7 +5,7 @@
  */
 package com.nls.dao;
 
-import com.nls.domain.Provit;
+import com.nls.domain.Profit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -16,9 +16,9 @@ import org.springframework.data.repository.query.Param;
  *
  * @author faheem
  */
-public interface ProvitDao extends PagingAndSortingRepository<Provit, Integer> {
+public interface ProfitDao extends PagingAndSortingRepository<Profit, Integer> {
 
-    @Query("from Provit a where upper(a.kotaAsal.nama) like upper(:search) ")
-    public Page<Provit> filter(@Param("search") String search, Pageable pageable);
+    @Query("from Profit a where upper(a.kotaAsal.nama) like upper(:search) ")
+    public Page<Profit> filter(@Param("search") String search, Pageable pageable);
 
 }

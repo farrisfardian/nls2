@@ -28,7 +28,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "setting_provit", uniqueConstraints = @UniqueConstraint(columnNames = {"id_kota_asal", "tgl_berlaku"}))
-public class Provit {
+public class Profit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +44,7 @@ public class Provit {
 
     @OneToMany(mappedBy = "provit", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
-    private Set<ProvitDetail> listDetail;
+    private Set<ProfitDetail> listDetail;
 
     public Integer getId() {
         return id;
@@ -85,14 +85,14 @@ public class Provit {
     /**
      * @return the listDetail
      */
-    public Set<ProvitDetail> getListDetail() {
+    public Set<ProfitDetail> getListDetail() {
         return listDetail;
     }
 
     /**
      * @param listDetail the listDetail to set
      */
-    public void setListDetail(Set<ProvitDetail> listDetail) {
+    public void setListDetail(Set<ProfitDetail> listDetail) {
         this.listDetail = listDetail;
     }
 

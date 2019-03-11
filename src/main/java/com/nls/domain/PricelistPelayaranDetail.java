@@ -34,10 +34,10 @@ public class PricelistPelayaranDetail {
 
     @Column(name = "harga")
     private BigDecimal harga;
-
-    @ManyToOne
-    @JoinColumn(name = "id_kategori_barang")
-    private KategoriBarang kategoriBarang;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "id_kategori_barang")
+//    private KategoriBarang kategoriBarang;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "jenis_stuffing")
@@ -51,6 +51,25 @@ public class PricelistPelayaranDetail {
     @JoinColumn(name = "id_pricelist")
     @JsonBackReference
     private PricelistPelayaran pricelist;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_kota_tujuan")
+    private Kota kotaTujuan;
+
+    /**
+     * @return the kotaTujuan
+     */
+    public Kota getKotaTujuan() {
+        return kotaTujuan;
+    }
+
+    /**
+     * @param kotaTujuan the kotaTujuan to set
+     */
+    public void setKotaTujuan(Kota kotaTujuan) {
+        this.kotaTujuan = kotaTujuan;
+    }
+
 
     public Integer getId() {
         return id;
@@ -74,19 +93,19 @@ public class PricelistPelayaranDetail {
         this.harga = harga;
     }
 
-    /**
-     * @return the kategoriBarang
-     */
-    public KategoriBarang getKategoriBarang() {
-        return kategoriBarang;
-    }
-
-    /**
-     * @param kategoriBarang the kategoriBarang to set
-     */
-    public void setKategoriBarang(KategoriBarang kategoriBarang) {
-        this.kategoriBarang = kategoriBarang;
-    }
+//    /**
+//     * @return the kategoriBarang
+//     */
+//    public KategoriBarang getKategoriBarang() {
+//        return kategoriBarang;
+//    }
+//
+//    /**
+//     * @param kategoriBarang the kategoriBarang to set
+//     */
+//    public void setKategoriBarang(KategoriBarang kategoriBarang) {
+//        this.kategoriBarang = kategoriBarang;
+//    }
 
     /**
      * @return the jenisStuffing

@@ -5,10 +5,9 @@
  */
 package com.nls.web;
 
-import com.nls.dao.ProvitDao;
-import com.nls.dao.jdbc.ProvitDaoJdbc;
-import com.nls.domain.Provit;
-import com.nls.domain.ProvitDetail;
+import com.nls.dao.jdbc.ProfitDaoJdbc;
+import com.nls.domain.Profit;
+import com.nls.domain.ProfitDetail;
 import java.security.InvalidParameterException;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -27,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.nls.dao.ProfitDao;
 
 /**
  *
@@ -35,37 +35,37 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/setting/provit")
-public class ProvitController {
+public class ProfitController {
 
     @Autowired
-    ProvitDao dao;
+    ProfitDao dao;
 
     @Autowired
-    ProvitDaoJdbc daoJdbc;
+    ProfitDaoJdbc daoJdbc;
 
 //    @Autowired
 //    AppService appService;
-    private final Logger logger = LoggerFactory.getLogger(ProvitController.class);
+    private final Logger logger = LoggerFactory.getLogger(ProfitController.class);
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public Iterable<Provit> cariSemua() {
+    public Iterable<Profit> cariSemua() {
         return dao.findAll();
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public Page<Provit> saringSemua(
+    public Page<Profit> saringSemua(
             @RequestParam(required = false) String search,
             Pageable pageable,
             HttpServletResponse respons) {
         PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
                 Sort.Direction.ASC, "nama");
         System.out.println("pageable.getPageNumber() : " + pageable.getPageNumber() + ", pageable.getPageSize() : " + pageable.getPageSize());
-        Page<Provit> result = dao.findAll(pr);
+        Page<Profit> result = dao.findAll(pr);
         return result;
     }
 
     @RequestMapping(value = "{column}/{value}", method = RequestMethod.GET)
-    public Provit cariSatu(@PathVariable String column, @PathVariable String value) {
+    public Profit cariSatu(@PathVariable String column, @PathVariable String value) {
         if (column.equalsIgnoreCase("kode")) {
             return dao.findOne(Integer.valueOf(value));
         } else {
@@ -75,7 +75,7 @@ public class ProvitController {
 
     @RequestMapping(value = "/{nama}", method = RequestMethod.GET)
     @ResponseBody
-    public Page<Provit> cariBerdasarkanNama(@PathVariable("nama") String nama,
+    public Page<Profit> cariBerdasarkanNama(@PathVariable("nama") String nama,
             Pageable pageable,
             HttpServletResponse response) {
         PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
@@ -95,7 +95,7 @@ public class ProvitController {
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void hapus(@PathVariable String id) {
-        Provit x = dao.findOne(Integer.valueOf(id));
+        Profit x = dao.findOne(Integer.valueOf(id));
         if (x == null) {
             throw new InvalidParameterException("Provit '" + id + "' tidak ditemukan!");
         }
@@ -103,9 +103,9 @@ public class ProvitController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void simpan(@RequestBody Provit x) {
+    public void simpan(@RequestBody Profit x) {
         if (x.getListDetail() != null) {
-            for (ProvitDetail c : x.getListDetail()) {
+            for (ProfitDetail c : x.getListDetail()) {
                 c.setProvit(x);
             }
         }
@@ -113,8 +113,8 @@ public class ProvitController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    public void perbarui(@PathVariable String id, @RequestBody Provit x) {
-        Provit r = dao.findOne(Integer.valueOf(id));
+    public void perbarui(@PathVariable String id, @RequestBody Profit x) {
+        Profit r = dao.findOne(Integer.valueOf(id));
         if (r == null) {
             throw new InvalidParameterException("Provit dengan ID '" + x.getId() + "' tidak ditemukan!");
         }

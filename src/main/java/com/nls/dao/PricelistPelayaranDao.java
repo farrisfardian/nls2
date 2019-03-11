@@ -18,7 +18,7 @@ import org.springframework.data.repository.query.Param;
  */
 public interface PricelistPelayaranDao extends PagingAndSortingRepository<PricelistPelayaran, Integer> {
 
-    @Query("from PricelistPelayaran a where upper(a.pelayaran.nama) like upper(:search) or upper(a.kotaTujuan.nama) like upper(:search)  or upper(a.kotaAsal.nama) like upper(:search)  or upper(a.satuanKirim.nama) like upper(:search) ")
+    @Query("from PricelistPelayaran a where upper(a.kotaAsal.nama) like upper(:search)  ")
     public Page<PricelistPelayaran> filter(@Param("search") String search, Pageable pageable);
 
 }

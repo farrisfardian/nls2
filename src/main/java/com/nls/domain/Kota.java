@@ -32,6 +32,9 @@ public class Kota {
 
     @Column(name = "kode_nota", length = 50)
     private String kodeNota;
+    
+    @Column(name = "masuk_pricelist")
+    private Boolean masukPricelist;
 
     public Integer getId() {
         return id;
@@ -39,6 +42,19 @@ public class Kota {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+    /**
+     * @return the masukPricelist
+     */
+    public Boolean getMasukPricelist() {
+        return masukPricelist;
+    }
+
+    /**
+     * @param masukPricelist the masukPricelist to set
+     */
+    public void setMasukPricelist(Boolean masukPricelist) {
+        this.masukPricelist = masukPricelist;
     }
 
     public String getNama() {

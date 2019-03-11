@@ -26,7 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "setting_provit_detail")
-public class ProvitDetail {
+public class ProfitDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +42,7 @@ public class ProvitDetail {
     @ManyToOne
     @JoinColumn(name = "id_provit")
     @JsonBackReference
-    private Provit provit;
+    private Profit provit;
 
     public Integer getId() {
         return id;
@@ -83,14 +83,14 @@ public class ProvitDetail {
     /**
      * @return the dooring
      */
-    public Provit getProvit() {
+    public Profit getProvit() {
         return provit;
     }
 
     /**
      * @param dooring the dooring to set
      */
-    public void setProvit(Provit dooring) {
+    public void setProvit(Profit dooring) {
         this.provit = dooring;
     }
 
