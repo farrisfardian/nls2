@@ -297,5 +297,18 @@
                         order: 0,
                     },
                 })
+                .state('master.ket-jatuh-tempo', {
+                    url: '/ket-jatuh-tempo',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/master/ketJatuhTempo/ket-jatuh-tempo.html',
+                            controller: 'KetJatuhTempoCtrl',
+                        }
+                    },
+                    title: 'Keterangan Jatuh Tempo',
+                    sidebarMeta: {
+                        order: 0,
+                    },
+                })
     }
 })();

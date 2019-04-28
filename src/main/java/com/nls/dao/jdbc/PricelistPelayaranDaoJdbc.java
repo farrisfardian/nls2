@@ -28,19 +28,19 @@ public class PricelistPelayaranDaoJdbc {
 
     private final org.slf4j.Logger logger = LoggerFactory.getLogger(PricelistPelayaranDaoJdbc.class);
 
-    public Object listPricelist(String idKotaAsal, String idKotaTujuan, String idPelayaran, String tglBerlaku, PageRequest page) {
+    public Object listPricelist(String idKotaAsal, String idKotaTujuan, String tglBerlaku, PageRequest page) {
         ModelMap mm = new ModelMap();
         System.out.println("Page.Size: " + page.getPageSize());
         System.out.println("Page.Offset: " + page.getOffset());
         System.out.println("tanggal1: " + tglBerlaku);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String query = "select * from fn_get_setting_pricelist_pelayaran(" + idKotaAsal + ", " + idPelayaran + ", '" + tglBerlaku + "') as ("
+        String query = "select * from fn_get_setting_pricelist_pelayaran_new(" + idKotaAsal + ", " + idKotaTujuan + ", '" + tglBerlaku + "') as (\n"
                 + "  id int,  \n"
                 + "  tgl_berlaku date,  \n"
-                + "  kota_asal varchar, \n"
-                + "  satuan_kirim varchar, pelayaran varchar,\n"
-                + "  detail text) ";
+                + "  kota_asal varchar, kota_tujuan varchar, \n"
+                + "  detail text\n"
+                + "  ) ";
         logger.warn("Query [{}]", query);
         Integer totalElement = mr.countRecordset(query);
         logger.warn("totalElement [{}]", totalElement);

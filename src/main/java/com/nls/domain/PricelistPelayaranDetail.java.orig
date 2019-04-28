@@ -32,11 +32,20 @@ public class PricelistPelayaranDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+<<<<<<< HEAD
+    @Column(name = "harga")
+    private BigDecimal harga;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "id_kategori_barang")
+//    private KategoriBarang kategoriBarang;
+=======
     @Column(name = "harga_dari_pelayaran")
     private BigDecimal hargaDariPelayaran;
 
     @Column(name = "provit")
     private BigDecimal provit;
+>>>>>>> 46a5a8ad1466e2e554447850b8901727c92e96e2
 
     @Column(name = "harga_fcl")
     private BigDecimal hargaFcl;
@@ -74,6 +83,43 @@ public class PricelistPelayaranDetail {
     @JoinColumn(name = "id_pricelist")
     @JsonBackReference
     private PricelistPelayaran pricelist;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_kota_tujuan")
+    private Kota kotaTujuan;
+
+    /**
+     * @return the kotaTujuan
+     */
+    public Kota getKotaTujuan() {
+        return kotaTujuan;
+    }
+
+    /**
+     * @param kotaTujuan the kotaTujuan to set
+     */
+    public void setKotaTujuan(Kota kotaTujuan) {
+        this.kotaTujuan = kotaTujuan;
+    }
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_kota_tujuan")
+    private Kota kotaTujuan;
+
+    /**
+     * @return the kotaTujuan
+     */
+    public Kota getKotaTujuan() {
+        return kotaTujuan;
+    }
+
+    /**
+     * @param kotaTujuan the kotaTujuan to set
+     */
+    public void setKotaTujuan(Kota kotaTujuan) {
+        this.kotaTujuan = kotaTujuan;
+    }
 
     public Integer getId() {
         return id;
@@ -83,6 +129,21 @@ public class PricelistPelayaranDetail {
         this.id = id;
     }
 
+<<<<<<< HEAD
+//    /**
+//     * @return the kategoriBarang
+//     */
+//    public KategoriBarang getKategoriBarang() {
+//        return kategoriBarang;
+//    }
+//
+//    /**
+//     * @param kategoriBarang the kategoriBarang to set
+//     */
+//    public void setKategoriBarang(KategoriBarang kategoriBarang) {
+//        this.kategoriBarang = kategoriBarang;
+//    }
+=======
     /**
      * @return the hargaDariPelayaran
      */
@@ -96,6 +157,7 @@ public class PricelistPelayaranDetail {
     public void setHargaDariPelayaran(BigDecimal hargaDariPelayaran) {
         this.hargaDariPelayaran = hargaDariPelayaran;
     }
+>>>>>>> 46a5a8ad1466e2e554447850b8901727c92e96e2
 
 //    /**
 //     * @return the kategoriBarang

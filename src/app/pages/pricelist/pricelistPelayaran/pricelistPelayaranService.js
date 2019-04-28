@@ -16,11 +16,11 @@
             query: function (search, p, callback) {
                 return this.entity.queryPage({"a": search, "page": p, "size": 10}, callback)
             },
-            entityComposite: $resource(url + '/idKotaAsal/idKotaTujuan/idPelayaran/tglBerlaku/:idKotaAsal/:idKotaTujuan/:idPelayaran/:tglBerlaku', {}, {
+            entityComposite: $resource(url + '/idKotaAsal/idKotaTujuan/tglBerlaku/:idKotaAsal/:idKotaTujuan/:tglBerlaku', {}, {
                 queryPage: {method: 'GET', isArray: false}
             }),
-            queryComposite: function (idKotaAsal, idKotaTujuan, idPelayaran, tglBerlaku, p, callback) {
-                return this.entityComposite.queryPage({"idKotaAsal": idKotaAsal, "idKotaTujuan": idKotaTujuan, "idPelayaran": idPelayaran, "tglBerlaku": tglBerlaku, "page": p, "size": 10}, callback)
+            queryComposite: function (idKotaAsal, idKotaTujuan, tglBerlaku, p, callback) {
+                return this.entityComposite.queryPage({"idKotaAsal": idKotaAsal, "idKotaTujuan": idKotaTujuan, "tglBerlaku": tglBerlaku, "page": p, "size": 10}, callback)
             },
             simpan: simpan,
             cariSatu: cariSatu,

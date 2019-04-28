@@ -6,10 +6,11 @@
             .controller('NotaModalController', NotaModalController);
 
     /** @ngInject */
-    function NotaCtrl($scope, $uibModal, $log, $filter, $stateParams, $window, toastr, NotaService, KapalBerangkatService, EnumService, TokoService, TambahanBiayaService, KotaService) {
+    function NotaCtrl($scope, $uibModal, $log, $filter, $stateParams, $window, toastr, NotaService, KapalBerangkatService, EnumService, TokoService, TambahanBiayaService, KotaService, KetJatuhTempoService) {
         $scope.search = "";
         $scope.oldSearch = "";
         $scope.deskKapalBerangkat = "";
+        $scope.adaHargaKosong = false;
         $scope.paging = {
             currentPage: 1,
             totalItems: 0
@@ -27,6 +28,9 @@
         });
         KotaService.cariSemua().success(function (data) {
             $scope.listKota = data;
+        });
+        KetJatuhTempoService.cariSemua().success(function (data) {
+            $scope.listKetJatuhTempo = data;
         });
         $scope.options = {format: 'DD/MM/YYYY', showClear: false};
         $scope.param = {tglAwal: new Date(), tglAkhir: new Date(), cari: "", toko: null, merk: null, status: "Semua"};
@@ -94,6 +98,7 @@
         }
 
         $scope.fillDetailNota = function (idTokoTujuan, idMerkTujuan, idKapalBerangkat) {
+            $scope.adaHargaKosong = false;
             if (idKapalBerangkat === '') {
                 $scope.vm.listDetail = [];
                 $scope.hitungGrandTotalTambahan();
@@ -102,6 +107,11 @@
                 NotaService.listDetailNotaTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat).success(function (data) {
                     $scope.vm.listDetail = data.listDetail;
                     console.log('generateDetail', data);
+                    for (var i = 0; i < $scope.vm.listDetail.length; i++) {
+                        if ($scope.vm.listDetail[i].harga === null) {
+                            $scope.adaHargaKosong = true;
+                        }
+                    }
                     if ($scope.vm.minBayar === true) {
                         NotaService.listSubtotalDetailNotaTokoMerkTujuan(idTokoTujuan, idMerkTujuan, idKapalBerangkat).success(function (data) {
                             $scope.listSubtotal = data;
@@ -297,6 +307,20 @@
             $scope.vm.listTambahanBiaya.splice(idx, 1);
             $scope.hitungGrandTotalTambahan();
         };
+        $scope.baruKetJatuhTempo = function () {
+            if ($scope.vm.listKetJatuhTempo === undefined || $scope.vm.listKetJatuhTempo === null) {
+                $scope.vm.listKetJatuhTempo = [];
+            }
+            $scope.vm.listKetJatuhTempo.push(
+                    {
+                        ketJatuhTempo: null
+                    }
+            );
+            console.log('baruKetJatuhTempo');
+        };
+        $scope.hapusKetJatuhTempo = function (idx) {
+            $scope.vm.listKetJatuhTempo.splice(idx, 1);
+        };
 
         $scope.hapusKapalBerangkat = function (idx) {
             for (var i = 0; i < $scope.vm.listTambahanBiaya.length; i++) {
@@ -395,6 +419,9 @@
             }).error(function (e) {
                 toastr.error("Ambil toko gagal");
             });
+        };
+        $scope.bukaDialog = function (idDialog) {
+            $('#' + idDialog).dialog();
         };
         console.log('data edit', $stateParams);
         if ($stateParams.idToko === null || $stateParams.idToko === undefined || $stateParams.idToko === 0 || $stateParams.idToko === '') {

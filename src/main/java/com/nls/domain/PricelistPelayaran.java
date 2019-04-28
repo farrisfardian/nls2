@@ -42,6 +42,10 @@ public class PricelistPelayaran {
     @JoinColumn(name = "id_kota_asal")
     private Kota kotaAsal;
 
+    @ManyToOne
+    @JoinColumn(name = "id_kota_tujuan")
+    private Kota kotaTujuan;
+
 //    @ManyToOne
 //    @JoinColumn(name = "id_pelayaran")
 //    private Pelayaran pelayaran;
@@ -49,7 +53,6 @@ public class PricelistPelayaran {
 //    @ManyToOne
 //    @JoinColumn(name = "id_satuan_kirim")
 //    private SatuanKirim satuanKirim;
-
     @OneToMany(mappedBy = "pricelist", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<PricelistPelayaranDetail> listDetail;
@@ -117,7 +120,6 @@ public class PricelistPelayaran {
 //    public void setSatuanKirim(SatuanKirim satuanKirim) {
 //        this.satuanKirim = satuanKirim;
 //    }
-
     /**
      * @return the listDetail
      */
@@ -130,6 +132,20 @@ public class PricelistPelayaran {
      */
     public void setListDetail(Set<PricelistPelayaranDetail> listDetail) {
         this.listDetail = listDetail;
+    }
+
+    /**
+     * @return the kotaTujuan
+     */
+    public Kota getKotaTujuan() {
+        return kotaTujuan;
+    }
+
+    /**
+     * @param kotaTujuan the kotaTujuan to set
+     */
+    public void setKotaTujuan(Kota kotaTujuan) {
+        this.kotaTujuan = kotaTujuan;
     }
 
 }

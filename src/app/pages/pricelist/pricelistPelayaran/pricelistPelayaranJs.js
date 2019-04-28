@@ -20,7 +20,6 @@
             $scope.dataPage = PricelistPelayaranService.queryComposite(
                     $scope.param.kotaAsal === null ? 'null' : $scope.param.kotaAsal.id,
                     $scope.param.kotaTujuan === null ? 'null' : $scope.param.kotaTujuan.id,
-                    $scope.param.pelayaran === null ? 'null' : $scope.param.pelayaran.id,
                     $filter('date')(new Date($scope.param.tglBerlaku), 'yyyy-MM-dd'),
                     $scope.paging.currentPage - 1, function () {
                         console.log('$scope.dataPage', $scope.dataPage);
@@ -31,13 +30,13 @@
                         for (var i = 0; i < $scope.dataPage.content.length; i++) {
                             var arr = $scope.dataPage.content[i].detail !== null && $scope.dataPage.content[i].detail !== undefined && (typeof $scope.dataPage.content[i].detail === 'string' || $scope.dataPage.content[i].detail instanceof String) ? $scope.dataPage.content[i].detail.split(";") : [];
 //                            console.log('arr', arr);
-                            $scope.dataPage.content[i].detail = []
+                            $scope.dataPage.content[i].detail = [];
                             for (var j = 0; j < arr.length; j++) {
                                 $scope.dataPage.content[i].detail.push(
                                         {
                                             id: j + 1,
                                             desc: arr[j]
-                                        })
+                                        });
                             }
                         }
                     });
@@ -58,13 +57,27 @@
 
         $scope.clear();
 
+        $scope.updateHargaFcl = function (idx) {
+            $scope.vm.listDetail[idx].hargaFcl = $scope.vm.listDetail[idx].hargaDariPelayaran + $scope.vm.listDetail[idx].provit;
+            $scope.updateHargaFclRingan(idx);
+            $scope.updateHargaFclBerat(idx);
+        };
+
+        $scope.updateHargaFclRingan = function (idx) {
+            $scope.vm.listDetail[idx].hargaFclRingan = $scope.vm.listDetail[idx].hargaFcl + $scope.vm.listDetail[idx].biayaDooringRingan;
+        };
+
+        $scope.updateHargaFclBerat = function (idx) {
+            $scope.vm.listDetail[idx].hargaFclBerat = $scope.vm.listDetail[idx].biayaDooringBerat === 0 || $scope.vm.listDetail[idx].biayaDooringBerat === null ? 0 : $scope.vm.listDetail[idx].hargaFcl + $scope.vm.listDetail[idx].biayaDooringBerat;
+        };
+
         $scope.baru = function () {
-            $scope.vm = {listDetail: [],tglBerlaku:new Date()};
+            $scope.vm = {listDetail: [], tglBerlaku: new Date()};
             $scope.ori = {};
             $scope.modalTitle = "Tambah Pricelist Pelayaran";
             console.log('Baru');
         };
-        
+
         $scope.baruDetail = function () {
             if ($scope.vm.listDetail === undefined || $scope.vm.listDetail === null) {
                 $scope.vm.listDetail = [];

@@ -5,10 +5,9 @@
  */
 package com.nls.web;
 
-import com.nls.dao.PricelistPelayaranDao;
-import com.nls.dao.jdbc.PricelistPelayaranDaoJdbc;
-import com.nls.domain.PricelistPelayaran;
-import com.nls.domain.PricelistPelayaranDetail;
+import com.nls.dao.KetJatuhTempoDao;
+import com.nls.domain.KetJatuhTempo;
+import com.nls.service.AppService;
 import java.security.InvalidParameterException;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -34,40 +33,39 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/api/setting/pricelist-pelayaran")
-public class PricelistPelayaranController {
+@RequestMapping("/api/master/ket-jatuh-tempo")
+public class KetJatuhTempoController {
 
     @Autowired
-    PricelistPelayaranDao dao;
-
-    @Autowired
-    PricelistPelayaranDaoJdbc daoJdbc;
+    KetJatuhTempoDao dao;
 
 //    @Autowired
 //    AppService appService;
-    private final Logger logger = LoggerFactory.getLogger(PricelistPelayaranController.class);
+
+    private final Logger logger = LoggerFactory.getLogger(KetJatuhTempoController.class);
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public Iterable<PricelistPelayaran> cariSemua() {
+    public Iterable<KetJatuhTempo> cariSemua() {
         return dao.findAll();
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public Page<PricelistPelayaran> saringSemua(
+    public Page<KetJatuhTempo> saringSemua(
             @RequestParam(required = false) String search,
             Pageable pageable,
             HttpServletResponse respons) {
         PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
                 Sort.Direction.ASC, "nama");
-        System.out.println("pageable.getPageNumber() : " + pageable.getPageNumber() + ", pageable.getPageSize() : " + pageable.getPageSize());
-        Page<PricelistPelayaran> result = dao.findAll(pr);
+        Page<KetJatuhTempo> result = dao.findAll(pr);
         return result;
     }
 
     @RequestMapping(value = "{column}/{value}", method = RequestMethod.GET)
-    public PricelistPelayaran cariSatu(@PathVariable String column, @PathVariable String value) {
+    public KetJatuhTempo cariSatu(@PathVariable String column, @PathVariable String value) {
         if (column.equalsIgnoreCase("kode")) {
             return dao.findOne(Integer.valueOf(value));
+        } else if (column.equalsIgnoreCase("nama")) {
+            return dao.findByNama(value);
         } else {
             throw new InvalidParameterException("column '" + column + "' not available");
         }
@@ -75,7 +73,7 @@ public class PricelistPelayaranController {
 
     @RequestMapping(value = "/{nama}", method = RequestMethod.GET)
     @ResponseBody
-    public Page<PricelistPelayaran> cariBerdasarkanNama(@PathVariable("nama") String nama,
+    public Page<KetJatuhTempo> cariBerdasarkanNama(@PathVariable("nama") String nama,
             Pageable pageable,
             HttpServletResponse response) {
         PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
@@ -83,40 +81,26 @@ public class PricelistPelayaranController {
         return dao.filter("%" + nama.toUpperCase() + "%", pr);
     }
 
-    @RequestMapping(value = "/idKotaAsal/idKotaTujuan/tglBerlaku/{idKotaAsal}/{idKotaTujuan}/{tglBerlaku}", method = RequestMethod.GET)
-    @ResponseBody
-    public Object cariComposite(@PathVariable("idKotaAsal") String idKotaAsal, @PathVariable("idKotaTujuan") String idKotaTujuan, @PathVariable("tglBerlaku") String tglBerlaku,
-            Pageable pageable,
-            HttpServletResponse response) {
-        PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
-                Sort.Direction.ASC, "tgl_berlaku");
-        return daoJdbc.listPricelist(idKotaAsal, idKotaTujuan, tglBerlaku, pr);
-    }
-
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void hapus(@PathVariable String id) {
-        PricelistPelayaran x = dao.findOne(Integer.valueOf(id));
+        KetJatuhTempo x = dao.findOne(Integer.valueOf(id));
         if (x == null) {
-            throw new InvalidParameterException("Cabang '" + id + "' tidak ditemukan!");
+            throw new InvalidParameterException("KetJatuhTempo '" + id + "' tidak ditemukan!");
         }
         dao.delete(x);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void simpan(@RequestBody PricelistPelayaran x) {
-        if (x.getListDetail() != null) {
-            for (PricelistPelayaranDetail c : x.getListDetail()) {
-                c.setPricelist(x);
-            }
-        }
+    public void simpan(@RequestBody KetJatuhTempo x) {
+//        User u = appService.getCurrentUser();
         dao.save(x);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    public void perbarui(@PathVariable String id, @RequestBody PricelistPelayaran x) {
-        PricelistPelayaran r = dao.findOne(Integer.valueOf(id));
+    public void perbarui(@PathVariable String id, @RequestBody KetJatuhTempo x) {
+        KetJatuhTempo r = dao.findOne(Integer.valueOf(id));
         if (r == null) {
-            throw new InvalidParameterException("PricelistPelayaran dengan ID '" + x.getId() + "' tidak ditemukan!");
+            throw new InvalidParameterException("KetJatuhTempo dengan nama '" + x.getNama() + "' tidak ditemukan!");
         }
         x.setId(r.getId());
         dao.save(x);

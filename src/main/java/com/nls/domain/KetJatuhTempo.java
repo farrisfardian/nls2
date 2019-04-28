@@ -20,36 +20,22 @@ import javax.persistence.Table;
  * @author faheem
  */
 @Entity
-@Table(name = "m_rekening")
-public class Rekening {
-
-    /**
-     * @return the tampilDiReport
-     */
-    public Boolean getTampilDiReport() {
-        return tampilDiReport;
-    }
-
-    /**
-     * @param tampilDiReport the tampilDiReport to set
-     */
-    public void setTampilDiReport(Boolean tampilDiReport) {
-        this.tampilDiReport = tampilDiReport;
-    }
+@Table(name = "m_ket_jatuh_tempo")
+public class KetJatuhTempo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    
     @Column
     private Integer urut;
+    
+    @Column(name = "is_default")
+    private Boolean isDefault;
 
     @Column(columnDefinition = "text")
     private String nama;
     
-    @Column(name = "tampil_di_report")
-    private Boolean tampilDiReport;
-
     public Integer getId() {
         return id;
     }
@@ -80,4 +66,18 @@ public class Rekening {
         this.urut = urut;
     }
 
+    /**
+     * @return the isDefault
+     */
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    /**
+     * @param isDefault the isDefault to set
+     */
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+    
 }

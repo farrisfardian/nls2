@@ -126,13 +126,6 @@
                         "stateRef": "master.rekening"
                     },
                     {
-                        "name": "master.ket-jatuh-tempo",
-                        "title": "Ket. Jatuh Tempo",
-                        "level": 1,
-                        "order": 0,
-                        "stateRef": "master.ket-jatuh-tempo"
-                    },
-                    {
                         "name": "master.kategori-barang",
                         "title": "Kategori Barang",
                         "level": 1,

@@ -47,50 +47,51 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-<!--                                    <div class="col-xs-2">
-                                        <label class="control-label" for="pelayaran">Pelayaran</label>
+                                    <!--                                    <div class="col-xs-2">
+                                                                            <label class="control-label" for="pelayaran">Pelayaran</label>
+                                                                        </div>
+                                                                        <div class="col-sm-4" ng-class="{error: form1.pelayaran.$invalid}">
+                                                                            <ui-select ng-model="vm.pelayaran" name="pelayaran"
+                                                                                       class="btn-group bootstrap-select form-control"
+                                                                                       ng-required="true"
+                                                                                       append-to-body="true"
+                                                                                       search-enabled="true" required="true" 
+                                                                                       >
+                                                                                <ui-select-match placeholder="Pilih pelayaran">
+                                                                                    {{$select.selected.nama}}
+                                                                                </ui-select-match>
+                                                                                <ui-select-choices
+                                                                                    repeat="item in listPelayaran | filter: $select.search">
+                                                                                    <span ng-bind-html="item.nama"></span>
+                                                                                </ui-select-choices>
+                                                                            </ui-select>
+                                                                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.pelayaran.$error.required">
+                                                                                Harus Diisi
+                                                                            </span>
+                                                                        </div>-->
+                                    <div class="col-md-6"></div>                                        
+                                    <div class="col-xs-2">
+                                        <label class="control-label" for="kota">Tujuan</label>
                                     </div>
-                                    <div class="col-sm-4" ng-class="{error: form1.pelayaran.$invalid}">
-                                        <ui-select ng-model="vm.pelayaran" name="pelayaran"
+                                    <div class="col-sm-4" ng-class="{error: form1.kotaTujuan.$invalid}">
+                                        <ui-select ng-model="vm.kotaTujuan" name="kotaTujuan"
                                                    class="btn-group bootstrap-select form-control"
                                                    ng-required="true"
                                                    append-to-body="true"
                                                    search-enabled="true" required="true" 
                                                    >
-                                            <ui-select-match placeholder="Pilih pelayaran">
+                                            <ui-select-match placeholder="Pilih Kota">
                                                 {{$select.selected.nama}}
                                             </ui-select-match>
                                             <ui-select-choices
-                                                repeat="item in listPelayaran | filter: $select.search">
+                                                repeat="item in listKota | filter: $select.search">
                                                 <span ng-bind-html="item.nama"></span>
                                             </ui-select-choices>
                                         </ui-select>
-                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.pelayaran.$error.required">
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kotaAsal.$error.required">
                                             Harus Diisi
                                         </span>
-                                    </div>-->
-<!--                                    <div class="col-xs-2">
-                                        <label class="control-label" for="satuanKirim">Satuan Kirim</label>
                                     </div>
-                                    <div class="col-sm-4" ng-class="{error: form1.satuanKirim.$invalid}">
-                                        <ui-select ng-model="vm.satuanKirim" name="satuanKirim"
-                                                   class="btn-group bootstrap-select form-control"
-                                                   ng-required="true"
-                                                   append-to-body="true"
-                                                   search-enabled="true"
-                                                   >
-                                            <ui-select-match placeholder="Pilih Satuan Kirim">
-                                                {{$select.selected.nama}}
-                                            </ui-select-match>
-                                            <ui-select-choices
-                                                repeat="item in listSatuanKirim | filter: $select.search">
-                                                <span ng-bind-html="item.nama"></span>
-                                            </ui-select-choices>
-                                        </ui-select>
-                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.satuanKirim.$error.required">
-                                            Harus Diisi
-                                        </span>
-                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -98,66 +99,137 @@
                                     <thead>
                                         <tr>
                                             <th><button class="btn btn-info btn-xs" ng-click="baruDetail()">Tambah</button></th>
-                                            <th>Tujuan</th>
                                             <th>Ukuran Kontainer</th>
-                                            <th>Jenis Stuffing</th>
-                                            <th>Harga</th>
+                                            <th>Setting Harga</th>
                                             <th style="width: 100px">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tr ng-repeat="c in vm.listDetail" class="editable-row">
+                                    <tr ng-repeat="c in vm.listDetail|orderBy:'ukuranKontainer'" class="editable-row">
                                         <td>
                                             {{$index + 1}}
                                         </td>
                                         <td>
-                                            <!--                                    <ui-select ng-model="c.kategoriBarang" name="kategoriBarang"
-                                                                                           class="btn-group bootstrap-select form-control"
-                                                                                           ng-required="true"
-                                                                                           append-to-body="true"
-                                                                                           search-enabled="true"
-                                                                                           >
-                                                                                    <ui-select-match placeholder="Pilih kategori">
-                                                                                        {{$select.selected.nama}}
-                                                                                    </ui-select-match>
-                                                                                    <ui-select-choices
-                                                                                        repeat="item in listKategoriBarang| filter: $select.search">
-                                                                                        <span ng-bind-html="item.nama"></span>
-                                                                                    </ui-select-choices>
-                                                                                </ui-select>-->
-                                    <ui-select ng-model="c.kotaTujuan" name="kota"
-                                               class="btn-group bootstrap-select form-control"
-                                               ng-required="true"
-                                               append-to-body="true"
-                                               search-enabled="true" required="true" 
-                                               >
-                                        <ui-select-match placeholder="Pilih Kota Tujuan">
-                                            {{$select.selected.nama}}
-                                        </ui-select-match>
-                                        <ui-select-choices
-                                            repeat="item in listKota | filter: $select.search">
-                                            <span ng-bind-html="item.nama"></span>
-                                        </ui-select-choices>
-                                    </ui-select>
-                                    </td>                            
-                                    <td>
-                                        <select class="form-control" ng-model="c.ukuranKontainer" ng-required="true" name="ukuranKontainer" >
-                                            <option ng-repeat="x in listUkuranKontainer" ng-value="x">{{x}}</option>
-                                        </select>
-                                    </td>                            
-                                    <td>
-                                        <select class="form-control" ng-model="c.jenisStuffing" ng-required="true" name="jenisStuffing" >
-                                            <option ng-repeat="x in listJenisStuffing" ng-value="x">{{x}}</option>
-                                        </select>
-                                    </td>                            
-                                    <td>
-                                        <input class="form-control" ng-model="c.harga">
-                                        <span ng-show="c.harga > 0">{{c.harga|number}}</span>
-                                    </td>                            
-                                    <td>
-                                        <div class="buttons" >
-                                            <button class="btn btn-danger editable-table-button btn-xs" ng-click="hapusDetail($index)">Hapus</button>
-                                        </div>
-                                    </td>                        
+                                            <select class="form-control" ng-model="c.ukuranKontainer" ng-required="true" name="ukuranKontainer" >
+                                                <option ng-repeat="x in listUkuranKontainer" ng-value="x">{{x}}</option>
+                                            </select>
+                                        </td>                            
+                                        <td>
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-7">
+                                                            <label class="control-label" for="hargaDariPelayaran">Harga dr Pelayaran</label>
+                                                        </div>
+                                                        <div class="col-sm-5" >
+                                                            <input class="form-control" ng-model="c.hargaDariPelayaran" ng-change="updateHargaFcl($index)" type="number">
+                                                            <span class="pull-right" ng-show="c.hargaDariPelayaran > 0">Rp.{{c.hargaDariPelayaran|number}}</span>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-7">
+                                                            <label class="control-label" for="provit">Profit</label>
+                                                        </div>
+                                                        <div class="col-sm-5" >
+                                                            <input class="form-control" ng-model="c.provit" ng-change="updateHargaFcl($index)" type="number">
+                                                            <span class="pull-right" ng-show="c.provit > 0">Rp.{{c.provit|number}}</span>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-7">
+                                                            <label class="control-label" for="hargaFcl">Harga FCL</label>
+                                                        </div>
+                                                        <div class="col-sm-5" >
+                                                            <input class="form-control" ng-model="c.hargaFcl" ng-disabled="true" type="number">
+                                                            <span class="pull-right" ng-show="c.hargaFcl > 0">Rp.{{c.hargaFcl|number}}</span>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>                                               
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-7">
+                                                            <label class="control-label" for="biayaDooringRingan">Biaya Dooring (Ringan)</label>
+                                                        </div>
+                                                        <div class="col-sm-5" >
+                                                            <input class="form-control" ng-model="c.biayaDooringRingan" ng-change="updateHargaFclRingan($index)" type="number" min="0">
+                                                            <span class="pull-right" ng-show="c.biayaDooringRingan > 0">Rp.{{c.biayaDooringRingan|number}}</span>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-7">
+                                                            <label class="control-label" for="biayaDooringBerat">Biaya Dooring (Berat)</label>
+                                                        </div>
+                                                        <div class="col-sm-5" >
+                                                            <input class="form-control" ng-model="c.biayaDooringBerat" ng-change="updateHargaFclBerat($index)" type="number" min="0">
+                                                            <span class="pull-right" ng-show="c.biayaDooringBerat > 0">Rp.{{c.biayaDooringBerat|number}}</span>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-7">
+                                                            <label class="control-label" for="hargaFclRingan" style="text-align: left">Harga FCL (Dooring) Ringan</label>
+                                                        </div>
+                                                        <div class="col-sm-5" >
+                                                            <!--<input class="form-control" ng-model="c.hargaFclRingan" type="number">-->
+                                                            <span class="pull-right" ng-show="c.hargaFclRingan > 0">Rp.{{c.hargaFclRingan|number}}</span>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-7">
+                                                            <label class="control-label pull-left" for="hargaFclBerat" style="text-align: left">Harga FCL (Dooring) Berat</label>
+                                                        </div>
+                                                        <div class="col-sm-5" >
+                                                            <!--<input class="form-control" ng-model="c.hargaFclBerat" type="number">-->
+                                                            <span class="pull-right" ng-show="c.hargaFclBerat > 0">Rp.{{c.hargaFclBerat|number}}</span>
+                                                            <span class="pull-right" ng-show="c.hargaFclBerat <= 0">Komunikatif</span>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-7">
+                                                            <label class="control-label" for="hargaLclRingan">Harga LCL Ringan</label>
+                                                        </div>
+                                                        <div class="col-sm-5" >
+                                                            <input class="form-control" ng-model="c.hargaLclRingan" type="number">
+                                                            <span class="pull-right" ng-show="c.hargaLclRingan > 0">Rp.{{c.hargaLclRingan|number}}</span>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-7">
+                                                            <label class="control-label" for="hargaLclBerat">Harga LCL Berat</label>
+                                                        </div>
+                                                        <div class="col-sm-5" >
+                                                            <input class="form-control" ng-model="c.hargaLclBerat" type="number">
+                                                            <span class="pull-right" ng-show="c.hargaLclBerat > 0">Rp.{{c.hargaLclBerat|number}}</span>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>
+                                            </div>
+                                        </td>                            
+                                        <td>
+                                            <div class="buttons" >
+                                                <button class="btn btn-danger editable-table-button btn-xs" ng-click="hapusDetail($index)">Hapus</button>
+                                            </div>
+                                        </td>                        
                                     </tr>
                                 </table>
                             </div>
@@ -201,29 +273,29 @@
                                         Harus Diisi
                                     </span>
                                 </div>
-                                <!--                                <div class="col-xs-2">
-                                                                    <label class="control-label" for="kota">Tujuan</label>
-                                                                </div>
-                                                                <div class="col-sm-4" ng-class="{error: formUtama.kota.$invalid}">
-                                                                    <ui-select ng-model="param.kotaTujuan"
-                                                                               class="btn-group bootstrap-select form-control"
-                                                                               ng-disabled="false"
-                                                                               append-to-body="true"
-                                                                               search-enabled="true" required="true" 
-                                                                               ng-change="resetMerek()"
-                                                                               >
-                                                                        <ui-select-match placeholder="Pilih Kota">
-                                                                            {{$select.selected.nama}}
-                                                                        </ui-select-match>
-                                                                        <ui-select-choices
-                                                                            repeat="item in listKota | filter: $select.search">
-                                                                            <span ng-bind-html="item.nama"></span>
-                                                                        </ui-select-choices>
-                                                                    </ui-select>
-                                                                    <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kota.$error.required">
-                                                                        Harus Diisi
-                                                                    </span>
-                                                                </div>-->
+                                <div class="col-xs-2">
+                                    <label class="control-label" for="kota">Tujuan</label>
+                                </div>
+                                <div class="col-sm-4" ng-class="{error: formUtama.kota.$invalid}">
+                                    <ui-select ng-model="param.kotaTujuan"
+                                               class="btn-group bootstrap-select form-control"
+                                               ng-disabled="false"
+                                               append-to-body="true"
+                                               search-enabled="true" required="true" 
+                                               ng-change="resetMerek()"
+                                               >
+                                        <ui-select-match placeholder="Pilih Kota">
+                                            {{$select.selected.nama}}
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                            repeat="item in listKota | filter: $select.search">
+                                            <span ng-bind-html="item.nama"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kota.$error.required">
+                                        Harus Diisi
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -240,28 +312,28 @@
                                         </span>                        
                                     </div>
                                 </div>
-                                <div class="col-xs-2">
-                                    <label class="control-label" for="kota">Pelayaran</label>
-                                </div>
-                                <div class="col-sm-4" ng-class="{error: formUtama.kota.$invalid}">
-                                    <ui-select ng-model="param.pelayaran"
-                                               class="btn-group bootstrap-select form-control"
-                                               ng-disabled="false"
-                                               append-to-body="true"
-                                               search-enabled="true" required="true" 
-                                               >
-                                        <ui-select-match placeholder="Pilih Pelayaran">
-                                            {{$select.selected.nama}}
-                                        </ui-select-match>
-                                        <ui-select-choices
-                                            repeat="item in listPelayaran | filter: $select.search">
-                                            <span ng-bind-html="item.nama"></span>
-                                        </ui-select-choices>
-                                    </ui-select>
-                                    <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kota.$error.required">
-                                        Harus Diisi
-                                    </span>
-                                </div>  
+                                <!--                                <div class="col-xs-2">
+                                                                    <label class="control-label" for="kota">Pelayaran</label>
+                                                                </div>
+                                                                <div class="col-sm-4" ng-class="{error: formUtama.kota.$invalid}">
+                                                                    <ui-select ng-model="param.pelayaran"
+                                                                               class="btn-group bootstrap-select form-control"
+                                                                               ng-disabled="false"
+                                                                               append-to-body="true"
+                                                                               search-enabled="true" required="true" 
+                                                                               >
+                                                                        <ui-select-match placeholder="Pilih Pelayaran">
+                                                                            {{$select.selected.nama}}
+                                                                        </ui-select-match>
+                                                                        <ui-select-choices
+                                                                            repeat="item in listPelayaran | filter: $select.search">
+                                                                            <span ng-bind-html="item.nama"></span>
+                                                                        </ui-select-choices>
+                                                                    </ui-select>
+                                                                    <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.kota.$error.required">
+                                                                        Harus Diisi
+                                                                    </span>
+                                                                </div>  -->
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -294,27 +366,19 @@
                                 <table class="table table-no-borders table-condensed" style="width: 100%;background: transparent" >
                                     <tbody>
                                         <tr>
-                                            <td style="text-align: left">Pelayaran</td>
-                                            <td> : {{c.pelayaran}}</td>
-                                            <td style="text-align: left">Asal </td>
-                                            <td>: {{c.kota_asal}}</td>
-                                        </tr>
-                                        <!--                                        <tr>
-                                                                                    <td>Merek</td>
-                                                                                    <td colspan="3">: {{c.merk}}</td>
-                                                                                </tr>-->
-                                        <tr>
-                                            <td style="text-align: left">Tgl Berlaku</td>
-                                            <td>: {{c.tgl_berlaku|date:'dd/MM/yyyy'}}</td>
-<!--                                            <td style="text-align: left">Satuan Kirim</td>
-                                            <td>: {{c.satuan_kirim}}</td>-->
-                                        </tr>
+                                            <td style="text-align: left">Asal : {{c.kota_asal}}</td>
+                                            <td style="text-align: left">Tujuan : {{c.kota_tujuan}}</td>
+                                            <td style="text-align: left">Tgl Berlaku : {{c.tgl_berlaku|date:'dd/MM/yyyy'}}</td>
+                                        </tr>                                        
                                         <tr>
                                             <td colspan="4" style="text-align: left" >
-                                                <ul>
-                                                    <li ng-repeat="x in c.detail track by x.id" ng-bind-html="x.desc">
-                                                    </li>
-                                                </ul>
+                                                <!--<ul>-->
+                                                <div class="row" ng-repeat="x in c.detail| orderBy:'desc':asc track by x.id " >
+                                                    <div class="col-md-12" ng-bind-html="x.desc">
+                                                    </div>
+                                                    <hr>
+                                                </div>
+                                                <!--</ul>-->
                                             </td>
                                         </tr>                                        
                                     </tbody>

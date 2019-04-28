@@ -37,6 +37,20 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Nota extends AbstractAuditingEntity implements Serializable {
 
+    /**
+     * @return the listKetJatuhTempo
+     */
+    public Set<NotaKetJatuhTempo> getListKetJatuhTempo() {
+        return listKetJatuhTempo;
+    }
+
+    /**
+     * @param listKetJatuhTempo the listKetJatuhTempo to set
+     */
+    public void setListKetJatuhTempo(Set<NotaKetJatuhTempo> listKetJatuhTempo) {
+        this.listKetJatuhTempo = listKetJatuhTempo;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -55,10 +69,10 @@ public class Nota extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "user_ins")
     private String userIns;
-    
+
     @Column(name = "user_upd")
     private String userUpd;
-    
+
     @Column(name = "nomor")
     private String nomorInvoice;
 
@@ -78,7 +92,7 @@ public class Nota extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "jml_min_bayar")
     private Double jmlMinBayar;
-    
+
     @Column(name = "total_tagihan")
     private BigDecimal totalTagihan;
 
@@ -95,6 +109,9 @@ public class Nota extends AbstractAuditingEntity implements Serializable {
     @OneToMany(mappedBy = "nota", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<NotaKapalBerangkat> listKapalBerangkat;
+    @OneToMany(mappedBy = "nota", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private Set<NotaKetJatuhTempo> listKetJatuhTempo;
 
     public Integer getId() {
         return id;

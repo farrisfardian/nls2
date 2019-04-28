@@ -9,12 +9,13 @@
                     </button>
                 </span>
             </div>
-            <div ba-panel ba-panel-title="Master Rekening" ba-panel-class="with-scroll">
+            <div ba-panel ba-panel-title="Master Keterangan Jatuh Tempo" ba-panel-class="with-scroll">
                 <table class="table table-bordered table-hover table-condensed">
                     <tr>
                         <td></td>
-                        <td>Nama Rekening</td>
+                        <td>Keterangan</td>
                         <td>Urut</td>
+                        <td>Default</td>
                         <td>
                             <button class="btn btn-info editable-table-button btn-xs" ng-click="baru()">Tambah</button>
                         </td>
@@ -30,10 +31,13 @@
                             {{ c.urut || 'empty' }}
                         </td>
                         <td>
+                            {{ c.isDefault?'Ya':'Tidak'}}
+                        </td>
+                        <td>
                             <div class="buttons" >
                                 <button class="btn btn-primary editable-table-button btn-xs" 
-                                        data-toggle="modal" ng-click="edit(c, 'app/pages/master/rekening/rekening-modal.html', 'md')">Edit</button>
-                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Rekening {{c.nama}}?" ng-confirm="hapus(c)">Delete</button>
+                                        data-toggle="modal" ng-click="edit(c, 'app/pages/master/ketJatuhTempo/ket-jatuh-tempo-modal.html', 'md')">Edit</button>
+                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Keterangan {{c.nama}}?" ng-confirm="hapus(c)">Delete</button>
                             </div>
                         </td>
                     </tr>
