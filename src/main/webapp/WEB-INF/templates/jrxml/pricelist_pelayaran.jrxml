@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
+<!-- 2019-05-11T16:06:16 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pricelist_pelayaran" pageWidth="937" pageHeight="612" orientation="Landscape" columnWidth="897" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d2ac48a4-e9d2-4865-8558-b7a02b2c9d74">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
+	<property name="com.jaspersoft.studio.unit." value="mm"/>
+	<style name="Crosstab_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab_CG" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab_CT" mode="Opaque" backcolor="#005FB3">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 1_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 1_CG" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 1_CT" mode="Opaque" backcolor="#005FB3">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 1_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="namaKotaAsal" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["Surabaya"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ukuranKontainer" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["40Feet"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[select * from fn_rpt_pricelist_pelayaran(7, '_40Feet'::varchar) as (asal varchar, tujuan varchar, item varchar, ukuran_kontainer text, tgl_berlaku date, jml numeric);]]>
+	</queryString>
+	<field name="asal" class="java.lang.String"/>
+	<field name="tujuan" class="java.lang.String"/>
+	<field name="tgl_berlaku" class="java.sql.Date"/>
+	<field name="ukuran_kontainer" class="java.lang.String"/>
+	<field name="item" class="java.lang.String"/>
+	<field name="jml" class="java.math.BigDecimal"/>
+	<group name="asal">
+		<groupExpression><![CDATA[$F{asal}]]></groupExpression>
+		<groupFooter>
+			<band height="70">
+				<crosstab>
+					<reportElement x="40" y="0" width="817" height="70" uuid="a66a41ea-6ca0-4ff3-b2ee-77c753066a49"/>
+					<rowGroup name="item1" width="80" totalPosition="End">
+						<bucket class="java.lang.String">
+							<bucketExpression><![CDATA[$F{item}]]></bucketExpression>
+						</bucket>
+						<crosstabRowHeader>
+							<cellContents mode="Opaque" style="Crosstab 1_CH">
+								<textField isStretchWithOverflow="true">
+									<reportElement x="0" y="0" width="80" height="20" uuid="19d2e5bd-3c8e-4744-8ca0-85a8ac953e97"/>
+									<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+									<textElement>
+										<font size="8"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{item1}.replace("1.","").replace("2.","").replace("3.","").replace("4.","").replace("5.","").replace("6.","").replace("7.","").replace("8.","").replace("9.","")]]></textFieldExpression>
+								</textField>
+							</cellContents>
+						</crosstabRowHeader>
+						<crosstabTotalRowHeader>
+							<cellContents mode="Transparent" style="Crosstab 1_CT">
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<staticText>
+									<reportElement x="0" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="f99abc01-35cc-451c-a3bf-e82d94bfe2e4">
+										<printWhenExpression><![CDATA[false]]></printWhenExpression>
+									</reportElement>
+									<box padding="2"/>
+									<text><![CDATA[Total item1]]></text>
+								</staticText>
+							</cellContents>
+						</crosstabTotalRowHeader>
+					</rowGroup>
+					<columnGroup name="tujuan1" height="20" totalPosition="End">
+						<bucket class="java.lang.String">
+							<bucketExpression><![CDATA[$F{tujuan}]]></bucketExpression>
+						</bucket>
+						<crosstabColumnHeader>
+							<cellContents mode="Opaque" style="Crosstab 1_CH">
+								<textField>
+									<reportElement x="0" y="0" width="70" height="20" uuid="3445bdc5-8e66-4570-aa72-590fc923dc6c"/>
+									<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+									<textElement>
+										<font size="8"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{tujuan1}]]></textFieldExpression>
+								</textField>
+							</cellContents>
+						</crosstabColumnHeader>
+						<crosstabTotalColumnHeader>
+							<cellContents mode="Transparent" style="Crosstab 1_CT">
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<staticText>
+									<reportElement x="0" y="0" width="10" height="20" forecolor="#FFFFFF" uuid="32b26412-2819-4b7b-b220-afb064b0e1b1">
+										<printWhenExpression><![CDATA[false]]></printWhenExpression>
+									</reportElement>
+									<box padding="2"/>
+									<text><![CDATA[Total tujuan1]]></text>
+								</staticText>
+							</cellContents>
+						</crosstabTotalColumnHeader>
+					</columnGroup>
+					<measure name="jml_MEASURE1" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{jml}]]></measureExpression>
+					</measure>
+					<crosstabCell width="70" height="20">
+						<cellContents mode="Opaque" style="Crosstab 1_CD">
+							<textField pattern="#,###,###,###">
+								<reportElement x="0" y="0" width="70" height="20" uuid="d9cdf814-e0d0-4107-8dce-1b86f77d3988">
+									<printWhenExpression><![CDATA[$V{jml_MEASURE1}.compareTo(BigDecimal.ZERO) == 1]]></printWhenExpression>
+								</reportElement>
+								<box padding="2"/>
+								<textElement textAlignment="Right">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{jml_MEASURE1}]]></textFieldExpression>
+							</textField>
+							<textField pattern="#,###,###,###">
+								<reportElement x="0" y="0" width="70" height="20" uuid="54714dfc-5c73-42fa-93e6-3c8fcb78e2b9">
+									<printWhenExpression><![CDATA[$V{jml_MEASURE1}.compareTo(BigDecimal.ZERO) == 0]]></printWhenExpression>
+								</reportElement>
+								<box padding="2"/>
+								<textElement textAlignment="Right">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA["KOMUNIKATIF"]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="10" height="20" columnTotalGroup="tujuan1">
+						<cellContents mode="Transparent" style="Crosstab 1_CT">
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="10" height="20" forecolor="#FFFFFF" uuid="f46cc584-7cc3-4274-bf56-195626564638">
+									<printWhenExpression><![CDATA[false]]></printWhenExpression>
+								</reportElement>
+								<textFieldExpression><![CDATA[$V{jml_MEASURE1}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="70" height="20" rowTotalGroup="item1">
+						<cellContents mode="Transparent" style="Crosstab 1_CT">
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="4567b526-fcf0-4ed8-a37c-02e3d9e15543">
+									<printWhenExpression><![CDATA[false]]></printWhenExpression>
+								</reportElement>
+								<textFieldExpression><![CDATA[$V{jml_MEASURE1}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="10" height="20" rowTotalGroup="item1" columnTotalGroup="tujuan1">
+						<cellContents mode="Transparent" style="Crosstab 1_CT">
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="10" height="20" forecolor="#FFFFFF" uuid="ace4ff27-d662-44f2-90f7-1924b9db4f86">
+									<printWhenExpression><![CDATA[false]]></printWhenExpression>
+								</reportElement>
+								<textFieldExpression><![CDATA[$V{jml_MEASURE1}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabCell>
+				</crosstab>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement mode="Transparent" x="0" y="0" width="897" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="ff977fda-4f99-4032-8422-5eaaa5a52b69"/>
+				<box padding="0" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PRICELIST HARGA TERBARU PENGIRIMAN \"REGULER\" "+(new SimpleDateFormat("yyyy").format(new Date()))+"\nKota Asal : "+$P{namaKotaAsal}+", Ukuran Kontainer : "+$P{ukuranKontainer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="680" y="20" width="217" height="20" uuid="d8f379d1-f525-40d8-a4cc-97558364b3cf"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dicetak pada tanggal "+(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()))]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<pageFooter>
+		<band height="20" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

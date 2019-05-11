@@ -44,6 +44,14 @@
                         <input type="checkbox" id="aktif" ng-model="vm.masukPricelist" name="masukPricelist">
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                        <label class="control-label" for="urutanPricelist">Urutan Pricelist</label>
+                    </div>
+                    <div class="col-sm-8" ng-class="{error: form1.status.$invalid}">
+                        <input type="number" id="urutanPricelist" ng-model="vm.urutanPricelist" name="urutanPricelist">
+                    </div>
+                </div>
 
             </div>
         </form>

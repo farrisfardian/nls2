@@ -27,6 +27,8 @@
           p:url="/WEB-INF/templates/jrxml/coba.jrxml"/>
     <bean id="api/report/per-stuffing" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
           p:url="/WEB-INF/templates/jrxml/packing-list-stuffing.jrxml"/>
+    <bean id="api/report/pricelist-pelayaran" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+          p:url="/WEB-INF/templates/jrxml/pricelist_pelayaran.jrxml"/>
     <bean id="api/report/per-toko" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
           p:url="/WEB-INF/templates/jrxml/per-toko.jrxml"/>
     <bean id="api/report/per-merk-toko" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"

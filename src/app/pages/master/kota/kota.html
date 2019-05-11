@@ -15,7 +15,7 @@
                         <td></td>
                         <td>Nama Kota</td>
                         <td>Kode Nota</td>
-                        <td>Masuk Pricelist</td>
+                        <td>Masuk Pricelist / urutan</td>
                         <td>
                             <button class="btn btn-info editable-table-button btn-xs" ng-click="baru()">Tambah</button>
                         </td>
@@ -31,7 +31,7 @@
                             {{ c.kodeNota || '' }}
                         </td>
                         <td>
-                            {{ c.masukPricelist?'Ya':'Tidak'}}
+                            {{ c.masukPricelist?'Ya':'Tidak'}} / {{c.masukPricelist?c.urutanPricelist:'-'}}
                         </td>
                         <td>
                             <div class="buttons" >

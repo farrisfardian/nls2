@@ -15,7 +15,7 @@
         };
 
         $scope.reloadData = function () {
-            $scope.dataPage = KotaService.query($scope.search, $scope.paging.currentPage-1, function () {
+            $scope.dataPage = KotaService.query($scope.search, $scope.paging.currentPage - 1, function () {
                 $scope.paging.maxSize = ($scope.dataPage.size);
                 $scope.paging.totalItems = $scope.dataPage.totalElements;
                 $scope.paging.currentPage = parseInt($scope.dataPage.number) + 1;
@@ -81,11 +81,14 @@
 
 
         $scope.simpan = function () {
+            if ($scope.vm.masukPricelist === null || $scope.vm.masukPricelist === false) {
+                $scope.vm.urutanPricelist = null;
+            }
             KotaService.simpan($scope.vm, $scope.ori).success(function (d) {
                 $uibModalInstance.close($scope.vm);
                 toastr.success('Simpan data sukses!');
-            })
-        }
+            });
+        };
     }
 })();
 

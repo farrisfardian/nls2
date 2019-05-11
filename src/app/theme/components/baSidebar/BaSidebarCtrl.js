@@ -164,20 +164,20 @@
                         "order": 0,
                         "stateRef": "pricelist.pricelist-pelayaran"
                     },
-                    {
-                        "name": "pricelist.dooring",
-                        "title": "Setting Dooring",
-                        "level": 1,
-                        "order": 0,
-                        "stateRef": "pricelist.dooring"
-                    },
-                    {
-                        "name": "pricelist.provit",
-                        "title": "Setting Provit",
-                        "level": 1,
-                        "order": 0,
-                        "stateRef": "pricelist.provit"
-                    }
+//                    {
+//                        "name": "pricelist.dooring",
+//                        "title": "Setting Dooring",
+//                        "level": 1,
+//                        "order": 0,
+//                        "stateRef": "pricelist.dooring"
+//                    },
+//                    {
+//                        "name": "pricelist.provit",
+//                        "title": "Setting Provit",
+//                        "level": 1,
+//                        "order": 0,
+//                        "stateRef": "pricelist.provit"
+//                    }
                 ]
             },
             {
@@ -295,6 +295,13 @@
                         "level": 1,
                         "order": 0,
                         "stateRef": "laporan.rekap-pembayaran"
+                    },
+                    {
+                        "name": "laporan.pricelist-pelayaran",
+                        "title": "Pricelist Pelayaran",
+                        "level": 1,
+                        "order": 0,
+                        "stateRef": "laporan.pricelist-pelayaran"
                     },
                     {
                         "name": "laporan.tracking-kapal",

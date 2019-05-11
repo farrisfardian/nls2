@@ -153,6 +153,19 @@
                         order: 0,
                     },
                 })
+                .state('laporan.pricelist-pelayaran', {
+                    url: '/pricelist-pelayaran',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/laporan/pricelistPelayaran/pricelist-pelayaran.html',
+                            controller: 'LaporanPricelistPelayaranCtrl'
+                        }
+                    },
+                    title: 'Pricelist Pelayaran',
+                    sidebarMeta: {
+                        order: 0,
+                    },
+                })
                 .state('laporan.tracking-kapal', {
                     url: '/tracking-kapal',
                     views: {

@@ -58,17 +58,24 @@
         $scope.clear();
 
         $scope.updateHargaFcl = function (idx) {
+            console.log('idx',idx);
+            console.log('$scope.vm.listDetail[idx].hargaDariPelayaran',$scope.vm.listDetail[idx].hargaDariPelayaran);
+            console.log('$scope.vm.listDetail[idx].provit',$scope.vm.listDetail[idx].provit);
             $scope.vm.listDetail[idx].hargaFcl = $scope.vm.listDetail[idx].hargaDariPelayaran + $scope.vm.listDetail[idx].provit;
+            console.log('$scope.vm.listDetail[idx].hargaFcl',$scope.vm.listDetail[idx].hargaFcl);
             $scope.updateHargaFclRingan(idx);
             $scope.updateHargaFclBerat(idx);
         };
 
         $scope.updateHargaFclRingan = function (idx) {
             $scope.vm.listDetail[idx].hargaFclRingan = $scope.vm.listDetail[idx].hargaFcl + $scope.vm.listDetail[idx].biayaDooringRingan;
+            console.log('$scope.vm.listDetail[idx].hargaFclRingan',$scope.vm.listDetail[idx].hargaFclRingan);
+            
         };
 
         $scope.updateHargaFclBerat = function (idx) {
             $scope.vm.listDetail[idx].hargaFclBerat = $scope.vm.listDetail[idx].biayaDooringBerat === 0 || $scope.vm.listDetail[idx].biayaDooringBerat === null ? 0 : $scope.vm.listDetail[idx].hargaFcl + $scope.vm.listDetail[idx].biayaDooringBerat;
+            console.log('$scope.vm.listDetail[idx].hargaFclBerat',$scope.vm.listDetail[idx].hargaFclBerat);
         };
 
         $scope.baru = function () {
@@ -119,6 +126,7 @@
                     data.tglBerlaku = new Date(data.tglBerlaku);
                 }
                 $scope.vm = angular.copy(data);
+                console.log('$scope.vm', $scope.vm);
             });
         };
 
