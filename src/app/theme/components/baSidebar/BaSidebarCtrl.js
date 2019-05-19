@@ -132,13 +132,13 @@
                         "order": 0,
                         "stateRef": "master.ket-jatuh-tempo"
                     },
-                    {
-                        "name": "master.kategori-barang",
-                        "title": "Kategori Barang",
-                        "level": 1,
-                        "order": 0,
-                        "stateRef": "master.kategori-barang"
-                    },
+//                    {
+//                        "name": "master.kategori-barang",
+//                        "title": "Kategori Barang",
+//                        "level": 1,
+//                        "order": 0,
+//                        "stateRef": "master.kategori-barang"
+//                    },
                     {
                         "name": "master.pelayaran",
                         "title": "Pelayaran",
