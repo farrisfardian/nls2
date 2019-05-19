@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2019-05-11T16:06:16 -->
+<!-- 2019-05-19T13:28:29 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pricelist_pelayaran" pageWidth="937" pageHeight="612" orientation="Landscape" columnWidth="897" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d2ac48a4-e9d2-4865-8558-b7a02b2c9d74">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
 	<property name="com.jaspersoft.studio.unit." value="mm"/>
@@ -81,6 +81,9 @@
 	</parameter>
 	<parameter name="ukuranKontainer" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["40Feet"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="namaPelayaran" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["TEMAS"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
 		<![CDATA[select * from fn_rpt_pricelist_pelayaran(7, '_40Feet'::varchar) as (asal varchar, tujuan varchar, item varchar, ukuran_kontainer text, tgl_berlaku date, jml numeric);]]>
@@ -256,7 +259,7 @@
 					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="0" rightIndent="0" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
 				</textElement>
-				<textFieldExpression><![CDATA["PRICELIST HARGA TERBARU PENGIRIMAN \"REGULER\" "+(new SimpleDateFormat("yyyy").format(new Date()))+"\nKota Asal : "+$P{namaKotaAsal}+", Ukuran Kontainer : "+$P{ukuranKontainer}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["PRICELIST HARGA TERBARU PENGIRIMAN \"REGULER\" "+(new SimpleDateFormat("yyyy").format(new Date()))+"\nKota Asal : "+$P{namaKotaAsal}+", Ukuran Kontainer : "+$P{ukuranKontainer}+", Pelayaran : "+$P{namaPelayaran}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement positionType="Float" x="680" y="20" width="217" height="20" uuid="d8f379d1-f525-40d8-a4cc-97558364b3cf"/>

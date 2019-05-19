@@ -39,7 +39,8 @@ public class PricelistPelayaranDaoJdbc {
                 + "  id int,  \n"
                 + "  tgl_berlaku date,  \n"
                 + "  kota_asal varchar, kota_tujuan varchar, \n"
-                + "  detail text\n"
+                + "  detail text,\n "
+                + "  pelayaran varchar"
                 + "  ) ";
         logger.warn("Query [{}]", query);
         Integer totalElement = mr.countRecordset(query);

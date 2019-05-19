@@ -69,7 +69,28 @@
                                                                                 Harus Diisi
                                                                             </span>
                                                                         </div>-->
-                                    <div class="col-md-6"></div>                                        
+                                    <div class="col-xs-2">
+                                        <label class="control-label" for="pelayaran">Pelayaran</label>
+                                    </div>
+                                    <div class="col-sm-4" ng-class="{error: form1.pelayaran.$invalid}">
+                                        <ui-select ng-model="vm.pelayaran" name="pelayaran"
+                                                   class="btn-group bootstrap-select form-control"
+                                                   ng-required="true"
+                                                   append-to-body="true"
+                                                   search-enabled="true" required="true" 
+                                                   >
+                                            <ui-select-match placeholder="Pilih pelayaran">
+                                                {{$select.selected.nama}}
+                                            </ui-select-match>
+                                            <ui-select-choices
+                                                repeat="item in listPelayaran | filter: $select.search">
+                                                <span ng-bind-html="item.nama"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.pelayaran.$error.required">
+                                            Harus Diisi
+                                        </span>
+                                    </div>
                                     <div class="col-xs-2">
                                         <label class="control-label" for="kota">Tujuan</label>
                                     </div>
@@ -366,12 +387,13 @@
                                 <table class="table table-no-borders table-condensed" style="width: 100%;background: transparent" >
                                     <tbody>
                                         <tr>
-                                            <td style="text-align: left">Asal : {{c.kota_asal}}</td>
-                                            <td style="text-align: left">Tujuan : {{c.kota_tujuan}}</td>
-                                            <td style="text-align: left">Tgl Berlaku : {{c.tgl_berlaku|date:'dd/MM/yyyy'}}</td>
+                                            <td style="text-align: left">Asal : <b style="color:black">{{c.kota_asal}}</b></td>
+                                            <td style="text-align: left">Tujuan : <b style="color:black">{{c.kota_tujuan}}</b></td>
+                                            <td style="text-align: left">Tgl Berlaku : <b style="color:black">{{c.tgl_berlaku|date:'dd/MM/yyyy'}}</b></td>
+                                            <td style="text-align: left">Pelayaran : <b style="color:black">{{c.pelayaran}}</b></td>
                                         </tr>                                        
                                         <tr>
-                                            <td colspan="4" style="text-align: left" >
+                                            <td colspan="5" style="text-align: left" >
                                                 <!--<ul>-->
                                                 <div class="row" ng-repeat="x in c.detail| orderBy:'desc':asc track by x.id " >
                                                     <div class="col-md-12" ng-bind-html="x.desc">

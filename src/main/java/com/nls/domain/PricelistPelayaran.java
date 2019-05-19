@@ -46,9 +46,9 @@ public class PricelistPelayaran {
     @JoinColumn(name = "id_kota_tujuan")
     private Kota kotaTujuan;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id_pelayaran")
-//    private Pelayaran pelayaran;
+    @ManyToOne
+    @JoinColumn(name = "id_pelayaran")
+    private Pelayaran pelayaran;
 //
 //    @ManyToOne
 //    @JoinColumn(name = "id_satuan_kirim")
@@ -146,6 +146,20 @@ public class PricelistPelayaran {
      */
     public void setKotaTujuan(Kota kotaTujuan) {
         this.kotaTujuan = kotaTujuan;
+    }
+
+    /**
+     * @return the pelayaran
+     */
+    public Pelayaran getPelayaran() {
+        return pelayaran;
+    }
+
+    /**
+     * @param pelayaran the pelayaran to set
+     */
+    public void setPelayaran(Pelayaran pelayaran) {
+        this.pelayaran = pelayaran;
     }
 
 }

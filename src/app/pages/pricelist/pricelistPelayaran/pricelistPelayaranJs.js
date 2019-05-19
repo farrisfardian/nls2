@@ -168,10 +168,10 @@
             $scope.listUkuranKontainer = data;
             console.log('$scope.listUkuranKontainer', $scope.listUkuranKontainer);
         });
-        SatuanKirimService.cariSemua().success(function (data) {
-            $scope.listSatuanKirim = data;
-            console.log('$scope.listSatuanKirim', $scope.listSatuanKirim);
-        });
+//        SatuanKirimService.cariSemua().success(function (data) {
+//            $scope.listSatuanKirim = data;
+//            console.log('$scope.listSatuanKirim', $scope.listSatuanKirim);
+//        });
 
         $scope.simpan = function () {
             PricelistPelayaranService.simpan($scope.vm, $scope.ori).success(function (d) {

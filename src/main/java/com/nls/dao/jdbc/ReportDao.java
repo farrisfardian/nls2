@@ -32,8 +32,8 @@ public class ReportDao {
         return mr.mapList(sql);
     }
 
-    public Object pricelistPelayaran(String idKotaAsal, String ukuranKontainer) {
-        String sql = "select * from fn_rpt_pricelist_pelayaran(" + idKotaAsal + ", '" + ukuranKontainer + "'::varchar) as (asal varchar, tujuan varchar, item varchar, ukuran_kontainer text, tgl_berlaku date, jml numeric);";
+    public Object pricelistPelayaran(String idKotaAsal, String idPelayaran, String ukuranKontainer) {
+        String sql = "select * from fn_rpt_pricelist_pelayaran(" + idKotaAsal + ", " + idPelayaran + ",'" + ukuranKontainer + "'::varchar) as (asal varchar, tujuan varchar, item varchar, ukuran_kontainer text, tgl_berlaku date, jml numeric);";
         System.out.println("perStuffing : " + sql);
         return mr.mapList(sql);
     }
