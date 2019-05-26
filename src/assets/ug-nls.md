@@ -1,121 +1,121 @@
 # ALUR DATA
 Berikut ini adalah alur data yang berlaku di aplikasi ini,
-<img src="alur_data.jpg" width="100%" alt="Alur Data" title="Alur Data"/> 
+<img src="assets/alur_data.jpg" width="100%" alt="Alur Data" title="Alur Data"/> 
 # MASTER 
 ## Item 
-<img src="ug-images/master-item.png" width="100%" alt="Master Item" title="Master Item"/>
+<img src="assets/ug-images/master-item.png" width="100%" alt="Master Item" title="Master Item"/>
 ###  Deskripsi  
 Menu **Master > Item** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data item barang yang akan digunakan di menu **Transaksi > Surat Jalan**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Tambahan Biaya 
-<img src="ug-images/master-tambahan-biaya.png" width="100%" alt="Master Tambahan Biaya" title="Master Tambahan Biaya"/>
+<img src="assets/ug-images/master-tambahan-biaya.png" width="100%" alt="Master Tambahan Biaya" title="Master Tambahan Biaya"/>
 ###  Deskripsi  
 Menu **Master > Tambahan Biaya** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data tambahan biaya yang akan digunakan di menu **Transaksi > Nota**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Jenis Item 
-<img src="ug-images/master-jenis-item.png" width="100%" alt="Master Jenis Item" title="Master Jenis Item"/>
+<img src="assets/ug-images/master-jenis-item.png" width="100%" alt="Master Jenis Item" title="Master Jenis Item"/>
 ###  Deskripsi  
 Menu **Master > Jenis Item** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data jenis item yang akan digunakan di menu **Transaksi > Item**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Kapal 
-<img src="ug-images/master-kapal.png" width="100%" alt="Master Kapal" title="Master Kapal"/>
+<img src="assets/ug-images/master-kapal.png" width="100%" alt="Master Kapal" title="Master Kapal"/>
 ###  Deskripsi  
 Menu **Master > Kapal** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data kapal yang akan digunakan di menu **Transaksi > Kapal Berangkat**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Kota 
-<img src="ug-images/master-kota.png" width="100%" alt="Master Kota" title="Master Kota"/>
+<img src="assets/ug-images/master-kota.png" width="100%" alt="Master Kota" title="Master Kota"/>
 ###  Deskripsi  
 Menu **Master > Kota** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data kota yang akan digunakan di beberapa menu **Master, Transaksi & Laporan**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Satuan Kirim
-<img src="ug-images/master-satuan-kirim.png" width="100%" alt="Master Satuan Kirim" title="Master Satuan Kirim"/> 
+<img src="assets/ug-images/master-satuan-kirim.png" width="100%" alt="Master Satuan Kirim" title="Master Satuan Kirim"/> 
 ###  Deskripsi  
 Menu **Master > Satuan Kirim** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data satuan kirim yang akan digunakan di menu **Transaksi > Stuffing**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Kondisi 
-<img src="ug-images/master-kondisi.png" width="100%" alt="Master Kondisi" title="Master Kondisi"/> 
+<img src="assets/ug-images/master-kondisi.png" width="100%" alt="Master Kondisi" title="Master Kondisi"/> 
 ###  Deskripsi  
 Menu **Master > Kondisi** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data kondisi yang akan digunakan di menu **Transaksi > Surat Jalan**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Toko 
-<img src="ug-images/master-toko.png" width="100%" alt="Master Toko" title="Master Toko"/> 
+<img src="assets/ug-images/master-toko.png" width="100%" alt="Master Toko" title="Master Toko"/> 
 ###  Deskripsi  
 Menu **Master > Toko** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data toko yang akan digunakan di menu **Transaksi > Surat Jalan**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## EMKL 
-<img src="ug-images/master-emkl.png" width="100%" alt="Master EMKL" title="Master EMKL"/> 
+<img src="assets/ug-images/master-emkl.png" width="100%" alt="Master EMKL" title="Master EMKL"/> 
 ###  Deskripsi  
 Menu **Master > EMKL** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data EMKL yang akan digunakan di menu **Transaksi > Stuffing**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Kapal Berangkat 
-<img src="ug-images/master-kapal-berangkat.png" width="100%" alt="Master Kapal Berangkat" title="Master Kapal Berangkat"/> 
+<img src="assets/ug-images/master-kapal-berangkat.png" width="100%" alt="Master Kapal Berangkat" title="Master Kapal Berangkat"/> 
 ###  Deskripsi  
 Menu **Master > Kapal Berangkat** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data kapal berangkat yang akan digunakan di menu **Transaksi > Stuffing**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Kategori Harga 
-<img src="ug-images/master-kategori-harga.png" width="100%" alt="Master Kategori Harga" title="Master Kategori Harga"/> 
+<img src="assets/ug-images/master-kategori-harga.png" width="100%" alt="Master Kategori Harga" title="Master Kategori Harga"/> 
 ###  Deskripsi  
 Menu **Master > Kategori Harga** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data kategori harga yang akan digunakan di menu **Master > Setting Harga**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Setting Harga 
-<img src="ug-images/master-setting-harga.png" width="100%" alt="Master Setting Harga" title="Master Setting Harga"/> 
+<img src="assets/ug-images/master-setting-harga.png" width="100%" alt="Master Setting Harga" title="Master Setting Harga"/> 
 ###  Deskripsi  
 Menu **Master > Setting Harga** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data setting harga yang akan digunakan untuk menghitung nominal tagihan di menu **Transaksi > Nota**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Setting Aplikasi 
-<img src="ug-images/master-setting-aplikasi.png" width="100%" alt="Master Setting Aplikasi" title="Master Setting Aplikasi"/>
+<img src="assets/ug-images/master-setting-aplikasi.png" width="100%" alt="Master Setting Aplikasi" title="Master Setting Aplikasi"/>
 ###  Deskripsi  
 Menu **Master > Setting Aplikasi** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data setting aplikasi yang meliputi account, password, smtp host, smtp auth email, dll.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Jenis Pembayaran 
-<img src="ug-images/master-jenis-pembayaran.png" width="100%" alt="Master Jenis Pembayaran" title="Master Jenis Pembayaran"/>
+<img src="assets/ug-images/master-jenis-pembayaran.png" width="100%" alt="Master Jenis Pembayaran" title="Master Jenis Pembayaran"/>
 ###  Deskripsi  
 Menu **Master > Jenis Pembayaran** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data jenis pembayaran yang akan digunakan di menu **Transaksi > Pembayaran**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Rekening 
-<img src="ug-images/master-rekening.png" width="100%" alt="Master Rekening" title="Master Rekening"/>
+<img src="assets/ug-images/master-rekening.png" width="100%" alt="Master Rekening" title="Master Rekening"/>
 ###  Deskripsi  
 Menu **Master > Rekening** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data rekening yang akan digunakan di menu **Transaksi > Pembayaran**. Data rekening ini muncul di pilihan **Rekening** saat jenis pembayaran yang terpilih adalah **Transfer**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Ket. Jatuh Tempo 
-<img src="ug-images/master-ket-jatuh-tempo.png" width="100%" alt="Master Ket. Jatu Tempo" title="Master Ket. Jatuh Tempo"/>
+<img src="assets/ug-images/master-ket-jatuh-tempo.png" width="100%" alt="Master Ket. Jatu Tempo" title="Master Ket. Jatuh Tempo"/>
 ###  Deskripsi  
 Menu **Master > Ket. Jatuh Tempo** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data ket. jatuh tempo yang akan digunakan di menu **Transaksi > Nota**. Keterangan ini akan muncul di keterangan **JATUH TEMPO PEMBAYARAN** pada print out Nota.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Pelayaran
-<img src="ug-images/master-pelayaran.png" width="100%" alt="Master Pelayaran" title="Master Pelayaran"/> 
+<img src="assets/ug-images/master-pelayaran.png" width="100%" alt="Master Pelayaran" title="Master Pelayaran"/> 
 ###  Deskripsi  
 Menu **Master > Pelayaran** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data pelayaran yang akan digunakan di menu **Pricelist > Pricelist Pelayaran**.
 ###  Tambah Data  
@@ -123,7 +123,7 @@ Menu **Master > Pelayaran** ini adalah menu yang digunakan untuk menambah, mengu
 ###  Hapus Data  
 # PRICELIST 
 ## Pricelist Pelayaran 
-<img src="ug-images/pricelist-pelayaran.png" width="100%" alt="Pricelist Pelayaran" title="Pricelist Pelayaran"/> 
+<img src="assets/ug-images/pricelist-pelayaran.png" width="100%" alt="Pricelist Pelayaran" title="Pricelist Pelayaran"/> 
 ###  Deskripsi  
 Menu **Pricelist > Pricelist Pelayaran** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data pricelist pelayaran yang akan disajikan di **Laporan Pricelist Pelayaran**.
 ###  Tambah Data  
@@ -131,28 +131,28 @@ Menu **Pricelist > Pricelist Pelayaran** ini adalah menu yang digunakan untuk me
 ###  Hapus Data  
 # TRANSAKSI 
 ## Stuffing 
-<img src="ug-images/transaksi-stuffing.png" width="100%" alt="Transaksi Stuffing" title="Transaksi Stuffing"/> 
+<img src="assets/ug-images/transaksi-stuffing.png" width="100%" alt="Transaksi Stuffing" title="Transaksi Stuffing"/> 
 ###  Deskripsi  
 Menu **Transaksi > Stuffing** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data stuffing yang akan digunakan di menu **Transaksi > Surat Jalan**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## List Surat Jalan 
-<img src="ug-images/transaksi-list-surat-jalan.png" width="100%" alt="Transaksi List Surat Jalan" title="Transaksi List Surat Jalan"/> 
+<img src="assets/ug-images/transaksi-list-surat-jalan.png" width="100%" alt="Transaksi List Surat Jalan" title="Transaksi List Surat Jalan"/> 
 ###  Deskripsi  
 Menu **Transaksi > List Surat Jalan** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data surat jalan yang akan dihitung nominal tagihannya di menu **Transaksi > Nota**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Nota 
-<img src="ug-images/transaksi-nota.png" width="100%" alt="Transaksi Nota" title="Transaksi Nota"/> 
+<img src="assets/ug-images/transaksi-nota.png" width="100%" alt="Transaksi Nota" title="Transaksi Nota"/> 
 ###  Deskripsi  
 Menu **Transaksi > Nota** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data nota yang berisi **perhitungan nominal tagihan** surat jalan dari menu **Transaksi > List Surat Jalan**. Data nota yang sudah dientri di menu ini akan digunakan di menu **Transaksi > Pembayaran**.
 ###  Tambah Data  
 ###  Ubah Data  
 ###  Hapus Data  
 ## Pembayaran 
-<img src="ug-images/transaksi-pembayaran.png" width="100%" alt="Transaksi Pembayaran" title="Transaksi Pembayaran"/> 
+<img src="assets/ug-images/transaksi-pembayaran.png" width="100%" alt="Transaksi Pembayaran" title="Transaksi Pembayaran"/> 
 ###  Deskripsi  
 Menu **Transaksi > Pembayaran** ini adalah menu yang digunakan untuk menambah, mengubah dan menghapus data **pembayaran terhadap nota tagihan** yang sudah disimpan di menu **Transaksi > Nota**.
 ###  Tambah Data  

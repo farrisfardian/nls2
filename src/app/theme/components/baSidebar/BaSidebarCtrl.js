@@ -372,14 +372,15 @@
                             },
                         ]
                     },
-                    {
-                        "name": "master.matauang",
-                        "title": "Matauang",
-                        "level": 1,
-                        "order": 200,
-                        "stateRef": "master.matauang"
-                    },
+                    
                 ]
+            },
+            {
+                "name": "ug.md-html",
+                "title": "User Guide",
+                "level": 1,
+                "order": 200,
+                "stateRef": "ug.md-html"
             },
         ];
         console.log('$scope.menuItems', $scope.menuItems);

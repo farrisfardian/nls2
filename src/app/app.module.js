@@ -1,27 +1,28 @@
 'use strict';
 
 angular.module('BlurAdmin', [
-  'ngAnimate',
-  'ui.bootstrap',
-  'ui.sortable',
-  'ui.router',
-  'ui.select', 
-  'ngSanitize',
-  'ngTouch',
-  'toastr',
-  'smart-table',
-  'xeditable',
-  'ui.slimscroll',
-  'ngJsTree',
-  'angular-progress-button-styles',
-  'ngResource',
-  'ngBootbox',
-  'ae-datetimepicker',
-  'ngStorage',
-  'ngCookies',
-  'ngCacheBuster',  
-  'BlurAdmin.theme',
-  'BlurAdmin.pages'
+    'ngAnimate',
+    'ui.bootstrap',
+    'ui.sortable',
+    'ui.router',
+    'ui.select',
+    'ngSanitize',
+    'ngTouch',
+    'toastr',
+    'smart-table',
+    'xeditable',
+    'ui.slimscroll',
+    'ngJsTree',
+    'angular-progress-button-styles',
+    'ngResource',
+    'ngBootbox',
+    'ae-datetimepicker',
+    'ngStorage',
+    'ngCookies',
+    'ngCacheBuster',
+    'BlurAdmin.theme',
+    'BlurAdmin.pages',
+    'hc.marked'
 ]).directive('ngConfirm', ['$uibModal', function ($uibModal) {
         return {
             restrict: 'A',
@@ -53,20 +54,20 @@ angular.module('BlurAdmin', [
             }
         }
     }])
-    .controller('ModalConfirmCtrl', ['$scope', '$uibModalInstance', 'notConfirmClick', 'confirmClick', 'confirmMessge',
-    function ($scope, $uibModalInstance, notConfirmClick, confirmClick, confirmMessge) {
-        $scope.confirmMessage = confirmMessge;
-        function closeModal() {
-            $uibModalInstance.dismiss('cancel');
-        }
+        .controller('ModalConfirmCtrl', ['$scope', '$uibModalInstance', 'notConfirmClick', 'confirmClick', 'confirmMessge',
+            function ($scope, $uibModalInstance, notConfirmClick, confirmClick, confirmMessge) {
+                $scope.confirmMessage = confirmMessge;
+                function closeModal() {
+                    $uibModalInstance.dismiss('cancel');
+                }
 
-        $scope.ok = function () {
-            confirmClick();
-            closeModal();
-        }
+                $scope.ok = function () {
+                    confirmClick();
+                    closeModal();
+                }
 
-        $scope.cancel = function () {
-            notConfirmClick();
-            closeModal();
-        }
-    }]);
+                $scope.cancel = function () {
+                    notConfirmClick();
+                    closeModal();
+                }
+            }]);
