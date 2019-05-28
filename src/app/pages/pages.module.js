@@ -20,6 +20,7 @@
         'BlurAdmin.pages.transaksi',
         'BlurAdmin.pages.laporan',
         'BlurAdmin.pages.setting',
+        'BlurAdmin.pages.ug',
     ])
             .directive('ngEnter', ngEnter)
             .directive('whenScrolled', whenScrolled)
