@@ -24,9 +24,6 @@
                 })
                 .state('transaksi.stuffing', {
                     url: '/stuffing',
-//                    templateUrl: 'app/pages/transaksi/stuffing/stuffing.html',
-//                    controller: 'StuffingCtrl',
-//          controllerAs: 'vm',
                     views: {
                         'content@': {
                             templateUrl: 'app/pages/transaksi/stuffing/stuffing.html',

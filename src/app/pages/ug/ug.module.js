@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('BlurAdmin.pages.transaksi', ['ui.select', 'ngSanitize'])
+    angular.module('BlurAdmin.pages.ug', ['ui.select', 'ngSanitize'])
             .config(routeConfig);
 
     /** @ngInject */
