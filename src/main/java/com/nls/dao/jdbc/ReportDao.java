@@ -250,4 +250,17 @@ public class ReportDao {
         String sql = "select * from fn_rekap_by_grup_new('" + grup + "'," + (tglMulai == null ? "null" : "'" + tglMulai + "'") + "," + (tglSampai == null ? "null" : "'" + tglSampai + "'") + ",'" + order + "') as (grup varchar, coli bigint, kubikasi numeric, kontainer bigint) limit " + limit;
         return mr.mapList(sql);
     }
+    
+    /**
+     *
+     * @param tglMulai format : yyyy-mm-dd
+     * @param tglSampai format : yyyy-mm-dd
+     * @param order contoh : 'grup_asc', 'grup_desc', 'coli_asc', 'coli_desc',
+     * 'kubikasi_asc', 'kubikasi_desc'
+     * @return
+     */
+    public Object rekapTagihanByGrup(String tglMulai, String tglSampai, String order, int limit) {
+        String sql = "select * from fn_rekap_tagihan_by_grup_new('" + tglMulai + "','" + tglSampai + "','" + order + "') as (grup varchar, tagihan numeric, terbayar numeric, sisa numeric, pros_bayar numeric) limit " + limit;
+        return mr.mapList(sql);
+    }
 }

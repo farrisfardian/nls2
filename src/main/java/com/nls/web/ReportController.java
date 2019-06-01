@@ -552,4 +552,20 @@ public class ReportController {
         logger.warn("order: [{}]", order);
         return dao.rekapColiKubikasiPerGrup(grup, tgl1, tgl2, order, limit);
     }
+    
+    @RequestMapping(value = "/rekap-terbayar-tagihan", method = RequestMethod.GET)
+    @ResponseBody
+    private Object rekapTagihanByGrup(HttpServletRequest request) throws ParseException {
+        String uri = request.getRequestURI();
+        String format = uri.substring(uri.lastIndexOf(".") + 1);
+
+        String tgl1 = request.getParameter("tgl1");
+        String tgl2 = request.getParameter("tgl2");
+        String order = request.getParameter("order");
+        Integer limit = Integer.parseInt(request.getParameter("limit"));
+        logger.warn("tgl1: [{}]", tgl1);
+        logger.warn("tgl2: [{}]", tgl2);
+        logger.warn("order: [{}]", order);
+        return dao.rekapTagihanByGrup(tgl1, tgl2, order, limit);
+    }
 }
