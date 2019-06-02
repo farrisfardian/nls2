@@ -1,7 +1,7 @@
 # ALUR DATA
 Berikut ini adalah alur data yang berlaku di aplikasi ini,
 <img src="alur_data.jpg" width="100%" alt="Alur Data" title="Alur Data"/> 
-# MASTER 
+# MASTER
 ## Item 
 <img src="ug-images/master-item.png" width="100%" alt="Master Item" title="Master Item"/>
 ###  Deskripsi  
@@ -161,35 +161,50 @@ Menu **Transaksi > Pembayaran** ini adalah menu yang digunakan untuk menambah, m
 # LAPORAN 
 ## Dashboard 
 ###  Deskripsi  
-Menu **Laporan > Dashboard** ini adalah menu yang digunakan untuk menampilkan rekap data transaksi meliputi **Rekap Kontainer** serta **Rekap Coli & Kubikasi** dengan pilihan grouping berdasarkan **Kota Tujuan, Kondisi, Customer, Kapal, Emkl & Pengirim** dalam bentuk grafik **Bar Chart**.
+Menu **Laporan > Dashboard** ini adalah menu yang digunakan untuk menampilkan rekap data transaksi meliputi :
+1. **Rekap Surat Jalan** yang terdiri dari **Rekap Kontainer** serta **Rekap Coli & Kubikasi** dengan pilihan grouping berdasarkan **Kota Tujuan, Kondisi, Customer, Kapal, Emkl & Pengirim** dalam bentuk grafik **Bar Chart**.
+<img src="ug-images/laporan-dashboard-rekap-surat-jalan.png" width="100%" alt="Dashboard Rekap Surat Jalan" title="Dashboard Rekap Surat Jalan"/> 
+2. **Rekap Tagihan** yang terdiri dari **Rekap Tagihan, Terbayar & Sisa** serta **Rekap Prosentase Terbayar** dengan grouping berdasarkan **Toko** dalam bentuk grafik **Bar Chart**.
+<img src="ug-images/laporan-dashboard-rekap-nota.png" width="100%" alt="Dashboard Rekap Tagihan" title="Dashboard Rekap Tagihan"/> 
+
 ## Per Toko 
+<img src="ug-images/laporan-pertoko.png" width="100%" alt="Laporan Per Toko" title="Laporan Per Toko"/> 
 ###  Deskripsi  
 Menu **Laporan > Per Toko** ini adalah menu yang dipakai untuk menampilkan **CARGO MANIFEST CUSTOMER** dengan filter **kota, kapal berangkat dan toko**. Laporan ini bisa ditampilkan dalam bentuk **PDF** maupun **XLS**.
 ## Stuffing / Kapal 
+<img src="ug-images/laporan-perkapal.png" width="100%" alt="Laporan Stuffing / Kapal" title="Laporan Stuffing / Kapal"/> 
 ###  Deskripsi  
 Menu **Laporan > Stuffing / Kapal** ini adalah menu yang dipakai untuk menampilkan **CARGO MANIFEST** dengan filter **kota, kapal berangkat dan kontainer**. Laporan ini bisa ditampilkan dalam bentuk **PDF** maupun **XLS**.
 ## Info Item 
+<img src="ug-images/laporan-info-item.png" width="100%" alt="Laporan Info Item" title="Laporan Info Item"/> 
 ###  Deskripsi  
 Menu **Laporan > Info Item** ini adalah menu yang dipakai untuk mencari **Surat Jalan** dengan filter **tanggal kirim, toko** dan **keyword untuk nama item & nomor kontainer**. Pada list yang tampil disediakan tombol untuk **cetak Cargo Manifest** dan **edit Surat Jalan**.
 ## Jml Container Bulanan 
+<img src="ug-images/laporan-jml-container-bulanan.png" width="100%" alt="Laporan Jml Container Bulanan" title="Laporan Jml Container Bulanan"/> 
 ###  Deskripsi  
 Menu **Laporan > Jml Container Bulanan** ini adalah menu yang dipakai untuk menampilkan rekap **Jml Container Bulanan** untuk tiap kota tujuan dengan filter **Tahun** dan **Bulan**. Laporan ini bisa ditampilkan dalam bentuk **PDF** maupun **XLS**.
 ## Rincian Nota 
+<img src="ug-images/laporan-rincian-nota.png" width="100%" alt="Laporan Rincian Nota" title="Laporan Rincian Nota"/> 
 ###  Deskripsi  
 Menu **Laporan > Rincian Nota** ini adalah menu yang dipakai untuk menampilkan daftar **Rincian Nota** untuk tiap Toko dengan filter **Tgl Berangkat, Toko dan Merk** serta grouping per **nomor nota**. Laporan ini dilengkapi dengan **rincian bayar** untuk tiap nota. Laporan ini menampilkan nota tagihan baik yang lunas maupun belum lunas.  Laporan ini bisa ditampilkan dalam bentuk **PDF** maupun **XLS**.
 ## Rekap Nota 
+<img src="ug-images/laporan-rekap-nota.png" width="100%" alt="Laporan Rekap Nota" title="Laporan Rekap Nota"/>
 ###  Deskripsi  
 Menu **Laporan > Rekap Nota** ini adalah menu yang dipakai untuk menampilkan daftar **REKAP NOTA TAGIHAN** untuk tiap Toko dengan filter **Tgl Berangkat, Toko, Merk dan Kapal** serta grouping per **nomor nota**. Laporan ini **tidak dilengkapi** dengan **rincian bayar** untuk tiap nota. Laporan ini menampilkan nota tagihan baik yang lunas maupun belum lunas. Laporan ini bisa ditampilkan dalam bentuk **PDF** maupun **XLS**.
 ## Rekap Nota Belum Lunas 
+<img src="ug-images/laporan-rekap-nota-belum-lunas.png" width="100%" alt="Laporan Rekap Nota Belum Lunas" title="Laporan Rekap Nota Belum Lunas"/>
 ###  Deskripsi  
 Menu **Laporan > Rekap Nota Belum Lunas** ini adalah menu yang dipakai untuk menampilkan daftar **REKAP NOTA BELUM LUNAS** untuk tiap Toko dengan filter **Tgl Berangkat** serta grouping per **Toko**. Laporan ini **dilengkapi** dengan **rincian bayar** untuk tiap nota. Laporan ini hanya menampilkan nota tagihan yang **belum lunas**. Laporan ini bisa ditampilkan dalam bentuk **PDF** maupun **XLS**.
 ## Rekap Pembayaran 
+<img src="ug-images/laporan-rekap-pembayaran.png" width="100%" alt="Laporan Rekap Pembayaran" title="Laporan Rekap Pembayaran"/>
 ###  Deskripsi  
-Menu **Laporan > Rekap Pembayaran** ini adalah menu yang dipakai untuk menampilkan daftar **REKAP PEMBAYARAN** untuk tiap Nota dengan filter **Tgl Berangkat, Kota Tujuan dan Kapal berangkat** serta grouping per **Nomor Pembayaran**. Laporan ini bisa ditampilkan dalam bentuk **PDF** maupun **XLS**.
+Menu **Laporan > Rekap Pembayaran** ini adalah menu yang dipakai untuk menampilkan daftar **REKAP PEMBAYARAN** untuk tiap Nota dengan filter **Tgl Berangkat, Kota Tujuan dan Kapal berangkat** serta grouping per **Kapal Berangkat**. Laporan ini bisa ditampilkan dalam bentuk **PDF** maupun **XLS**.
 ## Pricelist Pelayaran 
+<img src="ug-images/laporan-pricelist-pelayaran.png" width="100%" alt="Laporan Pricelist Pelayaran" title="Laporan Pricelist Pelayaran"/>
 ###  Deskripsi  
 Menu **Laporan > Pricelist Pelayaran** ini adalah menu yang dipakai untuk menampilkan tabel **PRICELIST PELAYARAN** untuk tiap Kota Tujuan sesuai dengan filter **Kota Asal, Ukuran Kontainer dan Pelayaran** yang berlaku saat ini. Laporan ini bisa ditampilkan dalam bentuk **PDF** maupun **XLS**.
-## Tracking Kapal 
+## Tracking Kapal
+<img src="ug-images/laporan-tracking-kapal.png" width="100%" alt="Laporan Tracking Kapal" title="Laporan Tracking Kapal"/> 
 ###  Deskripsi  
 Menu **Laporan > Tracking Kapal** ini adalah menu yang dipakai untuk melacak posisi kapal yang teraktual sesuai history GPS milik kapal tersebut.
 # ADMINISTRASI 
