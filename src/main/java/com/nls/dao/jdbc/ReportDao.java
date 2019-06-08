@@ -250,7 +250,7 @@ public class ReportDao {
         String sql = "select * from fn_rekap_by_grup_new('" + grup + "'," + (tglMulai == null ? "null" : "'" + tglMulai + "'") + "," + (tglSampai == null ? "null" : "'" + tglSampai + "'") + ",'" + order + "') as (grup varchar, coli bigint, kubikasi numeric, kontainer bigint) limit " + limit;
         return mr.mapList(sql);
     }
-    
+
     /**
      *
      * @param tglMulai format : yyyy-mm-dd
@@ -261,6 +261,18 @@ public class ReportDao {
      */
     public Object rekapTagihanByGrup(String tglMulai, String tglSampai, String order, int limit) {
         String sql = "select * from fn_rekap_tagihan_by_grup_new('" + tglMulai + "','" + tglSampai + "','" + order + "') as (grup varchar, tagihan numeric, terbayar numeric, sisa numeric, pros_bayar numeric) limit " + limit;
+        return mr.mapList(sql);
+    }
+
+    /**
+     *
+     * @param limit contoh : 6
+     * @param bulanSampai format : yyyy-mm
+     * @param toko contoh : 1165
+     * @return
+     */
+    public Object historyTagihanToko(String limit, String bulanSampai, String idToko) {
+        String sql = "select * from fn_get_history_tagihan_toko(" + idToko + ", '" + bulanSampai + "', " + limit + ") as (tahun_bulan text, str_label text, tagihan double precision)";
         return mr.mapList(sql);
     }
 }

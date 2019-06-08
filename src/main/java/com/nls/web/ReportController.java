@@ -568,4 +568,19 @@ public class ReportController {
         logger.warn("order: [{}]", order);
         return dao.rekapTagihanByGrup(tgl1, tgl2, order, limit);
     }
+    
+    @RequestMapping(value = "/history-tagihan-toko", method = RequestMethod.GET)
+    @ResponseBody
+    private Object historyTagihanToko(HttpServletRequest request) throws ParseException {
+        String uri = request.getRequestURI();
+        String format = uri.substring(uri.lastIndexOf(".") + 1);
+
+        String limit = request.getParameter("limit");
+        String thBln2 = request.getParameter("th_bln2");
+        String idToko = request.getParameter("idtoko");
+        logger.warn("limit: [{}]", limit);
+        logger.warn("thBln2: [{}]", thBln2);
+        logger.warn("idToko: [{}]", idToko);
+        return dao.historyTagihanToko(limit, thBln2, idToko);
+    }
 }
