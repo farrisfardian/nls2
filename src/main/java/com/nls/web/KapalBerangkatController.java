@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Transactional
 @RequestMapping("/api/master/kapal-berangkat")
 public class KapalBerangkatController {
-    
+
     @Autowired
     KapalBerangkatDao dao;
     @Autowired
@@ -47,17 +47,17 @@ public class KapalBerangkatController {
 //    @Autowired
 //    AppService appService;
     private final Logger logger = LoggerFactory.getLogger(KapalBerangkatController.class);
-    
+
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public Iterable<KapalBerangkat> cariSemua() {
         return dao.findAll();
     }
-    
+
     @RequestMapping(value = "/all-aktif-by-kota/{idKota}", method = RequestMethod.GET)
     public List<KapalBerangkat> filterByIdKotaAndAktif(@PathVariable Integer idKota) {
         return dao.filterByIdKotaAndAktif(idKota);
     }
-    
+
     @RequestMapping(method = RequestMethod.GET)
     public Page<KapalBerangkat> saringSemua(
             @RequestParam(required = false) String search,
@@ -68,7 +68,7 @@ public class KapalBerangkatController {
         Page<KapalBerangkat> result = dao.findAll(pr);
         return result;
     }
-    
+
     @RequestMapping(value = "{column}/{value}", method = RequestMethod.GET)
     public KapalBerangkat cariSatu(@PathVariable String column, @PathVariable String value) {
         if (column.equalsIgnoreCase("kode")) {
@@ -77,7 +77,7 @@ public class KapalBerangkatController {
             throw new InvalidParameterException("column '" + column + "' not available");
         }
     }
-    
+
     @RequestMapping(value = "/{nama}", method = RequestMethod.GET)
     @ResponseBody
     public Page<KapalBerangkat> cariBerdasarkanNama(@PathVariable("nama") String nama,
@@ -87,23 +87,23 @@ public class KapalBerangkatController {
                 Sort.Direction.ASC, "id");
         return dao.filter("%" + nama.toUpperCase() + "%", pr);
     }
-    
-    @RequestMapping(value = "/tglawal/tglakhir/idkota/idkapal/cari/{tglawal}/{tglakhir}/{idkota}/{idkapal}/{cari:.+}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/tglawal/tglakhir/idkota/idkapal/cari/tglnull/{tglawal}/{tglakhir}/{idkota}/{idkapal}/{cari:.+}/{tglnull}", method = RequestMethod.GET)
     @ResponseBody
-    public Object cariComposite(@PathVariable("tglawal") String tglawal, @PathVariable("tglakhir") String tglakhir, @PathVariable("idkota") String idkota, @PathVariable("idkapal") String idkapal, @PathVariable("cari") String cari,
+    public Object cariComposite(@PathVariable("tglawal") String tglawal, @PathVariable("tglakhir") String tglakhir, @PathVariable("idkota") String idkota, @PathVariable("idkapal") String idkapal, @PathVariable("cari") String cari, @PathVariable("tglnull") String tglnull,
             Pageable pageable,
             HttpServletResponse response) {
         PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
                 Sort.Direction.ASC, "tanggal");
-        return lookupDao.lookupKapalBerangkat((cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), idkota, idkapal, tglawal, tglakhir, pr);
+        return lookupDao.lookupKapalBerangkat((cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), idkota, idkapal, tglawal, tglakhir, tglnull, pr);
     }
-    
+
     @RequestMapping(value = "/idToko/idMerk/{idToko}/{idMerk}", method = RequestMethod.GET)
     @ResponseBody
-    public Object cariByTrxTokoMerkTujuan(@PathVariable("idToko") String idToko, @PathVariable("idMerk") String idMerk) {        
+    public Object cariByTrxTokoMerkTujuan(@PathVariable("idToko") String idToko, @PathVariable("idMerk") String idMerk) {
         return lookupDao.lookupKapalBerangkatPerTokoMerkTujuan(idToko, idMerk);
     }
-    
+
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void hapus(@PathVariable String id) {
         KapalBerangkat x = dao.findOne(Integer.valueOf(id));
@@ -112,13 +112,13 @@ public class KapalBerangkatController {
         }
         dao.delete(x);
     }
-    
+
     @RequestMapping(method = RequestMethod.POST)
     public void simpan(@RequestBody KapalBerangkat x) {
 //        User u = appService.getCurrentUser();
         dao.save(x);
     }
-    
+
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
     public void perbarui(@PathVariable String id, @RequestBody KapalBerangkat x) {
         KapalBerangkat r = dao.findOne(Integer.valueOf(id));
@@ -128,10 +128,10 @@ public class KapalBerangkatController {
         x.setId(r.getId());
         dao.save(x);
     }
-    
+
     @RequestMapping(value = "/count", method = RequestMethod.GET)
     public Long countAll() {
         return dao.count();
     }
-    
+
 }

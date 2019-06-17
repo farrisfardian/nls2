@@ -7,23 +7,26 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <div class="col-sm-1">
+                                    <div class="col-sm-1" ng-hide="param.tglNull">
                                         <label class="control-label" for="tglAwal">Tgl Awal</label>
                                     </div>
-                                    <div class="col-sm-3" >
+                                    <div class="col-sm-3" ng-hide="param.tglNull">
                                         <div class="input-group">
-                                            <input class="form-control" datetimepicker ng-model="param.tglAwal" options="dateOptions" name="tglAwal"/>
+                                            <input class="form-control" datetimepicker ng-model="param.tglAwal" options="dateOptions" name="tglAwal" />
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
-                                    <div class="col-sm-1">
+                                    <div class="col-sm-1" ng-hide="param.tglNull">
                                         <label class="control-label" for="tglAkhir">Tgl Akhir</label>
                                     </div>
-                                    <div class="col-sm-3" >
+                                    <div class="col-sm-3" ng-hide="param.tglNull" >
                                         <div class="input-group">
-                                            <input class="form-control" datetimepicker ng-model="param.tglAkhir" options="dateOptions" name="tglAkhir"/>
+                                            <input class="form-control" datetimepicker ng-model="param.tglAkhir" options="dateOptions" name="tglAkhir" ng-disabled="param.tglNull"/>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input ng-model="param.tglNull" name="tglNull" type="checkbox"/>Tgl Kosong
                                     </div>
                                 </div>
                             </div>
@@ -160,12 +163,12 @@
                                         <input class="form-control" datetimepicker ng-model="vm.tglBerangkat" options="dateOptions" name="tglBerangkat"/>
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-<!--                                    <p class="input-group">
-                                        <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" datepicker-options="dateOptions" ng-model="vm.tglBerangkat" is-open="opened" ng-required="true" close-text="Close" alt-input-formats="dd/MM/yyyy" show-button-bar="false" name="tglBerangkat" />
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="openDate()"><i class="glyphicon glyphicon-calendar"></i></button>
-                                        </span>
-                                    </p>-->
+                                    <!--                                    <p class="input-group">
+                                                                            <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" datepicker-options="dateOptions" ng-model="vm.tglBerangkat" is-open="opened" ng-required="true" close-text="Close" alt-input-formats="dd/MM/yyyy" show-button-bar="false" name="tglBerangkat" />
+                                                                            <span class="input-group-btn">
+                                                                                <button type="button" class="btn btn-default" ng-click="openDate()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                                            </span>
+                                                                        </p>-->
                                 </div>
                             </div>                    
                             <div class="form-group">

@@ -16,11 +16,11 @@
             query: function (search, p, callback) {
                 return this.entity.queryPage({"a": search, "page": p, "size": 10}, callback)
             },
-            entityComposite: $resource(url + '/tglawal/tglakhir/idkota/idkapal/cari/:tglawal/:tglakhir/:idkota/:idkapal/:a', {}, {
+            entityComposite: $resource(url + '/tglawal/tglakhir/idkota/idkapal/cari/tglnull/:tglawal/:tglakhir/:idkota/:idkapal/:a/:tglnull', {}, {
                 queryPage: {method: 'GET', isArray: false}
             }),
-            queryComposite: function (tglawal, tglakhir, idkota, idkapal, search, p, callback) {
-                return this.entityComposite.queryPage({"a": search, "tglawal": tglawal, "tglakhir": tglakhir, "idkota": idkota, "idkapal": idkapal, "page": p, "size": 10}, callback)
+            queryComposite: function (tglawal, tglakhir, idkota, idkapal, search, tglnull, p, callback) {
+                return this.entityComposite.queryPage({"a": search, "tglawal": tglawal, "tglakhir": tglakhir, "idkota": idkota, "idkapal": idkapal, "tglnull": tglnull, "page": p, "size": 10}, callback)
             },
             simpan: simpan,
             cariSatu: cariSatu,

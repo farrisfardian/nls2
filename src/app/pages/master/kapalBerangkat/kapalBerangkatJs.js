@@ -21,10 +21,10 @@
         $scope.dateOptions = {format: 'DD/MM/YYYY', showClear: false};
         $scope.vm = {};
         $scope.ori = {};
-        $scope.param = {tglAwal: new Date(), tglAkhir: new Date(), kota: null, kapal: null, cari: ""};
+        $scope.param = {tglAwal: new Date(), tglAkhir: new Date(), kota: null, kapal: null, cari: "", tglNull: false};
 
         $scope.reloadData = function () {
-            $scope.dataPage = KapalBerangkatService.queryComposite($filter('date')(new Date($scope.param.tglAwal), 'yyyy-MM-dd'), $filter('date')(new Date($scope.param.tglAkhir), 'yyyy-MM-dd'), ($scope.param.kota == null || $scope.param.kota.id == undefined || $scope.param.kota.id == null ? 0 : $scope.param.kota.id), ($scope.param.kapal == null || $scope.param.kapal.id == undefined || $scope.param.kapal.id == null ? 0 : $scope.param.kapal.id), ($scope.param.cari == '' ? 'null' : $scope.param.cari), $scope.paging.currentPage - 1, function () {
+            $scope.dataPage = KapalBerangkatService.queryComposite($filter('date')(new Date($scope.param.tglAwal), 'yyyy-MM-dd'), $filter('date')(new Date($scope.param.tglAkhir), 'yyyy-MM-dd'), ($scope.param.kota == null || $scope.param.kota.id == undefined || $scope.param.kota.id == null ? 0 : $scope.param.kota.id), ($scope.param.kapal == null || $scope.param.kapal.id == undefined || $scope.param.kapal.id == null ? 0 : $scope.param.kapal.id), ($scope.param.cari == '' ? 'null' : $scope.param.cari), ($scope.param.tglNull == false ? 'false' : 'true'), $scope.paging.currentPage - 1, function () {
                 $scope.paging.maxSize = ($scope.dataPage.size);
                 $scope.paging.totalItems = $scope.dataPage.totalElements;
                 $scope.paging.currentPage = parseInt($scope.dataPage.number) + 1;
