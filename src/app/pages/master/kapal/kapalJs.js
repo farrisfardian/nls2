@@ -15,7 +15,7 @@
         };
 
         $scope.reloadData = function () {
-            $scope.dataPage = KapalService.query($scope.search, $scope.paging.currentPage-1, function () {
+            $scope.dataPage = KapalService.query($scope.search, $scope.paging.currentPage - 1, function () {
                 $scope.paging.maxSize = ($scope.dataPage.size);
                 $scope.paging.totalItems = $scope.dataPage.totalElements;
                 $scope.paging.currentPage = parseInt($scope.dataPage.number) + 1;
@@ -73,12 +73,15 @@
         };
     }
 
-    function KapalModalController($uibModalInstance, toastr, $scope, KapalService, data) {
+    function KapalModalController($uibModalInstance, toastr, $scope, KapalService, data, PelayaranService) {
         $scope.ori = angular.copy(data);
         $scope.modalTitle = "Edit Kapal";
         console.log('edit', data);
         $scope.vm = angular.copy(data);
-
+        
+        PelayaranService.cariSemua().success(function (data) {
+            $scope.listPelayaran = data;
+        });
 
         $scope.simpan = function () {
             KapalService.simpan($scope.vm, $scope.ori).success(function (d) {

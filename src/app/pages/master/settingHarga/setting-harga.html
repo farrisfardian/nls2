@@ -5,7 +5,7 @@
                 <form class="form-horizontal" name="form1" id="form1">
                     <div>
                         <div class="row">
-                            
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="col-sm-2">
@@ -42,7 +42,7 @@
                                             Harus Diisi
                                         </span>
                                     </div>
-                                      
+
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -111,28 +111,28 @@
                                             Harus Diisi
                                         </span>
                                     </div>
-                                    <!--                                    <div class="col-xs-2">
-                                                                            <label class="control-label" for="satuanKirim">Satuan Kirim</label>
-                                                                        </div>
-                                                                        <div class="col-sm-4" ng-class="{error: form1.satuanKirim.$invalid}">
-                                                                            <ui-select ng-model="vm.satuanKirim" name="satuanKirim"
-                                                                                       class="btn-group bootstrap-select form-control"
-                                                                                       ng-required="true"
-                                                                                       append-to-body="true"
-                                                                                       search-enabled="true"
-                                                                                       >
-                                                                                <ui-select-match placeholder="Pilih Satuan Kirim">
-                                                                                    {{$select.selected.nama}}
-                                                                                </ui-select-match>
-                                                                                <ui-select-choices
-                                                                                    repeat="item in listSatuanKirim | filter: $select.search">
-                                                                                    <span ng-bind-html="item.nama"></span>
-                                                                                </ui-select-choices>
-                                                                            </ui-select>
-                                                                            <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.satuanKirim.$error.required">
-                                                                                Harus Diisi
-                                                                            </span>
-                                                                        </div>  -->
+                                    <div class="col-xs-2">
+                                        <label class="control-label" for="pelayaran">Pelayaran</label>
+                                    </div>
+                                    <div class="col-sm-4" ng-class="{error: form1.pelayaran.$invalid}">
+                                        <ui-select ng-model="vm.pelayaran" name="pelayaran"
+                                                   class="btn-group bootstrap-select form-control"
+                                                   ng-required="true"
+                                                   append-to-body="true"
+                                                   search-enabled="true"
+                                                   >
+                                            <ui-select-match placeholder="Pilih Pelayaran">
+                                                {{$select.selected.nama}}
+                                            </ui-select-match>
+                                            <ui-select-choices
+                                                repeat="item in listPelayaran | filter: $select.search">
+                                                <span ng-bind-html="item.nama"></span>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span style="float:right; color:white" class="help-block label label-danger" ng-show="form1.pelayaran.$error.required">
+                                            Harus Diisi
+                                        </span>
+                                    </div>  
                                 </div>
                             </div>
                             <!--                            <div class="col-md-12" style="background-color: cornflowerblue">
@@ -413,8 +413,8 @@
                                         <tr>
                                             <td style="text-align: left">Tgl Berlaku</td>
                                             <td>: {{c.tgl_berlaku|date:'dd/MM/yyyy'}}</td>
-                                            <td style="text-align: left">Kondisi</td>
-                                            <td>: {{c.kondisi}}</td>
+                                            <td style="text-align: left">Kondisi - Pelayaran</td>
+                                            <td style="color: blue">: {{c.kondisi}}</td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" style="text-align: left" >

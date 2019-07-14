@@ -30,6 +30,10 @@ public class Kapal {
     @Column
     private String nama;
     
+    @ManyToOne
+    @JoinColumn(name = "id_pelayaran")
+    private Pelayaran pelayaran;
+    
     public Integer getId() {
         return id;
     }
@@ -44,6 +48,20 @@ public class Kapal {
 
     public void setNama(String nama) {
         this.nama = nama;
+    }
+
+    /**
+     * @return the pelayaran
+     */
+    public Pelayaran getPelayaran() {
+        return pelayaran;
+    }
+
+    /**
+     * @param pelayaran the pelayaran to set
+     */
+    public void setPelayaran(Pelayaran pelayaran) {
+        this.pelayaran = pelayaran;
     }
     
 }

@@ -55,6 +55,10 @@ public class SettingHarga {
     @Temporal(TemporalType.DATE)
     @Column(name = "tgl_berlaku")
     private Date tglBerlaku;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_pelayaran")
+    private Pelayaran pelayaran;
 
     @OneToMany(mappedBy = "settingHarga", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
@@ -126,5 +130,19 @@ public class SettingHarga {
      */
     public void setKotaAsal(Kota kotaAsal) {
         this.kotaAsal = kotaAsal;
+    }
+
+    /**
+     * @return the pelayaran
+     */
+    public Pelayaran getPelayaran() {
+        return pelayaran;
+    }
+
+    /**
+     * @param pelayaran the pelayaran to set
+     */
+    public void setPelayaran(Pelayaran pelayaran) {
+        this.pelayaran = pelayaran;
     }
 }

@@ -6,7 +6,7 @@
             .controller('SettingHargaModalController', SettingHargaModalController);
 
     /** @ngInject */
-    function SettingHargaCtrl($scope, $uibModal, $log, $filter, toastr, SettingHargaService, KotaService, TokoService, KondisiService, SatuanKirimService, JenisItemService, KategoriHargaService) {
+    function SettingHargaCtrl($scope, $uibModal, $log, $filter, toastr, SettingHargaService, KotaService, TokoService, KondisiService, SatuanKirimService, JenisItemService, KategoriHargaService, PelayaranService) {
         $scope.search = "";
         $scope.oldSearch = "";
         $scope.deskKapalBerangkat = "";
@@ -48,7 +48,11 @@
 //                $scope.paging.maxPage = $scope.dataPage.totalPages;
 //            });
         };
-
+        
+        PelayaranService.cariSemua().success(function (data) {
+            $scope.listPelayaran = data;
+        });
+        
         $scope.clear = function () {
             $scope.modalTitle = "";
             $scope.vm = {};
@@ -185,7 +189,7 @@
             SettingHargaService.simpan($scope.vm, $scope.ori).success(function (d) {
                 toastr.success('Simpan data sukses!');
                 $scope.clear();
-            }).error(function(e){
+            }).error(function (e) {
                 toastr.error('Gagal simpan setting harga! Pastikan tanggal, toko, kondisi, asal & tujuan tidak sama persis dengan setting yang lalu.');
             });
         };

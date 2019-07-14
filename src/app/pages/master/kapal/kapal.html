@@ -13,7 +13,8 @@
                 <table class="table table-bordered table-hover table-condensed">
                     <tr>
                         <td></td>
-                        <td>Nama Kota</td>
+                        <td>Nama Kapal</td>
+                        <td>Pelayaran</td>
                         <td>
                             <button class="btn btn-info editable-table-button btn-xs" ng-click="baru()">Tambah</button>
                         </td>
@@ -24,6 +25,9 @@
                         </td>
                         <td>
                             {{ c.nama || 'empty' }}
+                        </td>
+                        <td>
+                            {{ c.pelayaran.nama || 'empty' }}
                         </td>
                         <td>
                             <div class="buttons" >
