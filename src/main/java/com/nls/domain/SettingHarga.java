@@ -29,7 +29,7 @@ import javax.persistence.UniqueConstraint;
  * @author faheem
  */
 @Entity
-@Table(name = "c_setting_harga", uniqueConstraints = @UniqueConstraint(columnNames = {"id_kota_asal", "id_kota_tujuan", "id_kondisi", "tgl_berlaku", "id_toko"}))
+@Table(name = "c_setting_harga", uniqueConstraints = @UniqueConstraint(columnNames = {"id_kota_asal", "id_kota_tujuan", "id_kondisi", "tgl_berlaku", "id_toko", "id_pelayaran"}))
 public class SettingHarga {
 
     @Id

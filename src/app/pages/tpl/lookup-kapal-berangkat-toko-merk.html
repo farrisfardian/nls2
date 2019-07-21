@@ -17,7 +17,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tujuan</th>
-                                <th>Kapal</th>
+                                <th>Kapal - Pelayaran</th>
                                 <th>No Kontainer</th>
                                 <th>Tgl Brkt</th>
                                 <th></th>
@@ -28,7 +28,7 @@
                             <tr ng-repeat="x in listData| filter:cari | limitTo:totalDisplayed">
                                 <td>{{$index+1}}</td>
                                 <td>{{x.kota}}</td>
-                                <td>{{x.kapal}}</td>
+                                <td>{{x.kapal}} - {{x.pelayaran}}</td>
                                 <td>{{x.nomor_kontainer}}</td>
                                 <td>{{x.tgl_berangkat | date:'dd-MM-yyyy'}}</td>
                                 <td><input type="checkbox" ng-model="x.selected" ng-click="updateStatus()"></td>

@@ -201,7 +201,7 @@
                     }
                     if (!exist) {
                         $scope.vm.listKapalBerangkat.push({
-                            kapalBerangkat: {id: $scope.listKapalBerangkat[i].id_kapal_berangkat, tglBerangkat: new Date($scope.listKapalBerangkat[i].tgl_berangkat), kapal: {nama: $scope.listKapalBerangkat[i].kapal}}
+                            kapalBerangkat: {id: $scope.listKapalBerangkat[i].id_kapal_berangkat, tglBerangkat: new Date($scope.listKapalBerangkat[i].tgl_berangkat), kapal: {nama: $scope.listKapalBerangkat[i].kapal, pelayaran: {nama: $scope.listKapalBerangkat[i].pelayaran}}}
                         });
                     }
                 }
@@ -396,7 +396,7 @@
                 toastr.success("Ambil toko sukses");
                 console.log('toko', $scope.vm.tokoTujuan);
                 KapalBerangkatService.cariSatu("kode", idKapalBerangkat).success(function (data) {
-                    $scope.listKapalBerangkat.push({id_kapal_berangkat: data.id, tgl_berangkat: data.tglBerangkat, kapal: data.kapal.nama})
+                    $scope.listKapalBerangkat.push({id_kapal_berangkat: data.id, tgl_berangkat: data.tglBerangkat, kapal: data.kapal.nama, pelayaran: data.kapal.pelayaran.nama})
                     if ($scope.vm.listKapalBerangkat === null || $scope.vm.listKapalBerangkat === undefined) {
                         $scope.vm.listKapalBerangkat = [];
                     }
@@ -410,7 +410,7 @@
                         }
                         if (!exist) {
                             $scope.vm.listKapalBerangkat.push({
-                                kapalBerangkat: {id: $scope.listKapalBerangkat[i].id_kapal_berangkat, tglBerangkat: new Date($scope.listKapalBerangkat[i].tgl_berangkat), kapal: {nama: $scope.listKapalBerangkat[i].kapal}}
+                                kapalBerangkat: {id: $scope.listKapalBerangkat[i].id_kapal_berangkat, tglBerangkat: new Date($scope.listKapalBerangkat[i].tgl_berangkat), kapal: {nama: $scope.listKapalBerangkat[i].kapal, pelayaran: {nama: $scope.listKapalBerangkat[i].pelayaran}}}
                             });
                         }
                     }

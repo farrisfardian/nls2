@@ -63,7 +63,7 @@
                                         <label class="control-label" for="kota">Berangkat</label>
                                     </div>
                                     <div class="col-sm-10" ng-class="{error: formKota.kota.$invalid}">
-                                        <label class="form-control" for="kota">{{vm.stuffing.kapalBerangkat.tglBerangkat|date:'dd/MM/yyyy'}} - {{vm.stuffing.kapalBerangkat.kapal.nama}}</label>
+                                        <label class="form-control" for="kota">{{vm.stuffing.kapalBerangkat.tglBerangkat|date:'dd/MM/yyyy'}} - {{vm.stuffing.kapalBerangkat.kapal.nama}} ({{vm.stuffing.kapalBerangkat.kapal.pelayaran.nama||'pelayaran belum diisi'}})</label>
                                     </div>
                                 </div>
                             </div>

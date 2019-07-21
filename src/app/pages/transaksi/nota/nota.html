@@ -120,7 +120,7 @@
                             </div>
                             <div class="col-sm-10" ng-class="{error: form1.emkl.$invalid}">
                                 <ol>
-                                    <li ng-repeat="x in vm.listKapalBerangkat">{{x.kapalBerangkat.kapal.nama}}, {{x.kapalBerangkat.tglBerangkat|date:'dd-MM-yyyy'}} <button class="btn btn-sm btn-danger" ng-click="hapusKapalBerangkat($index)">hapus</button></li>
+                                    <li ng-repeat="x in vm.listKapalBerangkat">{{x.kapalBerangkat.kapal.nama}} ({{x.kapalBerangkat.kapal.pelayaran.nama||'pelayaran belum diisi'}}), {{x.kapalBerangkat.tglBerangkat|date:'dd-MM-yyyy'}} <button class="btn btn-sm btn-danger" ng-click="hapusKapalBerangkat($index)">hapus</button></li>
                                 </ol>
                             </div>
                         </div>

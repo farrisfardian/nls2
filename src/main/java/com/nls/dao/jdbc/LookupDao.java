@@ -88,7 +88,7 @@ public class LookupDao {
     }
 
     public Object lookupKapalBerangkatPerTokoMerkTujuan(String idToko, String idMerk) {
-        String sql = "select * from fn_get_kapal_berangkat_by_toko_merk(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ") as (kapal varchar, tgl_berangkat date, tgl_ind varchar, nomor_kontainer varchar, id_kapal_berangkat int, sat_kirim varchar, kota varchar, id_toko int, id_merk int)";
+        String sql = "select * from fn_get_kapal_berangkat_by_toko_merk2(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ") as (kapal varchar, tgl_berangkat date, tgl_ind varchar, nomor_kontainer varchar, id_kapal_berangkat int, sat_kirim varchar, kota varchar, id_toko int, id_merk int, pelayaran varchar)";
         System.out.println("lookupKapalBerangkatPerTokoMerkTujuan : " + sql);
         return mr.mapList(sql);
     }
@@ -100,7 +100,7 @@ public class LookupDao {
     }
 
     public Object lookupDetailNotaPerTokoMerkTujuan(String idToko, String idMerk, String idKapalBerangkat) {
-        String sql = "select * from fn_gen_detail_nota2(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ", " + (idKapalBerangkat.equalsIgnoreCase("null") ? idKapalBerangkat : "ARRAY[" + idKapalBerangkat + "]") + ") as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, kubikasi numeric, jml numeric, coli int, id_sj text, sat_kirim_ori varchar, sisipan bool, harga_satuan numeric)";
+        String sql = "select * from fn_gen_detail_nota3(" + (idToko == null || idToko.equalsIgnoreCase("null") ? "null" : idToko) + ", " + (idMerk == null || idMerk.equalsIgnoreCase("null") ? "null" : idMerk) + ", " + (idKapalBerangkat.equalsIgnoreCase("null") ? idKapalBerangkat : "ARRAY[" + idKapalBerangkat + "]") + ") as (kota_tujuan varchar, kondisi varchar, customer varchar, kapal varchar, tgl_berangkat date, tgl_harga date, tgl_ind varchar, merk varchar, nomor_kontainer varchar, jenis_item varchar, id_jenis_item int, id_kategori_harga int, ukuran_kontainer varchar, id_kapal_berangkat int, id_merk int, id_toko int, paket boolean, sat_kirim varchar, id_kapal int, id_kondisi int, id_kota_asal int, id_pelayaran int, kubikasi numeric, jml numeric, coli int, id_sj text, sat_kirim_ori varchar, sisipan bool, harga_satuan numeric)";
         System.out.println("lookupDetailNotaPerTokoMerkTujuan : " + sql);
         return mr.mapList(sql);
     }
