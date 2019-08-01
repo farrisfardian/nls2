@@ -79,105 +79,107 @@
                                 <button type="button" class="btn btn-default" ng-click="lookupTagihanTerbayarTokoMerk()" ng-disabled="vm.tokoTujuan === null || vm.tokoTujuan === undefined" title="Cari & Tambahkan Nota"><i class="glyphicon glyphicon-search"></i></button>
                             </div>
                         </div>
-                        <table class="table table-bordered table-hover table-condensed">
-                            <thead>
-                                <tr>
-                                    <th colspan="7">Detail Pembayaran</th>
-                                </tr>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Info</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tr ng-repeat="c in vm.listDetail" class="editable-row">
-                                <td>
-                                    {{$index + 1}}
-                                </td>
-                                <td>
-                                    <div class="col-md-12">
-                                        <div class="col-md-6">
-                                            Nomor : <b>{{c.nota.nomorInvoice}}</b>, Tanggal : <b>{{c.nota.tanggal|date:'dd-MM-yyyy'}}</b><br>
-                                            Tagihan : Rp.{{ c.tagihan|number}}<br>
-                                            Telah Terbayar : Rp.{{ c.terbayar|number}}<br>
-                                            Sisa Tagihan : Rp.{{ c.tagihan - c.terbayar|number}}
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th colspan="7">Detail Pembayaran</th>
+                                    </tr>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Info</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tr ng-repeat="c in vm.listDetail" class="editable-row">
+                                    <td>
+                                        {{$index + 1}}
+                                    </td>
+                                    <td>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                Nomor : <b>{{c.nota.nomorInvoice}}</b>, Tanggal : <b>{{c.nota.tanggal|date:'dd-MM-yyyy'}}</b><br>
+                                                Tagihan : Rp.{{ c.tagihan|number}}<br>
+                                                Telah Terbayar : Rp.{{ c.terbayar|number}}<br>
+                                                Sisa Tagihan : Rp.{{ c.tagihan - c.terbayar|number}}
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="col-xs-5">
+                                                        Bayar Sekarang
+                                                    </div>
+                                                    <div class="col-xs-7">
+                                                        <input type="number" max="{{ c.tagihan - c.terbayar}}" ng-model="c.bayar" class="form-control" min="1" ng-keypress="$event.keyCode == 13 ? hitungGrandTotal() : undefined" ng-blur="hitungGrandTotal()">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-5">
+                                                    </div>
+                                                    <div class="col-xs-7">
+                                                        Rp.{{c.bayar|number}}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-5">
+                                                        Jenis Pembayaran
+                                                    </div>
+                                                    <div class="col-sm-7" ng-class="{error: form1.jenisPembayaran.$invalid}">
+                                                        <p class="input-group">
+                                                        <ui-select ng-model="c.jenisPembayaran"
+                                                                   class="btn-group bootstrap-select form-control"
+                                                                   ng-disabled="vm.tokoTujuan === null || vm.tokoTujuan === undefined"
+                                                                   append-to-body="true" ng-required="true"
+                                                                   search-enabled="true" name="jenisPembayaran"
+                                                                   ng-change="updateNoRekBgCek(c)"
+                                                                   >
+                                                            <ui-select-match placeholder="Pilih Jenis Pembayaran">
+                                                                {{$select.selected.nama}}
+                                                            </ui-select-match>
+                                                            <ui-select-choices
+                                                                repeat="item in listJenisPembayaran| filter: $select.search">
+                                                                <span ng-bind-html="item.nama"></span>
+                                                            </ui-select-choices>
+                                                        </ui-select>                                
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-xs-5" ng-hide="c.jenisPembayaran.kode === 'CA'">
+                                                        No Rekening / BG
+                                                    </div>
+                                                    <div class="col-sm-7" ng-class="{error: form1.merkTujuan.$invalid}" ng-hide="c.jenisPembayaran.kode === 'CA'">
+                                                        <ui-select ng-model="c.noRekBgCek"
+                                                                   class="btn-group bootstrap-select form-control"
+                                                                   ng-disabled="vm.tokoTujuan === null || vm.tokoTujuan === undefined"
+                                                                   append-to-body="true"
+                                                                   search-enabled="true" 
+                                                                   ng-show="c.jenisPembayaran.kode === 'TR'"
+                                                                   >
+                                                            <ui-select-match placeholder="Pilih Rekening">
+                                                                {{$select.selected.nama}}
+                                                            </ui-select-match>
+                                                            <ui-select-choices
+                                                                repeat="item.nama as item in listRekening| filter: $select.search">
+                                                                <span ng-bind-html="item.nama"></span>
+                                                            </ui-select-choices>
+                                                        </ui-select>
+                                                        <input name="nomor" placeholder="nomor" ng-model="c.noRekBgCek" type="text" class="form-control" ng-show="c.jenisPembayaran.kode === 'CK' || c.jenisPembayaran.kode === 'BG'" >                                
+                                                    </div>                            
+                                                </div>
+                                            </div>                                        
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <div class="col-xs-5">
-                                                    Bayar Sekarang
-                                                </div>
-                                                <div class="col-xs-7">
-                                                    <input type="number" max="{{ c.tagihan - c.terbayar}}" ng-model="c.bayar" class="form-control" min="1" ng-keypress="$event.keyCode == 13 ? hitungGrandTotal() : undefined" ng-blur="hitungGrandTotal()">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-xs-5">
-                                                </div>
-                                                <div class="col-xs-7">
-                                                    Rp.{{c.bayar|number}}
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-xs-5">
-                                                    Jenis Pembayaran
-                                                </div>
-                                                <div class="col-sm-7" ng-class="{error: form1.jenisPembayaran.$invalid}">
-                                                    <p class="input-group">
-                                                    <ui-select ng-model="c.jenisPembayaran"
-                                                               class="btn-group bootstrap-select form-control"
-                                                               ng-disabled="vm.tokoTujuan === null || vm.tokoTujuan === undefined"
-                                                               append-to-body="true" ng-required="true"
-                                                               search-enabled="true" name="jenisPembayaran"
-                                                               ng-change="updateNoRekBgCek(c)"
-                                                               >
-                                                        <ui-select-match placeholder="Pilih Jenis Pembayaran">
-                                                            {{$select.selected.nama}}
-                                                        </ui-select-match>
-                                                        <ui-select-choices
-                                                            repeat="item in listJenisPembayaran| filter: $select.search">
-                                                            <span ng-bind-html="item.nama"></span>
-                                                        </ui-select-choices>
-                                                    </ui-select>                                
-                                                    </p>
-                                                </div>
-                                                <div class="col-xs-5" ng-hide="c.jenisPembayaran.kode === 'CA'">
-                                                    No Rekening / BG
-                                                </div>
-                                                <div class="col-sm-7" ng-class="{error: form1.merkTujuan.$invalid}" ng-hide="c.jenisPembayaran.kode === 'CA'">
-                                                    <ui-select ng-model="c.noRekBgCek"
-                                                               class="btn-group bootstrap-select form-control"
-                                                               ng-disabled="vm.tokoTujuan === null || vm.tokoTujuan === undefined"
-                                                               append-to-body="true"
-                                                               search-enabled="true" 
-                                                               ng-show="c.jenisPembayaran.kode === 'TR'"
-                                                               >
-                                                        <ui-select-match placeholder="Pilih Rekening">
-                                                            {{$select.selected.nama}}
-                                                        </ui-select-match>
-                                                        <ui-select-choices
-                                                            repeat="item.nama as item in listRekening| filter: $select.search">
-                                                            <span ng-bind-html="item.nama"></span>
-                                                        </ui-select-choices>
-                                                    </ui-select>
-                                                    <input name="nomor" placeholder="nomor" ng-model="c.noRekBgCek" type="text" class="form-control" ng-show="c.jenisPembayaran.kode === 'CK' || c.jenisPembayaran.kode === 'BG'" >                                
-                                                </div>                            
-                                            </div>
-                                        </div>                                        
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="buttons" >
-                                        <button class="btn btn-danger editable-table-button btn-xs" 
-                                                data-toggle="modal" ng-click="hapusDetail($index)">Hapus</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align: right">Grand Total</td>
-                                <td style="text-align: right">{{grandTotal|number:2}}</td>
-                            </tr>
-                        </table>
+                                    </td>
+                                    <td>
+                                        <div class="buttons" >
+                                            <button class="btn btn-danger editable-table-button btn-xs" 
+                                                    data-toggle="modal" ng-click="hapusDetail($index)">Hapus</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: right">Grand Total</td>
+                                    <td style="text-align: right">{{grandTotal|number:2}}</td>
+                                </tr>
+                            </table>
+                        </div>
                         <br>
                         <div class="form-group">
                             <div class="col-sm-offset-9 col-sm-3">
@@ -228,58 +230,59 @@
                         </button>
                     </span>
                 </div>
-
-                <table class="table table-bordered table-hover table-condensed">
-                    <thead>
-                        <tr>
-                            <th><button class="btn btn-info btn-xs" ng-click="baru()">Tambah</button></th>
-                            <th>Toko</th>
-                            <th>Merk</th>
-                            <th>Nomor</th>
-                            <th>Tanggal Nota</th>
-                            <th>Total Bayar</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tr ng-repeat="c in dataPage.content" class="editable-row">
-                        <td>
-                            {{((paging.currentPage - 1) * paging.maxSize) + $index + 1}}
-                        </td>
-                        <td>
-                            {{ c.toko}}
-                        </td>
-                        <td>
-                            {{ c.merk}}
-                        </td>
-                        <td>
-                            {{ c.nomor}}
-                        </td>                        
-                        <td>
-                            {{ c.tanggal | date: 'dd-MM-yyyy' }}
-                        </td>
-                        <td>
-                            {{ c.total_bayar | number}}
-                        </td>
-                        <td>
-                            <div class="buttons" >
-                                <button class="btn btn-primary editable-table-button btn-xs" 
-                                        data-toggle="modal" ng-click="edit(c)">Edit</button>
-                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Pembayaran {{c.nomor}}?" ng-confirm="hapus(c)">Hapus</button>
-                                <div class="btn-group" uib-dropdown dropdown-append-to-body>
-                                    <button type="button" class="btn btn-default editable-table-button btn-xs" uib-dropdown-toggle>
-                                        Cetak<span class="caret"></span>
-                                    </button>
-                                    <ul uib-dropdown-menu>
-                                        <li><a href ng-click="cetak(c, 'pdf', false)">PDF</a></li>
-                                        <li><a href ng-click="cetak(c, 'xlsx', false)">XLS</a></li>
-                                        <li><a href ng-click="cetak(c, 'pdf', true)">PDF (+kapal berangkat)</a></li>
-                                        <li><a href ng-click="cetak(c, 'xlsx', true)">XLS (+kapal berangkat)</a></li>
-                                    </ul>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th><button class="btn btn-info btn-xs" ng-click="baru()">Tambah</button></th>
+                                <th>Toko</th>
+                                <th>Merk</th>
+                                <th>Nomor</th>
+                                <th>Tanggal Nota</th>
+                                <th>Total Bayar</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="c in dataPage.content" class="editable-row">
+                            <td>
+                                {{((paging.currentPage - 1) * paging.maxSize) + $index + 1}}
+                            </td>
+                            <td>
+                                {{ c.toko}}
+                            </td>
+                            <td>
+                                {{ c.merk}}
+                            </td>
+                            <td>
+                                {{ c.nomor}}
+                            </td>                        
+                            <td>
+                                {{ c.tanggal | date: 'dd-MM-yyyy' }}
+                            </td>
+                            <td>
+                                {{ c.total_bayar | number}}
+                            </td>
+                            <td>
+                                <div class="buttons" >
+                                    <button class="btn btn-primary editable-table-button btn-xs" 
+                                            data-toggle="modal" ng-click="edit(c)">Edit</button>
+                                    <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data Pembayaran {{c.nomor}}?" ng-confirm="hapus(c)">Hapus</button>
+                                    <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                        <button type="button" class="btn btn-default editable-table-button btn-xs" uib-dropdown-toggle>
+                                            Cetak<span class="caret"></span>
+                                        </button>
+                                        <ul uib-dropdown-menu>
+                                            <li><a href ng-click="cetak(c, 'pdf', false)">PDF</a></li>
+                                            <li><a href ng-click="cetak(c, 'xlsx', false)">XLS</a></li>
+                                            <li><a href ng-click="cetak(c, 'pdf', true)">PDF (+kapal berangkat)</a></li>
+                                            <li><a href ng-click="cetak(c, 'xlsx', true)">XLS (+kapal berangkat)</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>                        
-                    </tr>
-                </table>
+                            </td>                        
+                        </tr>
+                    </table>
+                </div>
                 <div align="center" ng-show="dataPage.totalPages > 1">
                     <ul uib-pagination total-items="paging.totalItems" ng-model="paging.currentPage" max-size="paging.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="reloadData()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
                     <pre>Page: {{paging.currentPage}} / {{paging.maxPage}}</pre>

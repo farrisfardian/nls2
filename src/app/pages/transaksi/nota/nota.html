@@ -294,9 +294,9 @@
                     </div>
                     <div class="modal-content modal-lg" id="dialogPerhatian" style="display: none" >
                         <div class="modal-header">
-<!--                            <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
-                                <em class="ion-ios-close-empty sn-link-close"></em>
-                            </button>-->
+                            <!--                            <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+                                                            <em class="ion-ios-close-empty sn-link-close"></em>
+                                                        </button>-->
                             <h4 class="modal-title">Perhatian, bila ada harga yg kosong maka :</h4>
                         </div>
                         <div class="modal-body">
@@ -305,11 +305,11 @@
                             <p>Pastikan <b>Kota Asal dan Kota Tujuan pada Setting Harga</b> sesuai dengan <b>Kota Asal dan Kota Tujuan pada Stuffing</b>.</p>
                         </div>
                     </div>
-<!--                    <div id="dialogPerhatian" ba-panel ba-panel-title="Perhatian, bila ada harga yg kosong periksa :" style="display: none">
-                        <p>Pastikan <b>Setting Harga</b> milik Toko sudah diinput dengan benar.</p>
-                        <p>Pastikan <b>Kategori Harga pada Surat Jalan</b> sudah diinput sesuai dengan <b>Setting Harga milik Toko</b>.</p>
-                        <p>Pastikan <b>Kota Asal dan Kota Tujuan pada Setting Harga</b> sesuai dengan <b>Kota Asal dan Kota Tujuan pada Stuffing</b>.</p>
-                    </div>-->
+                    <!--                    <div id="dialogPerhatian" ba-panel ba-panel-title="Perhatian, bila ada harga yg kosong periksa :" style="display: none">
+                                            <p>Pastikan <b>Setting Harga</b> milik Toko sudah diinput dengan benar.</p>
+                                            <p>Pastikan <b>Kategori Harga pada Surat Jalan</b> sudah diinput sesuai dengan <b>Setting Harga milik Toko</b>.</p>
+                                            <p>Pastikan <b>Kota Asal dan Kota Tujuan pada Setting Harga</b> sesuai dengan <b>Kota Asal dan Kota Tujuan pada Stuffing</b>.</p>
+                                        </div>-->
                 </form>
             </div>
         </div>
@@ -414,59 +414,60 @@
                         </div>
                     </div>
                 </div>                
-
-                <table class="table table-bordered table-hover table-condensed">
-                    <thead>
-                        <tr>
-                            <th><button class="btn btn-info btn-xs" ng-click="baru()">Tambah</button></th>
-                            <th>Toko</th>
-                            <th>Merk & Jumlah</th>
-                            <th>Nomor</th>
-                            <th>Tanggal Nota</th>
-                            <th>Tgl Brkt</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tr ng-repeat="c in dataPage.content" class="editable-row">
-                        <td>
-                            {{((paging.currentPage - 1) * paging.maxSize) + $index + 1}}
-                        </td>
-                        <td>
-                            {{ c.toko}}
-                        </td>
-                        <td>
-                            {{ c.merk}}
-                            <br>Tagihan : <b style="color: red">{{ c.tagihan|number:2}}</b>. Terbayar : <b style="color: blue">{{ c.terbayar|number:2}}</b>. Prosentase : <b style="color: blue">{{ (c.terbayar / c.tagihan) * 100 | number:2}}%</b>
-                        </td>
-                        <td>
-                            {{ c.nomor}}
-                        </td>                        
-                        <td>
-                            {{ c.tanggal | date: 'dd-MM-yyyy' }}
-                        </td>
-                        <td>
-                            {{ c.tgl_berangkat | date: 'dd-MM-yyyy' }}
-                        </td>
-                        <td>
-                            <div class="buttons" >
-                                <button class="btn btn-primary editable-table-button btn-xs" 
-                                        data-toggle="modal" ng-click="edit(c)">Edit</button>
-                                <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data nota {{c.nomor}}?" ng-confirm="hapus(c)">Hapus</button>
-                                <button class="btn btn-success editable-table-button btn-xs" ng-show="c.terbayar < c.tagihan"
-                                        data-toggle="modal" ng-click="buatPembayaran(c)">Bayar</button>
-                                <div class="btn-group" uib-dropdown dropdown-append-to-body>
-                                    <button type="button" class="btn btn-default editable-table-button btn-xs" uib-dropdown-toggle>
-                                        Cetak<span class="caret"></span>
-                                    </button>
-                                    <ul uib-dropdown-menu>
-                                        <li><a href ng-click="cetak(c, 'pdf')">PDF</a></li>
-                                        <li><a href ng-click="cetak(c, 'xlsx')">XLS</a></li>
-                                    </ul>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th><button class="btn btn-info btn-xs" ng-click="baru()">Tambah</button></th>
+                                <th>Toko</th>
+                                <th>Merk & Jumlah</th>
+                                <th>Nomor</th>
+                                <th>Tanggal Nota</th>
+                                <th>Tgl Brkt</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="c in dataPage.content" class="editable-row">
+                            <td>
+                                {{((paging.currentPage - 1) * paging.maxSize) + $index + 1}}
+                            </td>
+                            <td>
+                                {{ c.toko}}
+                            </td>
+                            <td>
+                                {{ c.merk}}
+                                <br>Tagihan : <b style="color: red">{{ c.tagihan|number:2}}</b>. Terbayar : <b style="color: blue">{{ c.terbayar|number:2}}</b>. Prosentase : <b style="color: blue">{{ (c.terbayar / c.tagihan) * 100 | number:2}}%</b>
+                            </td>
+                            <td>
+                                {{ c.nomor}}
+                            </td>                        
+                            <td>
+                                {{ c.tanggal | date: 'dd-MM-yyyy' }}
+                            </td>
+                            <td>
+                                {{ c.tgl_berangkat | date: 'dd-MM-yyyy' }}
+                            </td>
+                            <td>
+                                <div class="buttons" >
+                                    <button class="btn btn-primary editable-table-button btn-xs" 
+                                            data-toggle="modal" ng-click="edit(c)">Edit</button>
+                                    <button class="btn btn-danger editable-table-button btn-xs" ng-confirm-message="Anda yakin akan menghapus data nota {{c.nomor}}?" ng-confirm="hapus(c)">Hapus</button>
+                                    <button class="btn btn-success editable-table-button btn-xs" ng-show="c.terbayar < c.tagihan"
+                                            data-toggle="modal" ng-click="buatPembayaran(c)">Bayar</button>
+                                    <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                        <button type="button" class="btn btn-default editable-table-button btn-xs" uib-dropdown-toggle>
+                                            Cetak<span class="caret"></span>
+                                        </button>
+                                        <ul uib-dropdown-menu>
+                                            <li><a href ng-click="cetak(c, 'pdf')">PDF</a></li>
+                                            <li><a href ng-click="cetak(c, 'xlsx')">XLS</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>                        
-                    </tr>
-                </table>
+                            </td>                        
+                        </tr>
+                    </table>
+                </div>
                 <div align="center" ng-show="dataPage.totalPages > 1">
                     <ul uib-pagination total-items="paging.totalItems" ng-model="paging.currentPage" max-size="paging.maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="reloadData()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
                     <pre>Page: {{paging.currentPage}} / {{paging.maxPage}}</pre>
