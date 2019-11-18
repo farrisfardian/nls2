@@ -70,4 +70,15 @@ angular.module('BlurAdmin', [
                     notConfirmClick();
                     closeModal();
                 }
+            }])
+        .run(['$rootScope', function ($rootScope) {
+                $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams, option) {
+                    console.log(e);
+                    console.log(toState);
+                    console.log(toParams);
+                    console.log(fromState);
+                    console.log(fromParams);
+                    console.log(option);
+                    $rootScope.title=toState.title;
+                })
             }]);
