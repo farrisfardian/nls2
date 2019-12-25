@@ -12,5 +12,5 @@ package com.nls.constant;
  * @author faheem
  */
 public enum UkuranKontainer {
-    _20Feet_Open, _20Feet, _40Feet
+    _20Feet_Open, _20Feet, _21Feet, _40Feet
 }
