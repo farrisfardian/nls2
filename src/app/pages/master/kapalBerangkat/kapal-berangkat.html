@@ -108,6 +108,7 @@
                                             <td>Kota Tujuan</td>
                                             <td>Aktif</td>
                                             <td>Voyage</td>
+                                            <td>Log</td>
                                             <td>
                                                 <button class="btn btn-info editable-table-button btn-xs" ng-click="baru()">Tambah</button>
                                             </td>
@@ -130,6 +131,10 @@
                                             </td>
                                             <td>
                                                 {{c.no_voyage}}
+                                            </td>
+                                            <td>
+                                                Insert by : {{c.user_ins}} on {{c.tgl_ins|date:'dd/MM/yyyy HH:mm'}}<br>
+                                                Last Upd by : {{c.user_upd}} on {{c.tgl_last_upd|date:'dd/MM/yyyy HH:mm'}}
                                             </td>
                                             <td>
                                                 <div class="buttons" >

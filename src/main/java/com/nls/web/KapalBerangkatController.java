@@ -8,7 +8,9 @@ package com.nls.web;
 import com.nls.dao.KapalBerangkatDao;
 import com.nls.dao.jdbc.LookupDao;
 import com.nls.domain.KapalBerangkat;
+import com.nls.service.AppService;
 import java.security.InvalidParameterException;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -44,8 +46,8 @@ public class KapalBerangkatController {
     @Autowired
     LookupDao lookupDao;
 
-//    @Autowired
-//    AppService appService;
+    @Autowired
+    AppService appService;
     private final Logger logger = LoggerFactory.getLogger(KapalBerangkatController.class);
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -116,6 +118,8 @@ public class KapalBerangkatController {
     @RequestMapping(method = RequestMethod.POST)
     public void simpan(@RequestBody KapalBerangkat x) {
 //        User u = appService.getCurrentUser();
+        x.setUserIns(appService.getCurrentUser().getLogin());
+        x.setTglIns(new Date());
         dao.save(x);
     }
 
@@ -125,6 +129,8 @@ public class KapalBerangkatController {
         if (r == null) {
             throw new InvalidParameterException("KapalBerangkat tidak ditemukan!");
         }
+        x.setUserLastUpd(appService.getCurrentUser().getLogin());
+        x.setTglLastUpd(new Date());
         x.setId(r.getId());
         dao.save(x);
     }

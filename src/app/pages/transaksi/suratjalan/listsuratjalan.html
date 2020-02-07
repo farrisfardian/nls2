@@ -100,6 +100,7 @@
                     <td>Pengirim</td>
                     <td>Kontainer</td>
                     <td>Indeks SJ</td>
+                    <td>Log</td>
                     <td>
                         <button class="btn btn-info editable-table-button btn-xs" ng-click="baru()">Tambah</button>
                     </td>
@@ -127,6 +128,10 @@
                         </div>
                     </td>
                     <td>{{c.indeks}}</td>
+                    <td>
+                        Insert by : {{c.user_ins}} on {{c.tgl_ins|date:'dd/MM/yyyy HH:mm'}}<br>
+                        Last Upd by : {{c.user_upd}} on {{c.tgl_last_upd|date:'dd/MM/yyyy HH:mm'}}
+                    </td>
                     <td>
                         <div class="buttons" >
                             <button class="btn btn-primary editable-table-button btn-xs" 

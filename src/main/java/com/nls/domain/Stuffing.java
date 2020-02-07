@@ -57,18 +57,33 @@ public class Stuffing {
     @Enumerated(EnumType.STRING)
     @Column(name = "ukuran_kontainer")
     private UkuranKontainer ukuranKontainer;
-    
+
     @NotNull
     @NotEmpty
     @Column(name = "no_kontainer", nullable = false, length = 30)
     private String noKontainer;
-    
+
     @Column(columnDefinition = "boolean default true", nullable = false)
-    private Boolean aktif=Boolean.TRUE;
-    
+    private Boolean aktif = Boolean.TRUE;
+
     @ManyToOne
     @JoinColumn(name = "id_kota_asal")
     private Kota kotaAsal;
+
+    @Column(name = "user_ins")
+    private String userIns;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "tgl_ins")
+    private Date tglIns;
+    
+    @Column(name = "user_last_upd")
+    private String userLastUpd;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "tgl_last_upd")
+    private Date tglLastUpd;
+
     /**
      * @return the kotaAsal
      */
@@ -82,7 +97,6 @@ public class Stuffing {
     public void setKotaAsal(Kota kotaAsal) {
         this.kotaAsal = kotaAsal;
     }
-
 
     public Integer getId() {
         return id;
@@ -139,7 +153,6 @@ public class Stuffing {
 //    public void setKontainer(Kontainer kontainer) {
 //        this.kontainer = kontainer;
 //    }
-
     public Boolean getAktif() {
         return aktif;
     }
@@ -162,6 +175,62 @@ public class Stuffing {
 
     public void setUkuranKontainer(UkuranKontainer ukuranKontainer) {
         this.ukuranKontainer = ukuranKontainer;
+    }
+
+    /**
+     * @return the userIns
+     */
+    public String getUserIns() {
+        return userIns;
+    }
+
+    /**
+     * @param userIns the userIns to set
+     */
+    public void setUserIns(String userIns) {
+        this.userIns = userIns;
+    }
+
+    /**
+     * @return the tglIns
+     */
+    public Date getTglIns() {
+        return tglIns;
+    }
+
+    /**
+     * @param tglIns the tglIns to set
+     */
+    public void setTglIns(Date tglIns) {
+        this.tglIns = tglIns;
+    }
+
+    /**
+     * @return the userLastUpd
+     */
+    public String getUserLastUpd() {
+        return userLastUpd;
+    }
+
+    /**
+     * @param userLastUpd the userLastUpd to set
+     */
+    public void setUserLastUpd(String userLastUpd) {
+        this.userLastUpd = userLastUpd;
+    }
+
+    /**
+     * @return the tglLastUpd
+     */
+    public Date getTglLastUpd() {
+        return tglLastUpd;
+    }
+
+    /**
+     * @param tglLastUpd the tglLastUpd to set
+     */
+    public void setTglLastUpd(Date tglLastUpd) {
+        this.tglLastUpd = tglLastUpd;
     }
 
 }

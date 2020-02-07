@@ -424,6 +424,7 @@
                                 <th>Nomor</th>
                                 <th>Tanggal Nota</th>
                                 <th>Tgl Brkt</th>
+                                <th>Log</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -446,6 +447,10 @@
                             </td>
                             <td>
                                 {{ c.tgl_berangkat | date: 'dd-MM-yyyy' }}
+                            </td>
+                            <td>
+                                Insert by : {{c.user_ins}} on {{c.time_ins|date:'dd/MM/yyyy HH:mm'}}<br>
+                                Last Upd by : {{c.user_upd}} on {{c.time_upd|date:'dd/MM/yyyy HH:mm'}}
                             </td>
                             <td>
                                 <div class="buttons" >

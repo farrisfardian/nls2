@@ -11,6 +11,7 @@ import com.nls.dao.jdbc.LookupDao;
 import com.nls.domain.SJStuffing;
 import com.nls.domain.SuratJalan;
 import com.nls.domain.SuratJalanDetail;
+import com.nls.service.AppService;
 import java.security.InvalidParameterException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,6 +47,9 @@ public class SuratJalanController {
 
     @Autowired
     SuratJalanDao dao;
+    
+    @Autowired
+    AppService appService;
 
     @Autowired
     LookupDao lookupDao;
@@ -150,6 +154,8 @@ public class SuratJalanController {
             }
         }
         x.setIndeks(lookupDao.getNomorSuratJalan(x.getStuffing().getKotaAsal() == null ? null : x.getStuffing().getKotaAsal().getId(), x.getStuffing().getKota() == null ? null : x.getStuffing().getKota().getId(), sdf.format(x.getTanggal() == null ? new Date() : x.getTanggal())));
+        x.setUserIns(appService.getCurrentUser().getLogin());
+        x.setTglIns(new Date());
         dao.save(x);
         return x;
     }
@@ -172,6 +178,8 @@ public class SuratJalanController {
         if (x.getIndeks() == null) {
             x.setIndeks(lookupDao.getNomorSuratJalan(x.getStuffing().getKotaAsal() == null ? null : x.getStuffing().getKotaAsal().getId(), x.getStuffing().getKota() == null ? null : x.getStuffing().getKota().getId(), sdf.format(x.getTanggal() == null ? new Date() : x.getTanggal())));
         }
+        x.setUserLastUpd(appService.getCurrentUser().getLogin());
+        x.setTglLastUpd(new Date());
         dao.save(x);
         return x;
     }

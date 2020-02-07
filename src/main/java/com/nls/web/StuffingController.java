@@ -8,7 +8,9 @@ package com.nls.web;
 import com.nls.dao.StuffingDao;
 import com.nls.dao.jdbc.LookupDao;
 import com.nls.domain.Stuffing;
+import com.nls.service.AppService;
 import java.security.InvalidParameterException;
+import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,24 +38,28 @@ import org.springframework.web.bind.annotation.RestController;
 @Transactional
 @RequestMapping("api/transaksi/stuffing")
 public class StuffingController {
+
     @Autowired
     StuffingDao dao;
-    
+
+    @Autowired
+    AppService appService;
+
     @Autowired
     LookupDao lookupDao;
     private final Logger logger = LoggerFactory.getLogger(StuffingController.class);
-    
+
     @ResponseBody
     @RequestMapping(value = "open/lookup/{ik}")
-    public Object lookupStuffingOpen(@PathVariable("ik") Integer idKota){
+    public Object lookupStuffingOpen(@PathVariable("ik") Integer idKota) {
         return lookupDao.lookupStuffingOpen(idKota);
     }
+
     @ResponseBody
     @RequestMapping(value = "aktif/lookup/{ik}")
-    public Object lookupStuffingAktif(@PathVariable("ik") Integer idKota){
+    public Object lookupStuffingAktif(@PathVariable("ik") Integer idKota) {
         return lookupDao.lookupStuffingAktif(idKota);
     }
-    
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public Iterable<Stuffing> cariSemua() {
@@ -89,7 +95,7 @@ public class StuffingController {
                 Sort.Direction.ASC, "kontainer.nomor");
         return dao.filter("%" + s.toUpperCase() + "%", pr);
     }
-    
+
     @RequestMapping(value = "/tglawal/tglakhir/cari/{tglawal}/{tglakhir}/{cari:.+}", method = RequestMethod.GET)
     @ResponseBody
     public Object cariComposite(@PathVariable("tglawal") String tglawal, @PathVariable("tglakhir") String tglakhir, @PathVariable("cari") String cari,
@@ -99,9 +105,9 @@ public class StuffingController {
                 Sort.Direction.ASC, "tanggal");
         return lookupDao.lookupStuffing((cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), tglawal, tglakhir, pr);
     }
-    
+
     @RequestMapping(value = "stuffing/list/kapal-berangkat/{ik}/{id}", method = RequestMethod.GET)
-    public Object listStuffingPerKapalBerangkat(@PathVariable("ik") Integer ik, 
+    public Object listStuffingPerKapalBerangkat(@PathVariable("ik") Integer ik,
             @PathVariable("id") Integer id) {
         return lookupDao.lookupStuffingPerKapalBerangkat(ik, id);
     }
@@ -118,6 +124,8 @@ public class StuffingController {
     @RequestMapping(method = RequestMethod.POST)
     public void simpan(@RequestBody Stuffing x) {
 //        User u = appService.getCurrentUser();
+        x.setUserIns(appService.getCurrentUser().getLogin());
+        x.setTglIns(new Date());
         dao.save(x);
     }
 
@@ -125,8 +133,10 @@ public class StuffingController {
     public void perbarui(@PathVariable String id, @RequestBody Stuffing x) {
         Stuffing r = dao.findOne(Integer.valueOf(id));
         if (r == null) {
-            throw new InvalidParameterException("Stuffing dengan ID '" + x.getId()+ "' tidak ditemukan!");
+            throw new InvalidParameterException("Stuffing dengan ID '" + x.getId() + "' tidak ditemukan!");
         }
+        x.setUserLastUpd(appService.getCurrentUser().getLogin());
+        x.setTglLastUpd(new Date());
         x.setId(r.getId());
         dao.save(x);
     }

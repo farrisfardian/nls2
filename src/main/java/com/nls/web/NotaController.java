@@ -16,9 +16,11 @@ import com.nls.domain.Nota;
 import com.nls.domain.NotaDetail;
 import com.nls.domain.NotaKapalBerangkat;
 import com.nls.domain.NotaTambahanBiaya;
+import com.nls.service.AppService;
 import java.math.BigDecimal;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +67,9 @@ public class NotaController {
 
     @Autowired
     LookupDao lookupDao;
+
+    @Autowired
+    AppService appService;
 
     private final Logger logger = LoggerFactory.getLogger(NotaController.class);
 
@@ -199,6 +204,8 @@ public class NotaController {
             String nomorNota = lookupDao.getNomorNota(x.getKotaAsal().getId(), x.getTokoTujuan().getKota().getId());
             x.setNomorInvoice(nomorNota);
         }
+        x.setUserIns(appService.getCurrentUser().getLogin());
+        x.setTimeIns(new Date());
         dao.save(x);
         return x;
     }
@@ -229,6 +236,8 @@ public class NotaController {
             String nomorNota = lookupDao.getNomorNota(x.getKotaAsal().getId(), x.getTokoTujuan().getKota().getId());
             x.setNomorInvoice(nomorNota);
         }
+        x.setUserUpd(appService.getCurrentUser().getLogin());
+        x.setTimeUpd(new Date());
         dao.save(x);
         return x;
     }
