@@ -12,6 +12,7 @@
     function routeConfig($stateProvider) {
         $stateProvider
                 .state('setting', {
+                    parent: 'app',
                     url: '/setting',
                     template: '<ui-view autoscroll="true" autoscroll-body-top></ui-view>',
                     abstract: true,
@@ -41,11 +42,15 @@
                         order: 0,
                     },
                 })
-                //user
+                //menu
                 .state('setting.menu', {
                     url: '/menu',
-                    templateUrl: 'app/pages/setting/menu/menu.html',
-                    controller: 'MenuController',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/setting/menu/menu.html',
+                            controller: 'MenuController',
+                        }
+                    },
                     title: 'Menu',
                     sidebarMeta: {
                         order: 0,
@@ -64,8 +69,12 @@
                 //role
                 .state('setting.role', {
                     url: '/role',
-                    templateUrl: 'app/pages/setting/role/role.html',
-                    controller: 'RoleController',
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/pages/setting/role/role.html',
+                            controller: 'RoleController',
+                        }
+                    },
                     title: 'Role',
                     sidebarMeta: {
                         order: 0,

@@ -21,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -96,6 +97,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "reset_date")
     private ZonedDateTime resetDate = null;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_role")
+    private Role role;
 
     @JsonIgnore
     @ManyToMany
@@ -260,5 +265,19 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
             "}";
+    }
+
+    /**
+     * @return the role
+     */
+    public Role getRole() {
+        return role;
+    }
+
+    /**
+     * @param role the role to set
+     */
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

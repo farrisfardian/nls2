@@ -19,17 +19,12 @@
  */
 package com.nls.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -74,6 +69,12 @@ public class Menu {
     
     @Column
     private String icon;
+
+    @Column(name = "is_parent")
+    private Boolean isParent;
+    
+    @Column(name = "is_sidebar")
+    private Boolean isSidebar;
 
     @ManyToOne
     @JoinColumn(name="id_parent")
@@ -163,5 +164,33 @@ public class Menu {
 //    public void setSubMenu(List<Menu> subMenu) {
 //        this.subMenu = subMenu;
 //    }
+
+    /**
+     * @return the isParent
+     */
+    public Boolean getIsParent() {
+        return isParent;
+    }
+
+    /**
+     * @param isParent the isParent to set
+     */
+    public void setIsParent(Boolean isParent) {
+        this.isParent = isParent;
+    }
+
+    /**
+     * @return the isSidebar
+     */
+    public Boolean getIsSidebar() {
+        return isSidebar;
+    }
+
+    /**
+     * @param isSidebar the isSidebar to set
+     */
+    public void setIsSidebar(Boolean isSidebar) {
+        this.isSidebar = isSidebar;
+    }
     
 }

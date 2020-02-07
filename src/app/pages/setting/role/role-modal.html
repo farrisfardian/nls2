@@ -65,14 +65,8 @@
                     <div class="col-xs-3">
                         <label class="control-label" for="parent">Is Parent</label>
                     </div>                   
-                    <div class="col-sm-3" ng-class="{error: form1.parent.$invalid}">
+                    <div class="col-sm-8" ng-class="{error: form1.parent.$invalid}">
                         <ba-switcher switcher-style="primary" switcher-value="vm.isParent" ></ba-switcher>
-                    </div>
-                    <div class="col-xs-3">
-                        <label class="control-label" for="parent">Is Sidebar</label>
-                    </div>                   
-                    <div class="col-sm-3" ng-class="{error: form1.parent.$invalid}">
-                        <ba-switcher switcher-style="primary" switcher-value="vm.isSidebar" ></ba-switcher>
                     </div>
                 </div>
                 <div class="form-group" ng-hide="vm.isParent">

@@ -5,9 +5,9 @@
         .module('BlurAdmin.theme.components')
         .controller('UserManagementDialogController',UserManagementDialogController);
 
-    UserManagementDialogController.$inject = ['$stateParams', '$uibModalInstance', 'entity', 'User'];
+    UserManagementDialogController.$inject = ['$stateParams', '$uibModalInstance', 'entity', 'User', 'RoleService'];
 
-    function UserManagementDialogController ($stateParams, $uibModalInstance, entity, User) {
+    function UserManagementDialogController ($stateParams, $uibModalInstance, entity, User, RoleService) {
         var vm = this;
 
         vm.authorities = ['ROLE_ADMIN', 'ROLE_PL', 'ROLE_MANAJEMEN', 'ROLE_KEUANGAN', 'ROLE_EMKL'];
@@ -16,6 +16,9 @@
         vm.save = save;
         vm.user = entity;
 
+        RoleService.cariSemua().success(function (data) {
+            vm.listRole = data;
+        });
 
 
         function clear () {

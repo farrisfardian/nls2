@@ -1,5 +1,6 @@
 package com.nls.web.rest.vm;
 
+import com.nls.domain.Role;
 import com.nls.service.dto.UserDTO;
 import javax.validation.constraints.Size;
 
@@ -7,7 +8,8 @@ import java.time.ZonedDateTime;
 import java.util.Set;
 
 /**
- * View Model extending the UserDTO, which is meant to be used in the user management UI.
+ * View Model extending the UserDTO, which is meant to be used in the user
+ * management UI.
  */
 public class ManagedUserVM extends UserDTO {
 
@@ -23,12 +25,12 @@ public class ManagedUserVM extends UserDTO {
     }
 
     public ManagedUserVM(Long id, String login, String password, String firstName, String lastName,
-                         String email, boolean activated, String imageUrl, String langKey,
-                         String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate,
-                        Set<String> authorities) {
+            String email, boolean activated, String imageUrl, String langKey,
+            String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate,
+            Set<String> authorities, Role role) {
 
-        super(id, login, firstName, lastName, email, activated,  imageUrl, langKey,
-            createdBy, createdDate, lastModifiedBy, lastModifiedDate,  authorities);
+        super(id, login, firstName, lastName, email, activated, imageUrl, langKey,
+                createdBy, createdDate, lastModifiedBy, lastModifiedDate, authorities, role);
 
         this.password = password;
     }
@@ -39,7 +41,7 @@ public class ManagedUserVM extends UserDTO {
 
     @Override
     public String toString() {
-        return "ManagedUserVM{" +
-            "} " + super.toString();
+        return "ManagedUserVM{"
+                + "} " + super.toString();
     }
 }

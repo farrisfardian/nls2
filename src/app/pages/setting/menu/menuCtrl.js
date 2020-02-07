@@ -13,10 +13,10 @@
             currentPage: 1,
             totalItems: 0,
         };
-        MenuService.cariSemua().success(function (data) {
-            $scope.listParent = data;
-            console.log(data);
-        });
+//        MenuService.cariSemua().success(function (data) {
+//            $scope.listParent = data;
+//            console.log(data);
+//        });
         $scope.reloadData = function () {
             $scope.dataPage = MenuService.query($scope.search, $scope.paging.currentPage - 1, function () {
                 console.log('$scope.dataPage', $scope.dataPage);
@@ -24,7 +24,7 @@
                 $scope.paging.totalItems = $scope.dataPage.totalElements;
                 $scope.paging.currentPage = parseInt($scope.dataPage.number) + 1;
                 $scope.paging.maxPage = $scope.dataPage.totalPages;
-                
+
             });
         };
         $scope.reloadData();
@@ -77,19 +77,19 @@
         }
     }
 
-    function MenuModalController($uibModalInstance, toastr, $scope, MenuService, TipeMenuService, data) {
+    function MenuModalController($uibModalInstance, toastr, $scope, MenuService, data) {
         $scope.ori = angular.copy(data);
-        $scope.modalTitle = "Edit Akun";
+        $scope.modalTitle = "Edit Menu";
         console.log('edit', data);
         $scope.vm = angular.copy(data);
         if (data.id == undefined) {
-            $scope.modalTitle = "Tambah Akun";
+            $scope.modalTitle = "Tambah Menu";
         }
 
-        TipeMenuService.cariSemua().success(function (data) {
-            $scope.listTipe = data;
-            console.log('$scope.listTipe', $scope.listTipe);
-        });
+        MenuService.cariSemuaParent().success(function (d) {
+            $scope.listParent = d;
+        })
+
         $scope.simpan = function () {
             MenuService.simpan($scope.vm, $scope.ori).success(function (d) {
                 $uibModalInstance.close($scope.vm);

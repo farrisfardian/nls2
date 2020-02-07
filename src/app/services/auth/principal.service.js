@@ -1,15 +1,15 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('BlurAdmin')
-        .factory('Principal', Principal);
+            .module('BlurAdmin')
+            .factory('Principal', Principal);
 
-    Principal.$inject = ['$q', 'Account'];
+    Principal.$inject = ['$q', 'Account', '$rootScope'];
 
-    function Principal ($q, Account) {
+    function Principal($q, Account, $rootScope) {
         var _identity,
-            _authenticated = false;
+                _authenticated = false;
 
         var service = {
             authenticate: authenticate,
@@ -22,12 +22,12 @@
 
         return service;
 
-        function authenticate (identity) {
+        function authenticate(identity) {
             _identity = identity;
             _authenticated = identity !== null;
         }
 
-        function hasAnyAuthority (authorities) {
+        function hasAnyAuthority(authorities) {
             if (!_authenticated || !_identity || !_identity.authorities) {
                 return false;
             }
@@ -41,19 +41,19 @@
             return false;
         }
 
-        function hasAuthority (authority) {
+        function hasAuthority(authority) {
             if (!_authenticated) {
                 return $q.when(false);
             }
 
-            return this.identity().then(function(_id) {
+            return this.identity().then(function (_id) {
                 return _id.authorities && _id.authorities.indexOf(authority) !== -1;
-            }, function(){
+            }, function () {
                 return false;
             });
         }
 
-        function identity (force) {
+        function identity(force) {
             var deferred = $q.defer();
 
             if (force === true) {
@@ -70,29 +70,30 @@
 
             // retrieve the identity data from the server, update the identity object, and then resolve.
             Account.get().$promise
-                .then(getAccountThen)
-                .catch(getAccountCatch);
+                    .then(getAccountThen)
+                    .catch(getAccountCatch);
 
             return deferred.promise;
 
-            function getAccountThen (account) {
+            function getAccountThen(account) {
                 _identity = account.data;
+                $rootScope.currentLogin = _identity;
                 _authenticated = true;
                 deferred.resolve(_identity);
             }
 
-            function getAccountCatch () {
+            function getAccountCatch() {
                 _identity = null;
                 _authenticated = false;
                 deferred.resolve(_identity);
             }
         }
 
-        function isAuthenticated () {
+        function isAuthenticated() {
             return _authenticated;
         }
 
-        function isIdentityResolved () {
+        function isIdentityResolved() {
             return angular.isDefined(_identity);
         }
     }

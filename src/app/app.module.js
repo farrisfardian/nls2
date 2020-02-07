@@ -22,7 +22,8 @@ angular.module('BlurAdmin', [
     'ngCacheBuster',
     'BlurAdmin.theme',
     'BlurAdmin.pages',
-    'hc.marked'
+    'hc.marked',
+    'ntt.TreeDnD'
 ]).directive('ngConfirm', ['$uibModal', function ($uibModal) {
         return {
             restrict: 'A',
@@ -71,7 +72,7 @@ angular.module('BlurAdmin', [
                     closeModal();
                 }
             }])
-        .run(['$rootScope', function ($rootScope) {
+        .run(['$rootScope','$location', function ($rootScope,$location) {
                 $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams, option) {
                     console.log(e);
                     console.log(toState);
@@ -80,5 +81,18 @@ angular.module('BlurAdmin', [
                     console.log(fromParams);
                     console.log(option);
                     $rootScope.title=toState.title;
+                    var exists = false;
+
+                    if ($rootScope.currentLogin !== undefined) {
+                        for (var i = 0; i < $rootScope.currentLogin.role.menuSet.length; i++) {
+                            if ($rootScope.currentLogin.role.menuSet[i].menu.stateRef == toState.name) {
+                                exists = true;
+                            }
+                        }
+//                        console.log('exists', exists);
+                        if (!exists) {
+                            $location.path('/');
+                        }
+                    }
                 })
             }]);
