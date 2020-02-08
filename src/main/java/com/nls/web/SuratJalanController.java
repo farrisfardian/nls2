@@ -121,7 +121,7 @@ public class SuratJalanController {
             HttpServletResponse response) {
         PageRequest pr = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
                 Sort.Direction.ASC, "tanggal");
-        return lookupDao.lookupSuratJalan((cari.equals("null") ? "" : "%" + cari.toUpperCase() + "%"), idkota, tglawal, tglakhir, statusNota, pr);
+        return lookupDao.lookupSuratJalan((cari.equals("null") ? "" : "%" + cari.replace("*", "/").toUpperCase() + "%"), idkota, tglawal, tglakhir, statusNota, pr);
     }
 
     @RequestMapping(value = "infoitem/tglawal/tglakhir/idtoko/cari/{tglawal}/{tglakhir}/{idtoko}/{cari:.+}", method = RequestMethod.GET)

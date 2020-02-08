@@ -6,6 +6,7 @@
 package com.nls.domain;
 
 import com.nls.constant.UkuranKontainer;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "t_stuffing")
-public class Stuffing {
+public class Stuffing extends AbstractAuditingEntity implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
