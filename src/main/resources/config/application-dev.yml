@@ -43,9 +43,7 @@ spring:
         url: jdbc:postgresql://192.168.1.10:5432/nls
         username: nls-web
         password: nlsSurabaya2017
-#        url: jdbc:postgresql://152401112213.ip-dynamic.com:5432/nls
-#        username: nls-web
-#        password: nlsSurabaya2017
+
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL
