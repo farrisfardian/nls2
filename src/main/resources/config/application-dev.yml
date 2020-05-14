@@ -38,6 +38,7 @@ spring:
 #        username: test
 #        password: test
 #        url: jdbc:postgresql://localhost:5432/nls_server
+#        url: jdbc:postgresql://localhost:5432/nls_server_2020_04_09
 #        username: test
 #        password: test
         url: jdbc:postgresql://192.168.1.10:5432/nls

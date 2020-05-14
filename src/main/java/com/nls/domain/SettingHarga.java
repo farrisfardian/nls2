@@ -59,6 +59,20 @@ public class SettingHarga {
     @ManyToOne
     @JoinColumn(name = "id_pelayaran")
     private Pelayaran pelayaran;
+    
+    @Column(name = "user_ins")
+    private String userIns;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "tgl_ins")
+    private Date tglIns;
+    
+    @Column(name = "user_last_upd")
+    private String userLastUpd;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "tgl_last_upd")
+    private Date tglLastUpd;
 
     @OneToMany(mappedBy = "settingHarga", cascade = {javax.persistence.CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
@@ -144,5 +158,61 @@ public class SettingHarga {
      */
     public void setPelayaran(Pelayaran pelayaran) {
         this.pelayaran = pelayaran;
+    }
+
+    /**
+     * @return the userIns
+     */
+    public String getUserIns() {
+        return userIns;
+    }
+
+    /**
+     * @param userIns the userIns to set
+     */
+    public void setUserIns(String userIns) {
+        this.userIns = userIns;
+    }
+
+    /**
+     * @return the tglIns
+     */
+    public Date getTglIns() {
+        return tglIns;
+    }
+
+    /**
+     * @param tglIns the tglIns to set
+     */
+    public void setTglIns(Date tglIns) {
+        this.tglIns = tglIns;
+    }
+
+    /**
+     * @return the userLastUpd
+     */
+    public String getUserLastUpd() {
+        return userLastUpd;
+    }
+
+    /**
+     * @param userLastUpd the userLastUpd to set
+     */
+    public void setUserLastUpd(String userLastUpd) {
+        this.userLastUpd = userLastUpd;
+    }
+
+    /**
+     * @return the tglLastUpd
+     */
+    public Date getTglLastUpd() {
+        return tglLastUpd;
+    }
+
+    /**
+     * @param tglLastUpd the tglLastUpd to set
+     */
+    public void setTglLastUpd(Date tglLastUpd) {
+        this.tglLastUpd = tglLastUpd;
     }
 }

@@ -10,7 +10,9 @@ import com.nls.dao.jdbc.LookupDao;
 import com.nls.dao.jdbc.SettingHargaDaoJdbc;
 import com.nls.domain.SettingHarga;
 import com.nls.domain.SettingHargaDetail;
+import com.nls.service.AppService;
 import java.security.InvalidParameterException;
+import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +44,9 @@ public class SettingHargaController {
 
     @Autowired
     SettingHargaDaoJdbc daoJdbc;
+
+    @Autowired
+    AppService appService;
     private final Logger logger = LoggerFactory.getLogger(SettingHargaController.class);
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -96,6 +101,8 @@ public class SettingHargaController {
                 y.setSettingHarga(x);
             }
         }
+        x.setUserIns(appService.getCurrentUser().getLogin());
+        x.setTglIns(new Date());
         dao.save(x);
     }
 
@@ -109,6 +116,8 @@ public class SettingHargaController {
             y.setSettingHarga(x);
         }
         x.setId(r.getId());
+        x.setUserLastUpd(appService.getCurrentUser().getLogin());
+        x.setTglLastUpd(new Date());
         dao.save(x);
     }
 

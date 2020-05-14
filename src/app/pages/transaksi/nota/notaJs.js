@@ -67,10 +67,10 @@
 
         $scope.edit = function (x) {
             $scope.ori = angular.copy(x);
-            $scope.modalTitle = "Edit Nota";
             console.log('edit', x);
             NotaService.cariSatu("kode", x.id).success(function (data) {
                 console.log('edit', data);
+                $scope.modalTitle = "Edit Nota - " + data.nomorInvoice;
                 if (data.tanggal !== null && data.tanggal !== undefined) {
                     data.tanggal = new Date(data.tanggal);
                 }
