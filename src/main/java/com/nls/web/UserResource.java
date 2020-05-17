@@ -141,6 +141,34 @@ public class UserResource {
         return ResponseUtil.wrapOrNotFound(updatedUser,
             HeaderUtil.createAlert("A user is updated with identifier " + managedUserVM.getLogin(), managedUserVM.getLogin()));
     }
+    
+    /**
+     * PUT /users : Updates an existing User.
+     *
+     * @param managedUserVM the user to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated
+     * user, or with status 400 (Bad Request) if the login or email is already
+     * in use, or with status 500 (Internal Server Error) if the user couldn't
+     * be updated
+     */
+    @PutMapping("/users/reset-password")
+    @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<UserDTO> resetUserPassword(@RequestBody ManagedUserVM managedUserVM) {
+        log.debug("REST request to update User : {}", managedUserVM);
+        Optional<User> existingUser = userRepository.findOneByEmail(managedUserVM.getEmail());
+        if (existingUser.isPresent() && (!existingUser.get().getId().equals(managedUserVM.getId()))) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "emailexists", "E-mail already in use")).body(null);
+        }
+        existingUser = userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase());
+        if (existingUser.isPresent() && (!existingUser.get().getId().equals(managedUserVM.getId()))) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "userexists", "Login already in use")).body(null);
+        }
+        Optional<UserDTO> updatedUser = userService.resetUserPassword(managedUserVM);
+
+        return ResponseUtil.wrapOrNotFound(updatedUser,
+                HeaderUtil.createAlert("A user is updated with identifier " + managedUserVM.getLogin(), managedUserVM.getLogin()));
+    }
 
     /**
      * GET  /users : get all users.

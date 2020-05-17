@@ -1,18 +1,19 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('BlurAdmin.theme.components')
-        .controller('UserManagementController', UserManagementController);
+            .module('BlurAdmin.theme.components')
+            .controller('UserManagementController', UserManagementController);
 
-    UserManagementController.$inject = ['Principal', 'User', 'ParseLinks', 'AlertService', '$state', 'pagingParams', 'paginationConstants'];
+    UserManagementController.$inject = ['Principal', 'User', 'ParseLinks', 'AlertService', '$state', 'pagingParams', 'paginationConstants', 'toastr'];
 
-    function UserManagementController(Principal, User, ParseLinks, AlertService, $state, pagingParams, paginationConstants) {
+    function UserManagementController(Principal, User, ParseLinks, AlertService, $state, pagingParams, paginationConstants, toastr) {
         var vm = this;
 
         vm.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         vm.currentAccount = null;
         vm.languages = null;
+        vm.search = "";
         vm.loadAll = loadAll;
         vm.setActive = setActive;
         vm.users = [];
@@ -25,14 +26,15 @@
         vm.reverse = pagingParams.ascending;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.transition = transition;
+        vm.resetPassword = resetPassword;
 
         vm.loadAll();
-        
-        Principal.identity().then(function(account) {
+
+        Principal.identity().then(function (account) {
             vm.currentAccount = account;
         });
 
-        function setActive (user, isActivated) {
+        function setActive(user, isActivated) {
             user.activated = isActivated;
             User.update(user, function () {
                 vm.loadAll();
@@ -40,12 +42,38 @@
             });
         }
 
-        function loadAll () {
-            User.query({
-                page: pagingParams.page - 1,
-                size: vm.itemsPerPage,
-                sort: sort()
-            }, onSuccess, onError);
+        function onSaveSuccess(result) {
+            vm.isSaving = false;
+        }
+
+        function onSaveError() {
+            vm.isSaving = false;
+        }
+
+        function resetPassword(x) {
+            User.get({login: x.login}, function (d) {
+                User.update({login: "reset-password"}, d, onSaveSuccess, onSaveError);
+            }, function (e) {
+                toastr.error('Gagal reset password');
+            });
+        }
+
+        function loadAll() {
+            if (vm.search !== "") {
+                User.query({
+                    login: "filter",
+                    search: vm.search,
+                    page: pagingParams.page - 1,
+                    size: vm.itemsPerPage,
+                    sort: sort()
+                }, onSuccess, onError);
+            } else {
+                User.query({
+                    page: pagingParams.page - 1,
+                    size: vm.itemsPerPage,
+                    sort: sort()
+                }, onSuccess, onError);
+            }
         }
 
         function onSuccess(data, headers) {
@@ -66,7 +94,7 @@
             AlertService.error(error.data.message);
         }
 
-        function clear () {
+        function clear() {
             vm.user = {
                 id: null, login: null, firstName: null, lastName: null, email: null,
                 activated: null, langKey: null, createdBy: null, createdDate: null,
@@ -75,7 +103,7 @@
             };
         }
 
-        function sort () {
+        function sort() {
             var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
             if (vm.predicate !== 'id') {
                 result.push('id');
@@ -83,12 +111,12 @@
             return result;
         }
 
-        function loadPage (page) {
+        function loadPage(page) {
             vm.page = page;
             vm.transition();
         }
 
-        function transition () {
+        function transition() {
             $state.transitionTo($state.$current, {
                 page: vm.page,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),

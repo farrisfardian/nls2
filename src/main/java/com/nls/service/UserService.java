@@ -180,6 +180,31 @@ public class UserService {
                 })
                 .map(UserDTO::new);
     }
+    
+    public Optional<UserDTO> resetUserPassword(UserDTO userDTO) {
+//        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
+        return Optional.of(userRepository
+                .findOne(userDTO.getId()))
+                .map(user -> {
+                    user.setLogin(userDTO.getLogin());
+                    user.setFirstName(userDTO.getFirstName());
+                    user.setLastName(userDTO.getLastName());
+                    user.setEmail(userDTO.getEmail());
+                    user.setImageUrl(userDTO.getImageUrl());
+                    user.setActivated(userDTO.isActivated());
+                    user.setLangKey(userDTO.getLangKey());
+                    user.setRole(userDTO.getRole());
+                    user.setPassword(passwordEncoder.encode("123456"));
+                    Set<Authority> managedAuthorities = user.getAuthorities();
+                    managedAuthorities.clear();
+                    userDTO.getAuthorities().stream()
+                            .map(authorityRepository::findOne)
+                            .forEach(managedAuthorities::add);
+                    log.debug("Changed Information for User: {}", user);
+                    return user;
+                })
+                .map(UserDTO::new);
+    }
 
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
