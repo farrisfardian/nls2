@@ -185,6 +185,23 @@ public class UserResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    /**
+     * GET /users-filter : get all users.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body all users
+     * @throws URISyntaxException if the pagination headers couldn't be
+     * generated
+     */
+    @GetMapping("/users/filter/{search}")
+    @Timed
+    public ResponseEntity<List<UserDTO>> filterUsers(@PathVariable String search, @ApiParam Pageable pageable)
+            throws URISyntaxException {
+        final Page<UserDTO> page = userService.filterManagedUsers("%"+search+"%", pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users/filter");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /users/:login : get the "login" user.

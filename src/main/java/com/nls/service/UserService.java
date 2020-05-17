@@ -229,6 +229,11 @@ public class UserService {
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAll(pageable).map(UserDTO::new);
     }
+    
+    @Transactional(readOnly = true)
+    public Page<UserDTO> filterManagedUsers(String search, Pageable pageable) {
+        return userRepository.filter(search, pageable).map(UserDTO::new);
+    }
 
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
