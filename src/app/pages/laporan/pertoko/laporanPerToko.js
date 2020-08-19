@@ -40,7 +40,7 @@
                 });
             }
         }
-        $scope.cetak = function (tipe, isPisahEmkl) {
+        $scope.cetak = function (tipe, isPisahEmkl, isHarga) {
             var idMerks = "";
             var listToko = [];
             for (var i = 0; i < $scope.listToko.length; i++) {
@@ -55,7 +55,7 @@
             }
             console.log('idMerks', idMerks);
             var kapal = angular.isDefined($scope.kapal) && angular.isDefined($scope.kapal.selected) && $scope.kapal.selected != null && $scope.kapal.selected.id != null ? $scope.kapal.selected.id : 0;
-            var link = 'api/report/' + (isPisahEmkl === true ? 'per-merk-toko-pisah-emkl.' : 'per-merk-toko.') + tipe + '?id=' + kapal + '&it=' + idMerks;
+            var link = 'api/report/' + (isPisahEmkl === true ? (isHarga === true ? 'per-merk-toko-pisah-emkl-harga.' : 'per-merk-toko-pisah-emkl.') : 'per-merk-toko.') + tipe + '?id=' + kapal + '&it=' + idMerks;
             if (tipe == 'pdf') {
                 window.open(link, '_blank', 'width=1024, height=768');
             } else if (tipe == 'xlsx') {

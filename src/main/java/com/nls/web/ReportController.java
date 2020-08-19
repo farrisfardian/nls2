@@ -209,6 +209,29 @@ public class ReportController {
                 .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("dataSource", dao.perKapalMerkTokoPisahEmkl(Integer.valueOf(id), it));
     }
+    
+    @RequestMapping(value = "per-merk-toko-pisah-emkl-harga*", method = RequestMethod.GET)
+    private ModelMap perMerkTokoPisahEmklHarga(HttpServletRequest request) throws ParseException {
+        String uri = request.getRequestURI();
+        String format = uri.substring(uri.lastIndexOf(".") + 1);
+
+        String id = request.getParameter("id");
+        String it = request.getParameter("it");
+        System.out.println("context : " + (context == null ? "null" : "not null"));
+        String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
+        realPath = realPath.replace("\\", "\\\\");
+        logger.warn("format: [{}]", format);
+        logger.warn("id: [{}]", id);
+        logger.warn("idMerk: [{}]", it);
+
+        return new ModelMap()
+                //                .addAttribute("tanggal1", tg1)
+                //                .addAttribute("logo", realPath + "igg-kop.jpg")
+                .addAttribute("realPath", realPath)
+                .addAttribute("format", format)
+                .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
+                .addAttribute("dataSource", dao.perKapalMerkTokoPisahEmklHarga(Integer.valueOf(id), it));
+    }
 
     @RequestMapping(value = "pricelist-pelayaran*", method = RequestMethod.GET)
     private ModelMap pricelistPelayaran(HttpServletRequest request) throws ParseException {

@@ -80,14 +80,33 @@
                                     <td>{{x.kontak}}</td>
                                     <td>{{x.telepon}}</td>
                                     <td>
-                                        <input type="checkbox" id="terpilih" ng-model="x.terpilih" style="cursor:pointer" ng-click="klikToko(x,$index)">
+                                        <input type="checkbox" id="terpilih" ng-model="x.terpilih" style="cursor:pointer" ng-click="klikToko(x, $index)">
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <button class="btn btn-info pull-right" ng-click="cetak('pdf',true)">Cetak</button>
-                        <button class="btn btn-info pull-right" ng-click="cetak('email',true)" ng-disabled="listSelectedToko.length!==1" title="Hanya aktif bila yg dipilih adalah toko yg sama">Kirim Email</button>
-                        <button class="btn btn-info pull-right" ng-click="cetak('xlsx',true)">XLS</button>
+                        <button class="btn btn-info pull-right" ng-click="cetak('email', true, false)" ng-disabled="listSelectedToko.length !== 1" title="Hanya aktif bila yg dipilih adalah toko yg sama">Kirim Email</button>
+
+                        <div class="btn-group pull-right" uib-dropdown dropdown-append-to-body>
+                            <button type="button" class="btn btn-info pull-right" uib-dropdown-toggle>
+                                XLS <span class="caret"></span>
+                            </button>
+                            <ul uib-dropdown-menu>
+                                <li><a href ng-click="cetak('xlsx', true, false)">Unduh</a></li>
+                                <li><a href ng-click="cetak('xlsx', true, true)">Unduh (Rp)</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="btn-group pull-right" uib-dropdown dropdown-append-to-body>
+                            <button type="button" class="btn btn-info pull-right" uib-dropdown-toggle>
+                                PDF <span class="caret"></span>
+                            </button>
+                            <ul uib-dropdown-menu>
+                                <li><a href ng-click="cetak('pdf', true, false)">Cetak</a></li>
+                                <li><a href ng-click="cetak('pdf', true, true)">Cetak (Rp)</a></li>
+                            </ul>
+                        </div>
+
                     </div>
                 </form>
             </div>
