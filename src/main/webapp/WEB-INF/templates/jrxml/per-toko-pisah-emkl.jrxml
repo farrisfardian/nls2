@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2018-03-01T11:46:18 -->
+<!-- Created with Jaspersoft Studio version 6.5.0.final using JasperReports Library version 6.5.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="packing-list" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b8b76c8b-a069-48df-acd7-9c0db1840a9f">
 	<property name="ireport.zoom" value="1.0000000000000016"/>
 	<property name="ireport.x" value="0"/>
@@ -16,6 +15,9 @@
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="mm"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="mm"/>
 	<parameter name="realPath" class="java.lang.String"/>
+	<parameter name="showNoKontainer" class="java.lang.Boolean" isForPrompting="false">
+		<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select kota_tujuan, kondisi,
 customer, kapal, tgl_berangkat, tgl_ind, merk, alamat, nomor_kontainer, emkl,
@@ -491,9 +493,13 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 					<reportElement positionType="Float" x="0" y="42" width="572" height="14" uuid="dcc3b0c9-37c5-4ba9-8af0-899e4af1d5a9"/>
 					<box>
 						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
 					</box>
 					<textField>
-						<reportElement x="67" y="0" width="505" height="14" uuid="ad835fb0-faae-4fbb-8b49-4c3dd4fee585"/>
+						<reportElement x="67" y="0" width="505" height="14" uuid="ad835fb0-faae-4fbb-8b49-4c3dd4fee585">
+							<printWhenExpression><![CDATA[$P{showNoKontainer}==true]]></printWhenExpression>
+						</reportElement>
 						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 							<leftPen lineWidth="0.0"/>
 							<bottomPen lineWidth="0.75"/>
@@ -505,7 +511,9 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 						<textFieldExpression><![CDATA[": "+$F{nomor_kontainer}]]></textFieldExpression>
 					</textField>
 					<staticText>
-						<reportElement x="0" y="0" width="67" height="14" uuid="43b77423-cc80-4797-9443-1707572c9ed2"/>
+						<reportElement x="0" y="0" width="67" height="14" uuid="43b77423-cc80-4797-9443-1707572c9ed2">
+							<printWhenExpression><![CDATA[$P{showNoKontainer}==true]]></printWhenExpression>
+						</reportElement>
 						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 							<leftPen lineWidth="0.75"/>
 							<bottomPen lineWidth="0.75"/>
@@ -544,8 +552,14 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 				</frame>
 				<frame>
 					<reportElement positionType="Float" x="0" y="28" width="572" height="14" uuid="72261d2e-6b4d-499b-9861-d401239c84e3"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
 					<staticText>
-						<reportElement x="0" y="0" width="67" height="14" uuid="51747591-9036-4627-b158-90495cf144d6"/>
+						<reportElement x="0" y="0" width="67" height="14" uuid="51747591-9036-4627-b158-90495cf144d6">
+							<printWhenExpression><![CDATA[$P{showNoKontainer}==true]]></printWhenExpression>
+						</reportElement>
 						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 							<leftPen lineWidth="0.75"/>
 							<bottomPen lineWidth="0.0"/>
@@ -556,7 +570,9 @@ t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume dou
 						<text><![CDATA[EMKL]]></text>
 					</staticText>
 					<textField>
-						<reportElement x="67" y="0" width="505" height="14" uuid="54ac8790-336a-427c-940e-229217f2a9d8"/>
+						<reportElement x="67" y="0" width="505" height="14" uuid="54ac8790-336a-427c-940e-229217f2a9d8">
+							<printWhenExpression><![CDATA[$P{showNoKontainer}==true]]></printWhenExpression>
+						</reportElement>
 						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
 							<leftPen lineWidth="0.0"/>
 							<bottomPen lineWidth="0.0"/>

@@ -194,6 +194,7 @@ public class ReportController {
 
         String id = request.getParameter("id");
         String it = request.getParameter("it");
+        Boolean showNoKontainer = request.getParameter("showNoKontainer").equals("true");
         System.out.println("context : " + (context == null ? "null" : "not null"));
         String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
         realPath = realPath.replace("\\", "\\\\");
@@ -205,6 +206,7 @@ public class ReportController {
                 //                .addAttribute("tanggal1", tg1)
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
                 .addAttribute("realPath", realPath)
+                .addAttribute("showNoKontainer", showNoKontainer)
                 .addAttribute("format", format)
                 .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("dataSource", dao.perKapalMerkTokoPisahEmkl(Integer.valueOf(id), it));
@@ -217,6 +219,7 @@ public class ReportController {
 
         String id = request.getParameter("id");
         String it = request.getParameter("it");
+        Boolean showNoKontainer = request.getParameter("showNoKontainer").equals("true");
         System.out.println("context : " + (context == null ? "null" : "not null"));
         String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
         realPath = realPath.replace("\\", "\\\\");
@@ -227,7 +230,8 @@ public class ReportController {
         return new ModelMap()
                 //                .addAttribute("tanggal1", tg1)
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
-                .addAttribute("realPath", realPath)
+                .addAttribute("realPath", realPath)                
+                .addAttribute("showNoKontainer", showNoKontainer)
                 .addAttribute("format", format)
                 .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("dataSource", dao.perKapalMerkTokoPisahEmklHarga(Integer.valueOf(id), it));

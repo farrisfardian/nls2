@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 5.6.1.final using JasperReports Library version 5.6.1  -->
-<!-- 2018-02-10T09:30:55 -->
+<!-- Created with Jaspersoft Studio version 6.5.0.final using JasperReports Library version 6.5.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="packing-list" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b8b76c8b-a069-48df-acd7-9c0db1840a9f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="net.sf.jasperreports.default.font.name" value="DejaVu Sans"/>
@@ -9,7 +8,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="com.jaspersoft.studio.unit." value="mm"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nls"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
 	<property name="com.jaspersoft.studio.unit.topMargin" value="mm"/>
@@ -18,6 +17,7 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="mm"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="mm"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="mm"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="lapExpedisi" class="java.lang.Boolean"/>
 	<parameter name="realPath" class="java.lang.String"/>
 	<queryString>
@@ -26,30 +26,78 @@ customer varchar, kapal varchar, tgl_berangkat date, tgl_ind varchar, merk varch
 id integer, tanggal date, pengirim varchar, coli integer, jenis_barang text, p double precision, l double precision,
 t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume double precision, total_coli_sj text, pisah boolean)]]>
 	</queryString>
-	<field name="kota_tujuan" class="java.lang.String"/>
-	<field name="kondisi" class="java.lang.String"/>
-	<field name="customer" class="java.lang.String"/>
-	<field name="kapal" class="java.lang.String"/>
-	<field name="tgl_berangkat" class="java.sql.Date"/>
-	<field name="tgl_ind" class="java.lang.String"/>
-	<field name="merk" class="java.lang.String"/>
-	<field name="alamat" class="java.lang.String"/>
-	<field name="nomor_kontainer" class="java.lang.String"/>
-	<field name="emkl" class="java.lang.String"/>
-	<field name="id" class="java.lang.Integer"/>
-	<field name="tanggal" class="java.sql.Date"/>
-	<field name="pengirim" class="java.lang.String"/>
-	<field name="coli" class="java.lang.Integer"/>
-	<field name="jenis_barang" class="java.lang.String"/>
-	<field name="p" class="java.lang.Double"/>
-	<field name="l" class="java.lang.Double"/>
-	<field name="t" class="java.lang.Double"/>
-	<field name="paket" class="java.lang.Boolean"/>
-	<field name="ukuran" class="java.lang.String"/>
-	<field name="kubikasi" class="java.math.BigDecimal"/>
-	<field name="fix_volume" class="java.lang.Double"/>
-	<field name="total_coli_sj" class="java.lang.String"/>
-	<field name="pisah" class="java.lang.Boolean"/>
+	<field name="kota_tujuan" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="kota_tujuan"/>
+	</field>
+	<field name="kondisi" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="kondisi"/>
+	</field>
+	<field name="customer" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="customer"/>
+	</field>
+	<field name="kapal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="kapal"/>
+	</field>
+	<field name="tgl_berangkat" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="tgl_berangkat"/>
+	</field>
+	<field name="tgl_ind" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tgl_ind"/>
+	</field>
+	<field name="merk" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="merk"/>
+	</field>
+	<field name="alamat" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="alamat"/>
+	</field>
+	<field name="nomor_kontainer" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nomor_kontainer"/>
+	</field>
+	<field name="emkl" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="emkl"/>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+	</field>
+	<field name="tanggal" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="tanggal"/>
+	</field>
+	<field name="pengirim" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="pengirim"/>
+	</field>
+	<field name="coli" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="coli"/>
+	</field>
+	<field name="jenis_barang" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="jenis_barang"/>
+	</field>
+	<field name="p" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="p"/>
+	</field>
+	<field name="l" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="l"/>
+	</field>
+	<field name="t" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="t"/>
+	</field>
+	<field name="paket" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="paket"/>
+	</field>
+	<field name="ukuran" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ukuran"/>
+	</field>
+	<field name="kubikasi" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="kubikasi"/>
+	</field>
+	<field name="fix_volume" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="fix_volume"/>
+	</field>
+	<field name="total_coli_sj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="total_coli_sj"/>
+	</field>
+	<field name="pisah" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="pisah"/>
+	</field>
 	<variable name="nomor" class="java.lang.Integer" resetType="Group" resetGroup="merk" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{id}]]></variableExpression>
 	</variable>
@@ -588,7 +636,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 	<detail>
 		<band height="16" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="67" y="0" width="89" height="16" uuid="dff36071-28d4-4d2c-a6ab-799cce55a49b">
+				<reportElement stretchType="RelativeToBandHeight" x="67" y="0" width="89" height="16" uuid="dff36071-28d4-4d2c-a6ab-799cce55a49b">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$V{idx}==1]]></printWhenExpression>
@@ -605,7 +653,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[$F{pengirim}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="67" y="0" width="89" height="16" uuid="c15a33cc-2042-457a-9d1a-aa9511771762">
+				<reportElement stretchType="RelativeToBandHeight" x="67" y="0" width="89" height="16" uuid="c15a33cc-2042-457a-9d1a-aa9511771762">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$V{idx}>1]]></printWhenExpression>
 				</reportElement>
@@ -621,7 +669,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="dd-MM-yy">
-				<reportElement stretchType="RelativeToTallestObject" x="22" y="0" width="45" height="16" uuid="242bf956-8397-4ca9-b1a2-db9996694475">
+				<reportElement stretchType="RelativeToBandHeight" x="22" y="0" width="45" height="16" uuid="242bf956-8397-4ca9-b1a2-db9996694475">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$V{idx}==1]]></printWhenExpression>
 				</reportElement>
@@ -637,7 +685,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[$F{tanggal}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="22" y="0" width="45" height="16" uuid="0a9a2a59-c582-44ea-b5d5-6605efadcb2d">
+				<reportElement stretchType="RelativeToBandHeight" x="22" y="0" width="45" height="16" uuid="0a9a2a59-c582-44ea-b5d5-6605efadcb2d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$V{idx}>1]]></printWhenExpression>
 				</reportElement>
@@ -653,7 +701,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0">
-				<reportElement stretchType="RelativeToTallestObject" x="192" y="0" width="35" height="16" uuid="04004d5e-7e1c-4d97-ad8a-756c0c2f79f5">
+				<reportElement stretchType="RelativeToBandHeight" x="192" y="0" width="35" height="16" uuid="04004d5e-7e1c-4d97-ad8a-756c0c2f79f5">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
@@ -668,7 +716,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[$F{coli}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="227" y="0" width="203" height="16" uuid="b1b698df-0761-4511-b673-158de04a54a8">
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="227" y="0" width="203" height="16" uuid="b1b698df-0761-4511-b673-158de04a54a8">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
@@ -677,13 +725,13 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 					<bottomPen lineWidth="0.7"/>
 					<rightPen lineWidth="0.7"/>
 				</box>
-				<textElement markup="styled">
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
 					<font fontName="DejaVu Sans" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{jenis_barang}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="430" y="0" width="87" height="16" uuid="75022632-7fe4-450b-b5f1-04dd4f7bfb5e">
+				<reportElement stretchType="RelativeToBandHeight" x="430" y="0" width="87" height="16" uuid="75022632-7fe4-450b-b5f1-04dd4f7bfb5e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$F{paket}==true || ($F{paket}==false &&($F{fix_volume}>0||($F{p}==0 && $F{l}==0&& $F{t}==0)))]]></printWhenExpression>
 				</reportElement>
@@ -699,7 +747,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[$F{ukuran}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.000">
-				<reportElement stretchType="RelativeToTallestObject" x="517" y="0" width="55" height="16" uuid="e1877bca-956c-4ab4-a056-1b6da9b6469f">
+				<reportElement stretchType="RelativeToBandHeight" x="517" y="0" width="55" height="16" uuid="e1877bca-956c-4ab4-a056-1b6da9b6469f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
@@ -714,7 +762,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[$F{kubikasi}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="22" height="16" uuid="a792dddb-3bff-41eb-9576-d95247a50411">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="22" height="16" uuid="a792dddb-3bff-41eb-9576-d95247a50411">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$V{idx}==1]]></printWhenExpression>
 				</reportElement>
@@ -730,7 +778,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[$V{nomor}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="22" height="16" uuid="d37ea030-39bc-4819-a0b7-88f3d8dbb7d4">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="22" height="16" uuid="d37ea030-39bc-4819-a0b7-88f3d8dbb7d4">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$V{idx}>1]]></printWhenExpression>
 				</reportElement>
@@ -746,7 +794,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="idSuratJalan">
-				<reportElement stretchType="RelativeToTallestObject" x="156" y="0" width="36" height="16" uuid="1771744c-7b74-4e62-9a32-509ed4bf9db3">
+				<reportElement stretchType="RelativeToBandHeight" x="156" y="0" width="36" height="16" uuid="1771744c-7b74-4e62-9a32-509ed4bf9db3">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$V{idx}==1]]></printWhenExpression>
 				</reportElement>
@@ -762,7 +810,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[$V{subColi}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToTallestObject" x="156" y="0" width="36" height="16" uuid="ba419aa1-38fd-4aca-8899-22a015f3d809">
+				<reportElement stretchType="RelativeToBandHeight" x="156" y="0" width="36" height="16" uuid="ba419aa1-38fd-4aca-8899-22a015f3d809">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$V{idx}>1]]></printWhenExpression>
 				</reportElement>
@@ -778,7 +826,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.###;#,-##0.###">
-				<reportElement stretchType="RelativeToTallestObject" x="430" y="0" width="31" height="16" uuid="1cf729ee-3150-4a07-b1df-605cf4f46e98">
+				<reportElement stretchType="RelativeToBandHeight" x="430" y="0" width="31" height="16" uuid="1cf729ee-3150-4a07-b1df-605cf4f46e98">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[!($F{paket}==true || ($F{paket}==false &&($F{fix_volume}>0||($F{p}==0 && $F{l}==0&& $F{t}==0))))]]></printWhenExpression>
 				</reportElement>
@@ -794,7 +842,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[$F{p}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.###;#,-##0.###">
-				<reportElement stretchType="RelativeToTallestObject" x="461" y="0" width="27" height="16" uuid="3f4a1757-8ba3-4317-9551-00c36a91d3c3">
+				<reportElement stretchType="RelativeToBandHeight" x="461" y="0" width="27" height="16" uuid="3f4a1757-8ba3-4317-9551-00c36a91d3c3">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[!($F{paket}==true || ($F{paket}==false &&($F{fix_volume}>0||($F{p}==0 && $F{l}==0&& $F{t}==0))))]]></printWhenExpression>
 				</reportElement>
@@ -810,7 +858,7 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[$F{l}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.###;#,-##0.###">
-				<reportElement stretchType="RelativeToTallestObject" x="488" y="0" width="29" height="16" uuid="7a545d60-3ade-4c9f-a164-cb10c88b30b0">
+				<reportElement stretchType="RelativeToBandHeight" x="488" y="0" width="29" height="16" uuid="7a545d60-3ade-4c9f-a164-cb10c88b30b0">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[!($F{paket}==true || ($F{paket}==false &&($F{fix_volume}>0||($F{p}==0 && $F{l}==0&& $F{t}==0))))]]></printWhenExpression>
 				</reportElement>
