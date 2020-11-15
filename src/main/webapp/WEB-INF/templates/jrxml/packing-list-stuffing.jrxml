@@ -716,21 +716,6 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 				<textFieldExpression><![CDATA[$F{coli}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToBandHeight" x="227" y="0" width="203" height="16" uuid="b1b698df-0761-4511-b673-158de04a54a8">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
-					<topPen lineWidth="0.7"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.7"/>
-					<rightPen lineWidth="0.7"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Top" markup="none">
-					<font fontName="DejaVu Sans" size="9" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{jenis_barang}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="430" y="0" width="87" height="16" uuid="75022632-7fe4-450b-b5f1-04dd4f7bfb5e">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$F{paket}==true || ($F{paket}==false &&($F{fix_volume}>0||($F{p}==0 && $F{l}==0&& $F{t}==0)))]]></printWhenExpression>
@@ -872,6 +857,18 @@ t double precision, paket boolean , ukuran text, kubikasi numeric, fix_volume do
 					<font fontName="Arial" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{t}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="227" y="0" width="203" height="16" uuid="5213f720-4588-4ecb-9a45-1629b2a8d3b9"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement markup="styled">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jenis_barang}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
