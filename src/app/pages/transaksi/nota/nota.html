@@ -464,8 +464,17 @@
                                             Cetak<span class="caret"></span>
                                         </button>
                                         <ul uib-dropdown-menu>
-                                            <li><a href ng-click="cetak(c, 'pdf')">PDF</a></li>
-                                            <li><a href ng-click="cetak(c, 'xlsx')">XLS</a></li>
+                                            <li><a href ng-click="cetak(c, 'pdf',true)">PDF</a></li>
+                                            <li><a href ng-click="cetak(c, 'xlsx',true)">XLS</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                        <button type="button" class="btn btn-default editable-table-button btn-xs" uib-dropdown-toggle style="width: 100%">
+                                            Cetak<br>(w/o Cont)<span class="caret"></span>
+                                        </button>
+                                        <ul uib-dropdown-menu>
+                                            <li><a href ng-click="cetak(c, 'pdf',false)">PDF</a></li>
+                                            <li><a href ng-click="cetak(c, 'xlsx',false)">XLS</a></li>
                                         </ul>
                                     </div>
                                 </div>

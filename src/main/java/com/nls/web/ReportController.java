@@ -339,6 +339,7 @@ public class ReportController {
         String format = uri.substring(uri.lastIndexOf(".") + 1);
 
         String idNota = request.getParameter("idNota");
+        Boolean showNoKontainer = request.getParameter("showNoKontainer").equals("true");
         String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
         realPath = realPath.replace("\\", "\\\\");
         logger.warn("format: [{}]", format);
@@ -349,6 +350,7 @@ public class ReportController {
                 //                .addAttribute("logo", realPath + "igg-kop.jpg")
                 .addAttribute("realPath", realPath)
                 .addAttribute("format", format)
+                .addAttribute("showNoKontainer", showNoKontainer)
                 .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
                 .addAttribute("total", totalTerbilangByNota.get("total"))
                 .addAttribute("terbilang", totalTerbilangByNota.get("terbilang"))

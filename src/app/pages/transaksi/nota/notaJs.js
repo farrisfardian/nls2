@@ -365,8 +365,8 @@
             }
         };
 
-        $scope.cetak = function (c, tipe) {
-            var link = 'api/report/get-nota.' + tipe + '?idNota=' + c.id;
+        $scope.cetak = function (c, tipe, showNoKontainer) {
+            var link = 'api/report/get-nota.' + tipe + '?idNota=' + c.id+'&showNoKontainer='+showNoKontainer;
             if (tipe == 'pdf') {
 //                    window.open(link, '_blank', 'width=screen.width, height=screen.height');
                 window.open(link, '_blank', 'width=1024, height=768');
