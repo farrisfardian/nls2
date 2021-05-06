@@ -47,6 +47,6 @@
   },
   "dependencies": {
     "angular-sanitize": "^1.6.4",
-    "highcharts": "^5.0.9"
+    "highcharts": "^9.0.0"
   }
 }
