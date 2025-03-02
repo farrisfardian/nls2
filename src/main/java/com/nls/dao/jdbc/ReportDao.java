@@ -87,8 +87,26 @@ public class ReportDao {
                 + "customer, kapal, tgl_berangkat, tgl_ind, merk, alamat, nomor_kontainer, emkl, \n"
                 + "id, tanggal, pengirim, coli, jenis_barang, p, l, \n"
                 + "t, paket, ukuran, "
-                + "kubikasi, fix_volume, total_coli_sj, pisah, satuan_kirim, jml_kontainer, harga_satuan, kubikasi*harga_satuan as total  "
+                + "kubikasi, fix_volume, total_coli_sj, pisah, satuan_kirim, jml_kontainer, harga_satuan, "
+                + "case when paket = true then coli*harga_satuan else kubikasi*harga_satuan end as total  "
                 + "from fn_pl_rpt_per_kapal_merk_toko_pisah_emkl_harga(" + idKapal + ", ARRAY[" + idMerkToko + "]) as (kota_tujuan varchar, kondisi varchar, \n"
+                + "customer varchar, kapal varchar, tgl_berangkat date, tgl_ind varchar, merk varchar, alamat varchar, nomor_kontainer varchar, emkl varchar, \n"
+                + "id integer, tanggal date, pengirim varchar, coli integer, jenis_barang text, p double precision, l double precision, \n"
+                + "t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume double precision, total_coli_sj text, pisah boolean, satuan_kirim varchar, "
+                + "jml_kontainer bigint, harga_satuan numeric)";
+        System.out.println("perKapalMerkToko: " + sql);
+        return mr.mapList(sql);
+    }
+    
+    public Object perKapalMerkTokoPisahEmklHargaByNota(Integer idNota) {
+        //case when ukuran not ilike '%x%' and ukuran not ilike '%paket%' and ukuran not ilike '' then '0'::text else ukuran end as 
+        String sql = "select kota_tujuan, kondisi, \n"
+                + "customer, kapal, tgl_berangkat, tgl_ind, merk, alamat, nomor_kontainer, emkl, \n"
+                + "id, tanggal, pengirim, coli, jenis_barang, p, l, \n"
+                + "t, paket, ukuran, "
+                + "kubikasi, fix_volume, total_coli_sj, pisah, satuan_kirim, jml_kontainer, harga_satuan, "
+                + "case when paket = true then coli*harga_satuan else kubikasi*harga_satuan end as total  "
+                + "from fn_pl_rpt_per_kapal_merk_toko_pisah_emkl_harga_by_nota(" + idNota + ") as (kota_tujuan varchar, kondisi varchar, \n"
                 + "customer varchar, kapal varchar, tgl_berangkat date, tgl_ind varchar, merk varchar, alamat varchar, nomor_kontainer varchar, emkl varchar, \n"
                 + "id integer, tanggal date, pengirim varchar, coli integer, jenis_barang text, p double precision, l double precision, \n"
                 + "t double precision, paket boolean ,ukuran text, kubikasi numeric, fix_volume double precision, total_coli_sj text, pisah boolean, satuan_kirim varchar, "

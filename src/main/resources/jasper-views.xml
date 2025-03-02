@@ -11,12 +11,21 @@
         http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-    <util:map id="customSubReportUrls"></util:map>
+    <util:map id="customSubReportUrls">
+        <entry key="subReportNotaPl" value="/WEB-INF/templates/jrxml/per-toko-pisah-emkl-harga.jrxml" />
+    </util:map>
     <util:list id="subReportNotaData">
         <!-- This value must be declared exactly as you declared it in the master JRXML file -->
         <value>dataSourceKapal</value>
         <value>dataSourceRekening</value>
         <value>dataSourceKetJatuhTempo</value>
+    </util:list>
+    <util:list id="subReportNotaPlData">
+        <!-- This value must be declared exactly as you declared it in the master JRXML file -->
+        <value>dataSourceKapal</value>
+        <value>dataSourceRekening</value>
+        <value>dataSourceKetJatuhTempo</value>
+        <value>dataSourcePl</value>
     </util:list>
     <util:list id="subReportRincianNotaData">
         <!-- This value must be declared exactly as you declared it in the master JRXML file -->
@@ -60,4 +69,9 @@
           p:reportDataKey="dataSource"
           p:subReportUrls-ref="customSubReportUrls"
           p:subReportDataKeys-ref="subReportNotaData"/>
+    <bean id="api/report/get-nota-with-pl" class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView" 
+          p:url="/WEB-INF/templates/jrxml/nota-nls-with-pl.jrxml"
+          p:reportDataKey="dataSource"
+          p:subReportUrls-ref="customSubReportUrls"
+          p:subReportDataKeys-ref="subReportNotaPlData"/>
 </beans>

@@ -92,11 +92,10 @@
                     if ($stateParams.idSj === null || $stateParams.idSj === undefined || $stateParams.idSj === 0 || $stateParams.idSj === '') {
                         $scope.clear();
                     } else {
-                        window.close();
+//                        window.close();
+                        history.back();
                     }
                 }).error(function (error) {
-                    toastr.error('SImpan Surat Jalan Gagal!!!')
-                }).fail(function (error) {
                     toastr.error('SImpan Surat Jalan Gagal!!!')
                 });
             }

@@ -35,7 +35,6 @@
     "bootstrap": "^3.3.7",
     "bootstrap-select": "~1.12.1",
     "bootstrap-switch": "~3.3.2",
-    "bootstrap-tagsinput": "~0.7.1",
     "font-awesome": "fontawesome#~4.4.0",
     "fullcalendar": "~3.0.1",
     "highlight": "~8.8.0",
@@ -70,7 +69,8 @@
   },
   "resolutions": {
     "angular": "~1.5.9",
-    "jquery": "~3.1.1"
+    "jquery": "~3.1.1",
+    "bootstrap": "^3.3.7"
   },
   "overrides": {
     "amcharts": {

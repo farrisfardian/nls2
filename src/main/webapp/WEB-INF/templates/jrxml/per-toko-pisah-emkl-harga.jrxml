@@ -476,7 +476,7 @@ jml_kontainer bigint, harga_satuan numeric)]]>
 					<textElement textAlignment="Center">
 						<font fontName="DejaVu Sans" isBold="true" isPdfEmbedded="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["TUJUAN :"+$F{kota_tujuan}.toUpperCase()]]></textFieldExpression>
+					<textFieldExpression><![CDATA["SURABAYA - "+$F{kota_tujuan}.toUpperCase()]]></textFieldExpression>
 				</textField>
 				<image onErrorType="Blank">
 					<reportElement x="1" y="1" width="66" height="59" uuid="619a278d-a139-435c-a271-12b3ac4832b4">

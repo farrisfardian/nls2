@@ -374,6 +374,16 @@
                 location.href = link;
             }
         };
+        
+        $scope.cetakWithPl = function (c, tipe, showNoKontainer) {
+            var link = 'api/report/get-nota-with-pl.' + tipe + '?idNota=' + c.id+'&showNoKontainer='+showNoKontainer;
+            if (tipe == 'pdf') {
+//                    window.open(link, '_blank', 'width=screen.width, height=screen.height');
+                window.open(link, '_blank', 'width=1024, height=768');
+            } else {
+                location.href = link;
+            }
+        };
 
         $scope.$watch('vm.minBayar', function () {
             $scope.refreshDataDetail();

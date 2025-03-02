@@ -359,6 +359,34 @@ public class ReportController {
                 .addAttribute("dataSourceKapal", dao.getKapalBerangkatByNota(idNota))
                 .addAttribute("dataSource", dao.getNota(idNota));
     }
+    
+    @RequestMapping(value = "get-nota-with-pl*", method = RequestMethod.GET)
+    private ModelMap getNotaWithPl(HttpServletRequest request) throws ParseException {
+        String uri = request.getRequestURI();
+        String format = uri.substring(uri.lastIndexOf(".") + 1);
+
+        String idNota = request.getParameter("idNota");
+        Boolean showNoKontainer = request.getParameter("showNoKontainer").equals("true");
+        String realPath = context.getRealPath("/WEB-INF/templates/jrxml/") + System.getProperty("file.separator");
+        realPath = realPath.replace("\\", "\\\\");
+        logger.warn("format: [{}]", format);
+        logger.warn("tahun: [{}]", idNota);
+        Map<String, Object> totalTerbilangByNota = (Map<String, Object>) dao.getTotalTerbilangByNota(idNota);
+        return new ModelMap()
+                //                .addAttribute("tanggal1", tg1)
+                //                .addAttribute("logo", realPath + "igg-kop.jpg")
+                .addAttribute("realPath", realPath)
+                .addAttribute("format", format)
+                .addAttribute("showNoKontainer", showNoKontainer)
+                .addAttribute(JRParameter.REPORT_LOCALE, new Locale("id"))
+                .addAttribute("total", totalTerbilangByNota.get("total"))
+                .addAttribute("terbilang", totalTerbilangByNota.get("terbilang"))
+                .addAttribute("dataSourceRekening", dao.getRekening())
+                .addAttribute("dataSourceKetJatuhTempo", dao.getKetJatuhTempoByNota(idNota))
+                .addAttribute("dataSourceKapal", dao.getKapalBerangkatByNota(idNota))
+                .addAttribute("dataSourcePl", dao.perKapalMerkTokoPisahEmklHargaByNota(Integer.parseInt(idNota)))
+                .addAttribute("dataSource", dao.getNota(idNota));
+    }
 
     @RequestMapping(value = "get-rincian-nota*", method = RequestMethod.GET)
     private ModelMap getRincianNota(HttpServletRequest request) throws ParseException {

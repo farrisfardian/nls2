@@ -2,24 +2,20 @@
     'use strict';
 
     angular.module('BlurAdmin.pages.transaksi')
-            .controller('ListSuratJalanCtrl', ListSuratJalanCtrl);
+            .controller('ListSuratJalanCtrlOld', ListSuratJalanCtrlOld);
 
-    function ListSuratJalanCtrl($scope, $window, $uibModal, $filter, SuratJalanService, KotaService, toastr, $rootScope) {
+    function ListSuratJalanCtrlOld($scope, $window, $uibModal, $filter, SuratJalanService, KotaService, toastr) {
         $scope.paging = {
             currentPage: 1,
             totalItems: 0
         };
         $scope.options = {format: 'DD/MM/YYYY', showClear: false};
         $scope.vm = {tglAwal: new Date(), tglAkhir: new Date(), kota: null, cari: "", statusNota: 'Semua'};
-        if ($rootScope.filterListSj !== null && $rootScope.filterListSj !== undefined) {
-            $scope.vm = $rootScope.filterListSj;
-        }
         $scope.listStatusNota = ['Semua', 'Sudah', 'Belum'];
         KotaService.cariSemua().success(function (data) {
             $scope.listKota = data;
         });
         $scope.reloadData = function () {
-            $rootScope.filterListSj = $scope.vm;
             console.log('vm', $scope.vm);
             console.log('tglAwal', $filter('date')(new Date($scope.vm.tglAwal), 'yyyy-MM-dd'));
             $scope.dataPage = SuratJalanService.queryComposite($filter('date')(new Date($scope.vm.tglAwal), 'yyyy-MM-dd'), $filter('date')(new Date($scope.vm.tglAkhir), 'yyyy-MM-dd'), ($scope.vm.kota == null || $scope.vm.kota.id == undefined || $scope.vm.kota.id == null ? 0 : $scope.vm.kota.id), ($scope.vm.cari == '' ? 'null' : $scope.vm.cari.replace(/\//g, '*')), $scope.vm.statusNota, $scope.paging.currentPage - 1, function () {
@@ -35,17 +31,17 @@
         $scope.edit = function (x) {
             $window.open('#/transaksi/suratjalan/' + x.id, '_blank');
         };
-
+        
         $scope.edit2 = function (x) {
             var editUrl = '#/transaksi/suratjalan/' + x.id;
-            console.log('editSjUrl ', editUrl);
-            window.location.href = '#/transaksi/suratjalan/' + x.id;
+            console.log('editSjUrl ',editUrl);
+            window.location.href= '#/transaksi/suratjalan/' + x.id;
         };
 
         $scope.buatNota = function (x) {
-            $window.open('#/transaksi/nota/' + x.id_toko_tujuan + '/' + x.id_merk_tujuan + '/' + x.id_kapal_berangkat, '_blank');
+            $window.open('#/transaksi/nota/' + x.id_toko_tujuan+'/'+x.id_merk_tujuan+'/'+x.id_kapal_berangkat, '_blank');
         };
-
+        
         $scope.baru = function (x) {
             window.location.href = '#/transaksi/suratjalan';
         };
